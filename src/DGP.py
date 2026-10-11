@@ -1,17 +1,27 @@
 from dataclasses import dataclass
+from abc import ABC, abstractmethod
 
 import numpy as np
 
 
-@dataclass
-class IndividualLevelConditionalOutcomes(frozen=True):
+@dataclass(frozen=True)
+class IndividualLevelConditionalOutcomes:
     n: int
     covariates: np.ndarray
     treatment_outcomes: np.ndarray
     control_outcomes: np.ndarray
 
 
-class IndividualConditionalOutcomesDGP:
+class IndividualConditionalOutcomesDGP(ABC):
+    @abstractmethod
+    def generate_individuals(
+        self,
+        rng: np.random.Generator | int | None = None,
+    ) -> IndividualLevelConditionalOutcomes:
+        pass
+
+
+class IndividualConditionalOutcomesUniformDGP:
     def __init__(
         self,
         n: int,
@@ -46,31 +56,42 @@ class IndividualConditionalOutcomesDGP:
             control_outcomes=control_outcomes,
         )
 
-@dataclass
-class ExperimentResults(frozen=True):
+@dataclass(frozen=True)
+class ExperimentResults:
     assignments: np.ndarray
     covariates: np.ndarray
     outcomes: np.ndarray
+
+
+
 
 class ExperimentDGP:
     def __init__(
         self,
         n_exp: int,
-        conditional_outcomes: IndividualLevelConditionalOutcomes,
         p_treatment: float,
+        conditional_outcomes: IndividualLevelConditionalOutcomes | None,
     ):
-        self.n_ind = conditional_outcomes.n
+        self.p_treatment = p_treatment
         self.n_exp = n_exp
         self.conditional_outcomes = conditional_outcomes
-        self.p_treatment = p_treatment
+        self.n_ind = conditional_outcomes.n if conditional_outcomes is not None else None
+        
+
+    def set_conditional_outcomes(self, conditional_outcomes: IndividualLevelConditionalOutcomes):
+        self.conditional_outcomes = conditional_outcomes
+        self.n_ind = conditional_outcomes.n
 
     def generate_experiment(
         self,
         rng: np.random.Generator | int | None = None,
     ) -> ExperimentResults:
+        if self.conditional_outcomes is None:
+            raise ValueError("Conditional outcomes not set")
+
         rng = np.random.default_rng(rng)
 
-        # Must be (n, 1) to match the potential-outcome arrays.
+
         assignments = rng.binomial(
             1,
             self.p_treatment,
@@ -91,6 +112,8 @@ class ExperimentDGP:
         self,
         rng: np.random.Generator | int | None = None,
     ) -> list[ExperimentResults]:
+        if self.conditional_outcomes is None:
+            raise ValueError("Conditional outcomes not set")
         base_rng = np.random.default_rng(rng)
         child_rngs = base_rng.spawn(self.n_exp)
 
