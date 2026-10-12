@@ -1,6 +1,5 @@
 import numpy as np
 import statsmodels.api as sm
-import pandas as pd
 from DGP import ExperimentResults
 from DGP import IndividualLevelConditionalOutcomes
 
@@ -18,17 +17,17 @@ def differential_log_odds(treatment_result, control_result):
 
 class TrueParameterFinder(ABC):
     @abstractmethod
-    def find_true_parameter(self, individuals: IndividualLevelConditionalOutcomes):
+    def find_true_parameters(self, individuals: IndividualLevelConditionalOutcomes):
         pass
 
 class DifferentialLogOddsFinder(TrueParameterFinder):
-    def find_true_parameter(self, individuals: IndividualLevelConditionalOutcomes):
+    def find_true_parameters(self, individuals: IndividualLevelConditionalOutcomes):
         return differential_log_odds(individuals.treatment_outcomes, individuals.control_outcomes)
 
 
 class ModelParameterEstimator(ABC):
     @abstractmethod
-    def generate_parameter_estimates(self, experiment_results: list[ExperimentResults]) -> pd.DataFrame:
+    def generate_parameter_estimates(self, experiment_results: list[ExperimentResults]) -> tuple[np.ndarray, np.ndarray]:
         pass
 
 
@@ -41,7 +40,7 @@ class LogitModel(ModelParameterEstimator):
     def generate_parameter_estimates(
         self,
         experiment_results: list[ExperimentResults] = None,
-    ) -> pd.DataFrame:
+    ) -> tuple[np.ndarray, np.ndarray]:
         beta_mat = []
         plug_in_estimates = []
 
@@ -63,16 +62,8 @@ class LogitModel(ModelParameterEstimator):
             )
             plug_in_estimates.append(plug_in)
 
-        combined_estimates = np.column_stack((beta_mat, plug_in_estimates))
-
-       
-        num_covariates = covariates.shape[1] if covariates.ndim > 1 else 1
-        column_names = (
-            ["const", "assignment"]
-            + [f"cov_{i}" for i in range(num_covariates)]
-            + ["plug_in_estimate"]
-        )
-        return pd.DataFrame(combined_estimates, columns=column_names)
+        
+        return beta_mat, plug_in_estimates
 
     def plug_in_differential_log_odds(
         fitted_result,

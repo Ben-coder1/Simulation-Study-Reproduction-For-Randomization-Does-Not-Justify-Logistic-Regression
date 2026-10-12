@@ -70,7 +70,7 @@ class ExperimentDGP:
         self,
         n_exp: int,
         p_treatment: float,
-        conditional_outcomes: IndividualLevelConditionalOutcomes | None,
+        conditional_outcomes: "IndividualLevelConditionalOutcomes | None" = None,
     ):
         self.p_treatment = p_treatment
         self.n_exp = n_exp
