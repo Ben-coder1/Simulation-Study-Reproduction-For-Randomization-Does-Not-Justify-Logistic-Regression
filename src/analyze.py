@@ -6,7 +6,7 @@ import dataframe_image as dfi
 import numpy as np
 import pandas as pd
 
-from metrics import mean_and_sd
+from src.metrics import mean_and_sd
 from configuration import PICKLE_LOCATION, ROW_NAMES
 
 

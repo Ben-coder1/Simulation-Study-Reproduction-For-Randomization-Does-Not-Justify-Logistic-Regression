@@ -1,12 +1,14 @@
-from DGP import *
-from Methods import *
-from metrics import bias, mean_and_sd
+from logging import config
+
+from src.DGP import *
+from src.Methods import *
+from src.metrics import bias, mean_and_sd
 import dataframe_image as dfi
 import pickle
 
-from configuration import PICKLE_LOCATION
+from configuration import PICKLE_LOCATION, SEED, SIMULATIONS
 
-DEFAULT_SEED = 100
+
 
 class Simulation:
     def __init__(self, individualDGP: IndividualConditionalOutcomesDGP, ExperimentDGP: ExperimentDGP, param_estimator: ModelParameterEstimator, true_parameter_finder: TrueParameterFinder):
@@ -78,27 +80,21 @@ class MultipleSimulations:
             )
         return simulation_raws
 
-simulation1 = Simulation(
-    individualDGP=IndividualConditionalOutcomesUniformDGP(100, 3/4,1/2),
-    ExperimentDGP=ExperimentDGP(1000,.75),
-    param_estimator=LogitModel(),
-    true_parameter_finder=DifferentialLogOddsFinder(),
-)
 
-simulation2 = Simulation(
-    individualDGP=IndividualConditionalOutcomesUniformDGP(1000, 3/4,1/2),
-    ExperimentDGP=ExperimentDGP(1000,.75),
-    param_estimator=LogitModel(),
-    true_parameter_finder=DifferentialLogOddsFinder(),
-)
+def run_from_config():
+    sims = [
+        Simulation(
+            individualDGP=INDIVIDUAL_DGPS[sim_dict["individualDGP"]](sim_dict["nIndividuals"], sim_dict["treatment_threshold"], sim_dict["control_threshold"]),
+            ExperimentDGP=EXPERIMENT_DGPS[sim_dict["ExperimentDGP"]](sim_dict["nExperiments"], sim_dict["pTreatment"]),
+            param_estimator=PARAMETER_ESTIMATORS[sim_dict["param_estimator"]](),
+            true_parameter_finder=TRUTH_PARAMETER_FINDERS[sim_dict["true_parameter_finder"]]()
+        )
+        for sim_dict in SIMULATIONS
+    ]
 
-simulation3 = Simulation(
-    individualDGP=IndividualConditionalOutcomesUniformDGP(5000, 3/4,1/2),
-    ExperimentDGP=ExperimentDGP(1000,.75),
-    param_estimator=LogitModel(),
-    true_parameter_finder=DifferentialLogOddsFinder(),
-)
+    simulations_control = MultipleSimulations(sims)
+    simulations_results = simulations_control.run_multiple_simulations(rng=SEED)
+    return simulations_results
 
 
-start = MultipleSimulations([simulation1, simulation2, simulation3])
-hold = start.run_multiple_simulations()
+simulations_results = run_from_config()
