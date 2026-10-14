@@ -1,386 +1,593 @@
+"""
+Purpose-built reproduction script.
+
+This module exists solely to reproduce the particular results table/chart
+containing:
+
+    beta_1, beta_2, beta_3, plug-in estimate, and true parameter
+
+along with the empirical standard deviations of the estimated quantities.
+
+It is intentionally tied to the current simulation output structure and
+should not be used as a general-purpose simulation-analysis module.
+"""
+
 import pickle
-from numbers import Real
+import warnings
 from pathlib import Path
 
 import dataframe_image as dfi
 import numpy as np
 import pandas as pd
 
-from src.metrics import mean_and_sd
 from configuration import PICKLE_LOCATION, ROW_NAMES
+from src.metrics import bias
+
+LOGIT_ESTIMATOR_NAME = "LogitModelEstimator"
+PLUGIN_ESTIMATOR_NAME = "LogitModelPlugIn"
+
+CSV_OUTPUT_LOCATION = "simulation_results.csv"
+IMAGE_OUTPUT_LOCATION = "simulation_results.png"
 
 
+def mean_and_sd(values: np.ndarray) -> tuple[float, float]:
+    """
+    Calculate the mean and sample standard deviation, ignoring NaNs.
 
-def analyze_simulation_data():
-    with open(PICKLE_LOCATION, "rb") as file:
-        simulation_raws = pickle.load(file)
-    return summarize_simulation_raws(simulation_raws, row_names = ROW_NAMES)
+    Returns (NaN, NaN) if there are no finite estimates. The standard
+    deviation is NaN if only one finite estimate is available.
+    """
+    values = np.asarray(values, dtype=float).ravel()
+    finite_values = values[np.isfinite(values)]
+
+    if finite_values.size == 0:
+        return np.nan, np.nan
+
+    mean = float(np.mean(finite_values))
+
+    if finite_values.size < 2:
+        standard_deviation = np.nan
+    else:
+        standard_deviation = float(
+            np.std(finite_values, ddof=1)
+        )
+
+    return mean, standard_deviation
 
 
-
-def create_stats_dataframe(
-    data,
-    col_names_1=None,
-    col_names_2=None,
-    col_names_3=None,
-    row_names=None,
-    row_col_name="Row Name"
+def load_simulation_data(
+    pickle_location: str | Path = PICKLE_LOCATION,
 ):
+    """Load the labeled simulation results produced by simulation.py."""
+    pickle_path = Path(pickle_location)
+
+    if not pickle_path.exists():
+        raise FileNotFoundError(
+            f"Simulation output was not found at "
+            f"{pickle_path.resolve()}."
+        )
+
+    with pickle_path.open("rb") as file:
+        simulation_results = pickle.load(file)
+
+    if not isinstance(simulation_results, list):
+        raise ValueError(
+            "Expected the pickle file to contain a list of "
+            "simulation results."
+        )
+
+    if not simulation_results:
+        raise ValueError("The simulation-results file is empty.")
+
+    return simulation_results
+
+
+def validate_simulation_result(
+    simulation_result,
+    row_number: int,
+) -> None:
+    """Validate the fields required for this particular table."""
+    if not isinstance(simulation_result, dict):
+        raise ValueError(
+            f"Simulation result {row_number} must be a dictionary."
+        )
+
+    required_top_level_keys = {
+        "true_parameter",
+        "estimator_results",
+    }
+
+    missing_keys = (
+        required_top_level_keys - simulation_result.keys()
+    )
+
+    if missing_keys:
+        raise ValueError(
+            f"Simulation result {row_number} is missing keys: "
+            f"{sorted(missing_keys)}."
+        )
+
+    estimator_results = simulation_result["estimator_results"]
+
+    if not isinstance(estimator_results, dict):
+        raise ValueError(
+            f"'estimator_results' in row {row_number} must be "
+            "a dictionary."
+        )
+
+    required_estimators = {
+        LOGIT_ESTIMATOR_NAME,
+        PLUGIN_ESTIMATOR_NAME,
+    }
+
+    missing_estimators = (
+        required_estimators - estimator_results.keys()
+    )
+
+    if missing_estimators:
+        raise ValueError(
+            f"Simulation result {row_number} is missing estimator "
+            f"results for: {sorted(missing_estimators)}. Make sure "
+            "both 'logit' and 'logit_plugin' are included in the "
+            "configuration."
+        )
+
+    logit_result = estimator_results[LOGIT_ESTIMATOR_NAME]
+    plugin_result = estimator_results[PLUGIN_ESTIMATOR_NAME]
+
+    if "auxiliary" not in logit_result:
+        raise ValueError(
+            f"{LOGIT_ESTIMATOR_NAME} in row {row_number} does not "
+            "contain 'auxiliary' coefficient results."
+        )
+
+    if "estimates" not in plugin_result:
+        raise ValueError(
+            f"{PLUGIN_ESTIMATOR_NAME} in row {row_number} does not "
+            "contain 'estimates'."
+        )
+
+
+def summarize_simulation_result(
+    simulation_result,
+    row_number: int,
+) -> dict[str, float]:
     """
-    Convert simulation results into a pandas DataFrame.
+    Summarize one sample-size scenario.
 
-    Each element of `data` creates exactly one DataFrame row.
+    The LogitModelEstimator auxiliary output is expected to be an array
+    with one row per experiment and one column per fitted coefficient.
 
-    Expected structure for each element:
-    [
-        [(mean1, sd1), (mean2, sd2), ...],
-        (plugin_mean, plugin_sd),
-        true_value
-    ]
-
-    The second component may also be:
-        [(plugin1_mean, plugin1_sd), (plugin2_mean, plugin2_sd), ...]
-
-    The third component may be either one number or a sequence of numbers.
-
-    Each estimate column is immediately followed by its SD column:
-        beta_1, sd(beta_1), beta_2, sd(beta_2), ...
-
-    Returns
-    -------
-    pandas.DataFrame
+    For this specific reproduction, exactly three coefficient columns are
+    required and are displayed as beta_1, beta_2, and beta_3.
     """
-    if data is None or len(data) == 0:
-        raise ValueError("Data cannot be empty.")
+    validate_simulation_result(
+        simulation_result,
+        row_number,
+    )
 
-    def is_numeric(value):
-        return isinstance(value, Real) and not isinstance(value, bool)
+    estimator_results = simulation_result["estimator_results"]
 
-    def is_estimate_pair(value):
-        """Return True for a single (mean, SD) pair."""
-        return (
-            isinstance(value, (list, tuple, np.ndarray))
-            and len(value) == 2
-            and is_numeric(value[0])
-            and is_numeric(value[1])
-        )
+    logit_coefficients = np.asarray(
+        estimator_results[
+            LOGIT_ESTIMATOR_NAME
+        ]["auxiliary"],
+        dtype=float,
+    )
 
-    def normalize_estimates(value, component_name, row_number):
-        """
-        Convert either one (mean, SD) pair or a sequence of such pairs
-        into a list of pairs.
-        """
-        if is_estimate_pair(value):
-            estimates = [value]
-        elif isinstance(value, (list, tuple, np.ndarray)):
-            estimates = list(value)
-        else:
-            raise ValueError(
-                f"{component_name} in row {row_number} must be a "
-                "(mean, SD) pair or a sequence of (mean, SD) pairs."
-            )
+    plugin_estimates = np.asarray(
+        estimator_results[
+            PLUGIN_ESTIMATOR_NAME
+        ]["estimates"],
+        dtype=float,
+    ).ravel()
 
-        for position, estimate in enumerate(estimates, start=1):
-            if not is_estimate_pair(estimate):
-                raise ValueError(
-                    f"Item {position} of {component_name} in row "
-                    f"{row_number} is not a valid (mean, SD) pair: "
-                    f"{estimate!r}"
-                )
+    true_parameter = float(
+        simulation_result["true_parameter"]
+    )
 
-        return estimates
-
-    def normalize_true_values(value, row_number):
-        """Convert one true value or a sequence of true values to a list."""
-        if is_numeric(value):
-            values = [value]
-        elif isinstance(value, (list, tuple, np.ndarray)):
-            values = list(value)
-        else:
-            raise ValueError(
-                f"True parameters in row {row_number} must be a number "
-                "or a sequence of numbers."
-            )
-
-        for position, true_value in enumerate(values, start=1):
-            if not is_numeric(true_value):
-                raise ValueError(
-                    f"True parameter {position} in row {row_number} "
-                    f"is not numeric: {true_value!r}"
-                )
-
-        return values
-
-
-    normalized_data = []
-
-    for row_index, row in enumerate(data):
-        row_number = row_index + 1
-
-        if not isinstance(row, (list, tuple)) or len(row) != 3:
-            raise ValueError(
-                f"Row {row_number} must contain exactly three components: "
-                "model estimates, plug-in estimates, and true parameters."
-            )
-
-        model_estimates = normalize_estimates(
-            row[0],
-            component_name="Model estimates",
-            row_number=row_number
-        )
-
-        plugin_estimates = normalize_estimates(
-            row[1],
-            component_name="Plug-in estimates",
-            row_number=row_number
-        )
-
-        true_values = normalize_true_values(
-            row[2],
-            row_number=row_number
-        )
-
-        normalized_data.append(
-            (model_estimates, plugin_estimates, true_values)
-        )
-
-
-    n_cols_1 = len(normalized_data[0][0])
-    n_cols_2 = len(normalized_data[0][1])
-    n_cols_3 = len(normalized_data[0][2])
-
-    # Ensure all rows have matching dimensions.
-    for row_index, (model, plugin, true) in enumerate(
-        normalized_data,
-        start=1
-    ):
-        if len(model) != n_cols_1:
-            raise ValueError(
-                f"Row {row_index} has {len(model)} model estimates; "
-                f"expected {n_cols_1}."
-            )
-
-        if len(plugin) != n_cols_2:
-            raise ValueError(
-                f"Row {row_index} has {len(plugin)} plug-in estimates; "
-                f"expected {n_cols_2}."
-            )
-
-        if len(true) != n_cols_3:
-            raise ValueError(
-                f"Row {row_index} has {len(true)} true parameters; "
-                f"expected {n_cols_3}."
-            )
-
-    if col_names_1 is None:
-        col_names_1 = [
-            f"beta_{i + 1}"
-            for i in range(n_cols_1)
-        ]
-    else:
-        col_names_1 = list(col_names_1)
-
-    if col_names_2 is None:
-        if n_cols_2 == 1:
-            col_names_2 = ["plug_in_estimate"]
-        else:
-            col_names_2 = [
-                f"plug_in_estimate_{i + 1}"
-                for i in range(n_cols_2)
-            ]
-    else:
-        col_names_2 = list(col_names_2)
-
-    if col_names_3 is None:
-        if n_cols_3 == 1:
-            col_names_3 = ["true_parameter"]
-        else:
-            col_names_3 = [
-                f"true_parameter_{i + 1}"
-                for i in range(n_cols_3)
-            ]
-    else:
-        col_names_3 = list(col_names_3)
-
-    if len(col_names_1) != n_cols_1:
+    if logit_coefficients.ndim != 2:
         raise ValueError(
-            f"Expected {n_cols_1} names in col_names_1, "
-            f"got {len(col_names_1)}."
+            f"The logit auxiliary output in row {row_number} must "
+            "be a two-dimensional coefficient matrix. Received "
+            f"shape {logit_coefficients.shape}."
         )
 
-    if len(col_names_2) != n_cols_2:
+    if logit_coefficients.shape[1] != 3:
         raise ValueError(
-            f"Expected {n_cols_2} names in col_names_2, "
-            f"got {len(col_names_2)}."
+            f"This purpose-built reproduction expects exactly three "
+            f"logit coefficients, but row {row_number} contains "
+            f"{logit_coefficients.shape[1]} columns."
         )
 
-    if len(col_names_3) != n_cols_3:
+    if logit_coefficients.shape[0] != plugin_estimates.size:
         raise ValueError(
-            f"Expected {n_cols_3} names in col_names_3, "
-            f"got {len(col_names_3)}."
+            f"Row {row_number} contains "
+            f"{logit_coefficients.shape[0]} logit fits but "
+            f"{plugin_estimates.size} plug-in estimates."
+        )
+
+    beta_1_mean, beta_1_sd = mean_and_sd(
+        logit_coefficients[:, 0]
+    )
+    beta_2_mean, beta_2_sd = mean_and_sd(
+        logit_coefficients[:, 1]
+    )
+    beta_3_mean, beta_3_sd = mean_and_sd(
+        logit_coefficients[:, 2]
+    )
+
+    plugin_mean, plugin_sd = mean_and_sd(
+        plugin_estimates
+    )
+
+    logit_failure_rate = float(
+        np.mean(
+            ~np.all(
+                np.isfinite(logit_coefficients),
+                axis=1,
+            )
+        )
+    )
+
+    plugin_failure_rate = float(
+        np.mean(~np.isfinite(plugin_estimates))
+    )
+
+    if logit_failure_rate > 0:
+        warnings.warn(
+            f"Simulation row {row_number} has a logit-fit failure "
+            f"rate of {logit_failure_rate:.2%}. Non-finite fits "
+            "were excluded from means and standard deviations.",
+            RuntimeWarning,
+            stacklevel=2,
+        )
+
+    if plugin_failure_rate > 0:
+        warnings.warn(
+            f"Simulation row {row_number} has a plug-in failure "
+            f"rate of {plugin_failure_rate:.2%}. Non-finite "
+            "estimates were excluded from means and standard "
+            "deviations.",
+            RuntimeWarning,
+            stacklevel=2,
+        )
+
+    return {
+        "beta_1": beta_1_mean,
+        "sd(beta_1)": beta_1_sd,
+        "beta_2": beta_2_mean,
+        "sd(beta_2)": beta_2_sd,
+        "beta_3": beta_3_mean,
+        "sd(beta_3)": beta_3_sd,
+        "plug_in_estimate": plugin_mean,
+        "sd(plug_in_estimate)": plugin_sd,
+        "true_parameter": true_parameter,
+    }
+
+
+def summarize_simulation_results(
+    simulation_results,
+    row_names=None,
+) -> pd.DataFrame:
+    """
+    Convert all sample-size scenarios into the reproduction table.
+    """
+    if not simulation_results:
+        raise ValueError(
+            "simulation_results cannot be empty."
         )
 
     if row_names is None:
         row_names = [
-            f"Row {i + 1}"
-            for i in range(len(normalized_data))
+            f"Simulation {index}"
+            for index in range(
+                1,
+                len(simulation_results) + 1,
+            )
         ]
     else:
         row_names = list(row_names)
 
-    if len(row_names) != len(normalized_data):
+    if len(row_names) != len(simulation_results):
         raise ValueError(
-            f"Expected {len(normalized_data)} row names, "
-            f"got {len(row_names)}."
+            f"Received {len(row_names)} row names for "
+            f"{len(simulation_results)} simulation results. "
+            "ROW_NAMES and SIMULATIONS must use the same order."
         )
-
-    headers = [row_col_name]
-
-    for column_name in col_names_1:
-        headers.extend([
-            column_name,
-            f"sd({column_name})"
-        ])
-
-    for column_name in col_names_2:
-        headers.extend([
-            column_name,
-            f"sd({column_name})"
-        ])
-
-    headers.extend(col_names_3)
-
 
     dataframe_rows = []
 
-    for row_name, (model, plugin, true) in zip(
-        row_names,
-        normalized_data
+    for row_number, (
+        row_name,
+        simulation_result,
+    ) in enumerate(
+        zip(row_names, simulation_results),
+        start=1,
     ):
-        output_row = [row_name]
+        summary = summarize_simulation_result(
+            simulation_result,
+            row_number,
+        )
 
-        for mean, sd in model:
-            output_row.extend([
-                float(mean),
-                float(sd)
-            ])
+        dataframe_rows.append(
+            {
+                "n": row_name,
+                **summary,
+            }
+        )
 
-        for mean, sd in plugin:
-            output_row.extend([
-                float(mean),
-                float(sd)
-            ])
-
-        output_row.extend(float(value) for value in true)
-
-        dataframe_rows.append(output_row)
+    column_order = [
+        "n",
+        "beta_1",
+        "sd(beta_1)",
+        "beta_2",
+        "sd(beta_2)",
+        "beta_3",
+        "sd(beta_3)",
+        "plug_in_estimate",
+        "sd(plug_in_estimate)",
+        "true_parameter",
+    ]
 
     return pd.DataFrame(
         dataframe_rows,
-        columns=headers
+        columns=column_order,
     )
 
-def summarize_simulation_raws(
-    simulation_raws,
-    col_names_1=None,
-    col_names_2=None,
-    col_names_3=None,
-    row_names=None,
-):
-    """
-    Summarize raw simulation results.
 
-    Each element of simulation_raws must have the form:
-
-        (
-            model_param_estimates,
-            plug_in_estimates,
-            true_parameter
-        )
-
-    A separate mean and SD is calculated for every column of
-    model_param_estimates and plug_in_estimates.
-    """
-    if not simulation_raws:
-        raise ValueError("simulation_raws cannot be empty.")
-
-    summarized_results = []
-
-    for row_number, raw_result in enumerate(simulation_raws, start=1):
-        if len(raw_result) != 3:
-            raise ValueError(
-                f"Simulation row {row_number} must contain exactly "
-                "three items."
-            )
-
-        (
-            model_param_estimates,
-            plug_in_estimates,
-            true_parameter,
-        ) = raw_result
-
-        model_param_estimates = np.asarray(
-            model_param_estimates,
-            dtype=float,
-        )
-
-        plug_in_estimates = np.asarray(
-            plug_in_estimates,
-            dtype=float,
-        )
-
-
-        model_summary = mean_and_sd(model_param_estimates)
-
-
-
-        plugin_summary = mean_and_sd(plug_in_estimates)
-
-
-        summarized_results.append(
-            (
-                model_summary,
-                plugin_summary,
-                true_parameter,
-            )
-        )
-
-    if row_names is None:
-        row_names = [
-            f"Simulation {i + 1}"
-            for i in range(len(summarized_results))
-        ]
-
-    return create_stats_dataframe(
-        data=summarized_results,
-        col_names_1=col_names_1,
-        col_names_2=col_names_2,
-        col_names_3=col_names_3,
-        row_names=row_names,
-        row_col_name="n",
+def analyze_simulation_data() -> pd.DataFrame:
+    """Load and summarize the current simulation output."""
+    simulation_results = load_simulation_data(
+        PICKLE_LOCATION
     )
 
-if __name__ == "__main__":
-    df = analyze_simulation_data()
+    return summarize_simulation_results(
+        simulation_results,
+        row_names=ROW_NAMES,
+    )
 
-    print(df)
 
-    df.to_csv(
-        "simulation_results.csv",
+def export_reproduction_table(
+    dataframe: pd.DataFrame,
+    csv_location: str | Path = CSV_OUTPUT_LOCATION,
+    image_location: str | Path = IMAGE_OUTPUT_LOCATION,
+) -> None:
+    """Export the purpose-built reproduction table."""
+    csv_path = Path(csv_location)
+    image_path = Path(image_location)
+
+    csv_path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+    image_path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    dataframe.to_csv(
+        csv_path,
         index=False,
         float_format="%.4f",
     )
 
-
-    styled_df = (
-        df.style
+    styled_dataframe = (
+        dataframe.style
         .hide(axis="index")
-        .format(precision=4)
+        .format(
+            {
+                column: "{:.4f}"
+                for column in dataframe.columns
+                if column != "n"
+            },
+            na_rep="NaN",
+        )
     )
-
 
     dfi.export(
-        styled_df,
-        "simulation_results.png",
+        styled_dataframe,
+        image_path,
         table_conversion="matplotlib",
     )
+
+def create_bias_dataframe(
+    simulation_results,
+    row_names=None,
+) -> pd.DataFrame:
+    """
+    Create a purpose-specific bias table for the two methods used in
+    the paper reproduction:
+
+    1. Raw logistic treatment coefficient.
+    2. Standardized logistic plug-in estimator.
+
+    This is tied to the current simulation output structure and is
+    not intended as a general-purpose analysis function.
+    """
+    if not simulation_results:
+        raise ValueError(
+            "simulation_results cannot be empty."
+        )
+
+    if row_names is None:
+        row_names = [
+            f"Simulation {index}"
+            for index in range(
+                1,
+                len(simulation_results) + 1,
+            )
+        ]
+    else:
+        row_names = list(row_names)
+
+    if len(row_names) != len(simulation_results):
+        raise ValueError(
+            f"Received {len(row_names)} row names for "
+            f"{len(simulation_results)} simulation results."
+        )
+
+    rows = []
+
+    for row_number, (
+        row_name,
+        simulation_result,
+    ) in enumerate(
+        zip(row_names, simulation_results),
+        start=1,
+    ):
+        validate_simulation_result(
+            simulation_result,
+            row_number,
+        )
+
+        true_parameter = float(
+            simulation_result["true_parameter"]
+        )
+
+        estimator_results = simulation_result[
+            "estimator_results"
+        ]
+
+        # These are the treatment coefficients returned by
+        # fitted_result.params[1].
+        logit_estimates = np.asarray(
+            estimator_results[
+                LOGIT_ESTIMATOR_NAME
+            ]["estimates"],
+            dtype=float,
+        ).ravel()
+
+        plugin_estimates = np.asarray(
+            estimator_results[
+                PLUGIN_ESTIMATOR_NAME
+            ]["estimates"],
+            dtype=float,
+        ).ravel()
+
+        if logit_estimates.size != plugin_estimates.size:
+            raise ValueError(
+                f"Simulation row {row_number} contains "
+                f"{logit_estimates.size} raw logit estimates but "
+                f"{plugin_estimates.size} plug-in estimates."
+            )
+
+        logit_bias = bias(
+            true_parameter,
+            logit_estimates,
+        )
+
+        plugin_bias = bias(
+            true_parameter,
+            plugin_estimates,
+        )
+
+        rows.append(
+            {
+                "n": row_name,
+                "true_parameter": true_parameter,
+                "bias(logit)": float(logit_bias),
+                "bias(logit_plugin)": float(plugin_bias),
+            }
+        )
+
+    return pd.DataFrame(
+        rows,
+        columns=[
+            "n",
+            "true_parameter",
+            "bias(logit)",
+            "bias(logit_plugin)",
+        ],
+    )
+
+def export_bias_table(
+    dataframe: pd.DataFrame,
+    csv_location: str | Path = "simulation_bias_results.csv",
+    image_location: str | Path = "simulation_bias_results.png",
+) -> None:
+    """
+    Export the purpose-specific bias table as CSV and PNG.
+    """
+    csv_path = Path(csv_location)
+    image_path = Path(image_location)
+
+    csv_path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+    image_path.parent.mkdir(
+        parents=True,
+        exist_ok=True,
+    )
+
+    dataframe.to_csv(
+        csv_path,
+        index=False,
+        float_format="%.4f",
+    )
+
+    styled_dataframe = (
+        dataframe.style
+        .hide(axis="index")
+        .format(
+            {
+                "true_parameter": "{:.4f}",
+                "bias(logit)": "{:.4f}",
+                "bias(logit_plugin)": "{:.4f}",
+            },
+            na_rep="NaN",
+        )
+    )
+
+    dfi.export(
+        styled_dataframe,
+        image_path,
+        table_conversion="matplotlib",
+    )
+
+def main() -> None:
+    warnings.warn(
+        "This script is purpose-built solely to reproduce the "
+        "requested coefficient/plugin/truth and bias tables. "
+        "It should not be used as a general simulation-analysis "
+        "pipeline.",
+        UserWarning,
+        stacklevel=2,
+    )
+
+    simulation_results = load_simulation_data(
+        PICKLE_LOCATION
+    )
+
+    results_dataframe = summarize_simulation_results(
+        simulation_results,
+        row_names=ROW_NAMES,
+    )
+
+    bias_dataframe = create_bias_dataframe(
+        simulation_results,
+        row_names=ROW_NAMES,
+    )
+
+    print("\nCoefficient, plug-in, and truth results:\n")
+    print(results_dataframe.to_string(index=False))
+
+    print("\nEstimator bias results:\n")
+    print(bias_dataframe.to_string(index=False))
+
+    export_reproduction_table(
+        results_dataframe
+    )
+
+    export_bias_table(
+        bias_dataframe
+    )
+
+
+
+
+if __name__ == "__main__":
+    main()
+
+

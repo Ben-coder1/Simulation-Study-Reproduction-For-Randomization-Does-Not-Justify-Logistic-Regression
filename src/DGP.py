@@ -150,8 +150,11 @@ class ExperimentDGP:
 
     rng = np.random.default_rng(rng)
 
-    # Generate 1D vector for assignments (shape: (n_ind,))
-    assignments = rng.binomial(1, self.p_treatment, size=self.n_ind)
+    
+    n_treated = int(round(self.n_ind * self.p_treatment))
+
+    assignments = np.zeros(self.n_ind, dtype=int)
+    assignments[rng.choice(self.n_ind, size=n_treated, replace=False)] = 1
 
     # Select outcomes based on 1D assignments
     outcomes = np.where(

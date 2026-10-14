@@ -152,6 +152,29 @@ def test_experiment_dgp_generate_experiment():
     assert np.isin(experiment_results.assignments, [0, 1]).all()
     assert np.isin(experiment_results.outcomes, [0, 1]).all()
 
+    assert np.sum(experiment_results.assignments) == int(round(1000 * 0.75))
+
+
+def test_experiment_dgp_generate_experiment_p_treatment_diff():
+    individuals_basic = IndividualConditionalOutcomesUniformDGP(1000, 0.75, 0.5).generate_individuals(rng=42)
+    n_exp = 1000
+    p_treatment = 0.25
+    experiment_dgp = ExperimentDGP(n_exp, p_treatment, individuals_basic)
+    experiment_results = experiment_dgp.generate_experiment(rng=42)
+
+    assert isinstance(experiment_results.assignments, np.ndarray)
+    assert isinstance(experiment_results.covariates, np.ndarray)
+    assert isinstance(experiment_results.outcomes, np.ndarray)
+
+    assert experiment_results.assignments.shape == (1000,)
+    assert experiment_results.covariates.shape == (1000, 1)
+    assert experiment_results.outcomes.shape == (1000,)
+
+    assert np.isin(experiment_results.assignments, [0, 1]).all()
+    assert np.isin(experiment_results.outcomes, [0, 1]).all()
+
+    assert np.sum(experiment_results.assignments) == int(round(1000 * 0.25))
+
 def test_experiment_dgp_generate_experiment_assignments_match_outcomes_all_treatment_success():
     individuals_basic = IndividualLevelConditionalOutcomes(
         n=1000,

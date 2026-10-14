@@ -1,47 +1,89 @@
-from logging import config
-
-from src.DGP import *
-from src.Methods import *
-from src.metrics import bias, mean_and_sd
-import dataframe_image as dfi
 import pickle
 
-from configuration import PICKLE_LOCATION, SEED, SIMULATIONS
+import numpy as np
 
+from configuration import PICKLE_LOCATION, SEED, SIMULATIONS
+from src.DGP import (
+    EXPERIMENT_DGPS,
+    INDIVIDUAL_DGPS,
+    ExperimentDGP,
+    IndividualConditionalOutcomesDGP,
+)
+from src.Methods import (
+    PARAMETER_ESTIMATORS,
+    TRUTH_PARAMETER_FINDERS,
+    ModelParameterEstimator,
+    TrueParameterFinder,
+)
 
 
 class Simulation:
-    def __init__(self, individualDGP: IndividualConditionalOutcomesDGP, ExperimentDGP: ExperimentDGP, param_estimator: ModelParameterEstimator, true_parameter_finder: TrueParameterFinder):
-        self.nExperiment = ExperimentDGP.n_exp
-        self.nindividual = individualDGP.n
+    def __init__(
+        self,
+        individual_dgp: IndividualConditionalOutcomesDGP,
+        experiment_dgp: ExperimentDGP,
+        param_estimators: list[ModelParameterEstimator],
+        true_parameter_finder: TrueParameterFinder,
+    ):
+        if not param_estimators:
+            raise ValueError(
+                "At least one parameter estimator is required."
+            )
 
-        self.individualDGP = individualDGP
-        
-        self.ExperimentDGP = ExperimentDGP
-        
-        self.param_estimator = param_estimator
+        self.n_experiments = experiment_dgp.n_exp
+        self.n_individuals = individual_dgp.n
+
+        self.individual_dgp = individual_dgp
+        self.experiment_dgp = experiment_dgp
+        self.param_estimators = param_estimators
         self.true_parameter_finder = true_parameter_finder
 
     def run_simulation(
-            self, 
-            rng: np.random.Generator | int | None = None
-            ):
+        self,
+        rng: np.random.Generator | int | None = None,
+    ):
         base_rng = np.random.default_rng(rng)
-        individualsDGP_rng = base_rng.spawn(1)[0]
-        individuals = self.individualDGP.generate_individuals(rng=individualsDGP_rng)
+        individuals_rng, experiment_rng = base_rng.spawn(2)
 
-        self.ExperimentDGP.set_conditional_outcomes(individuals)
+        individuals = self.individual_dgp.generate_individuals(
+            rng=individuals_rng
+        )
 
-        experiment_rng = base_rng.spawn(1)[0]
-        experiement_outcomes = self.ExperimentDGP.generate_experiments(rng=experiment_rng)
+        self.experiment_dgp.set_conditional_outcomes(individuals)
 
-        true_parameter = self.true_parameter_finder.find_true_parameters(individuals)
+        experiment_results = (
+            self.experiment_dgp.generate_experiments(
+                rng=experiment_rng
+            )
+        )
 
-        model_param_estimates, plug_in_estimates = self.param_estimator.generate_parameter_estimates(experiement_outcomes)
+        true_parameter = (
+            self.true_parameter_finder.find_true_parameters(
+                individuals
+            )
+        )
 
+        estimator_results = {}
 
+        for estimator in self.param_estimators:
+            estimator_name = type(estimator).__name__
 
-        return model_param_estimates, plug_in_estimates, true_parameter
+            estimates, auxiliary = (
+                estimator.generate_parameter_estimates(
+                    experiment_results
+                )
+            )
+
+            estimator_results[estimator_name] = {
+                "estimates": estimates,
+                "auxiliary": auxiliary,
+            }
+
+        return {
+            "true_parameter": true_parameter,
+            "estimator_results": estimator_results,
+        }
+
 
 class MultipleSimulations:
     def __init__(self, simulations: list[Simulation]):
@@ -49,52 +91,65 @@ class MultipleSimulations:
 
     def run_multiple_simulations(
         self,
-        rng: np.random.Generator | int | None = None
+        rng: np.random.Generator | int | None = None,
     ):
         base_rng = np.random.default_rng(rng)
         simulation_rngs = base_rng.spawn(len(self.simulations))
 
-        simulation_raws = []
+        simulation_results = []
 
         for simulation, simulation_rng in zip(
             self.simulations,
-            simulation_rngs
+            simulation_rngs,
         ):
-            model_param_estimates, plug_in_estimates, true_parameter = (
-                simulation.run_simulation(rng=simulation_rng)
+            result = simulation.run_simulation(
+                rng=simulation_rng
             )
+            simulation_results.append(result)
 
-            # Each append creates one DataFrame row.
-            simulation_raws.append(
-                (
-                    model_param_estimates,
-                    plug_in_estimates,
-                    true_parameter
-                )
-            )
         with open(PICKLE_LOCATION, "wb") as file:
             pickle.dump(
-                simulation_raws,
+                simulation_results,
                 file,
-                protocol=pickle.HIGHEST_PROTOCOL
+                protocol=pickle.HIGHEST_PROTOCOL,
             )
-        return simulation_raws
+
+        return simulation_results
 
 
 def run_from_config():
-    sims = [
+    simulations = [
         Simulation(
-            individualDGP=INDIVIDUAL_DGPS[sim_dict["individualDGP"]](sim_dict["nIndividuals"], sim_dict["treatment_threshold"], sim_dict["control_threshold"]),
-            ExperimentDGP=EXPERIMENT_DGPS[sim_dict["ExperimentDGP"]](sim_dict["nExperiments"], sim_dict["pTreatment"]),
-            param_estimator=PARAMETER_ESTIMATORS[sim_dict["param_estimator"]](),
-            true_parameter_finder=TRUTH_PARAMETER_FINDERS[sim_dict["true_parameter_finder"]]()
+            individual_dgp=INDIVIDUAL_DGPS[
+                sim_dict["individual_dgp"]
+            ](
+                sim_dict["n_individuals"],
+                sim_dict["treatment_threshold"],
+                sim_dict["control_threshold"],
+            ),
+            experiment_dgp=EXPERIMENT_DGPS[
+                sim_dict["experiment_dgp"]
+            ](
+                sim_dict["n_experiments"],
+                sim_dict["p_treatment"],
+            ),
+            param_estimators=[
+                PARAMETER_ESTIMATORS[estimator_name]()
+                for estimator_name in sim_dict["param_estimators"]
+            ],
+            true_parameter_finder=TRUTH_PARAMETER_FINDERS[
+                sim_dict["true_parameter_finder"]
+            ](),
         )
         for sim_dict in SIMULATIONS
     ]
 
-    simulations_control = MultipleSimulations(sims)
-    simulations_results = simulations_control.run_multiple_simulations(rng=SEED)
-    return simulations_results
+    simulation_controller = MultipleSimulations(simulations)
+
+    return simulation_controller.run_multiple_simulations(
+        rng=SEED
+    )
 
 
-simulations_results = run_from_config()
+if __name__ == "__main__":
+    simulations_results = run_from_config()
