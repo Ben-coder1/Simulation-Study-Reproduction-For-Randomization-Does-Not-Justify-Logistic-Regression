@@ -49,18 +49,43 @@ def test_experiment_dgp_generate_experiments_same():
         assert np.array_equal(exp1.covariates, exp2.covariates)
         assert np.array_equal(exp1.outcomes, exp2.outcomes)
 
-
 def test_run_from_config_reproducibility():
     results1 = run_from_config()
     results2 = run_from_config()
 
     assert len(results1) == len(results2)
-    for r1, r2 in zip(results1, results2):
-        model_param_estimates1, plug_in_estimates1, true_parameter1 = r1
-        model_param_estimates2, plug_in_estimates2, true_parameter2 = r2
-        assert np.array_equal(model_param_estimates1, model_param_estimates2)
-        assert np.array_equal(plug_in_estimates1, plug_in_estimates2)
-        assert np.array_equal(true_parameter1, true_parameter2)
+
+    for result1, result2 in zip(results1, results2):
+        assert result1.keys() == result2.keys()
+
+        np.testing.assert_equal(
+            result1["true_parameter"],
+            result2["true_parameter"],
+        )
+
+        estimator_results1 = result1["estimator_results"]
+        estimator_results2 = result2["estimator_results"]
+
+        assert (
+            estimator_results1.keys()
+            == estimator_results2.keys()
+        )
+
+        for estimator_name in estimator_results1:
+            estimator1 = estimator_results1[estimator_name]
+            estimator2 = estimator_results2[estimator_name]
+
+            assert estimator1.keys() == estimator2.keys()
+
+            np.testing.assert_array_equal(
+                estimator1["estimates"],
+                estimator2["estimates"],
+            )
+
+            np.testing.assert_array_equal(
+                estimator1["auxiliary"],
+                estimator2["auxiliary"],
+            )
 
 
 
