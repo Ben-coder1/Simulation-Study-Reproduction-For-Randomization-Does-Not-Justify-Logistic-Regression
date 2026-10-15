@@ -20,7 +20,7 @@ import dataframe_image as dfi
 import numpy as np
 import pandas as pd
 
-from configuration import PICKLE_LOCATION, ROW_NAMES
+from configuration import BIAS_CSV_LOCATION, BIAS_IMAGE_LOCATION, PICKLE_LOCATION, RESULTS_CSV_LOCATION, RESULTS_IMAGE_LOCATION, ROW_NAMES
 from src.metrics import bias
 
 LOGIT_ESTIMATOR_NAME = "LogitModelEstimator"
@@ -349,13 +349,11 @@ def analyze_simulation_data() -> pd.DataFrame:
 
 
 def export_reproduction_table(
-    dataframe: pd.DataFrame,
-    csv_location: str | Path = CSV_OUTPUT_LOCATION,
-    image_location: str | Path = IMAGE_OUTPUT_LOCATION,
+    dataframe: pd.DataFrame
 ) -> None:
     """Export the purpose-built reproduction table."""
-    csv_path = Path(csv_location)
-    image_path = Path(image_location)
+    csv_path = Path(RESULTS_CSV_LOCATION)
+    image_path = Path(RESULTS_IMAGE_LOCATION)
 
     csv_path.parent.mkdir(
         parents=True,
@@ -503,14 +501,12 @@ def create_bias_dataframe(
 
 def export_bias_table(
     dataframe: pd.DataFrame,
-    csv_location: str | Path = "simulation_bias_results.csv",
-    image_location: str | Path = "simulation_bias_results.png",
 ) -> None:
     """
     Export the purpose-specific bias table as CSV and PNG.
     """
-    csv_path = Path(csv_location)
-    image_path = Path(image_location)
+    csv_path = Path(BIAS_CSV_LOCATION)
+    image_path = Path(BIAS_IMAGE_LOCATION)
 
     csv_path.parent.mkdir(
         parents=True,

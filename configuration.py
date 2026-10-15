@@ -1,6 +1,38 @@
-PICKLE_LOCATION = "simulation_data.pkl"
-SEED = 100
+from pathlib import Path
 
+
+PROJECT_ROOT = Path(__file__).resolve().parent
+
+RESULTS_DIR = PROJECT_ROOT / "results"
+RAW_RESULTS_DIR = RESULTS_DIR / "raw"
+TABLES_DIR = RESULTS_DIR / "tables"
+FIGURES_DIR = RESULTS_DIR / "figures"
+
+PICKLE_LOCATION = (
+    RAW_RESULTS_DIR / "simulation_data.pkl"
+)
+
+RESULTS_CSV_LOCATION = (
+    TABLES_DIR / "simulation_results.csv"
+)
+
+BIAS_CSV_LOCATION = (
+    TABLES_DIR / "simulation_bias_results.csv"
+)
+
+RESULTS_IMAGE_LOCATION = (
+    TABLES_DIR / "simulation_results.png"
+)
+
+BIAS_IMAGE_LOCATION = (
+    TABLES_DIR / "simulation_bias_results.png"
+)
+
+VIOLIN_IMAGE_LOCATION = (
+    FIGURES_DIR / "simulation_violin_plots.png"
+)
+
+SEED = 100
 
 individual_100_simulation = {
     "individual_dgp": "individual_uniform",

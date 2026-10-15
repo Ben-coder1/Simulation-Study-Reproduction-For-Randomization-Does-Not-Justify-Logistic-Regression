@@ -1,5 +1,5 @@
 import pickle
-
+from pathlib import Path
 import numpy as np
 
 from configuration import PICKLE_LOCATION, SEED, SIMULATIONS
@@ -106,8 +106,9 @@ class MultipleSimulations:
                 rng=simulation_rng
             )
             simulation_results.append(result)
-
-        with open(PICKLE_LOCATION, "wb") as file:
+        pickle_path = Path(PICKLE_LOCATION)
+        pickle_path.parent.mkdir(parents=True, exist_ok=True)
+        with open(pickle_path, "wb") as file:
             pickle.dump(
                 simulation_results,
                 file,

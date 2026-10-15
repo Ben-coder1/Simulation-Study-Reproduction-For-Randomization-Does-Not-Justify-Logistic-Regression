@@ -17,7 +17,7 @@ from pathlib import Path
 import matplotlib.pyplot as plt
 import numpy as np
 
-from configuration import PICKLE_LOCATION, SIMULATIONS
+from configuration import PICKLE_LOCATION, SIMULATIONS, VIOLIN_IMAGE_LOCATION
 from src.Methods import PARAMETER_ESTIMATORS
 
 
@@ -441,23 +441,19 @@ def create_violin_plots(
 
 
 def save_violin_plots(
-    figure,
-    output_location: str | Path = OUTPUT_LOCATION,
+    figure
 ) -> Path:
     """Save the combined violin-plot figure."""
-    output_path = Path(output_location)
-    output_path.parent.mkdir(
-        parents=True,
-        exist_ok=True,
-    )
+    figure_path = Path(VIOLIN_IMAGE_LOCATION)
+    figure_path.parent.mkdir(parents=True, exist_ok=True)
 
     figure.savefig(
-        output_path,
+        figure_path,
         dpi=OUTPUT_DPI,
         bbox_inches="tight",
     )
 
-    return output_path
+    return figure_path
 
 
 def main() -> None:
@@ -471,8 +467,7 @@ def main() -> None:
     )
 
     output_path = save_violin_plots(
-        figure,
-        OUTPUT_LOCATION,
+        figure
     )
 
     print(
