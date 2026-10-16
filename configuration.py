@@ -29,7 +29,12 @@ BIAS_IMAGE_LOCATION = (
 )
 
 VIOLIN_IMAGE_LOCATION = (
-    FIGURES_DIR / "simulation_violin_plots.png"
+    FIGURES_DIR / "simulation_violin_plots.pdf"
+)
+
+SCATTER_IMAGE_LOCATION = (
+    FIGURES_DIR
+    / "differential_log_odds_error_scatterplots.pdf"
 )
 
 SEED = 100

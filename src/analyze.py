@@ -21,39 +21,13 @@ import numpy as np
 import pandas as pd
 
 from configuration import BIAS_CSV_LOCATION, BIAS_IMAGE_LOCATION, PICKLE_LOCATION, RESULTS_CSV_LOCATION, RESULTS_IMAGE_LOCATION, ROW_NAMES
-from src.metrics import bias
+from src.metrics import bias, mean_and_sd
 
 LOGIT_ESTIMATOR_NAME = "LogitModelEstimator"
 PLUGIN_ESTIMATOR_NAME = "LogitModelPlugIn"
 
 CSV_OUTPUT_LOCATION = "simulation_results.csv"
 IMAGE_OUTPUT_LOCATION = "simulation_results.png"
-
-
-def mean_and_sd(values: np.ndarray) -> tuple[float, float]:
-    """
-    Calculate the mean and sample standard deviation, ignoring NaNs.
-
-    Returns (NaN, NaN) if there are no finite estimates. The standard
-    deviation is NaN if only one finite estimate is available.
-    """
-    values = np.asarray(values, dtype=float).ravel()
-    finite_values = values[np.isfinite(values)]
-
-    if finite_values.size == 0:
-        return np.nan, np.nan
-
-    mean = float(np.mean(finite_values))
-
-    if finite_values.size < 2:
-        standard_deviation = np.nan
-    else:
-        standard_deviation = float(
-            np.std(finite_values, ddof=1)
-        )
-
-    return mean, standard_deviation
-
 
 def load_simulation_data(
     pickle_location: str | Path = PICKLE_LOCATION,

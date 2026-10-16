@@ -1,25 +1,28 @@
 import numpy as np
-def mean_and_sd(data):
+def mean_and_sd(values: np.ndarray) -> tuple[float, float]:
     """
-    Calculate the mean and standard deviation of each column.
+    Calculate the mean and sample standard deviation, ignoring NaNs.
 
-    Returns
-    -------
-    list[tuple[float, float]]
-        [(mean_1, sd_1), (mean_2, sd_2), ...]
+    Returns (NaN, NaN) if there are no finite estimates. The standard
+    deviation is NaN if only one finite estimate is available.
     """
-    data = np.asarray(data, dtype=float)
+    values = np.asarray(values, dtype=float).ravel()
+    finite_values = values[np.isfinite(values)]
 
-    if data.size == 0:
-        raise ValueError("data cannot be empty.")
+    if finite_values.size == 0:
+        return np.nan, np.nan
 
-    col_means = np.atleast_1d(np.mean(data, axis=0))
-    col_sds = np.atleast_1d(np.std(data, axis=0))
+    mean = float(np.mean(finite_values))
 
-    return [
-        (float(mean), float(sd))
-        for mean, sd in zip(col_means, col_sds)
-    ]
+    if finite_values.size < 2:
+        standard_deviation = np.nan
+    else:
+        standard_deviation = float(
+            np.std(finite_values, ddof=1)
+        )
+
+    return mean, standard_deviation
 
 def bias(true_param, estimated_param):
+    """return the bias of the estimated parameter relative to the true parameter."""
     return np.mean(estimated_param - true_param, axis=0)

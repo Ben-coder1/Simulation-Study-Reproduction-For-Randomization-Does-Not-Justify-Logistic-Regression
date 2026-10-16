@@ -8,6 +8,14 @@ from tqdm.auto import tqdm
 
 @dataclass(frozen=True)
 class IndividualLevelConditionalOutcomes:
+  """Container for individual-level conditional outcomes.
+
+  Attributes:
+    n: Number of individuals.
+    covariates: Array of covariate values for each individual.
+    treatment_outcomes: Array of treatment outcome values for each individual.
+    control_outcomes: Array of control outcome values for each individual.
+  """
   n: int
   covariates: np.ndarray
   treatment_outcomes: np.ndarray
@@ -15,7 +23,11 @@ class IndividualLevelConditionalOutcomes:
 
 
 class IndividualConditionalOutcomesDGP(ABC):
+  """Abstract base class for generating individual-level conditional outcomes.
 
+  Subclasses must implement the generate_individuals method to produce
+  an instance of IndividualLevelConditionalOutcomes.
+  """
   @abstractmethod
   def generate_individuals(
       self,
@@ -25,6 +37,13 @@ class IndividualConditionalOutcomesDGP(ABC):
 
 
 class IndividualConditionalOutcomesUniformDGP(IndividualConditionalOutcomesDGP):
+  """DGP for generating individual-level conditional outcomes using uniform(0,1) distributions for latent and covariate values, and using thresholds to determine treatment/control success.
+  
+  Attributes:
+    n: Number of individuals to generate.
+    treatment_outcome_threshold: Threshold for determining treatment success.
+    control_outcome_threshold: Threshold for determining control success.
+  """
 
   def __init__(
       self,
@@ -32,6 +51,17 @@ class IndividualConditionalOutcomesUniformDGP(IndividualConditionalOutcomesDGP):
       treatment_outcome_threshold: float,
       control_outcome_threshold: float,
   ):
+    """Initialize the DGP with the specified number of individuals and outcome thresholds.
+
+    Keyword arguments:
+      n -- Number of individuals to generate.
+      treatment_outcome_threshold -- Threshold for determining treatment success.
+      control_outcome_threshold -- Threshold for determining control success.
+
+    Raises:
+      TypeError: If n is not an integer. If any of the thresholds are not real numbers.
+      ValueError: if n is a non-positive integer.
+    """
     # Validate n
     if isinstance(n, bool) or not isinstance(n, int):
       raise TypeError(f"'n' must be an integer, got {type(n).__name__}.")
@@ -57,6 +87,14 @@ class IndividualConditionalOutcomesUniformDGP(IndividualConditionalOutcomesDGP):
       self,
       rng: np.random.Generator | int | None = None,
   ) -> IndividualLevelConditionalOutcomes:
+    """
+    Generate individual-level conditional outcomes.
+
+    Keyword arguments:
+      rng -- Random number generator or seed for reproducibility.
+
+    Returns an instance of IndividualLevelConditionalOutcomes containing the generated data.
+    """
     rng = np.random.default_rng(rng)
 
     covariates = rng.uniform(0, 1, size=(self.n, 1))
@@ -91,26 +129,50 @@ class IndividualConditionalOutcomesUniformDGP(IndividualConditionalOutcomesDGP):
 
 @dataclass(frozen=True)
 class ExperimentResults:
+  """Container for the results of a causal inference experiment.
+
+  Attributes:
+    assignments: Array indicating treatment assignment for each individual.
+    covariates: Array of covariate values for each individual.
+    outcomes: Array of observed outcomes for each individual.
+  """
   assignments: np.ndarray
   covariates: np.ndarray
   outcomes: np.ndarray
 
 
 class ExperimentDGP:
+  """Data-generating process for a causal inference experiment created by assigning individuals to treatment and control groups.
 
+  Attributes:
+    n_exp: Number of experiments to generate.
+    p_treatment: Percentage of individuals assigned to the treatment group.
+    conditional_outcomes: Instance of IndividualLevelConditionalOutcomes containing the conditional outcome data for individuals.
+    n_ind: Number of individuals in the experiment.
+  """
   def __init__(
       self,
       n_exp: int,
       p_treatment: float,
       conditional_outcomes: IndividualLevelConditionalOutcomes | None = None,
   ):
-    # Validate n_exp
+    """
+    Initialize the ExperimentDGP with the specified number of experiments, treatment percentage, and optional conditional outcomes.
+
+    Keyword arguments:
+      n_exp -- Number of experiments to generate.
+      p_treatment -- Percentage of individuals assigned to the treatment group.
+      conditional_outcomes -- Instance of IndividualLevelConditionalOutcomes containing the conditional outcome data for individuals.
+
+    Raises:
+      TypeError: If n_exp is not an integer or p_treatment is not a real number.
+      ValueError: If n_exp is not positive or p_treatment is not between 0.0 and 1.0.
+    """
     if isinstance(n_exp, bool) or not isinstance(n_exp, int):
       raise TypeError(f"'n_exp' must be an integer, got {type(n_exp).__name__}.")
     if n_exp <= 0:
       raise ValueError(f"'n_exp' must be a positive integer (> 0), got {n_exp}.")
 
-    # Validate p_treatment
     if isinstance(p_treatment, bool) or not isinstance(
         p_treatment, (int, float, Real)
     ):
@@ -133,6 +195,15 @@ class ExperimentDGP:
   def set_conditional_outcomes(
       self, conditional_outcomes: IndividualLevelConditionalOutcomes
   ):
+    """
+    Set the conditional outcomes for the experiment.
+
+    Keyword arguments:
+      conditional_outcomes -- Instance of IndividualLevelConditionalOutcomes containing the conditional outcome data for individuals.
+
+    Raises:
+      TypeError: If conditional_outcomes is not an instance of IndividualLevelConditionalOutcomes.
+    """
     if not isinstance(conditional_outcomes, IndividualLevelConditionalOutcomes):
       raise TypeError(
           "'conditional_outcomes' must be an instance of"
@@ -145,6 +216,15 @@ class ExperimentDGP:
       self,
       rng: np.random.Generator | int | None = None,
   ) -> ExperimentResults:
+    """
+    Generate a single experiment by assigning individuals to treatment and control groups and observing outcomes.
+
+    Keyword arguments:
+      rng -- Random number generator or seed for reproducibility.
+
+    Returns:
+      An instance of ExperimentResults containing the assignments, covariates, and outcomes.
+    """
     if self.conditional_outcomes is None:
       raise ValueError("Conditional outcomes not set")
 
@@ -173,6 +253,15 @@ class ExperimentDGP:
       self,
       rng: np.random.Generator | int | None = None,
   ) -> list[ExperimentResults]:
+    """
+    Generate multiple experiments by repeatedly calling generate_experiment.
+
+    Keyword arguments:
+      rng -- Random number generator or seed for reproducibility.
+
+    Returns:
+      A list of ExperimentResults instances.
+    """
     if self.conditional_outcomes is None:
       raise ValueError("Conditional outcomes not set")
 
