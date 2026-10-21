@@ -48,3 +48,7 @@ Using the assignment coefficient from logistic regression is biased when the dat
 | `make simulate` | Runs simulations. |
 | `make analyze` | Runs analysis. |
 | `make figures` | Creates the figures. |
+
+# AI Use
+
+AI was used in creating this project. I used both Gemini and Sol throughout.

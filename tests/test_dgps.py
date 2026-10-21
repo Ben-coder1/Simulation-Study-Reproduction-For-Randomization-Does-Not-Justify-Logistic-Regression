@@ -2,7 +2,7 @@ import pytest
 from scipy import stats
 import numpy as np
 
-from src.DGP import IndividualConditionalOutcomesUniformDGP, ExperimentDGP, IndividualLevelConditionalOutcomes
+from src.dgps import IndividualConditionalOutcomesUniformDGP, ExperimentDGP, IndividualLevelConditionalOutcomes
 
 def test_individual_conditional_outcomes_dgp():
     n = 100

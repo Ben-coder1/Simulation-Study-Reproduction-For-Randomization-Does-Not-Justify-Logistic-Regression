@@ -9,7 +9,7 @@ all: .all_complete
 
 simulate: .simulate_complete
 
-.simulate_complete: configuration.py src/simulation.py src/DGP.py src/methods.py
+.simulate_complete: configuration.py src/simulation.py src/dgps.py src/methods.py
 	python -m src.simulation
 	touch .simulate_complete
 
@@ -26,5 +26,5 @@ figures: .figures_complete
 	touch .figures_complete
 
 clean: 
-	rm -f .simulate_complete .analyze_complete .figures_complete .all_complete
+	rm -f .simulate_complete .analyze_complete .figures_complete .all_complete 
 	rm -rf  results

@@ -1,6 +1,6 @@
 import pytest
-from src.DGP import ExperimentResults
-from src.Methods import LogitModelEstimator, DifferentialLogOddsFinder, differential_log_odds, LogitModelPlugIn
+from src.dgps import ExperimentResults
+from src.methods import LogitModelEstimator, DifferentialLogOddsFinder, differential_log_odds, LogitModelPlugIn
 import statsmodels.api as sm
 import numpy as np
 

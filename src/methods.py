@@ -1,8 +1,8 @@
 import numpy as np
 import statsmodels.api as sm
 import warnings
-from src.DGP import ExperimentResults
-from src.DGP import IndividualLevelConditionalOutcomes
+from src.dgps import ExperimentResults
+from src.dgps import IndividualLevelConditionalOutcomes
 
 
 

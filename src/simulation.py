@@ -3,13 +3,13 @@ from pathlib import Path
 import numpy as np
 
 from configuration import PICKLE_LOCATION, SEED, SIMULATIONS
-from src.DGP import (
+from src.dgps import (
     EXPERIMENT_DGPS,
     INDIVIDUAL_DGPS,
     ExperimentDGP,
     IndividualConditionalOutcomesDGP,
 )
-from src.Methods import (
+from src.methods import (
     PARAMETER_ESTIMATORS,
     TRUTH_PARAMETER_FINDERS,
     ModelParameterEstimator,

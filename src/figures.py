@@ -40,7 +40,7 @@ from configuration import (
     SIMULATIONS,
     VIOLIN_IMAGE_LOCATION,
 )
-from src.Methods import PARAMETER_ESTIMATORS
+from src.methods import PARAMETER_ESTIMATORS
 
 
 # ---------------------------------------------------------------------
