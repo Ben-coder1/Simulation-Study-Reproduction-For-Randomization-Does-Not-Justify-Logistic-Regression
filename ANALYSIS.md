@@ -10,4 +10,4 @@ Nothing was actually unexpected in the results, the simulations simply showcased
 
 The most difficult part of the implementation was deciding how I wanted to structure and organize the code, and in general design decisions. I struggled with choosing whether to combine the methods and true parameters into different classes, or combining the plug-in with the logit model. 
 
-I am confident in my results. The main thing which could undermine that confidence is if I misunderstood what the original authors did, or accidentally implemented a different version of their experiment or estimator. However I did spend time understanding what they did so that this would not occur. 
+I am generally confident in my results. The main thing which could undermine that confidence is that the conditional outcomes for the individuals are only generated once, and so these results could potentially be dependant on the individuals generated at the beggining. This is not really an issue though, especially when there are many individuals.
