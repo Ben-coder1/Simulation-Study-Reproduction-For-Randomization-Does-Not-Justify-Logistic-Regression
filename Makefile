@@ -13,13 +13,13 @@ simulate: .simulate_complete
 
 analyze: .analyze_complete
 
-.analyze_complete: .simulate_complete src/analyze.py
+.analyze_complete: .simulate_complete src/analyze.py results/raw/simulation_data.pkl
 	python -m src.analyze
 	touch .analyze_complete
 
 figures: .figures_complete
 
-.figures_complete: .simulate_complete src/figures.py
+.figures_complete: .simulate_complete src/figures.py results/raw/simulation_data.pkl
 	python -m src.figures
 	touch .figures_complete
 
