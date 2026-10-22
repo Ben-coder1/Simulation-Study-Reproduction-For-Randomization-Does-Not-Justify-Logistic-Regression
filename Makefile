@@ -1,11 +1,9 @@
-.PHONY: all simulate analyze figures test clean test
+.PHONY: all simulate analyze figures test clean
 
 test: 
 	python -m pytest
 
-all: .all_complete
-
-.all_complete: simulate analyze figures
+all: simulate analyze figures
 
 simulate: .simulate_complete
 
@@ -26,5 +24,5 @@ figures: .figures_complete
 	touch .figures_complete
 
 clean: 
-	rm -f .simulate_complete .analyze_complete .figures_complete .all_complete 
+	rm -f .simulate_complete .analyze_complete .figures_complete
 	rm -rf  results
