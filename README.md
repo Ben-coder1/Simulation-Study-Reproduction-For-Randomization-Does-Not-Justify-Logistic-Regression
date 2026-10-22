@@ -37,7 +37,7 @@ make all
 
 # Key Findings Summary
 
-Using the assignment coefficient from logistic regression is biased when the data is generated from a newman setting with randomization, while the plug in estimator is not. The plug in estimator also has reduced variance, and the two estimators give highly related estimates.
+Using the assignment coefficient from logistic regression is biased when the data is generated from a Neyman setting with randomization, while the plug in estimator is not. The plug in estimator also has reduced variance, and the two estimators give highly related estimates.
 
 # Miscellaneous Commands
 
