@@ -1,0 +1,11 @@
+End-to-end benchmark comparison
+Scope: each version's run_from_config() entry point.
+Includes data generation, estimation, and pipeline file saving.
+Excludes imports, warm-up, and benchmark report generation.
+No numerical-equivalence checks are performed.
+Completed repeats per version: 6
+
+original: median=31.412566 s, min=18.640594 s, max=59.614433 s
+optimized: median=20.061521 s, min=10.222378 s, max=29.787258 s
+
+Median speedup: 1.566x

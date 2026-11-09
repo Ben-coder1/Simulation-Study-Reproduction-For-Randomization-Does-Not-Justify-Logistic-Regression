@@ -1,4 +1,4 @@
-.PHONY: all simulate analyze figures test clean
+.PHONY: all simulate analyze figures test clean profile complexity profile_optimized benchmark
 
 test: 
 	python -m pytest
@@ -26,3 +26,15 @@ figures: .figures_complete
 clean: 
 	rm -f .simulate_complete .analyze_complete .figures_complete
 	rm -rf  results
+
+profile: 
+	python -m profiling.profiler
+
+profile_optimized: 
+	python -m profiling.profiler_optimized
+
+complexity: 
+	python -m profiling.complexity
+
+benchmark: 
+	python -m profiling.benchmark_comparisons
