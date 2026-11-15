@@ -20,7 +20,7 @@ TIMINGS_PATH = PROFILES_DIR / "benchmark_comparison_timings.csv"
 SUMMARY_PATH = PROFILES_DIR / "benchmark_comparison_summary.txt"
 PLOT_PATH = PROFILES_DIR / "benchmark_comparison.png"
 
-N_REPEATS = 6
+N_REPEATS = 20
 
 RUNNERS = {
     "original": run_original,

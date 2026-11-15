@@ -1,0 +1,33 @@
+Performance comparisons — original vs optimized simulations
+
+Times include generation, estimation, and pickle serialization.
+Reported times are medians across successful repeats.
+Speedup = original runtime / optimized runtime.
+The optimized pipeline also avoids a second logistic fit.
+Failed runs are excluded from timing statistics.
+
+ Individuals  Experiments   Original (s)  Optimized (s)    Speedup
+         100           10         0.0305         0.0029     10.43x
+         100           50         0.0383         0.0076      5.06x
+         100          100         0.0734         0.0114      6.46x
+         100          250         0.1840         0.0263      6.99x
+         100          500         0.4312         0.0841      5.13x
+         100        1,000         1.1904         0.1597      7.45x
+         500           10         0.0204         0.0078      2.60x
+         500           50         0.0825         0.0264      3.12x
+         500          100         0.1627         0.0456      3.57x
+         500          250         0.4076         0.1158      3.52x
+         500          500         0.8023         0.2367      3.39x
+         500        1,000         1.7833         0.5038      3.54x
+       1,000           10         0.0267         0.0113      2.36x
+       1,000           50         0.1124         0.0440      2.56x
+       1,000          100         0.2326         0.0821      2.83x
+       1,000          250         0.6460         0.2140      3.02x
+       1,000          500         1.2689         0.4666      2.72x
+       1,000        1,000         2.5845         0.9453      2.73x
+       5,000           10         0.0884         0.0452      1.96x
+       5,000           50         0.3863         0.2181      1.77x
+       5,000          100         0.8155         0.4406      1.85x
+       5,000          250         2.0539         1.2309      1.67x
+       5,000          500         4.2666         2.3448      1.82x
+       5,000        1,000         8.4332         5.0405      1.67x

@@ -10,9 +10,9 @@ from src.dgps import (
     ExperimentDGP,
     IndividualConditionalOutcomesDGP,
 )
-from src.methods import (
+from src_optimized.optimized_methods import (
     DifferentialLogOddsFinder,
-    LogitModelPlugIn,
+    fast_LogitModelPlugIn
 )
 
 
@@ -28,7 +28,7 @@ class Simulation:
         self.individual_dgp = individual_dgp
         self.experiment_dgp = experiment_dgp
 
-        self.param_estimator = LogitModelPlugIn()
+        self.param_estimator = fast_LogitModelPlugIn()
         self.true_parameter_finder = DifferentialLogOddsFinder()
 
     def run_simulation(
