@@ -7,18 +7,22 @@ from unittest.mock import patch
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Adjust these imports if your simulation modules have different names.
+# Adjust these imports if your simulation files are located elsewhere.
 import src.simulation as original_module
 import src_optimized.simulation as optimized_module
+import src_optimized.non_vectorized_simulation as non_vectorized_module
 
 from src.simulation import run_from_config as run_original_simulations
 from src_optimized.simulation import (
     run_from_config as run_optimized_simulations,
 )
+from src_optimized.non_vectorized_simulation import (
+    run_from_config as run_non_vectorized_simulations,
+)
 
 
 # Assumes this script is one directory below the project root.
-# If it is directly in the project root, use .parent instead.
+# If saved directly in the project root, use .parent instead.
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PROFILES_DIR = PROJECT_ROOT / "profiles"
 
@@ -37,12 +41,18 @@ CSV_FIELDS = [
     "error",
 ]
 
+METHOD_LABELS = [
+    ("original", "Original"),
+    ("optimized", "Optimized / vectorized"),
+    ("non_vectorized", "Non-vectorized"),
+]
+
 
 def make_simulation_config(
     n_individuals: int,
     n_experiments: int,
 ) -> dict:
-    """Generate simulation settings without editing configuration.py."""
+    """Generate settings without editing configuration.py."""
     return {
         "individual_dgp": "individual_uniform",
         "experiment_dgp": "base",
@@ -67,10 +77,10 @@ def measure_one_run(
     pickle_path: Path,
 ) -> float:
     """
-    Run one simulation with temporarily overridden module settings.
+    Run one implementation with temporarily overridden module settings.
 
     Timing includes data generation, estimation, and pickle serialization.
-    Configuration files and normal pickle outputs are not modified.
+    Normal configuration files and pickle outputs are not modified.
     """
     with (
         patch.object(module, "SIMULATIONS", [simulation_config]),
@@ -81,6 +91,7 @@ def measure_one_run(
         results = run_function()
         elapsed = perf_counter() - start
 
+    # Release returned arrays before the next measured run.
     del results
     return elapsed
 
@@ -93,17 +104,23 @@ def collect_runtime_data(
     base_seed: int = 12345,
 ) -> Path:
     """
-    Run performance comparisons and write measurements directly to CSV.
+    Run all three implementations and write each measurement to CSV.
 
-    Both implementations receive the same seed for each paired run.
+    All implementations receive the same seed for each comparison.
     Failed runs are recorded and excluded from runtime plots.
     """
     if repeats < 1:
         raise ValueError("repeats must be positive.")
+
     if not individual_counts or not experiment_counts:
-        raise ValueError("Population and experiment counts must be nonempty.")
+        raise ValueError(
+            "Population and experiment counts must be nonempty."
+        )
+
     if any(n <= 0 for n in (*individual_counts, *experiment_counts)):
-        raise ValueError("Population and experiment counts must be positive.")
+        raise ValueError(
+            "Population and experiment counts must be positive."
+        )
 
     csv_path = Path(csv_path)
     csv_path.parent.mkdir(parents=True, exist_ok=True)
@@ -111,9 +128,14 @@ def collect_runtime_data(
     methods = [
         ("original", original_module, run_original_simulations),
         ("optimized", optimized_module, run_optimized_simulations),
+        (
+            "non_vectorized",
+            non_vectorized_module,
+            run_non_vectorized_simulations,
+        ),
     ]
 
-    pair_number = 0
+    comparison_number = 0
 
     with (
         TemporaryDirectory(prefix="performance_comparisons_") as temp_dir,
@@ -131,13 +153,13 @@ def collect_runtime_data(
                 )
 
                 for repeat in range(repeats):
+                    # Identical seed for all three implementations.
                     seed = base_seed + repeat
 
-                    # Alternate order across pairs, even when repeats=1.
-                    run_order = (
-                        methods if pair_number % 2 == 0 else methods[::-1]
-                    )
-                    pair_number += 1
+                    # Rotate which implementation runs first.
+                    offset = comparison_number % len(methods)
+                    run_order = methods[offset:] + methods[:offset]
+                    comparison_number += 1
 
                     for name, module, run_function in run_order:
                         print(
@@ -193,7 +215,7 @@ def graph_runtime_data(
     show: bool = False,
 ) -> None:
     """
-    Read the saved CSV, write a summary, and generate runtime graphs.
+    Read the CSV, write a summary, and generate runtime graphs.
 
     Repeated successful measurements are summarized by their median.
     """
@@ -240,42 +262,49 @@ def graph_runtime_data(
         for key, values in measurements.items()
     }
 
+    def format_runtime(value):
+        return f"{value:.4f}" if value is not None else "N/A"
+
+    def format_speedup(original, comparison):
+        if (
+            original is not None
+            and comparison is not None
+            and comparison > 0
+        ):
+            return f"{original / comparison:.2f}x"
+        return "N/A"
+
     # Write the summary before generating figures.
     lines = [
-        "Performance comparisons — original vs optimized simulations",
+        "Performance comparisons — simulation implementations",
         "",
         "Times include generation, estimation, and pickle serialization.",
         "Reported times are medians across successful repeats.",
-        "Speedup = original runtime / optimized runtime.",
-        "The optimized pipeline also avoids a second logistic fit.",
+        "Speedups are relative to the original implementation.",
         "Failed runs are excluded from timing statistics.",
+        "These measurements compare complete pipelines, not just fitting.",
         "",
         f"{'Individuals':>12} {'Experiments':>12} "
-        f"{'Original (s)':>14} {'Optimized (s)':>14} {'Speedup':>10}",
+        f"{'Original (s)':>14} {'Vectorized (s)':>16} "
+        f"{'Non-vectorized (s)':>20} "
+        f"{'Vectorized speedup':>20} "
+        f"{'Non-vectorized speedup':>24}",
     ]
 
     for n_ind, n_exp in sorted(configurations):
         original = medians.get((n_ind, n_exp, "original"))
         optimized = medians.get((n_ind, n_exp, "optimized"))
-
-        original_text = (
-            f"{original:.4f}" if original is not None else "N/A"
-        )
-        optimized_text = (
-            f"{optimized:.4f}" if optimized is not None else "N/A"
-        )
-        speedup_text = (
-            f"{original / optimized:.2f}x"
-            if original is not None
-            and optimized is not None
-            and optimized > 0
-            else "N/A"
+        non_vectorized = medians.get(
+            (n_ind, n_exp, "non_vectorized")
         )
 
         lines.append(
             f"{n_ind:>12,} {n_exp:>12,} "
-            f"{original_text:>14} {optimized_text:>14} "
-            f"{speedup_text:>10}"
+            f"{format_runtime(original):>14} "
+            f"{format_runtime(optimized):>16} "
+            f"{format_runtime(non_vectorized):>20} "
+            f"{format_speedup(original, optimized):>20} "
+            f"{format_speedup(original, non_vectorized):>24}"
         )
 
     if failures:
@@ -290,17 +319,14 @@ def graph_runtime_data(
     def draw_population(ax, n_ind):
         plotted = False
 
-        for method, label in [
-            ("original", "Original"),
-            ("optimized", "Optimized"),
-        ]:
-            # Include failed configurations as gaps rather than
-            # connecting a line across missing measurements.
-            counts = sorted(
-                n_exp
-                for population, n_exp in configurations
-                if population == n_ind
-            )
+        counts = sorted(
+            n_exp
+            for population, n_exp in configurations
+            if population == n_ind
+        )
+
+        for method, label in METHOD_LABELS:
+            # Missing or failed runs appear as gaps in the line.
             runtimes = [
                 medians.get((n_ind, n_exp, method), np.nan)
                 for n_exp in counts
@@ -335,7 +361,7 @@ def graph_runtime_data(
 
     populations = sorted(individual_counts)
 
-    # Combined figure.
+    # Combined figure with one panel per population size.
     ncols = min(2, len(populations))
     nrows = (len(populations) + ncols - 1) // ncols
 
@@ -352,7 +378,9 @@ def graph_runtime_data(
     for ax in list(axes.flat)[len(populations):]:
         ax.set_visible(False)
 
-    fig.suptitle("Performance comparisons — original vs optimized")
+    fig.suptitle(
+        "Performance comparisons — simulation implementations"
+    )
     fig.tight_layout(rect=(0, 0, 1, 0.96))
     fig.savefig(plot_path, dpi=200)
 
@@ -371,12 +399,15 @@ def graph_runtime_data(
         fig.tight_layout()
 
         individual_plot_path = plot_path.with_name(
-            f"{plot_path.stem}_{n_ind}_individuals{plot_path.suffix}"
+            f"{plot_path.stem}_{n_ind}_individuals"
+            f"{plot_path.suffix}"
         )
         fig.savefig(individual_plot_path, dpi=200)
         plt.close(fig)
 
-        print(f"Individual graph: {individual_plot_path.resolve()}")
+        print(
+            f"Individual graph: {individual_plot_path.resolve()}"
+        )
 
     print(f"Combined graph:   {plot_path.resolve()}")
     print(f"Summary:          {summary_path.resolve()}")
@@ -386,8 +417,8 @@ if __name__ == "__main__":
     csv_path = collect_runtime_data(
         csv_path=TIMINGS_PATH,
         individual_counts=(100, 500, 1000, 5000),
-        experiment_counts=(10, 50, 100, 250, 500, 1000),
-        repeats=1,  # Increase to 3 for less noisy measurements.
+        experiment_counts=(10, 50, 100, 250, 500, 1000,2000),
+        repeats=5,  # Increase to 3 for less noisy measurements.
         base_seed=12345,
     )
 
