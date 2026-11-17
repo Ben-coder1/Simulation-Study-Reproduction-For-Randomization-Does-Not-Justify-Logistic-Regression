@@ -1,0 +1,898 @@
+Convergence comparisons — simulation implementations
+
+Includes existing configured runs and the performance grid.
+Grid individual counts: (100, 500, 1000, 5000)
+Grid experiment counts: (10, 50, 100, 250, 500, 1000, 2000)
+Grid repeats: 5
+Grid seeds: 12345 through 12349
+
+Grid seeds and run-order rotation match the performance script.
+Matching seeds do not guarantee identical data across
+implementations if their RNG usage differs.
+
+Passed means no detected nonconvergence, caught error, or
+nonfinite output. Other warnings are reported separately.
+Separation flags reflect estimator messages, not a dedicated
+complete/quasi-complete separation test.
+Experiment indices in diagnostics are zero-based.
+A failed batch may stop before all experiments are diagnosed.
+Configured runs preserve the full configuration list and RNG
+spawning; an exception may stop that configured pipeline.
+Runtime includes the pipeline and diagnostic checks and is
+not intended to replace the performance benchmark.
+
+Summary by source and implementation:
+  config / original: runs=1, passed=1, separation_mentions=0
+  config / optimized: runs=1, passed=1, separation_mentions=0
+  config / non_vectorized: runs=1, passed=1, separation_mentions=0
+  performance_grid / original: runs=140, passed=140, separation_mentions=0
+  performance_grid / optimized: runs=140, passed=140, separation_mentions=0
+  performance_grid / non_vectorized: runs=140, passed=140, separation_mentions=0
+
+Configured settings:
+
+original, seed=100:
+  simulation=0: {'individual_dgp': 'individual_uniform', 'experiment_dgp': 'base', 'n_individuals': 100, 'n_experiments': 1000, 'treatment_threshold': 0.75, 'control_threshold': 0.5, 'p_treatment': 0.75, 'param_estimators': ['logit', 'logit_plugin'], 'true_parameter_finder': 'differential_log_odds'}
+  simulation=1: {'individual_dgp': 'individual_uniform', 'experiment_dgp': 'base', 'n_individuals': 500, 'n_experiments': 1000, 'treatment_threshold': 0.75, 'control_threshold': 0.5, 'p_treatment': 0.75, 'param_estimators': ['logit', 'logit_plugin'], 'true_parameter_finder': 'differential_log_odds'}
+  simulation=2: {'individual_dgp': 'individual_uniform', 'experiment_dgp': 'base', 'n_individuals': 1000, 'n_experiments': 1000, 'treatment_threshold': 0.75, 'control_threshold': 0.5, 'p_treatment': 0.75, 'param_estimators': ['logit', 'logit_plugin'], 'true_parameter_finder': 'differential_log_odds'}
+  simulation=3: {'individual_dgp': 'individual_uniform', 'experiment_dgp': 'base', 'n_individuals': 5000, 'n_experiments': 1000, 'treatment_threshold': 0.75, 'control_threshold': 0.5, 'p_treatment': 0.75, 'param_estimators': ['logit', 'logit_plugin'], 'true_parameter_finder': 'differential_log_odds'}
+
+optimized, seed=100:
+  simulation=0: {'individual_dgp': 'individual_uniform', 'experiment_dgp': 'base', 'n_individuals': 100, 'n_experiments': 1000, 'treatment_threshold': 0.75, 'control_threshold': 0.5, 'p_treatment': 0.75, 'param_estimators': ['logit', 'logit_plugin'], 'true_parameter_finder': 'differential_log_odds'}
+  simulation=1: {'individual_dgp': 'individual_uniform', 'experiment_dgp': 'base', 'n_individuals': 500, 'n_experiments': 1000, 'treatment_threshold': 0.75, 'control_threshold': 0.5, 'p_treatment': 0.75, 'param_estimators': ['logit', 'logit_plugin'], 'true_parameter_finder': 'differential_log_odds'}
+  simulation=2: {'individual_dgp': 'individual_uniform', 'experiment_dgp': 'base', 'n_individuals': 1000, 'n_experiments': 1000, 'treatment_threshold': 0.75, 'control_threshold': 0.5, 'p_treatment': 0.75, 'param_estimators': ['logit', 'logit_plugin'], 'true_parameter_finder': 'differential_log_odds'}
+  simulation=3: {'individual_dgp': 'individual_uniform', 'experiment_dgp': 'base', 'n_individuals': 5000, 'n_experiments': 1000, 'treatment_threshold': 0.75, 'control_threshold': 0.5, 'p_treatment': 0.75, 'param_estimators': ['logit', 'logit_plugin'], 'true_parameter_finder': 'differential_log_odds'}
+
+non_vectorized, seed=100:
+  simulation=0: {'individual_dgp': 'individual_uniform', 'experiment_dgp': 'base', 'n_individuals': 100, 'n_experiments': 1000, 'treatment_threshold': 0.75, 'control_threshold': 0.5, 'p_treatment': 0.75, 'param_estimators': ['logit', 'logit_plugin'], 'true_parameter_finder': 'differential_log_odds'}
+  simulation=1: {'individual_dgp': 'individual_uniform', 'experiment_dgp': 'base', 'n_individuals': 500, 'n_experiments': 1000, 'treatment_threshold': 0.75, 'control_threshold': 0.5, 'p_treatment': 0.75, 'param_estimators': ['logit', 'logit_plugin'], 'true_parameter_finder': 'differential_log_odds'}
+  simulation=2: {'individual_dgp': 'individual_uniform', 'experiment_dgp': 'base', 'n_individuals': 1000, 'n_experiments': 1000, 'treatment_threshold': 0.75, 'control_threshold': 0.5, 'p_treatment': 0.75, 'param_estimators': ['logit', 'logit_plugin'], 'true_parameter_finder': 'differential_log_odds'}
+  simulation=3: {'individual_dgp': 'individual_uniform', 'experiment_dgp': 'base', 'n_individuals': 5000, 'n_experiments': 1000, 'treatment_threshold': 0.75, 'control_threshold': 0.5, 'p_treatment': 0.75, 'param_estimators': ['logit', 'logit_plugin'], 'true_parameter_finder': 'differential_log_odds'}
+
+All run results:
+
+config / original: individuals=None, experiments=None, repeat=1, seed=100, status=passed, runtime=8.7005s
+
+config / optimized: individuals=None, experiments=None, repeat=1, seed=100, status=passed, runtime=4.1360s
+
+config / non_vectorized: individuals=None, experiments=None, repeat=1, seed=100, status=passed, runtime=5.3847s
+
+performance_grid / original: individuals=100, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0094s
+
+performance_grid / optimized: individuals=100, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0027s
+
+performance_grid / non_vectorized: individuals=100, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0079s
+
+performance_grid / optimized: individuals=100, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0025s
+
+performance_grid / non_vectorized: individuals=100, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0079s
+
+performance_grid / original: individuals=100, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0090s
+
+performance_grid / non_vectorized: individuals=100, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0074s
+
+performance_grid / original: individuals=100, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0085s
+
+performance_grid / optimized: individuals=100, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0025s
+
+performance_grid / original: individuals=100, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0088s
+
+performance_grid / optimized: individuals=100, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0024s
+
+performance_grid / non_vectorized: individuals=100, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0078s
+
+performance_grid / optimized: individuals=100, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0027s
+
+performance_grid / non_vectorized: individuals=100, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0092s
+
+performance_grid / original: individuals=100, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0095s
+
+performance_grid / non_vectorized: individuals=100, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.0351s
+
+performance_grid / original: individuals=100, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.0398s
+
+performance_grid / optimized: individuals=100, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.0080s
+
+performance_grid / original: individuals=100, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.0388s
+
+performance_grid / optimized: individuals=100, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.0079s
+
+performance_grid / non_vectorized: individuals=100, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.0378s
+
+performance_grid / optimized: individuals=100, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.0077s
+
+performance_grid / non_vectorized: individuals=100, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.0336s
+
+performance_grid / original: individuals=100, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.0367s
+
+performance_grid / non_vectorized: individuals=100, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.0345s
+
+performance_grid / original: individuals=100, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.0390s
+
+performance_grid / optimized: individuals=100, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.0083s
+
+performance_grid / original: individuals=100, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.0430s
+
+performance_grid / optimized: individuals=100, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.0078s
+
+performance_grid / non_vectorized: individuals=100, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.0344s
+
+performance_grid / optimized: individuals=100, experiments=100, repeat=1, seed=12345, status=passed, runtime=0.0140s
+
+performance_grid / non_vectorized: individuals=100, experiments=100, repeat=1, seed=12345, status=passed, runtime=0.0695s
+
+performance_grid / original: individuals=100, experiments=100, repeat=1, seed=12345, status=passed, runtime=0.0783s
+
+performance_grid / non_vectorized: individuals=100, experiments=100, repeat=2, seed=12346, status=passed, runtime=0.0677s
+
+performance_grid / original: individuals=100, experiments=100, repeat=2, seed=12346, status=passed, runtime=0.0759s
+
+performance_grid / optimized: individuals=100, experiments=100, repeat=2, seed=12346, status=passed, runtime=0.0111s
+
+performance_grid / original: individuals=100, experiments=100, repeat=3, seed=12347, status=passed, runtime=0.0663s
+
+performance_grid / optimized: individuals=100, experiments=100, repeat=3, seed=12347, status=passed, runtime=0.0105s
+
+performance_grid / non_vectorized: individuals=100, experiments=100, repeat=3, seed=12347, status=passed, runtime=0.0598s
+
+performance_grid / optimized: individuals=100, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.0107s
+
+performance_grid / non_vectorized: individuals=100, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.0644s
+
+performance_grid / original: individuals=100, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.0706s
+
+performance_grid / non_vectorized: individuals=100, experiments=100, repeat=5, seed=12349, status=passed, runtime=0.0660s
+
+performance_grid / original: individuals=100, experiments=100, repeat=5, seed=12349, status=passed, runtime=0.0750s
+
+performance_grid / optimized: individuals=100, experiments=100, repeat=5, seed=12349, status=passed, runtime=0.0115s
+
+performance_grid / original: individuals=100, experiments=250, repeat=1, seed=12345, status=passed, runtime=0.1771s
+
+performance_grid / optimized: individuals=100, experiments=250, repeat=1, seed=12345, status=passed, runtime=0.0251s
+
+performance_grid / non_vectorized: individuals=100, experiments=250, repeat=1, seed=12345, status=passed, runtime=0.1600s
+
+performance_grid / optimized: individuals=100, experiments=250, repeat=2, seed=12346, status=passed, runtime=0.0250s
+
+performance_grid / non_vectorized: individuals=100, experiments=250, repeat=2, seed=12346, status=passed, runtime=0.1587s
+
+performance_grid / original: individuals=100, experiments=250, repeat=2, seed=12346, status=passed, runtime=0.1733s
+
+performance_grid / non_vectorized: individuals=100, experiments=250, repeat=3, seed=12347, status=passed, runtime=0.1450s
+
+performance_grid / original: individuals=100, experiments=250, repeat=3, seed=12347, status=passed, runtime=0.1662s
+
+performance_grid / optimized: individuals=100, experiments=250, repeat=3, seed=12347, status=passed, runtime=0.0237s
+
+performance_grid / original: individuals=100, experiments=250, repeat=4, seed=12348, status=passed, runtime=0.1733s
+
+performance_grid / optimized: individuals=100, experiments=250, repeat=4, seed=12348, status=passed, runtime=0.0245s
+
+performance_grid / non_vectorized: individuals=100, experiments=250, repeat=4, seed=12348, status=passed, runtime=0.1573s
+
+performance_grid / optimized: individuals=100, experiments=250, repeat=5, seed=12349, status=passed, runtime=0.0251s
+
+performance_grid / non_vectorized: individuals=100, experiments=250, repeat=5, seed=12349, status=passed, runtime=0.1610s
+
+performance_grid / original: individuals=100, experiments=250, repeat=5, seed=12349, status=passed, runtime=0.1785s
+
+performance_grid / non_vectorized: individuals=100, experiments=500, repeat=1, seed=12345, status=passed, runtime=0.3195s
+
+performance_grid / original: individuals=100, experiments=500, repeat=1, seed=12345, status=passed, runtime=0.3491s
+
+performance_grid / optimized: individuals=100, experiments=500, repeat=1, seed=12345, status=passed, runtime=0.0484s
+
+performance_grid / original: individuals=100, experiments=500, repeat=2, seed=12346, status=passed, runtime=0.3458s
+
+performance_grid / optimized: individuals=100, experiments=500, repeat=2, seed=12346, status=passed, runtime=0.0502s
+
+performance_grid / non_vectorized: individuals=100, experiments=500, repeat=2, seed=12346, status=passed, runtime=0.3125s
+
+performance_grid / optimized: individuals=100, experiments=500, repeat=3, seed=12347, status=passed, runtime=0.0461s
+
+performance_grid / non_vectorized: individuals=100, experiments=500, repeat=3, seed=12347, status=passed, runtime=0.2924s
+
+performance_grid / original: individuals=100, experiments=500, repeat=3, seed=12347, status=passed, runtime=0.3202s
+
+performance_grid / non_vectorized: individuals=100, experiments=500, repeat=4, seed=12348, status=passed, runtime=0.3193s
+
+performance_grid / original: individuals=100, experiments=500, repeat=4, seed=12348, status=passed, runtime=0.3468s
+
+performance_grid / optimized: individuals=100, experiments=500, repeat=4, seed=12348, status=passed, runtime=0.0479s
+
+performance_grid / original: individuals=100, experiments=500, repeat=5, seed=12349, status=passed, runtime=0.3509s
+
+performance_grid / optimized: individuals=100, experiments=500, repeat=5, seed=12349, status=passed, runtime=0.0530s
+
+performance_grid / non_vectorized: individuals=100, experiments=500, repeat=5, seed=12349, status=passed, runtime=0.3406s
+
+performance_grid / optimized: individuals=100, experiments=1000, repeat=1, seed=12345, status=passed, runtime=0.1039s
+
+performance_grid / non_vectorized: individuals=100, experiments=1000, repeat=1, seed=12345, status=passed, runtime=0.6777s
+
+performance_grid / original: individuals=100, experiments=1000, repeat=1, seed=12345, status=passed, runtime=0.7577s
+
+performance_grid / non_vectorized: individuals=100, experiments=1000, repeat=2, seed=12346, status=passed, runtime=0.6246s
+
+performance_grid / original: individuals=100, experiments=1000, repeat=2, seed=12346, status=passed, runtime=0.6870s
+
+performance_grid / optimized: individuals=100, experiments=1000, repeat=2, seed=12346, status=passed, runtime=0.0971s
+
+performance_grid / original: individuals=100, experiments=1000, repeat=3, seed=12347, status=passed, runtime=0.6412s
+
+performance_grid / optimized: individuals=100, experiments=1000, repeat=3, seed=12347, status=passed, runtime=0.0933s
+
+performance_grid / non_vectorized: individuals=100, experiments=1000, repeat=3, seed=12347, status=passed, runtime=0.5818s
+
+performance_grid / optimized: individuals=100, experiments=1000, repeat=4, seed=12348, status=passed, runtime=0.0958s
+
+performance_grid / non_vectorized: individuals=100, experiments=1000, repeat=4, seed=12348, status=passed, runtime=0.6283s
+
+performance_grid / original: individuals=100, experiments=1000, repeat=4, seed=12348, status=passed, runtime=0.6909s
+
+performance_grid / non_vectorized: individuals=100, experiments=1000, repeat=5, seed=12349, status=passed, runtime=0.6313s
+
+performance_grid / original: individuals=100, experiments=1000, repeat=5, seed=12349, status=passed, runtime=0.7017s
+
+performance_grid / optimized: individuals=100, experiments=1000, repeat=5, seed=12349, status=passed, runtime=0.0983s
+
+performance_grid / original: individuals=100, experiments=2000, repeat=1, seed=12345, status=passed, runtime=1.4059s
+
+performance_grid / optimized: individuals=100, experiments=2000, repeat=1, seed=12345, status=passed, runtime=0.2290s
+
+performance_grid / non_vectorized: individuals=100, experiments=2000, repeat=1, seed=12345, status=passed, runtime=1.2707s
+
+performance_grid / optimized: individuals=100, experiments=2000, repeat=2, seed=12346, status=passed, runtime=0.1950s
+
+performance_grid / non_vectorized: individuals=100, experiments=2000, repeat=2, seed=12346, status=passed, runtime=1.2649s
+
+performance_grid / original: individuals=100, experiments=2000, repeat=2, seed=12346, status=passed, runtime=1.3660s
+
+performance_grid / non_vectorized: individuals=100, experiments=2000, repeat=3, seed=12347, status=passed, runtime=1.1551s
+
+performance_grid / original: individuals=100, experiments=2000, repeat=3, seed=12347, status=passed, runtime=1.2773s
+
+performance_grid / optimized: individuals=100, experiments=2000, repeat=3, seed=12347, status=passed, runtime=0.1911s
+
+performance_grid / original: individuals=100, experiments=2000, repeat=4, seed=12348, status=passed, runtime=2.5711s
+
+performance_grid / optimized: individuals=100, experiments=2000, repeat=4, seed=12348, status=passed, runtime=0.4913s
+
+performance_grid / non_vectorized: individuals=100, experiments=2000, repeat=4, seed=12348, status=passed, runtime=4.5357s
+
+performance_grid / optimized: individuals=100, experiments=2000, repeat=5, seed=12349, status=passed, runtime=0.6828s
+
+performance_grid / non_vectorized: individuals=100, experiments=2000, repeat=5, seed=12349, status=passed, runtime=4.7053s
+
+performance_grid / original: individuals=100, experiments=2000, repeat=5, seed=12349, status=passed, runtime=4.6279s
+
+performance_grid / non_vectorized: individuals=500, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0327s
+
+performance_grid / original: individuals=500, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0137s
+
+performance_grid / optimized: individuals=500, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0057s
+
+performance_grid / original: individuals=500, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0134s
+
+performance_grid / optimized: individuals=500, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0047s
+
+performance_grid / non_vectorized: individuals=500, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0108s
+
+performance_grid / optimized: individuals=500, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0047s
+
+performance_grid / non_vectorized: individuals=500, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0100s
+
+performance_grid / original: individuals=500, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0155s
+
+performance_grid / non_vectorized: individuals=500, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0129s
+
+performance_grid / original: individuals=500, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0551s
+
+performance_grid / optimized: individuals=500, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0224s
+
+performance_grid / original: individuals=500, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0682s
+
+performance_grid / optimized: individuals=500, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0227s
+
+performance_grid / non_vectorized: individuals=500, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0456s
+
+performance_grid / optimized: individuals=500, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.0870s
+
+performance_grid / non_vectorized: individuals=500, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.2106s
+
+performance_grid / original: individuals=500, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.2835s
+
+performance_grid / non_vectorized: individuals=500, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.2231s
+
+performance_grid / original: individuals=500, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.1176s
+
+performance_grid / optimized: individuals=500, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.0196s
+
+performance_grid / original: individuals=500, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.1574s
+
+performance_grid / optimized: individuals=500, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.0156s
+
+performance_grid / non_vectorized: individuals=500, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.0442s
+
+performance_grid / optimized: individuals=500, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.0168s
+
+performance_grid / non_vectorized: individuals=500, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.0426s
+
+performance_grid / original: individuals=500, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.0544s
+
+performance_grid / non_vectorized: individuals=500, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.0447s
+
+performance_grid / original: individuals=500, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.0552s
+
+performance_grid / optimized: individuals=500, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.0159s
+
+performance_grid / original: individuals=500, experiments=100, repeat=1, seed=12345, status=passed, runtime=0.4397s
+
+performance_grid / optimized: individuals=500, experiments=100, repeat=1, seed=12345, status=passed, runtime=0.1496s
+
+performance_grid / non_vectorized: individuals=500, experiments=100, repeat=1, seed=12345, status=passed, runtime=0.1598s
+
+performance_grid / optimized: individuals=500, experiments=100, repeat=2, seed=12346, status=passed, runtime=0.0526s
+
+performance_grid / non_vectorized: individuals=500, experiments=100, repeat=2, seed=12346, status=passed, runtime=0.4300s
+
+performance_grid / original: individuals=500, experiments=100, repeat=2, seed=12346, status=passed, runtime=0.5389s
+
+performance_grid / non_vectorized: individuals=500, experiments=100, repeat=3, seed=12347, status=passed, runtime=0.4253s
+
+performance_grid / original: individuals=500, experiments=100, repeat=3, seed=12347, status=passed, runtime=0.2999s
+
+performance_grid / optimized: individuals=500, experiments=100, repeat=3, seed=12347, status=passed, runtime=0.1417s
+
+performance_grid / original: individuals=500, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.3881s
+
+performance_grid / optimized: individuals=500, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.1458s
+
+performance_grid / non_vectorized: individuals=500, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.3594s
+
+performance_grid / optimized: individuals=500, experiments=100, repeat=5, seed=12349, status=passed, runtime=0.1573s
+
+performance_grid / non_vectorized: individuals=500, experiments=100, repeat=5, seed=12349, status=passed, runtime=0.4170s
+
+performance_grid / original: individuals=500, experiments=100, repeat=5, seed=12349, status=passed, runtime=0.1769s
+
+performance_grid / non_vectorized: individuals=500, experiments=250, repeat=1, seed=12345, status=passed, runtime=0.7346s
+
+performance_grid / original: individuals=500, experiments=250, repeat=1, seed=12345, status=passed, runtime=0.5193s
+
+performance_grid / optimized: individuals=500, experiments=250, repeat=1, seed=12345, status=passed, runtime=0.0932s
+
+performance_grid / original: individuals=500, experiments=250, repeat=2, seed=12346, status=passed, runtime=0.3366s
+
+performance_grid / optimized: individuals=500, experiments=250, repeat=2, seed=12346, status=passed, runtime=0.0841s
+
+performance_grid / non_vectorized: individuals=500, experiments=250, repeat=2, seed=12346, status=passed, runtime=0.8001s
+
+performance_grid / optimized: individuals=500, experiments=250, repeat=3, seed=12347, status=passed, runtime=0.1702s
+
+performance_grid / non_vectorized: individuals=500, experiments=250, repeat=3, seed=12347, status=passed, runtime=0.2216s
+
+performance_grid / original: individuals=500, experiments=250, repeat=3, seed=12347, status=passed, runtime=1.1539s
+
+performance_grid / non_vectorized: individuals=500, experiments=250, repeat=4, seed=12348, status=passed, runtime=0.7538s
+
+performance_grid / original: individuals=500, experiments=250, repeat=4, seed=12348, status=passed, runtime=1.1773s
+
+performance_grid / optimized: individuals=500, experiments=250, repeat=4, seed=12348, status=passed, runtime=0.3194s
+
+performance_grid / original: individuals=500, experiments=250, repeat=5, seed=12349, status=passed, runtime=1.1431s
+
+performance_grid / optimized: individuals=500, experiments=250, repeat=5, seed=12349, status=passed, runtime=0.2712s
+
+performance_grid / non_vectorized: individuals=500, experiments=250, repeat=5, seed=12349, status=passed, runtime=0.4188s
+
+performance_grid / optimized: individuals=500, experiments=500, repeat=1, seed=12345, status=passed, runtime=0.4101s
+
+performance_grid / non_vectorized: individuals=500, experiments=500, repeat=1, seed=12345, status=passed, runtime=0.5922s
+
+performance_grid / original: individuals=500, experiments=500, repeat=1, seed=12345, status=passed, runtime=1.9966s
+
+performance_grid / non_vectorized: individuals=500, experiments=500, repeat=2, seed=12346, status=passed, runtime=1.9063s
+
+performance_grid / original: individuals=500, experiments=500, repeat=2, seed=12346, status=passed, runtime=2.1303s
+
+performance_grid / optimized: individuals=500, experiments=500, repeat=2, seed=12346, status=passed, runtime=0.1581s
+
+performance_grid / original: individuals=500, experiments=500, repeat=3, seed=12347, status=passed, runtime=0.5286s
+
+performance_grid / optimized: individuals=500, experiments=500, repeat=3, seed=12347, status=passed, runtime=0.1528s
+
+performance_grid / non_vectorized: individuals=500, experiments=500, repeat=3, seed=12347, status=passed, runtime=0.4098s
+
+performance_grid / optimized: individuals=500, experiments=500, repeat=4, seed=12348, status=passed, runtime=0.3212s
+
+performance_grid / non_vectorized: individuals=500, experiments=500, repeat=4, seed=12348, status=passed, runtime=2.1685s
+
+performance_grid / original: individuals=500, experiments=500, repeat=4, seed=12348, status=passed, runtime=2.7854s
+
+performance_grid / non_vectorized: individuals=500, experiments=500, repeat=5, seed=12349, status=passed, runtime=2.1593s
+
+performance_grid / original: individuals=500, experiments=500, repeat=5, seed=12349, status=passed, runtime=3.1842s
+
+performance_grid / optimized: individuals=500, experiments=500, repeat=5, seed=12349, status=passed, runtime=0.8325s
+
+performance_grid / original: individuals=500, experiments=1000, repeat=1, seed=12345, status=passed, runtime=5.8765s
+
+performance_grid / optimized: individuals=500, experiments=1000, repeat=1, seed=12345, status=passed, runtime=1.6754s
+
+performance_grid / non_vectorized: individuals=500, experiments=1000, repeat=1, seed=12345, status=passed, runtime=4.3951s
+
+performance_grid / optimized: individuals=500, experiments=1000, repeat=2, seed=12346, status=passed, runtime=1.6572s
+
+performance_grid / non_vectorized: individuals=500, experiments=1000, repeat=2, seed=12346, status=passed, runtime=4.5096s
+
+performance_grid / original: individuals=500, experiments=1000, repeat=2, seed=12346, status=passed, runtime=5.5301s
+
+performance_grid / non_vectorized: individuals=500, experiments=1000, repeat=3, seed=12347, status=passed, runtime=4.1261s
+
+performance_grid / original: individuals=500, experiments=1000, repeat=3, seed=12347, status=passed, runtime=5.2936s
+
+performance_grid / optimized: individuals=500, experiments=1000, repeat=3, seed=12347, status=passed, runtime=1.6374s
+
+performance_grid / original: individuals=500, experiments=1000, repeat=4, seed=12348, status=passed, runtime=5.3462s
+
+performance_grid / optimized: individuals=500, experiments=1000, repeat=4, seed=12348, status=passed, runtime=1.6371s
+
+performance_grid / non_vectorized: individuals=500, experiments=1000, repeat=4, seed=12348, status=passed, runtime=4.2325s
+
+performance_grid / optimized: individuals=500, experiments=1000, repeat=5, seed=12349, status=passed, runtime=1.6789s
+
+performance_grid / non_vectorized: individuals=500, experiments=1000, repeat=5, seed=12349, status=passed, runtime=4.3658s
+
+performance_grid / original: individuals=500, experiments=1000, repeat=5, seed=12349, status=passed, runtime=5.3226s
+
+performance_grid / non_vectorized: individuals=500, experiments=2000, repeat=1, seed=12345, status=passed, runtime=8.4192s
+
+performance_grid / original: individuals=500, experiments=2000, repeat=1, seed=12345, status=passed, runtime=10.7363s
+
+performance_grid / optimized: individuals=500, experiments=2000, repeat=1, seed=12345, status=passed, runtime=3.4349s
+
+performance_grid / original: individuals=500, experiments=2000, repeat=2, seed=12346, status=passed, runtime=11.2217s
+
+performance_grid / optimized: individuals=500, experiments=2000, repeat=2, seed=12346, status=passed, runtime=3.2570s
+
+performance_grid / non_vectorized: individuals=500, experiments=2000, repeat=2, seed=12346, status=passed, runtime=8.6463s
+
+performance_grid / optimized: individuals=500, experiments=2000, repeat=3, seed=12347, status=passed, runtime=3.2494s
+
+performance_grid / non_vectorized: individuals=500, experiments=2000, repeat=3, seed=12347, status=passed, runtime=8.5505s
+
+performance_grid / original: individuals=500, experiments=2000, repeat=3, seed=12347, status=passed, runtime=9.2190s
+
+performance_grid / non_vectorized: individuals=500, experiments=2000, repeat=4, seed=12348, status=passed, runtime=1.6238s
+
+performance_grid / original: individuals=500, experiments=2000, repeat=4, seed=12348, status=passed, runtime=3.0246s
+
+performance_grid / optimized: individuals=500, experiments=2000, repeat=4, seed=12348, status=passed, runtime=0.9670s
+
+performance_grid / original: individuals=500, experiments=2000, repeat=5, seed=12349, status=passed, runtime=3.6754s
+
+performance_grid / optimized: individuals=500, experiments=2000, repeat=5, seed=12349, status=passed, runtime=1.0170s
+
+performance_grid / non_vectorized: individuals=500, experiments=2000, repeat=5, seed=12349, status=passed, runtime=9.4083s
+
+performance_grid / optimized: individuals=1000, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0384s
+
+performance_grid / non_vectorized: individuals=1000, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0620s
+
+performance_grid / original: individuals=1000, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0844s
+
+performance_grid / non_vectorized: individuals=1000, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0640s
+
+performance_grid / original: individuals=1000, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0822s
+
+performance_grid / optimized: individuals=1000, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0365s
+
+performance_grid / original: individuals=1000, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0802s
+
+performance_grid / optimized: individuals=1000, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0362s
+
+performance_grid / non_vectorized: individuals=1000, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0604s
+
+performance_grid / optimized: individuals=1000, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0369s
+
+performance_grid / non_vectorized: individuals=1000, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0596s
+
+performance_grid / original: individuals=1000, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0842s
+
+performance_grid / non_vectorized: individuals=1000, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0626s
+
+performance_grid / original: individuals=1000, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0954s
+
+performance_grid / optimized: individuals=1000, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0499s
+
+performance_grid / original: individuals=1000, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.4150s
+
+performance_grid / optimized: individuals=1000, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.1519s
+
+performance_grid / non_vectorized: individuals=1000, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.3031s
+
+performance_grid / optimized: individuals=1000, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.1554s
+
+performance_grid / non_vectorized: individuals=1000, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.2960s
+
+performance_grid / original: individuals=1000, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.3935s
+
+performance_grid / non_vectorized: individuals=1000, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.2769s
+
+performance_grid / original: individuals=1000, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.3691s
+
+performance_grid / optimized: individuals=1000, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.1637s
+
+performance_grid / original: individuals=1000, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.4194s
+
+performance_grid / optimized: individuals=1000, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.2925s
+
+performance_grid / non_vectorized: individuals=1000, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.2688s
+
+performance_grid / optimized: individuals=1000, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.1692s
+
+performance_grid / non_vectorized: individuals=1000, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.2873s
+
+performance_grid / original: individuals=1000, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.3992s
+
+performance_grid / non_vectorized: individuals=1000, experiments=100, repeat=1, seed=12345, status=passed, runtime=0.5292s
+
+performance_grid / original: individuals=1000, experiments=100, repeat=1, seed=12345, status=passed, runtime=0.7782s
+
+performance_grid / optimized: individuals=1000, experiments=100, repeat=1, seed=12345, status=passed, runtime=0.3054s
+
+performance_grid / original: individuals=1000, experiments=100, repeat=2, seed=12346, status=passed, runtime=0.7627s
+
+performance_grid / optimized: individuals=1000, experiments=100, repeat=2, seed=12346, status=passed, runtime=0.2959s
+
+performance_grid / non_vectorized: individuals=1000, experiments=100, repeat=2, seed=12346, status=passed, runtime=0.5176s
+
+performance_grid / optimized: individuals=1000, experiments=100, repeat=3, seed=12347, status=passed, runtime=0.2902s
+
+performance_grid / non_vectorized: individuals=1000, experiments=100, repeat=3, seed=12347, status=passed, runtime=0.7300s
+
+performance_grid / original: individuals=1000, experiments=100, repeat=3, seed=12347, status=passed, runtime=0.7434s
+
+performance_grid / non_vectorized: individuals=1000, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.5433s
+
+performance_grid / original: individuals=1000, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.7338s
+
+performance_grid / optimized: individuals=1000, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.2898s
+
+performance_grid / original: individuals=1000, experiments=100, repeat=5, seed=12349, status=passed, runtime=0.7328s
+
+performance_grid / optimized: individuals=1000, experiments=100, repeat=5, seed=12349, status=passed, runtime=0.2888s
+
+performance_grid / non_vectorized: individuals=1000, experiments=100, repeat=5, seed=12349, status=passed, runtime=0.5237s
+
+performance_grid / optimized: individuals=1000, experiments=250, repeat=1, seed=12345, status=passed, runtime=0.7169s
+
+performance_grid / non_vectorized: individuals=1000, experiments=250, repeat=1, seed=12345, status=passed, runtime=1.3048s
+
+performance_grid / original: individuals=1000, experiments=250, repeat=1, seed=12345, status=passed, runtime=1.8601s
+
+performance_grid / non_vectorized: individuals=1000, experiments=250, repeat=2, seed=12346, status=passed, runtime=1.2918s
+
+performance_grid / original: individuals=1000, experiments=250, repeat=2, seed=12346, status=passed, runtime=1.8281s
+
+performance_grid / optimized: individuals=1000, experiments=250, repeat=2, seed=12346, status=passed, runtime=0.7307s
+
+performance_grid / original: individuals=1000, experiments=250, repeat=3, seed=12347, status=passed, runtime=1.8249s
+
+performance_grid / optimized: individuals=1000, experiments=250, repeat=3, seed=12347, status=passed, runtime=0.7139s
+
+performance_grid / non_vectorized: individuals=1000, experiments=250, repeat=3, seed=12347, status=passed, runtime=1.2792s
+
+performance_grid / optimized: individuals=1000, experiments=250, repeat=4, seed=12348, status=passed, runtime=0.7255s
+
+performance_grid / non_vectorized: individuals=1000, experiments=250, repeat=4, seed=12348, status=passed, runtime=1.3032s
+
+performance_grid / original: individuals=1000, experiments=250, repeat=4, seed=12348, status=passed, runtime=1.8483s
+
+performance_grid / non_vectorized: individuals=1000, experiments=250, repeat=5, seed=12349, status=passed, runtime=1.2956s
+
+performance_grid / original: individuals=1000, experiments=250, repeat=5, seed=12349, status=passed, runtime=1.8471s
+
+performance_grid / optimized: individuals=1000, experiments=250, repeat=5, seed=12349, status=passed, runtime=0.7374s
+
+performance_grid / original: individuals=1000, experiments=500, repeat=1, seed=12345, status=passed, runtime=3.9292s
+
+performance_grid / optimized: individuals=1000, experiments=500, repeat=1, seed=12345, status=passed, runtime=1.5054s
+
+performance_grid / non_vectorized: individuals=1000, experiments=500, repeat=1, seed=12345, status=passed, runtime=2.5591s
+
+performance_grid / optimized: individuals=1000, experiments=500, repeat=2, seed=12346, status=passed, runtime=1.5160s
+
+performance_grid / non_vectorized: individuals=1000, experiments=500, repeat=2, seed=12346, status=passed, runtime=2.8399s
+
+performance_grid / original: individuals=1000, experiments=500, repeat=2, seed=12346, status=passed, runtime=3.7512s
+
+performance_grid / non_vectorized: individuals=1000, experiments=500, repeat=3, seed=12347, status=passed, runtime=2.6284s
+
+performance_grid / original: individuals=1000, experiments=500, repeat=3, seed=12347, status=passed, runtime=3.9392s
+
+performance_grid / optimized: individuals=1000, experiments=500, repeat=3, seed=12347, status=passed, runtime=1.4983s
+
+performance_grid / original: individuals=1000, experiments=500, repeat=4, seed=12348, status=passed, runtime=4.0404s
+
+performance_grid / optimized: individuals=1000, experiments=500, repeat=4, seed=12348, status=passed, runtime=1.5219s
+
+performance_grid / non_vectorized: individuals=1000, experiments=500, repeat=4, seed=12348, status=passed, runtime=2.7591s
+
+performance_grid / optimized: individuals=1000, experiments=500, repeat=5, seed=12349, status=passed, runtime=1.4855s
+
+performance_grid / non_vectorized: individuals=1000, experiments=500, repeat=5, seed=12349, status=passed, runtime=2.9123s
+
+performance_grid / original: individuals=1000, experiments=500, repeat=5, seed=12349, status=passed, runtime=0.9973s
+
+performance_grid / non_vectorized: individuals=1000, experiments=1000, repeat=1, seed=12345, status=passed, runtime=1.0422s
+
+performance_grid / original: individuals=1000, experiments=1000, repeat=1, seed=12345, status=passed, runtime=1.5378s
+
+performance_grid / optimized: individuals=1000, experiments=1000, repeat=1, seed=12345, status=passed, runtime=0.6209s
+
+performance_grid / original: individuals=1000, experiments=1000, repeat=2, seed=12346, status=passed, runtime=1.5460s
+
+performance_grid / optimized: individuals=1000, experiments=1000, repeat=2, seed=12346, status=passed, runtime=0.6117s
+
+performance_grid / non_vectorized: individuals=1000, experiments=1000, repeat=2, seed=12346, status=passed, runtime=1.0520s
+
+performance_grid / optimized: individuals=1000, experiments=1000, repeat=3, seed=12347, status=passed, runtime=2.3006s
+
+performance_grid / non_vectorized: individuals=1000, experiments=1000, repeat=3, seed=12347, status=passed, runtime=6.3306s
+
+performance_grid / original: individuals=1000, experiments=1000, repeat=3, seed=12347, status=passed, runtime=8.0015s
+
+performance_grid / non_vectorized: individuals=1000, experiments=1000, repeat=4, seed=12348, status=passed, runtime=6.1748s
+
+performance_grid / original: individuals=1000, experiments=1000, repeat=4, seed=12348, status=passed, runtime=8.0324s
+
+performance_grid / optimized: individuals=1000, experiments=1000, repeat=4, seed=12348, status=passed, runtime=3.2909s
+
+performance_grid / original: individuals=1000, experiments=1000, repeat=5, seed=12349, status=passed, runtime=8.0995s
+
+performance_grid / optimized: individuals=1000, experiments=1000, repeat=5, seed=12349, status=passed, runtime=3.1801s
+
+performance_grid / non_vectorized: individuals=1000, experiments=1000, repeat=5, seed=12349, status=passed, runtime=6.1055s
+
+performance_grid / optimized: individuals=1000, experiments=2000, repeat=1, seed=12345, status=passed, runtime=6.2745s
+
+performance_grid / non_vectorized: individuals=1000, experiments=2000, repeat=1, seed=12345, status=passed, runtime=11.1952s
+
+performance_grid / original: individuals=1000, experiments=2000, repeat=1, seed=12345, status=passed, runtime=5.0490s
+
+performance_grid / non_vectorized: individuals=1000, experiments=2000, repeat=2, seed=12346, status=passed, runtime=2.1189s
+
+performance_grid / original: individuals=1000, experiments=2000, repeat=2, seed=12346, status=passed, runtime=3.1884s
+
+performance_grid / optimized: individuals=1000, experiments=2000, repeat=2, seed=12346, status=passed, runtime=6.2547s
+
+performance_grid / original: individuals=1000, experiments=2000, repeat=3, seed=12347, status=passed, runtime=14.1534s
+
+performance_grid / optimized: individuals=1000, experiments=2000, repeat=3, seed=12347, status=passed, runtime=1.3279s
+
+performance_grid / non_vectorized: individuals=1000, experiments=2000, repeat=3, seed=12347, status=passed, runtime=2.5908s
+
+performance_grid / optimized: individuals=1000, experiments=2000, repeat=4, seed=12348, status=passed, runtime=6.9174s
+
+performance_grid / non_vectorized: individuals=1000, experiments=2000, repeat=4, seed=12348, status=passed, runtime=12.1184s
+
+performance_grid / original: individuals=1000, experiments=2000, repeat=4, seed=12348, status=passed, runtime=17.1619s
+
+performance_grid / non_vectorized: individuals=1000, experiments=2000, repeat=5, seed=12349, status=passed, runtime=11.7480s
+
+performance_grid / original: individuals=1000, experiments=2000, repeat=5, seed=12349, status=passed, runtime=18.4724s
+
+performance_grid / optimized: individuals=1000, experiments=2000, repeat=5, seed=12349, status=passed, runtime=6.5992s
+
+performance_grid / original: individuals=5000, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.4743s
+
+performance_grid / optimized: individuals=5000, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.1601s
+
+performance_grid / non_vectorized: individuals=5000, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.1468s
+
+performance_grid / optimized: individuals=5000, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.1577s
+
+performance_grid / non_vectorized: individuals=5000, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.1450s
+
+performance_grid / original: individuals=5000, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.2544s
+
+performance_grid / non_vectorized: individuals=5000, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.1546s
+
+performance_grid / original: individuals=5000, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.2507s
+
+performance_grid / optimized: individuals=5000, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.1508s
+
+performance_grid / original: individuals=5000, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.2498s
+
+performance_grid / optimized: individuals=5000, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.1581s
+
+performance_grid / non_vectorized: individuals=5000, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.1583s
+
+performance_grid / optimized: individuals=5000, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.1566s
+
+performance_grid / non_vectorized: individuals=5000, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.1497s
+
+performance_grid / original: individuals=5000, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.2579s
+
+performance_grid / non_vectorized: individuals=5000, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.6493s
+
+performance_grid / original: individuals=5000, experiments=50, repeat=1, seed=12345, status=passed, runtime=1.1893s
+
+performance_grid / optimized: individuals=5000, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.9535s
+
+performance_grid / original: individuals=5000, experiments=50, repeat=2, seed=12346, status=passed, runtime=1.1786s
+
+performance_grid / optimized: individuals=5000, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.6879s
+
+performance_grid / non_vectorized: individuals=5000, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.6876s
+
+performance_grid / optimized: individuals=5000, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.7016s
+
+performance_grid / non_vectorized: individuals=5000, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.6605s
+
+performance_grid / original: individuals=5000, experiments=50, repeat=3, seed=12347, status=passed, runtime=1.3605s
+
+performance_grid / non_vectorized: individuals=5000, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.6901s
+
+performance_grid / original: individuals=5000, experiments=50, repeat=4, seed=12348, status=passed, runtime=1.1627s
+
+performance_grid / optimized: individuals=5000, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.6888s
+
+performance_grid / original: individuals=5000, experiments=50, repeat=5, seed=12349, status=passed, runtime=1.1728s
+
+performance_grid / optimized: individuals=5000, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.8914s
+
+performance_grid / non_vectorized: individuals=5000, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.6949s
+
+performance_grid / optimized: individuals=5000, experiments=100, repeat=1, seed=12345, status=passed, runtime=1.4344s
+
+performance_grid / non_vectorized: individuals=5000, experiments=100, repeat=1, seed=12345, status=passed, runtime=1.3298s
+
+performance_grid / original: individuals=5000, experiments=100, repeat=1, seed=12345, status=passed, runtime=2.6484s
+
+performance_grid / non_vectorized: individuals=5000, experiments=100, repeat=2, seed=12346, status=passed, runtime=1.4901s
+
+performance_grid / original: individuals=5000, experiments=100, repeat=2, seed=12346, status=passed, runtime=2.6381s
+
+performance_grid / optimized: individuals=5000, experiments=100, repeat=2, seed=12346, status=passed, runtime=1.5478s
+
+performance_grid / original: individuals=5000, experiments=100, repeat=3, seed=12347, status=passed, runtime=3.9516s
+
+performance_grid / optimized: individuals=5000, experiments=100, repeat=3, seed=12347, status=passed, runtime=3.8617s
+
+performance_grid / non_vectorized: individuals=5000, experiments=100, repeat=3, seed=12347, status=passed, runtime=2.7078s
+
+performance_grid / optimized: individuals=5000, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.7089s
+
+performance_grid / non_vectorized: individuals=5000, experiments=100, repeat=4, seed=12348, status=passed, runtime=6.0853s
+
+performance_grid / original: individuals=5000, experiments=100, repeat=4, seed=12348, status=passed, runtime=8.6308s
+
+performance_grid / non_vectorized: individuals=5000, experiments=100, repeat=5, seed=12349, status=passed, runtime=3.3638s
+
+performance_grid / original: individuals=5000, experiments=100, repeat=5, seed=12349, status=passed, runtime=5.8486s
+
+performance_grid / optimized: individuals=5000, experiments=100, repeat=5, seed=12349, status=passed, runtime=3.5468s
+
+performance_grid / original: individuals=5000, experiments=250, repeat=1, seed=12345, status=passed, runtime=6.8768s
+
+performance_grid / optimized: individuals=5000, experiments=250, repeat=1, seed=12345, status=passed, runtime=6.2156s
+
+performance_grid / non_vectorized: individuals=5000, experiments=250, repeat=1, seed=12345, status=passed, runtime=7.6688s
+
+performance_grid / optimized: individuals=5000, experiments=250, repeat=2, seed=12346, status=passed, runtime=8.5467s
+
+performance_grid / non_vectorized: individuals=5000, experiments=250, repeat=2, seed=12346, status=passed, runtime=6.5660s
+
+performance_grid / original: individuals=5000, experiments=250, repeat=2, seed=12346, status=passed, runtime=6.0615s
+
+performance_grid / non_vectorized: individuals=5000, experiments=250, repeat=3, seed=12347, status=passed, runtime=4.5782s
+
+performance_grid / original: individuals=5000, experiments=250, repeat=3, seed=12347, status=passed, runtime=8.5371s
+
+performance_grid / optimized: individuals=5000, experiments=250, repeat=3, seed=12347, status=passed, runtime=3.9217s
+
+performance_grid / original: individuals=5000, experiments=250, repeat=4, seed=12348, status=passed, runtime=6.4880s
+
+performance_grid / optimized: individuals=5000, experiments=250, repeat=4, seed=12348, status=passed, runtime=3.8381s
+
+performance_grid / non_vectorized: individuals=5000, experiments=250, repeat=4, seed=12348, status=passed, runtime=3.3789s
+
+performance_grid / optimized: individuals=5000, experiments=250, repeat=5, seed=12349, status=passed, runtime=4.0267s
+
+performance_grid / non_vectorized: individuals=5000, experiments=250, repeat=5, seed=12349, status=passed, runtime=3.8846s
+
+performance_grid / original: individuals=5000, experiments=250, repeat=5, seed=12349, status=passed, runtime=6.4490s
+
+performance_grid / non_vectorized: individuals=5000, experiments=500, repeat=1, seed=12345, status=passed, runtime=7.5517s
+
+performance_grid / original: individuals=5000, experiments=500, repeat=1, seed=12345, status=passed, runtime=17.0390s
+
+performance_grid / optimized: individuals=5000, experiments=500, repeat=1, seed=12345, status=passed, runtime=14.9193s
+
+performance_grid / original: individuals=5000, experiments=500, repeat=2, seed=12346, status=passed, runtime=20.7347s
+
+performance_grid / optimized: individuals=5000, experiments=500, repeat=2, seed=12346, status=passed, runtime=7.8043s
+
+performance_grid / non_vectorized: individuals=5000, experiments=500, repeat=2, seed=12346, status=passed, runtime=6.7910s
+
+performance_grid / optimized: individuals=5000, experiments=500, repeat=3, seed=12347, status=passed, runtime=15.3479s
+
+performance_grid / non_vectorized: individuals=5000, experiments=500, repeat=3, seed=12347, status=passed, runtime=14.0289s
+
+performance_grid / original: individuals=5000, experiments=500, repeat=3, seed=12347, status=passed, runtime=16.5207s
+
+performance_grid / non_vectorized: individuals=5000, experiments=500, repeat=4, seed=12348, status=passed, runtime=7.0152s
+
+performance_grid / original: individuals=5000, experiments=500, repeat=4, seed=12348, status=passed, runtime=9.5136s
+
+performance_grid / optimized: individuals=5000, experiments=500, repeat=4, seed=12348, status=passed, runtime=2.5354s
+
+performance_grid / original: individuals=5000, experiments=500, repeat=5, seed=12349, status=passed, runtime=8.6270s
+
+performance_grid / optimized: individuals=5000, experiments=500, repeat=5, seed=12349, status=passed, runtime=7.0750s
+
+performance_grid / non_vectorized: individuals=5000, experiments=500, repeat=5, seed=12349, status=passed, runtime=6.2518s
+
+performance_grid / optimized: individuals=5000, experiments=1000, repeat=1, seed=12345, status=passed, runtime=13.9621s
+
+performance_grid / non_vectorized: individuals=5000, experiments=1000, repeat=1, seed=12345, status=passed, runtime=12.2281s
+
+performance_grid / original: individuals=5000, experiments=1000, repeat=1, seed=12345, status=passed, runtime=23.0291s
+
+performance_grid / non_vectorized: individuals=5000, experiments=1000, repeat=2, seed=12346, status=passed, runtime=12.3020s
+
+performance_grid / original: individuals=5000, experiments=1000, repeat=2, seed=12346, status=passed, runtime=23.1857s
+
+performance_grid / optimized: individuals=5000, experiments=1000, repeat=2, seed=12346, status=passed, runtime=15.1036s
+
+performance_grid / original: individuals=5000, experiments=1000, repeat=3, seed=12347, status=passed, runtime=28.3889s
+
+performance_grid / optimized: individuals=5000, experiments=1000, repeat=3, seed=12347, status=passed, runtime=7.2093s
+
+performance_grid / non_vectorized: individuals=5000, experiments=1000, repeat=3, seed=12347, status=passed, runtime=5.9743s
+
+performance_grid / optimized: individuals=5000, experiments=1000, repeat=4, seed=12348, status=passed, runtime=4.7150s
+
+performance_grid / non_vectorized: individuals=5000, experiments=1000, repeat=4, seed=12348, status=passed, runtime=4.5585s
+
+performance_grid / original: individuals=5000, experiments=1000, repeat=4, seed=12348, status=passed, runtime=8.4071s
+
+performance_grid / non_vectorized: individuals=5000, experiments=1000, repeat=5, seed=12349, status=passed, runtime=4.6907s
+
+performance_grid / original: individuals=5000, experiments=1000, repeat=5, seed=12349, status=passed, runtime=40.9992s
+
+performance_grid / optimized: individuals=5000, experiments=1000, repeat=5, seed=12349, status=passed, runtime=15.6743s
+
+performance_grid / original: individuals=5000, experiments=2000, repeat=1, seed=12345, status=passed, runtime=54.2217s
+
+performance_grid / optimized: individuals=5000, experiments=2000, repeat=1, seed=12345, status=passed, runtime=22.9186s
+
+performance_grid / non_vectorized: individuals=5000, experiments=2000, repeat=1, seed=12345, status=passed, runtime=26.0951s
+
+performance_grid / optimized: individuals=5000, experiments=2000, repeat=2, seed=12346, status=passed, runtime=29.9442s
+
+performance_grid / non_vectorized: individuals=5000, experiments=2000, repeat=2, seed=12346, status=passed, runtime=19.6725s
+
+performance_grid / original: individuals=5000, experiments=2000, repeat=2, seed=12346, status=passed, runtime=44.3278s
+
+performance_grid / non_vectorized: individuals=5000, experiments=2000, repeat=3, seed=12347, status=passed, runtime=25.5198s
+
+performance_grid / original: individuals=5000, experiments=2000, repeat=3, seed=12347, status=passed, runtime=49.1022s
+
+performance_grid / optimized: individuals=5000, experiments=2000, repeat=3, seed=12347, status=passed, runtime=30.8494s
+
+performance_grid / original: individuals=5000, experiments=2000, repeat=4, seed=12348, status=passed, runtime=49.4061s
+
+performance_grid / optimized: individuals=5000, experiments=2000, repeat=4, seed=12348, status=passed, runtime=21.3219s
+
+performance_grid / non_vectorized: individuals=5000, experiments=2000, repeat=4, seed=12348, status=passed, runtime=22.0197s
+
+performance_grid / optimized: individuals=5000, experiments=2000, repeat=5, seed=12349, status=passed, runtime=31.1087s
+
+performance_grid / non_vectorized: individuals=5000, experiments=2000, repeat=5, seed=12349, status=passed, runtime=28.0601s
+
+performance_grid / original: individuals=5000, experiments=2000, repeat=5, seed=12349, status=passed, runtime=39.3549s
