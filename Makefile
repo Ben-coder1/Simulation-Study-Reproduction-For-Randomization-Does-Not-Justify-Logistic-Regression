@@ -1,4 +1,4 @@
-.PHONY: all simulate analyze figures test clean base_profiler optimized_profiler complexity benchmark timing memory optimized-validation stability-check
+.PHONY: all simulate analyze figures test clean base_profiler optimized_profiler complexity benchmark timing memory optimized-validation stability-check performance-suite
 
 test: 
 	python -m pytest
@@ -27,10 +27,10 @@ clean:
 	rm -f .simulate_complete .analyze_complete .figures_complete
 	rm -rf  results
 
-base_profiler:
+base-profiler:
 	python -m performance_analysis.base_profiler
 
-optimized_profiler:
+optimized-profiler:
 	python -m performance_analysis.optimized_profiler
 
 complexity: 
@@ -50,4 +50,14 @@ optimized-validation:
 
 stability-check:
 	python -m performance_analysis.numerical_stability
+
+performance-suite:
+	$(MAKE) base-profiler
+	$(MAKE) optimized-profiler
+	$(MAKE) complexity
+	$(MAKE) benchmark
+	$(MAKE) timing
+	$(MAKE) memory
+	$(MAKE) stability-check
+	$(MAKE) optimized-validation
 

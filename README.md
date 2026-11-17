@@ -43,16 +43,21 @@ Using the assignment coefficient from logistic regression is biased when the dat
 
 | Command | Description |
 |---|---|
+| `make all` | Runs simulation, analysis, and figures. |
 | `make clean` | Removes temporary files and results folder. |
 | `make test` | Runs tests using pytest. |
 | `make simulate` | Runs simulations. |
 | `make analyze` | Runs analysis. |
 | `make figures` | Creates the figures. |
+| `make complexity` | Measures simulation runtime as the number of individuals changes. |
 | `make benchmark` | Benchmarks the original, vectorized, and non-vectorized pipelines. |
 | `make timing` | Writes a full timing grid and a faceted timing plot by population size. |
 | `make memory` | Writes a full peak-Python-memory grid and a matching faceted memory plot. |
-| `make base_profiler` | Profiles the original simulation. |
-| `make optimized_profiler` | Profiles the optimized simulation. |
+| `make base-profiler` | Profiles the original simulation. |
+| `make optimized-profiler` | Profiles the optimized simulation. |
+| `make stability-check` | Checks numerical warnings, convergence, and finite outputs across conditions. |
+| `make optimized-validation` | Runs the optimized estimator regression tests. |
+| `make performance-suite` | Runs the full performance analysis and optimized regression validation in sequence. |
 
 # AI Use
 
