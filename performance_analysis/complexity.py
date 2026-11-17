@@ -1,3 +1,5 @@
+"""Measure baseline simulation runtime as population size grows."""
+
 import csv
 from pathlib import Path
 from time import perf_counter
@@ -13,7 +15,7 @@ from src.methods import PARAMETER_ESTIMATORS, TRUTH_PARAMETER_FINDERS
 N_EXPERIMENTS = 1000
 N_INDIVIDUALS = range(1000, 15001, 1000)
 
-# This script is one directory below the project root.
+# Resolve output paths relative to the project root.
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PROFILES_DIR = PROJECT_ROOT / "performance_results" / "runtime"
 PROFILES_DIR.mkdir(parents=True, exist_ok=True)
@@ -21,6 +23,11 @@ PROFILES_DIR.mkdir(parents=True, exist_ok=True)
 CSV_PATH = PROFILES_DIR / "runtime_by_individuals.csv"
 PLOT_PATH = PROFILES_DIR / "runtime_by_individuals.png"
 def build_simulation(n_individuals):
+    """Build a baseline simulation with the requested population size.
+
+    Keyword arguments:
+        n_individuals -- Number of individuals to generate.
+    """
     return Simulation(
         individual_dgp=INDIVIDUAL_DGPS["individual_uniform"](
             n_individuals,
@@ -42,7 +49,11 @@ def build_simulation(n_individuals):
 
 
 def save_results(results):
-    """Save the completed timings and their plot."""
+    """Save the completed timings and their plot.
+
+    Keyword arguments:
+        results -- Population-size and elapsed-seconds pairs.
+    """
     CSV_PATH.parent.mkdir(parents=True, exist_ok=True)
     PLOT_PATH.parent.mkdir(parents=True, exist_ok=True)
 
@@ -76,6 +87,7 @@ def save_results(results):
 
 
 def main():
+    """Time each population size and save results after every run."""
     results = []
 
     print(

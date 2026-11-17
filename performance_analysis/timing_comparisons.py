@@ -1,3 +1,5 @@
+"""Compare estimator runtimes across experiment and population sizes."""
+
 import csv
 from pathlib import Path
 from tempfile import TemporaryDirectory
@@ -7,7 +9,6 @@ from unittest.mock import patch
 import matplotlib.pyplot as plt
 import numpy as np
 
-# Adjust these imports if your simulation files are located elsewhere.
 import src.simulation as original_module
 import src_optimized.optimized_simulation as optimized_module
 import src_optimized.non_vectorized_simulation as non_vectorized_module
@@ -21,8 +22,7 @@ from src_optimized.non_vectorized_simulation import (
 )
 
 
-# Assumes this script is one directory below the project root.
-# If saved directly in the project root, use .parent instead.
+# Keep benchmark artifacts outside the simulation results directory.
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PROFILES_DIR = PROJECT_ROOT / "performance_results" / "runtime"
 

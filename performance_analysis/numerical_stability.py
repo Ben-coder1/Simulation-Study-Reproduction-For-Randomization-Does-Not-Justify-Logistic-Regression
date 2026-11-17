@@ -1,3 +1,5 @@
+"""Check numerical stability across the optimized simulation grid."""
+
 import csv
 import warnings
 from collections import Counter
@@ -16,18 +18,14 @@ import src_optimized.optimized_simulation as optimized_module
 import src_optimized.non_vectorized_simulation as non_vectorized_module
 
 
-# Same output folder as the performance comparison script.
-# Assumes this script is one directory below the project root.
-# If saved directly in the project root, use .parent instead.
+# Store diagnostic reports separately from timing measurements.
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PROFILES_DIR = PROJECT_ROOT / "performance_results" / "numerical_stability"
 
 CSV_PATH = PROFILES_DIR / "convergence_comparisons_results.csv"
 SUMMARY_PATH = PROFILES_DIR / "convergence_comparisons_summary.txt"
 
-# Same population sizes, experiment counts, and repeats as the
-# performance comparison. Seeds differ after the first configuration
-# unless the performance script also uses the seed formula below.
+# Match the timing grid while using distinct seeds for each condition.
 INDIVIDUAL_COUNTS = (100, 500, 1000, 5000)
 EXPERIMENT_COUNTS = (10, 50, 100, 250, 500, 1000, 2000)
 REPEATS = 5

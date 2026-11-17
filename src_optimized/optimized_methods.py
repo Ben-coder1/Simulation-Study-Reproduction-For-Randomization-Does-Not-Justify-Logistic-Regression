@@ -1,3 +1,5 @@
+"""Estimate log-odds effects with batched logistic regression."""
+
 import numpy as np
 import statsmodels.api as sm
 import warnings
@@ -11,14 +13,28 @@ from abc import ABC, abstractmethod
 
 
 def differential_log_odds(treatment_result, control_result) -> float:
+  """Return the difference in log-odds for two binary outcome arrays.
+
+  Return NaN with a warning when either success rate is zero or one.
+
+  Keyword arguments:
+      treatment_result -- Binary potential outcomes under treatment.
+      control_result -- Binary potential outcomes under control.
+
+  Raises:
+      ValueError: If an array is empty or contains values other than 0 or 1.
+
+  Warns:
+      UserWarning: If either observed success rate is zero or one.
+  """
   t = np.asarray(treatment_result)
   c = np.asarray(control_result)
 
-  # 1. Validate inputs are non-empty
+  # Require observations in both potential-outcome arrays.
   if t.size == 0 or c.size == 0:
     raise ValueError("Input arrays must not be empty.")
 
-  # 2. Validate inputs only contain values in {0, 1}
+  # Log-odds here are defined for binary outcomes.
   if not np.isin(t, [0, 1]).all():
     raise ValueError("treatment_result must only contain values in {0, 1}.")
   if not np.isin(c, [0, 1]).all():
@@ -27,7 +43,7 @@ def differential_log_odds(treatment_result, control_result) -> float:
   treatment_success_rate = float(np.mean(t))
   control_success_rate = float(np.mean(c))
 
-  # 3. Handle boundary conditions (rates of 0 or 1 result in log(0) or division by zero)
+  # Boundary success rates have undefined or infinite log-odds.
   if treatment_success_rate in (0.0, 1.0) or control_success_rate in (
       0.0,
       1.0,
@@ -40,7 +56,6 @@ def differential_log_odds(treatment_result, control_result) -> float:
     )
     return np.nan
 
-  # 4. Compute log-odds differential
   t_log_odds = np.log(treatment_success_rate / (1.0 - treatment_success_rate))
   c_log_odds = np.log(control_success_rate / (1.0 - control_success_rate))
 
@@ -48,19 +63,39 @@ def differential_log_odds(treatment_result, control_result) -> float:
 
 
 class TrueParameterFinder(ABC):
+    """Define the interface for population-level truth calculations."""
+
     @abstractmethod
     def find_true_parameters(self, individuals: IndividualLevelConditionalOutcomes):
+        """Return the target parameter from individual potential outcomes.
+
+        Keyword arguments:
+            individuals -- Individual potential outcomes and covariates.
+        """
         pass
 
 class DifferentialLogOddsFinder(TrueParameterFinder):
+    """Compute the population differential log-odds."""
+
     def find_true_parameters(self, individuals: IndividualLevelConditionalOutcomes):
+        """Return the log-odds contrast between potential outcomes.
+
+        Keyword arguments:
+            individuals -- Individual potential outcomes and covariates.
+        """
         return differential_log_odds(individuals.treatment_outcomes, individuals.control_outcomes)
 
 
 class ModelParameterEstimator(ABC):
+    """Define the interface for experiment-level estimators."""
+
     @abstractmethod
-    #the second element of the returned tuple is auxillary for tracking
     def generate_parameter_estimates(self, experiment_results: list[ExperimentResults]) -> tuple[np.ndarray, np.ndarray]:
+        """Return estimates and auxiliary fit information by experiment.
+
+        Keyword arguments:
+            experiment_results -- Results for the experiments to estimate.
+        """
         pass
 
 
@@ -71,7 +106,24 @@ class LogitEstimationError(RuntimeError):
 
 
 class fast_LogitModelEstimator(ModelParameterEstimator):
+    """Fit treatment coefficients with batched Newton iterations.
+
+    Experiments must share covariates in the same row order and have
+    binary outcomes in both assignment groups. A singular Hessian or
+    failure to converge raises ``LogitEstimationError``.
+    """
+
     def __init__(self, max_iter: int = 35, tol: float = 1e-8):
+        """Configure the Newton iteration limit and convergence tolerance.
+
+        Keyword arguments:
+            max_iter -- Maximum number of Newton iterations.
+            tol -- Largest accepted absolute coefficient update.
+
+        Raises:
+            ValueError: If max_iter is below one or tol is not positive
+                and finite.
+        """
         if max_iter < 1:
             raise ValueError("max_iter must be positive.")
         if not np.isfinite(tol) or tol <= 0:
@@ -84,6 +136,21 @@ class fast_LogitModelEstimator(ModelParameterEstimator):
         self,
         experiment_results: list[ExperimentResults],
     ) -> tuple[np.ndarray, np.ndarray]:
+        """Return treatment estimates and full coefficients by experiment.
+
+        The first array has shape ``(n_experiments,)``. The second has
+        shape ``(n_experiments, n_covariates + 2)`` with intercept and
+        treatment coefficients in its first two columns.
+
+        Keyword arguments:
+            experiment_results -- Experiments sharing ordered covariates.
+
+        Raises:
+            ValueError: If covariates, outcomes, or assignments violate
+                the required input structure or outcome variation.
+            LogitEstimationError: If a fit is singular, nonfinite, or
+                fails to converge within max_iter iterations.
+        """
         n_experiments = len(experiment_results)
         if n_experiments == 0:
             return np.array([]), np.array([])
@@ -252,7 +319,24 @@ class fast_LogitModelEstimator(ModelParameterEstimator):
         return coefficient_matrix[:, 1].copy(), coefficient_matrix
 
 class fast_LogitModelPlugIn(ModelParameterEstimator):
+    """Fit batched logistic models and compute marginal plug-in contrasts.
+
+    Experiments must share covariates in the same row order. Experiments
+    without both outcomes or assignment groups receive NaN results;
+    singular or nonconvergent valid fits raise an error.
+    """
+
     def __init__(self, max_iter: int = 35, tol: float = 1e-8):
+        """Configure the Newton iteration limit and convergence tolerance.
+
+        Keyword arguments:
+            max_iter -- Maximum number of Newton iterations.
+            tol -- Largest accepted absolute coefficient update.
+
+        Raises:
+            ValueError: If max_iter is below one or tol is not positive
+                and finite.
+        """
         if max_iter < 1:
             raise ValueError("max_iter must be positive.")
         if not np.isfinite(tol) or tol <= 0:
@@ -265,6 +349,28 @@ class fast_LogitModelPlugIn(ModelParameterEstimator):
         self,
         experiment_results: list[ExperimentResults],
     ) -> tuple[np.ndarray, np.ndarray]:
+        """Return plug-in estimates and full coefficients by experiment.
+
+        The estimate array has shape ``(n_experiments,)`` and the
+        coefficient array has shape ``(n_experiments, n_covariates + 2)``.
+        Newton iterations stop for each fit when its largest absolute
+        coefficient update is at most ``self.tol``.
+
+        Keyword arguments:
+            experiment_results -- Experiments sharing ordered covariates.
+
+        Raises:
+            ValueError: If covariates, outcomes, or assignments violate
+                the required input structure.
+            RuntimeError: If a fit has nonfinite derivatives or a
+                singular Hessian.
+            LogitEstimationError: If a fit does not converge.
+
+        Warns:
+            RuntimeWarning: If an experiment has only one outcome value.
+            UserWarning: If an experiment has only one assignment group
+                or a counterfactual success rate is zero or one.
+        """
         n_experiments = len(experiment_results)
         if n_experiments == 0:
             return np.array([]), np.array([])
@@ -455,7 +561,7 @@ class fast_LogitModelPlugIn(ModelParameterEstimator):
 
         coefficient_matrix[valid_experiment_indices] = valid_coefficients
 
-        # Counterfactual predictions, shape (V, n).
+        # Predict both counterfactual outcomes for valid fits and individuals.
         control_linear_predictors = (
             valid_coefficients[:, 0, None]
             + valid_coefficients[:, 2:] @ shared_covariates.T

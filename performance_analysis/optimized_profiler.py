@@ -1,3 +1,5 @@
+"""Profile the vectorized simulation and save readable reports."""
+
 import cProfile
 import pstats
 import subprocess
@@ -14,6 +16,11 @@ FLAME_GRAPH_LOCATION = PROFILE_DIR / "optimized_simulation_flamegraph.svg"
 
 
 def save_profile_outputs(profiler):
+    """Save cProfile data, cumulative statistics, and a flame graph.
+
+    Keyword arguments:
+        profiler -- cProfile instance containing collected call statistics.
+    """
     # Save cProfile data.
     profiler.dump_stats(str(PROFILE_LOCATION))
 
@@ -65,6 +72,7 @@ def save_profile_outputs(profiler):
 
 
 def main():
+    """Run the vectorized simulation under cProfile and save results."""
     PROFILE_DIR.mkdir(parents=True, exist_ok=True)
 
     print("Starting simulation profiling...", flush=True)

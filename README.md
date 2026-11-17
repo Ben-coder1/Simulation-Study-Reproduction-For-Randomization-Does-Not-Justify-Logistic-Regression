@@ -1,6 +1,6 @@
 # Description
 
-Simulation study based on the paper *Randomization Does Not Justify Logistic Regression*, where two estimators of differential log odds are compared under a Neyman nonparametric setup with randomization. The two estimators compared are the assignment coefficient in logistic regression and the plug-in estimator introduced in the paper that uses the logistic regression model .
+Simulation study based on the paper *Randomization Does Not Justify Logistic Regression*, where two estimators of differential log odds are compared under a Neyman nonparametric setup with randomization. The two estimators compared are the assignment coefficient in logistic regression and the plug-in estimator introduced in the paper that uses the logistic regression model.
 
 # Setup
 

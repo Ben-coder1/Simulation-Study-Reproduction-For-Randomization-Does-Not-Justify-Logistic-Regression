@@ -1,3 +1,5 @@
+"""Run the configured baseline simulation and save its estimates."""
+
 import pickle
 from pathlib import Path
 import numpy as np
@@ -18,6 +20,8 @@ from src.methods import (
 
 
 class Simulation:
+    """Generate experiments and apply each configured estimator."""
+
     def __init__(
         self,
         individual_dgp: IndividualConditionalOutcomesDGP,
@@ -25,6 +29,17 @@ class Simulation:
         param_estimators: list[ModelParameterEstimator],
         true_parameter_finder: TrueParameterFinder,
     ):
+        """Store the generators and estimators for one population.
+
+        Keyword arguments:
+            individual_dgp -- Generator for individual potential outcomes.
+            experiment_dgp -- Generator for treatment assignments.
+            param_estimators -- Estimators applied to each experiment.
+            true_parameter_finder -- Calculator for the population truth.
+
+        Raises:
+            ValueError: If no parameter estimators are supplied.
+        """
         if not param_estimators:
             raise ValueError(
                 "At least one parameter estimator is required."
@@ -42,6 +57,17 @@ class Simulation:
         self,
         rng: np.random.Generator | int | None = None,
     ):
+        """Return the truth and estimator outputs for one population.
+
+        Separate spawned generators handle individuals and assignments.
+        Each estimator result contains an estimates array and auxiliary data.
+
+        Keyword arguments:
+            rng -- Generator, integer seed, or None for a fresh generator.
+
+        Returns:
+            A dictionary with the true parameter and estimator results.
+        """
         base_rng = np.random.default_rng(rng)
         individuals_rng, experiment_rng = base_rng.spawn(2)
 
@@ -86,13 +112,28 @@ class Simulation:
 
 
 class MultipleSimulations:
+    """Run configured populations and persist their ordered results."""
+
     def __init__(self, simulations: list[Simulation]):
+        """Store the simulations to run in order.
+
+        Keyword arguments:
+            simulations -- Configured population simulations.
+        """
         self.simulations = simulations
 
     def run_multiple_simulations(
         self,
         rng: np.random.Generator | int | None = None,
     ):
+        """Use one spawned random stream per simulation and save a pickle.
+
+        Keyword arguments:
+            rng -- Generator, integer seed, or None for a fresh generator.
+
+        Returns:
+            Simulation result dictionaries in configuration order.
+        """
         base_rng = np.random.default_rng(rng)
         simulation_rngs = base_rng.spawn(len(self.simulations))
 
@@ -119,6 +160,7 @@ class MultipleSimulations:
 
 
 def run_from_config():
+    """Build and run the simulations in ``configuration.SIMULATIONS``."""
     simulations = [
         Simulation(
             individual_dgp=INDIVIDUAL_DGPS[

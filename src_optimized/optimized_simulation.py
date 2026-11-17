@@ -1,3 +1,5 @@
+"""Run the optimized simulation with the baseline result structure."""
+
 import pickle
 from pathlib import Path
 
@@ -17,11 +19,19 @@ from src_optimized.optimized_methods import (
 
 
 class Simulation:
+    """Fit the batched plug-in model once for each population."""
+
     def __init__(
         self,
         individual_dgp: IndividualConditionalOutcomesDGP,
         experiment_dgp: ExperimentDGP,
     ):
+        """Store the generators and create the batched estimator.
+
+        Keyword arguments:
+            individual_dgp -- Generator for individual potential outcomes.
+            experiment_dgp -- Generator for treatment assignments.
+        """
         self.n_experiments = experiment_dgp.n_exp
         self.n_individuals = individual_dgp.n
 
@@ -35,6 +45,17 @@ class Simulation:
         self,
         rng: np.random.Generator | int | None = None,
     ):
+        """Return truth and both estimates using one set of model fits.
+
+        Separate spawned generators handle individuals and assignments.
+        The treatment coefficient is reused as the logit estimate.
+
+        Keyword arguments:
+            rng -- Generator, integer seed, or None for a fresh generator.
+
+        Returns:
+            A dictionary with the true parameter and estimator results.
+        """
         base_rng = np.random.default_rng(rng)
         individuals_rng, experiment_rng = base_rng.spawn(2)
 
@@ -84,13 +105,28 @@ class Simulation:
 
 
 class MultipleSimulations:
+    """Run optimized populations and persist their ordered results."""
+
     def __init__(self, simulations: list[Simulation]):
+        """Store the simulations to run in order.
+
+        Keyword arguments:
+            simulations -- Configured population simulations.
+        """
         self.simulations = simulations
 
     def run_multiple_simulations(
         self,
         rng: np.random.Generator | int | None = None,
     ):
+        """Use one spawned random stream per simulation and save a pickle.
+
+        Keyword arguments:
+            rng -- Generator, integer seed, or None for a fresh generator.
+
+        Returns:
+            Simulation result dictionaries in configuration order.
+        """
         base_rng = np.random.default_rng(rng)
         simulation_rngs = base_rng.spawn(len(self.simulations))
 
@@ -119,6 +155,7 @@ class MultipleSimulations:
 
 
 def run_from_config():
+    """Build and run the simulations in ``configuration_optimized``."""
     simulations = [
         Simulation(
             individual_dgp=INDIVIDUAL_DGPS[

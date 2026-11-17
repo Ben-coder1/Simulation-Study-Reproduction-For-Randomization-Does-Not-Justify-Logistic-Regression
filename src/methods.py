@@ -1,3 +1,5 @@
+"""Estimate marginal log-odds effects from simulated experiments."""
+
 import numpy as np
 import statsmodels.api as sm
 import warnings
@@ -10,14 +12,28 @@ from abc import ABC, abstractmethod
 
 
 def differential_log_odds(treatment_result, control_result) -> float:
+  """Return the difference in log-odds for two binary outcome arrays.
+
+  Return NaN with a warning when either success rate is zero or one.
+
+  Keyword arguments:
+      treatment_result -- Binary potential outcomes under treatment.
+      control_result -- Binary potential outcomes under control.
+
+  Raises:
+      ValueError: If an array is empty or contains values other than 0 or 1.
+
+  Warns:
+      UserWarning: If either observed success rate is zero or one.
+  """
   t = np.asarray(treatment_result)
   c = np.asarray(control_result)
 
-  # 1. Validate inputs are non-empty
+  # Require observations in both potential-outcome arrays.
   if t.size == 0 or c.size == 0:
     raise ValueError("Input arrays must not be empty.")
 
-  # 2. Validate inputs only contain values in {0, 1}
+  # Log-odds here are defined for binary outcomes.
   if not np.isin(t, [0, 1]).all():
     raise ValueError("treatment_result must only contain values in {0, 1}.")
   if not np.isin(c, [0, 1]).all():
@@ -26,7 +42,7 @@ def differential_log_odds(treatment_result, control_result) -> float:
   treatment_success_rate = float(np.mean(t))
   control_success_rate = float(np.mean(c))
 
-  # 3. Handle boundary conditions (rates of 0 or 1 result in log(0) or division by zero)
+  # Boundary success rates have undefined or infinite log-odds.
   if treatment_success_rate in (0.0, 1.0) or control_success_rate in (
       0.0,
       1.0,
@@ -39,7 +55,6 @@ def differential_log_odds(treatment_result, control_result) -> float:
     )
     return np.nan
 
-  # 4. Compute log-odds differential
   t_log_odds = np.log(treatment_success_rate / (1.0 - treatment_success_rate))
   c_log_odds = np.log(control_success_rate / (1.0 - control_success_rate))
 
@@ -47,25 +62,47 @@ def differential_log_odds(treatment_result, control_result) -> float:
 
 
 class TrueParameterFinder(ABC):
+    """Define the interface for population-level truth calculations."""
+
     @abstractmethod
     def find_true_parameters(self, individuals: IndividualLevelConditionalOutcomes):
+        """Return the target parameter from individual potential outcomes.
+
+        Keyword arguments:
+            individuals -- Individual potential outcomes and covariates.
+        """
         pass
 
 class DifferentialLogOddsFinder(TrueParameterFinder):
+    """Compute the population differential log-odds."""
+
     def find_true_parameters(self, individuals: IndividualLevelConditionalOutcomes):
+        """Return the log-odds contrast between potential outcomes.
+
+        Keyword arguments:
+            individuals -- Individual potential outcomes and covariates.
+        """
         return differential_log_odds(individuals.treatment_outcomes, individuals.control_outcomes)
 
 
 class ModelParameterEstimator(ABC):
+    """Define the interface for experiment-level estimators."""
+
     @abstractmethod
-    #the second element of the returned tuple is auxillary for tracking
     def generate_parameter_estimates(self, experiment_results: list[ExperimentResults]) -> tuple[np.ndarray, np.ndarray]:
+        """Return estimates and auxiliary fit information by experiment.
+
+        Keyword arguments:
+            experiment_results -- Results for the experiments to estimate.
+        """
         pass
 
 
 
 
 class LogitModelEstimator(ModelParameterEstimator):
+    """Estimate treatment log-odds coefficients with separate logit fits."""
+
     def __init__(self):
         pass
 
@@ -73,6 +110,21 @@ class LogitModelEstimator(ModelParameterEstimator):
     self,
     experiment_results: list[ExperimentResults],
 ) -> tuple[np.ndarray, np.ndarray]:
+        """Return treatment coefficients and full coefficients for each fit.
+
+        Experiments without both outcome values or assignment groups
+        receive NaN estimates and coefficient rows.
+
+        Keyword arguments:
+            experiment_results -- Results for the experiments to fit.
+
+        Raises:
+            ValueError: If input lengths differ or values are not binary.
+
+        Warns:
+            RuntimeWarning: If an experiment has only one outcome value.
+            UserWarning: If an experiment has only one assignment group.
+        """
         beta_mat = []
         assignment_coefs = []
         
@@ -140,9 +192,26 @@ class LogitModelEstimator(ModelParameterEstimator):
         return np.array(assignment_coefs), np.array(beta_mat)
 
 class LogitModelPlugIn(ModelParameterEstimator):
+    """Estimate marginal log-odds contrasts from separate logit fits."""
+
     def __init__(self):
         pass
     def generate_parameter_estimates(self, experiment_results: list[ExperimentResults]) -> tuple[np.ndarray, np.ndarray]:
+        """Return plug-in contrasts and full coefficients by experiment.
+
+        Experiments without both outcome values or assignment groups
+        receive NaN estimates and coefficient rows.
+
+        Keyword arguments:
+            experiment_results -- Results for the experiments to fit.
+
+        Raises:
+            ValueError: If input lengths differ or values are not binary.
+
+        Warns:
+            RuntimeWarning: If an experiment has only one outcome value.
+            UserWarning: If an experiment has only one assignment group.
+        """
         beta_mat = []
         plug_in_estimates = []
         
@@ -216,6 +285,15 @@ class LogitModelPlugIn(ModelParameterEstimator):
         fitted_result,
         covariates: np.ndarray,
     ) -> float:
+        """Contrast mean predicted outcomes under universal assignment.
+
+        Keyword arguments:
+            fitted_result -- Fitted logistic regression result.
+            covariates -- Covariates used for both counterfactual predictions.
+
+        Warns:
+            UserWarning: If a mean predicted success rate is zero or one.
+        """
         covariates = np.asarray(covariates)
         n = covariates.shape[0]
 

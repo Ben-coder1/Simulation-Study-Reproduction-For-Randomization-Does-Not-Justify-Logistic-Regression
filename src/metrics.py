@@ -1,3 +1,5 @@
+"""Summarize simulation estimates and their bias."""
+
 import numpy as np
 def mean_and_sd(values: np.ndarray) -> tuple[float, float]:
     """
@@ -5,6 +7,12 @@ def mean_and_sd(values: np.ndarray) -> tuple[float, float]:
 
     Returns (NaN, NaN) if there are no finite estimates. The standard
     deviation is NaN if only one finite estimate is available.
+
+    Keyword arguments:
+        values -- Estimates to summarize; nonfinite values are excluded.
+
+    Returns:
+        The mean and sample standard deviation of finite values.
     """
     values = np.asarray(values, dtype=float).ravel()
     finite_values = values[np.isfinite(values)]
@@ -24,5 +32,10 @@ def mean_and_sd(values: np.ndarray) -> tuple[float, float]:
     return mean, standard_deviation
 
 def bias(true_param, estimated_param):
-    """return the bias of the estimated parameter relative to the true parameter."""
+    """Return the mean estimation error relative to the true parameter.
+
+    Keyword arguments:
+        true_param -- Target parameter to subtract from each estimate.
+        estimated_param -- Array of estimated parameters.
+    """
     return np.mean(estimated_param - true_param, axis=0)

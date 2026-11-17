@@ -8,7 +8,6 @@ from time import perf_counter
 
 import matplotlib.pyplot as plt
 
-# Adjust the original import if its module has a different location.
 from src.simulation import run_from_config as run_original
 from src_optimized.optimized_simulation import run_from_config as run_optimized
 from src_optimized.non_vectorized_simulation import (
@@ -39,7 +38,17 @@ DISPLAY_NAMES = {
 
 
 def timed_run(version):
-    """Time a pipeline without depending on its returned result format."""
+    """Time a pipeline without depending on its returned result format.
+
+    Keyword arguments:
+        version -- Key of the simulation pipeline to run.
+
+    Returns:
+        Elapsed wall-clock seconds.
+
+    Raises:
+        KeyError: If version is absent from RUNNERS.
+    """
     gc.collect()
 
     start = perf_counter()
@@ -53,6 +62,11 @@ def timed_run(version):
 
 
 def save_results(timings):
+    """Write completed timings, a summary, and a comparison plot.
+
+    Keyword arguments:
+        timings -- Completed runtime lists keyed by implementation name.
+    """
     PROFILES_DIR.mkdir(parents=True, exist_ok=True)
 
     with TIMINGS_PATH.open(
@@ -129,6 +143,7 @@ def save_results(timings):
 
 
 def main():
+    """Warm up and time all three simulation pipelines repeatedly."""
     timings = {version: [] for version in RUNNERS}
 
     print(
@@ -144,7 +159,7 @@ def main():
         offset = repeat % len(versions)
         order = versions[offset:] + versions[:offset]
 
-        # Only record a paired repeat after both versions succeed.
+        # Record a repeat only after all three implementations succeed.
         pair = {}
 
         for version in order:
@@ -159,7 +174,7 @@ def main():
         for version in timings:
             timings[version].append(pair[version])
 
-        # Preserve results after every completed pair.
+        # Preserve results after every completed repeat.
         save_results(timings)
 
     print("\nEnd-to-end runtime summary:")
