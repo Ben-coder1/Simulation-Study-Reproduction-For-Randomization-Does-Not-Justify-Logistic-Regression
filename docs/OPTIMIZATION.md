@@ -1,8 +1,9 @@
-# Optimization
+# Optimization 1
 
-1) Majority of the time spent fitting logistic regression
 
-2) I applied an algorithmic improvement which reduces redundant computations (I only fit once rather than twice).
+The majority of the time is spent fitting logistic regression
+
+I applied an algorithmic improvement which reduces redundant computations (I only fit once rather than twice).
 
 ## Before
 
@@ -60,6 +61,8 @@ Alternatively, here you can see the overall run time comparisons.
 
 ![Overall run time comparisons](../performance_results/benchmarks/benchmark_comparison.png)
 
+# Optimization 2
+
 My other improvement was to vectorize the logistic regression fits over experiments. This was to solve the same problem as before. Rather than fitting a new logit model for each experiement, I did it all at once using vectorization.
 
 ## Before
@@ -98,8 +101,17 @@ for _ in range(self.max_iter):
 
 As you can see from the charts it runs faster, however it takes up a lot more memory. This can be seen by the associated charts.
 
+
+
 ![Memory comparisons of original, optimized/vectorized, and non-vectorized methods](../performance_results/memory/memory_comparisons.png)
 
 However, the speedup depends drastically on what computer you are using. The charts you see above were all from my mac, while my older pc actually had much less speedup, including no improvement when simulating 5000 individuals.
 
-Removing duplicated code was the best return on investment since it gave a sizeable performance boost for minimal results. I was minimally surprised about where time was spent. I rogiinally planned to vectorize the experiment creations, but since the profiling showed that very little time was spent there I decided against it. In general, I think any optimziatinos regarding the DGP would not be worth it.
+One other thing to note is that this code, when run on my mac (but not my windows), often produces the following: "Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul". According to the internet, this is a known mac bug, and need not be evidence of convergence issues, especially as my regression tests pass.
+
+
+
+# LESSONS LEARNED
+Removing duplicated code was the best return on investment since it gave a sizeable performance boost for minimal results. I was minimally surprised about where time was spent. I rogiinally planned to vectorize the experiment creations, but since the profiling showed that very little time was spent there I decided against it. In general, I think any optimziatinos regarding the DGP would not be worth it here.
+
+One other thing I learned is that an optimization may have different levels of effect on different hardware. While obviously possible, I did not expect such thigns to happen here. 

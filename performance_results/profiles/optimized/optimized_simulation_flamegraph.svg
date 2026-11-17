@@ -1,0 +1,1488 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" width="1200" height="816"
+     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+    .func_g:hover { stroke:black; stroke-width:0.5; cursor:pointer; }
+</style>
+<svg class="func_g" x="0.0" y="384" width="1199.003403902359" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 100.00% (1 1 1.4540000000000001e-05 1.674200833)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="0.00014980324132689822" y="360" width="1198.9488705051826" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 100.00% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="0.04246814377329532" y="336" width="1197.5682372435892" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 99.88% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="0.09374600830806865" y="312" width="18.17215713664278" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:86:generate_individuals 1.60% (4 4 0.005025295 0.026748292000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_individuals</text>
+</g></svg>
+<svg class="func_g" x="0.09374600830806865" y="288" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/tqdm/asyncio.py:23:__init__ 0.10% (4 4 0.000171124 0.0016926240000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__init__</text>
+</g></svg>
+<svg class="func_g" x="1.3069544367659622" y="288" width="11.373371433593675" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/tqdm/std.py:664:__new__ 1.03% (4 4 8.8961e-05 0.017262875)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__new__</text>
+</g></svg>
+<svg class="func_g" x="1.592890800005973" y="264" width="10.992996959708448" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/tqdm/std.py:766:get_lock 1.00% (8 8 2.3478492572363527e-05 0.01673219045447316)</title>
+    <rect height="100%" width="100%" fill="rgb(57, 242, 168)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">get_lock</text>
+</g></svg>
+<svg class="func_g" x="1.592890800005973" y="240" width="10.974084922604831" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/tqdm/std.py:88:__init__ 1.00% (1 1 4.0676508325973e-05 0.016705805072423714)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__init__</text>
+</g></svg>
+<svg class="func_g" x="1.59321887835476" y="216" width="10.942367823151493" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/tqdm/std.py:114:create_mp_lock 1.00% (1 1 2.4931438702075287e-05 0.016661554536006533)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">create_mp_lock</text>
+</g></svg>
+<svg class="func_g" x="1.59321887835476" y="192" width="10.923247073895707" height="23"><g>
+    <title>/opt/homebrew/Cellar/python@3.11/3.11.18/Frameworks/Python.framework/Versions/3.11/lib/python3.11/multiprocessing/context.py:70:RLock 0.99% (1 1 2.1482062818291495e-05 0.016634877966400546)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">RLock</text>
+</g></svg>
+<svg class="func_g" x="1.5943503555358713" y="168" width="5.9794380098602" height="23"><g>
+    <title>/opt/homebrew/Cellar/python@3.11/3.11.18/Frameworks/Python.framework/Versions/3.11/lib/python3.11/multiprocessing/synchronize.py:193:__init__ 0.58% (1 1 1.6163901040835894e-05 0.009737456487190585)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__init__</text>
+</g></svg>
+<svg class="func_g" x="1.5943503555358713" y="144" width="5.967852341111854" height="23"><g>
+    <title>/opt/homebrew/Cellar/python@3.11/3.11.18/Frameworks/Python.framework/Versions/3.11/lib/python3.11/multiprocessing/synchronize.py:50:__init__ 0.58% (1 1 4.65361592924701e-05 0.00972129258614975)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__init__</text>
+</g></svg>
+<svg class="func_g" x="1.594559067688041" y="120" width="1.3855370132399782" height="23"><g>
+    <title>/opt/homebrew/Cellar/python@3.11/3.11.18/Frameworks/Python.framework/Versions/3.11/lib/python3.11/multiprocessing/resource_tracker.py:172:register 0.20% (1 1 8.683771377851749e-06 0.0033282139381695234)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">register</text>
+</g></svg>
+<svg class="func_g" x="1.594559067688041" y="96" width="1.3793128165923996" height="23"><g>
+    <title>/opt/homebrew/Cellar/python@3.11/3.11.18/Frameworks/Python.framework/Versions/3.11/lib/python3.11/multiprocessing/resource_tracker.py:180:_send 0.20% (1 1 3.3863517277111814e-05 0.003319530166791672)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_send</text>
+</g></svg>
+<svg class="func_g" x="1.594559067688041" y="72" width="1.3518535879968523" height="23"><g>
+    <title>/opt/homebrew/Cellar/python@3.11/3.11.18/Frameworks/Python.framework/Versions/3.11/lib/python3.11/multiprocessing/resource_tracker.py:94:ensure_running 0.20% (1 1 5.4554786491517644e-05 0.0032812200559714)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">ensure_running</text>
+</g></svg>
+<svg class="func_g" x="1.5947377595991454" y="48" width="1.2091380767391482" height="23"><g>
+    <title>/opt/homebrew/Cellar/python@3.11/3.11.18/Frameworks/Python.framework/Versions/3.11/lib/python3.11/multiprocessing/util.py:450:spawnv_passfds 0.18% (1 1 6.53596398308635e-05 0.003082108597576645)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">spawnv_passfds</text>
+</g></svg>
+<svg class="func_g" x="1.5947377595991454" y="24" width="1.1568706927411934" height="23"><g>
+    <title>~:0:&lt;built-in method _posixsubprocess.fork_exec&gt; 0.18% (1 1 0.0030091870562347282 0.0030091870562347282)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method _posixsubprocess.fork_exec&gt;</text>
+</g></svg>
+<svg class="func_g" x="4.07644032648656" y="120" width="3.4524070232668267" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:1165:_find_and_load 0.37% (1 1 3.6996775162873204e-06 0.006211835335606183)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_find_and_load</text>
+</g></svg>
+<svg class="func_g" x="4.106682798748978" y="96" width="3.4190625843199047" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:1120:_find_and_load_unlocked 0.37% (3 1 1.5002967059337678e-05 0.006165314394682754)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_find_and_load_unlocked</text>
+</g></svg>
+<svg class="func_g" x="4.106682798748978" y="72" width="3.278335604931949" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:666:_load_unlocked 0.36% (3 1 9.751754771797856e-06 0.005968977263179035)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_load_unlocked</text>
+</g></svg>
+<svg class="func_g" x="4.10690093644029" y="48" width="1.0232721826902318" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:566:module_from_spec 0.17% (1 1 3.139702078526741e-06 0.002822795304271766)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">module_from_spec</text>
+</g></svg>
+<svg class="func_g" x="4.125741705578269" y="24" width="1.0020425611266455" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap_external&gt;:1231:create_module 0.17% (0 0 1.3005072764880085e-06 0.0027931765131996343)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">create_module</text>
+</g></svg>
+<svg class="func_g" x="4.125741705578269" y="0" width="1.0008408811364462" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:233:_call_with_frames_removed 0.17% (0 0 5.384436651951103e-07 0.00279149997325479)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_call_with_frames_removed</text>
+</g></svg>
+<svg class="func_g" x="6.130173119130522" y="48" width="1.2444832033501187" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap_external&gt;:934:exec_module 0.19% (1 0 3.3430816151085893e-06 0.0031314208247104542)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">exec_module</text>
+</g></svg>
+<svg class="func_g" x="6.130173119130522" y="24" width="1.1297033027230032" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:233:_call_with_frames_removed 0.18% (1 0 5.534096814713919e-07 0.002971284107917266)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_call_with_frames_removed</text>
+</g></svg>
+<svg class="func_g" x="8.57518788044384" y="168" width="3.9258805472106078" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:1165:_find_and_load 0.41% (1 1 8.933075792695907e-06 0.006872408268659816)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_find_and_load</text>
+</g></svg>
+<svg class="func_g" x="8.608622790628766" y="144" width="3.885545048243812" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:1120:_find_and_load_unlocked 0.41% (3 1 1.6586701370963444e-05 0.006816133656646152)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_find_and_load_unlocked</text>
+</g></svg>
+<svg class="func_g" x="8.608622790628766" y="120" width="3.7299627309119243" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:666:_load_unlocked 0.39% (3 1 1.0781163726011634e-05 0.006599070901298909)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_load_unlocked</text>
+</g></svg>
+<svg class="func_g" x="8.608863955241688" y="96" width="1.2368516409941241" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:566:module_from_spec 0.19% (2 2 3.4711334474272506e-06 0.003120773548201114)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">module_from_spec</text>
+</g></svg>
+<svg class="func_g" x="8.629693582478415" y="72" width="1.2133809907086786" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap_external&gt;:1231:create_module 0.18% (1 1 1.4377906543789924e-06 0.0030880281558704255)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">create_module</text>
+</g></svg>
+<svg class="func_g" x="8.629693582478415" y="48" width="1.2120524596879765" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:233:_call_with_frames_removed 0.18% (1 1 5.952825360714074e-07 0.0030861746380101487)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_call_with_frames_removed</text>
+</g></svg>
+<svg class="func_g" x="10.845715596235815" y="96" width="1.481414008233871" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap_external&gt;:934:exec_module 0.21% (1 1 3.695982014041179e-06 0.003461978012806576)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">exec_module</text>
+</g></svg>
+<svg class="func_g" x="10.845715596235815" y="72" width="1.3545177798037815" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:233:_call_with_frames_removed 0.20% (1 1 6.118283860826665e-07 0.0032849370388798884)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_call_with_frames_removed</text>
+</g></svg>
+<svg class="func_g" x="13.683073935561778" y="288" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/tqdm/std.py:1166:__iter__ 0.16% (6604 6604 0.001607038 0.002754414)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__iter__</text>
+</g></svg>
+<svg class="func_g" x="19.271278859352538" y="312" width="151.49775867950243" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:252:generate_experiments 12.71% (4 4 0.023968291000000003 0.21275929200000002)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiments</text>
+</g></svg>
+<svg class="func_g" x="19.271278859352538" y="288" width="28.02382681716988" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/_ufunc_config.py:464:inner 2.42% (4000 4000 0.012165015000000001 0.040492981000000004)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">inner</text>
+</g></svg>
+<svg class="func_g" x="19.951141105373924" y="264" width="18.62454506018994" height="23"><g>
+    <title>~:0:&lt;method 'set' of '_contextvars.ContextVar' objects&gt; 1.64% (4011 4011 0.02737944707504296 0.02737944707504296)</title>
+    <rect height="100%" width="100%" fill="rgb(71, 230, 126)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'set' of '_contextvars.ContextVar' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="49.31226108398901" y="288" width="103.57454850909804" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:271:&lt;listcomp&gt; 8.71% (4 4 0.0014042100000000001 0.145898583)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;listcomp&gt;</text>
+</g></svg>
+<svg class="func_g" x="49.31698024447177" y="264" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/tqdm/std.py:1166:__iter__ 0.16% (4004 4004 0.001488168 0.002754144)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__iter__</text>
+</g></svg>
+<svg class="func_g" x="51.291045786486265" y="264" width="100.58927955060251" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:215:generate_experiment 8.47% (4000 4000 0.106696754 0.14173364500000002)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiment</text>
+</g></svg>
+<svg class="func_g" x="51.586474980668996" y="240" width="8.993135547197944" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/fromnumeric.py:3328:prod 0.83% (4000 4000 0.0020167740000000003 0.013942057)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">prod</text>
+</g></svg>
+<svg class="func_g" x="51.586474980668996" y="216" width="7.547588742299315" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/fromnumeric.py:69:_wrapreduction 0.71% (4000 4000 0.0042061780000000005 0.011925283)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_wrapreduction</text>
+</g></svg>
+<svg class="func_g" x="51.586474980668996" y="192" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/fromnumeric.py:70:&lt;dictcomp&gt; 0.11% (3782 3782 0.0018098011182022965 0.0018098011182022965)</title>
+    <rect height="100%" width="100%" fill="rgb(44, 255, 210)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;dictcomp&gt;</text>
+</g></svg>
+<svg class="func_g" x="54.00795848928274" y="192" width="2.1112770135999632" height="23"><g>
+    <title>~:0:&lt;method 'reduce' of 'numpy.ufunc' objects&gt; 0.26% (3782 3782 0.004340739827006895 0.004340739827006895)</title>
+    <rect height="100%" width="100%" fill="rgb(71, 230, 126)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'reduce' of 'numpy.ufunc' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="61.84280693849718" y="240" width="9.29845533911785" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/numeric.py:290:full 0.86% (4000 4000 0.011309383000000001 0.014368028000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">full</text>
+</g></svg>
+<svg class="func_g" x="62.1187308529076" y="216" width="1" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.empty&gt; 0.16% (3988 3988 0.0026736860525101015 0.0026736860525101015)</title>
+    <rect height="100%" width="100%" fill="rgb(71, 230, 126)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.empty&gt;</text>
+</g></svg>
+<svg class="func_g" x="73.54172762477923" y="240" width="1.862427433559807" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.zeros&gt; 0.24% (4000 4000 0.003993554 0.003993554)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.zeros&gt;</text>
+</g></svg>
+<svg class="func_g" x="172.370519772402" y="312" width="1024.6060907140431" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 85.47% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="173.1512598616256" y="288" width="9.10475473074873" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/numeric.py:2475:array_equal 0.84% (4000 4000 0.0071863050000000005 0.014097784)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">array_equal</text>
+</g></svg>
+<svg class="func_g" x="173.69188757462175" y="264" width="3.413257246634439" height="23"><g>
+    <title>~:0:&lt;method 'all' of 'numpy.ndarray' objects&gt; 0.37% (4000 4000 0.00097816 0.006157215000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'all' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="173.69188757462175" y="240" width="2.7121494067477454" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/_methods.py:67:_all 0.31% (4100 4100 0.0009798296896463064 0.005179055)</title>
+    <rect height="100%" width="100%" fill="rgb(99, 206, 42)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_all</text>
+</g></svg>
+<svg class="func_g" x="173.69188757462175" y="216" width="2.0098447969039874" height="23"><g>
+    <title>~:0:&lt;method 'reduce' of 'numpy.ufunc' objects&gt; 0.25% (4100 4100 0.004199225310353693 0.004199225310353693)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'reduce' of 'numpy.ufunc' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="183.80486069754775" y="288" width="66.33281332893141" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:145:unique 5.61% (8000 8000 0.00647536 0.093940277)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">unique</text>
+</g></svg>
+<svg class="func_g" x="183.80486069754775" y="264" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:132:_unpack_tuple 0.14% (8000 8000 0.001868342 0.0024240340000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_unpack_tuple</text>
+</g></svg>
+<svg class="func_g" x="185.542315962077" y="264" width="59.55871433993868" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:339:_unique1d 5.05% (8000 8000 0.03395353 0.084489302)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_unique1d</text>
+</g></svg>
+<svg class="func_g" x="185.9184991380018" y="240" width="1" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.empty&gt; 0.11% (8000 8000 0.001816993 0.001816993)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.empty&gt;</text>
+</g></svg>
+<svg class="func_g" x="187.22085052971605" y="240" width="2.5159587674677653" height="23"><g>
+    <title>~:0:&lt;method 'flatten' of 'numpy.ndarray' objects&gt; 0.29% (8000 8000 0.004905337 0.004905337)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'flatten' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="190.73680929718387" y="240" width="30.027623643635277" height="23"><g>
+    <title>~:0:&lt;method 'sort' of 'numpy.ndarray' objects&gt; 2.59% (8000 8000 0.043288605 0.043288605)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'sort' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="251.68320439100964" y="288" width="46.760964658904314" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:1015:isin 3.98% (8000 8000 0.005644457 0.06663435000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">isin</text>
+</g></svg>
+<svg class="func_g" x="251.68320439100964" y="264" width="41.20113725552651" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:862:_in1d 3.52% (7938 7938 0.04667624694807055 0.0588774822779575)</title>
+    <rect height="100%" width="100%" fill="rgb(71, 230, 126)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_in1d</text>
+</g></svg>
+<svg class="func_g" x="252.23933036276364" y="240" width="1.1460099066177118" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.all&gt; 0.18% (7938 7938 0.001569330642723705 0.0029940344849038163)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.all&gt;</text>
+</g></svg>
+<svg class="func_g" x="255.4636903674686" y="240" width="1.089062763990063" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.asarray&gt; 0.17% (15876 15876 0.002914583915585317 0.002914583915585317)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.asarray&gt;</text>
+</g></svg>
+<svg class="func_g" x="257.55275313145864" y="240" width="1" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.zeros&gt; 0.12% (7938 7938 0.0020535865712689827 0.0020535865712689827)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.zeros&gt;</text>
+</g></svg>
+<svg class="func_g" x="259.0246857856284" y="240" width="1" height="23"><g>
+    <title>~:0:&lt;method 'ravel' of 'numpy.ndarray' objects&gt; 0.12% (15876 15876 0.001958669161862192 0.001958669161862192)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'ravel' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="299.44611075795586" y="288" width="5.275100808323239" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/linalg/_linalg.py:320:solve 0.52% (25 25 0.008361549000000001 0.008754791000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">solve</text>
+</g></svg>
+<svg class="func_g" x="306.06370478166764" y="288" width="10.843889368457035" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.asarray&gt; 0.99% (12004 12004 0.016524161000000002 0.016524161000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.asarray&gt;</text>
+</g></svg>
+<svg class="func_g" x="317.9775673158247" y="288" width="7.679229236567727" height="23"><g>
+    <title>~:0:&lt;method 'all' of 'numpy.ndarray' objects&gt; 0.72% (8154 8154 0.001949664 0.012108943)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'all' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="317.9775673158247" y="264" width="6.281784324135355" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/_methods.py:67:_all 0.61% (8043 8043 0.0019220423783103747 0.010159279)</title>
+    <rect height="100%" width="100%" fill="rgb(99, 206, 42)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_all</text>
+</g></svg>
+<svg class="func_g" x="317.9775673158247" y="240" width="4.90413753830495" height="23"><g>
+    <title>~:0:&lt;method 'reduce' of 'numpy.ufunc' objects&gt; 0.49% (8043 8043 0.008237236621689625 0.008237236621689625)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'reduce' of 'numpy.ufunc' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="326.6567965523924" y="288" width="4.621833242801922" height="23"><g>
+    <title>~:0:&lt;method 'mean' of 'numpy.ndarray' objects&gt; 0.47% (8 8 2.1085000000000002e-05 0.007843376)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'mean' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="326.6567965523924" y="264" width="4.60672031771399" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/_methods.py:118:_mean 0.47% (8 8 8.675000000000001e-05 0.007822291)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_mean</text>
+</g></svg>
+<svg class="func_g" x="326.7442290031334" y="240" width="4.457108770393494" height="23"><g>
+    <title>~:0:&lt;method 'reduce' of 'numpy.ufunc' objects&gt; 0.45% (16 16 0.00761355844446237 0.00761355844446237)</title>
+    <rect height="100%" width="100%" fill="rgb(71, 230, 126)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'reduce' of 'numpy.ufunc' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="0.005973493843150095" y="432" width="1.0832792725610028" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/_methods.py:67:_all 0.17% (12162 12162 0.002906515 0.015362875000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_all</text>
+</g></svg>
+<svg class="func_g" x="0.005973493843150095" y="456" width="1.0832792725610028" height="23"><g>
+    <title>~:0:&lt;method 'all' of 'numpy.ndarray' objects&gt; 0.17% (12162 12162 0.002906515 0.015362875000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'all' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="0.7108029430593681" y="480" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 0.12% (8154 8154 0.001949664 0.012108943)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="0.7108029430593681" y="504" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="0.7108029430593681" y="528" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="0.7108029430593681" y="552" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="2.313384218858321" y="432" width="7.798980800865378" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/_ufunc_config.py:464:inner 0.73% (4013 4013 0.012276016 0.040620022000000006)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">inner</text>
+</g></svg>
+<svg class="func_g" x="2.313384218858321" y="456" width="7.771461580912154" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:252:generate_experiments 0.73% (4000 4000 0.012165015000000001 0.040492981000000004)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiments</text>
+</g></svg>
+<svg class="func_g" x="2.313384218858321" y="480" width="7.771461580912154" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 1.43% (4 4 0.023968291000000003 0.21275929200000002)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="2.313384218858321" y="504" width="7.771461580912154" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="2.313384218858321" y="528" width="7.771461580912154" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="11.116933660203207" y="432" width="2.0757214457801823" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/fromnumeric.py:69:_wrapreduction 0.26% (4041 4041 0.004291134 0.012539324000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_wrapreduction</text>
+</g></svg>
+<svg class="func_g" x="11.267549361040695" y="456" width="1.9251057449426958" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/fromnumeric.py:3328:prod 0.25% (4000 4000 0.0042061780000000005 0.011925283)</title>
+    <rect height="100%" width="100%" fill="rgb(225, 225, 225)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">prod</text>
+</g></svg>
+<svg class="func_g" x="11.267549361040695" y="480" width="1.9251057449426958" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:215:generate_experiment 0.12% (4000 4000 0.0020167740000000003 0.013942057)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiment</text>
+</g></svg>
+<svg class="func_g" x="11.267549361040695" y="504" width="1.9251057449426958" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:271:&lt;listcomp&gt; 6.37% (4000 4000 0.106696754 0.14173364500000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;listcomp&gt;</text>
+</g></svg>
+<svg class="func_g" x="11.267549361040695" y="528" width="1.9251057449426958" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:252:generate_experiments 0.08% (4 4 0.0014042100000000001 0.145898583)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiments</text>
+</g></svg>
+<svg class="func_g" x="11.267549361040695" y="552" width="1.9251057449426958" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 1.43% (4 4 0.023968291000000003 0.21275929200000002)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="11.267549361040695" y="576" width="1.9251057449426958" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="11.267549361040695" y="600" width="1.9251057449426958" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="14.192655105983391" y="432" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/fromnumeric.py:70:&lt;dictcomp&gt; 0.12% (4041 4041 0.001933849 0.001933849)</title>
+    <rect height="100%" width="100%" fill="rgb(230, 230, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;dictcomp&gt;</text>
+</g></svg>
+<svg class="func_g" x="14.192655105983391" y="456" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/fromnumeric.py:69:_wrapreduction 0.12% (4041 4041 0.001933849 0.001933849)</title>
+    <rect height="100%" width="100%" fill="rgb(232, 232, 232)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_wrapreduction</text>
+</g></svg>
+<svg class="func_g" x="14.260531807677832" y="480" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/fromnumeric.py:3328:prod 0.25% (4000 4000 0.0042061780000000005 0.011925283)</title>
+    <rect height="100%" width="100%" fill="rgb(225, 225, 225)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">prod</text>
+</g></svg>
+<svg class="func_g" x="14.260531807677832" y="504" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:215:generate_experiment 0.12% (4000 4000 0.0020167740000000003 0.013942057)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiment</text>
+</g></svg>
+<svg class="func_g" x="14.260531807677832" y="528" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:271:&lt;listcomp&gt; 6.37% (4000 4000 0.106696754 0.14173364500000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;listcomp&gt;</text>
+</g></svg>
+<svg class="func_g" x="14.260531807677832" y="552" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:252:generate_experiments 0.08% (4 4 0.0014042100000000001 0.145898583)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiments</text>
+</g></svg>
+<svg class="func_g" x="14.260531807677832" y="576" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 1.43% (4 4 0.023968291000000003 0.21275929200000002)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="14.260531807677832" y="600" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="14.260531807677832" y="624" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="15.926940849301374" y="432" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/fromnumeric.py:3328:prod 0.12% (4000 4000 0.0020167740000000003 0.013942057)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">prod</text>
+</g></svg>
+<svg class="func_g" x="15.926940849301374" y="456" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:215:generate_experiment 0.12% (4000 4000 0.0020167740000000003 0.013942057)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiment</text>
+</g></svg>
+<svg class="func_g" x="15.926940849301374" y="480" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:271:&lt;listcomp&gt; 6.37% (4000 4000 0.106696754 0.14173364500000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;listcomp&gt;</text>
+</g></svg>
+<svg class="func_g" x="15.926940849301374" y="504" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:252:generate_experiments 0.08% (4 4 0.0014042100000000001 0.145898583)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiments</text>
+</g></svg>
+<svg class="func_g" x="15.926940849301374" y="528" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 1.43% (4 4 0.023968291000000003 0.21275929200000002)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="15.926940849301374" y="552" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="15.926940849301374" y="576" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="18.409716696004402" y="432" width="7.1242311638330165" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/numeric.py:290:full 0.68% (4008 4008 0.01133463 0.01440861)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">full</text>
+</g></svg>
+<svg class="func_g" x="18.409716696004402" y="456" width="7.1013491822198915" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:215:generate_experiment 0.68% (4000 4000 0.011309383000000001 0.014368028000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiment</text>
+</g></svg>
+<svg class="func_g" x="18.409716696004402" y="480" width="7.1013491822198915" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:271:&lt;listcomp&gt; 6.37% (4000 4000 0.106696754 0.14173364500000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;listcomp&gt;</text>
+</g></svg>
+<svg class="func_g" x="18.409716696004402" y="504" width="7.1013491822198915" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:252:generate_experiments 0.08% (4 4 0.0014042100000000001 0.145898583)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiments</text>
+</g></svg>
+<svg class="func_g" x="18.409716696004402" y="528" width="7.1013491822198915" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 1.43% (4 4 0.023968291000000003 0.21275929200000002)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="18.409716696004402" y="552" width="7.1013491822198915" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="18.409716696004402" y="576" width="7.1013491822198915" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="26.83123060034585" y="432" width="4.15086977111816" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/numeric.py:2475:array_equal 0.43% (4000 4000 0.0071863050000000005 0.014097784)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">array_equal</text>
+</g></svg>
+<svg class="func_g" x="26.83123060034585" y="456" width="4.15086977111816" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 0.43% (4000 4000 0.0071863050000000005 0.014097784)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="26.83123060034585" y="480" width="4.15086977111816" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="26.83123060034585" y="504" width="4.150869771118161" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="26.83123060034585" y="528" width="4.150869771118161" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="31.982100371464007" y="432" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:132:_unpack_tuple 0.11% (8000 8000 0.001868342 0.0024240340000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_unpack_tuple</text>
+</g></svg>
+<svg class="func_g" x="31.982100371464007" y="456" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:145:unique 0.11% (8000 8000 0.001868342 0.0024240340000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">unique</text>
+</g></svg>
+<svg class="func_g" x="31.982100371464007" y="480" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 0.39% (8000 8000 0.00647536 0.093940277)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="31.982100371464007" y="504" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="31.982100371464007" y="528" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="31.982100371464007" y="552" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="33.87010287619332" y="432" width="3.641291467744228" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:145:unique 0.39% (8000 8000 0.00647536 0.093940277)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">unique</text>
+</g></svg>
+<svg class="func_g" x="33.87010287619332" y="456" width="3.641291467744228" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 0.39% (8000 8000 0.00647536 0.093940277)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="33.87010287619332" y="480" width="3.641291467744229" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="33.87010287619332" y="504" width="3.641291467744229" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="33.87010287619332" y="528" width="3.641291467744229" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="38.511394343937546" y="432" width="23.336597361196546" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:339:_unique1d 2.03% (8000 8000 0.03395353 0.084489302)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_unique1d</text>
+</g></svg>
+<svg class="func_g" x="38.511394343937546" y="456" width="23.336597361196546" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:145:unique 2.03% (8000 8000 0.03395353 0.084489302)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">unique</text>
+</g></svg>
+<svg class="func_g" x="38.511394343937546" y="480" width="23.336597361196546" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 0.39% (8000 8000 0.00647536 0.093940277)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="38.511394343937546" y="504" width="23.336597361196546" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="38.511394343937546" y="528" width="23.336597361196546" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="38.511394343937546" y="552" width="23.336597361196546" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="62.84799170513409" y="432" width="32.75027891894173" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:862:_in1d 2.81% (8008 8008 0.047087154000000006 0.059395801000000005)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_in1d</text>
+</g></svg>
+<svg class="func_g" x="62.84799170513409" y="456" width="32.75027891894173" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:1015:isin 2.81% (8008 8008 0.047087154000000006 0.059395801000000005)</title>
+    <rect height="100%" width="100%" fill="rgb(225, 225, 225)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">isin</text>
+</g></svg>
+<svg class="func_g" x="63.13356367296722" y="480" width="32.46470695110861" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 0.34% (8000 8000 0.005644457 0.06663435000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="63.13356367296722" y="504" width="32.46470695110861" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="63.13356367296722" y="528" width="32.46470695110861" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="63.13356367296722" y="552" width="32.46470695110861" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="96.59827062407584" y="432" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:876:&lt;genexpr&gt; 0.12% (16024 16024 0.002050709 0.002050709)</title>
+    <rect height="100%" width="100%" fill="rgb(182, 182, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;genexpr&gt;</text>
+</g></svg>
+<svg class="func_g" x="98.61462655290742" y="432" width="3.0684610751962547" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:1015:isin 0.34% (8008 8008 0.0056761680000000005 0.067202976)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">isin</text>
+</g></svg>
+<svg class="func_g" x="98.64905111094104" y="456" width="3.034036517162626" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 0.34% (8000 8000 0.005644457 0.06663435000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="98.64905111094104" y="480" width="3.034036517162626" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="98.64905111094104" y="504" width="3.034036517162626" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="98.64905111094104" y="528" width="3.034036517162626" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="102.8339230065957" y="432" width="4.9932399172903565" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/linalg/_linalg.py:320:solve 0.50% (25 25 0.008361549000000001 0.008754791000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">solve</text>
+</g></svg>
+<svg class="func_g" x="102.8339230065957" y="456" width="4.9932399172903565" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 0.50% (25 25 0.008361549000000001 0.008754791000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="102.8339230065957" y="480" width="4.9932399172903565" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="102.8339230065957" y="504" width="4.9932399172903565" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="102.8339230065957" y="528" width="4.9932399172903565" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="109.92835866649892" y="432" width="1.2185257960500637" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/tqdm/std.py:1166:__iter__ 0.18% (10608 10608 0.003095206 0.005508558)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__iter__</text>
+</g></svg>
+<svg class="func_g" x="113.16936111051132" y="432" width="2.6019400938940427" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:86:generate_individuals 0.30% (4 4 0.005025295 0.026748292000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_individuals</text>
+</g></svg>
+<svg class="func_g" x="113.16936111051132" y="456" width="2.6019400938940427" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 0.30% (4 4 0.005025295 0.026748292000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="113.16936111051132" y="480" width="2.6019400938940427" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="113.16936111051132" y="504" width="2.6019400938940427" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="116.78029154917074" y="432" width="75.47617027874972" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:215:generate_experiment 6.37% (4000 4000 0.106696754 0.14173364500000002)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiment</text>
+</g></svg>
+<svg class="func_g" x="116.78029154917074" y="456" width="75.47617027874972" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:271:&lt;listcomp&gt; 6.37% (4000 4000 0.106696754 0.14173364500000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;listcomp&gt;</text>
+</g></svg>
+<svg class="func_g" x="116.78029154917074" y="480" width="75.47617027874972" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:252:generate_experiments 0.08% (4 4 0.0014042100000000001 0.145898583)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiments</text>
+</g></svg>
+<svg class="func_g" x="116.78029154917074" y="504" width="75.4761702787497" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 1.43% (4 4 0.023968291000000003 0.21275929200000002)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="116.78029154917074" y="528" width="75.4761702787497" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="116.78029154917074" y="552" width="75.4761702787497" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="193.25646182792048" y="432" width="16.179558281657048" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:252:generate_experiments 1.43% (4 4 0.023968291000000003 0.21275929200000002)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiments</text>
+</g></svg>
+<svg class="func_g" x="193.25646182792048" y="456" width="16.179558281657048" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 1.43% (4 4 0.023968291000000003 0.21275929200000002)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="193.25646182792048" y="480" width="16.179558281657048" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="193.25646182792048" y="504" width="16.179558281657048" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="211.5134336916774" y="432" width="863.9221160166086" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="211.5134336916774" y="456" width="863.9221160166086" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="211.5134336916774" y="480" width="863.9221160166086" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="211.5134336916774" y="504" width="863.9221160166086" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="1081.083269813693" y="432" width="7.203280685728805" height="23"><g>
+    <title>~:0:&lt;built-in method _imp.create_dynamic&gt; 0.68% (2 2 0.011444917 0.011444917)</title>
+    <rect height="100%" width="100%" fill="rgb(230, 230, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method _imp.create_dynamic&gt;</text>
+</g></svg>
+<svg class="func_g" x="1081.083269813693" y="456" width="7.203280685728805" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:233:_call_with_frames_removed 0.68% (2 2 0.011444917 0.011444917)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_call_with_frames_removed</text>
+</g></svg>
+<svg class="func_g" x="1081.3015429885825" y="480" width="3.16894801709775" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap_external&gt;:934:exec_module 0.00% (4 2 2.3320000000000003e-06 0.012520624000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(232, 232, 232)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">exec_module</text>
+</g></svg>
+<svg class="func_g" x="1081.3015429885825" y="504" width="3.16894801709775" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:666:_load_unlocked 0.00% (4 2 1.3709e-05 0.012841041000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(232, 232, 232)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_load_unlocked</text>
+</g></svg>
+<svg class="func_g" x="1081.3015429885825" y="528" width="3.16894801709775" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:1120:_find_and_load_unlocked 0.00% (6 2 2.1083e-05 0.012904749)</title>
+    <rect height="100%" width="100%" fill="rgb(232, 232, 232)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_find_and_load_unlocked</text>
+</g></svg>
+<svg class="func_g" x="1081.3015429885825" y="552" width="3.16894801709775" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:1165:_find_and_load 0.00% (6 2 3.1794e-05 0.013065416000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_find_and_load</text>
+</g></svg>
+<svg class="func_g" x="1085.4704910056803" y="480" width="2.811508840950746" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap_external&gt;:1231:create_module 0.00% (2 2 2.2080000000000003e-06 0.011447125)</title>
+    <rect height="100%" width="100%" fill="rgb(225, 225, 225)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">create_module</text>
+</g></svg>
+<svg class="func_g" x="1085.4704910056803" y="504" width="2.811508840950746" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:566:module_from_spec 0.00% (2 2 5.3330000000000004e-06 0.011454)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">module_from_spec</text>
+</g></svg>
+<svg class="func_g" x="1085.4704910056803" y="528" width="2.811508840950746" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:666:_load_unlocked 0.00% (6 6 1.2875000000000001e-05 0.011575458)</title>
+    <rect height="100%" width="100%" fill="rgb(232, 232, 232)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_load_unlocked</text>
+</g></svg>
+<svg class="func_g" x="1085.4704910056803" y="552" width="2.811508840950746" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:1120:_find_and_load_unlocked 0.00% (6 2 2.1083e-05 0.012904749)</title>
+    <rect height="100%" width="100%" fill="rgb(232, 232, 232)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_find_and_load_unlocked</text>
+</g></svg>
+<svg class="func_g" x="1085.4704910056803" y="576" width="2.811508840950746" height="23"><g>
+    <title>&lt;frozen importlib._bootstrap&gt;:1165:_find_and_load 0.00% (6 2 3.1794e-05 0.013065416000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_find_and_load</text>
+</g></svg>
+<svg class="func_g" x="1089.430943621775" y="432" width="1.1628885855164857" height="23"><g>
+    <title>~:0:&lt;built-in method _posixsubprocess.fork_exec&gt; 0.18% (1 1 0.0030175830000000003 0.0030175830000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(198, 198, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method _posixsubprocess.fork_exec&gt;</text>
+</g></svg>
+<svg class="func_g" x="1089.430943621775" y="456" width="1.1628885855164857" height="23"><g>
+    <title>/opt/homebrew/Cellar/python@3.11/3.11.18/Frameworks/Python.framework/Versions/3.11/lib/python3.11/multiprocessing/util.py:450:spawnv_passfds 0.18% (1 1 0.0030175830000000003 0.0030175830000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">spawnv_passfds</text>
+</g></svg>
+<svg class="func_g" x="1089.430943621775" y="480" width="1.1628885855164857" height="23"><g>
+    <title>/opt/homebrew/Cellar/python@3.11/3.11.18/Frameworks/Python.framework/Versions/3.11/lib/python3.11/multiprocessing/resource_tracker.py:94:ensure_running 0.00% (1 1 6.5542e-05 0.003090708)</title>
+    <rect height="100%" width="100%" fill="rgb(232, 232, 232)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">ensure_running</text>
+</g></svg>
+<svg class="func_g" x="1089.430943621775" y="504" width="1.1628885855164857" height="23"><g>
+    <title>/opt/homebrew/Cellar/python@3.11/3.11.18/Frameworks/Python.framework/Versions/3.11/lib/python3.11/multiprocessing/resource_tracker.py:180:_send 0.00% (1 1 5.4707e-05 0.0032903750000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_send</text>
+</g></svg>
+<svg class="func_g" x="1089.430943621775" y="528" width="1.1628885855164857" height="23"><g>
+    <title>/opt/homebrew/Cellar/python@3.11/3.11.18/Frameworks/Python.framework/Versions/3.11/lib/python3.11/multiprocessing/resource_tracker.py:172:register 0.00% (1 1 3.3958e-05 0.003328792)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">register</text>
+</g></svg>
+<svg class="func_g" x="1089.430943621775" y="552" width="1.1628885855164857" height="23"><g>
+    <title>/opt/homebrew/Cellar/python@3.11/3.11.18/Frameworks/Python.framework/Versions/3.11/lib/python3.11/multiprocessing/synchronize.py:50:__init__ 0.00% (1 1 8.708e-06 0.0033375)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__init__</text>
+</g></svg>
+<svg class="func_g" x="1089.430943621775" y="576" width="1.1628885855164857" height="23"><g>
+    <title>/opt/homebrew/Cellar/python@3.11/3.11.18/Frameworks/Python.framework/Versions/3.11/lib/python3.11/multiprocessing/synchronize.py:193:__init__ 0.00% (1 1 4.6666000000000003e-05 0.009748416000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__init__</text>
+</g></svg>
+<svg class="func_g" x="1089.430943621775" y="600" width="1.1628885855164857" height="23"><g>
+    <title>/opt/homebrew/Cellar/python@3.11/3.11.18/Frameworks/Python.framework/Versions/3.11/lib/python3.11/multiprocessing/context.py:70:RLock 0.00% (1 1 1.6209e-05 0.009764625)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">RLock</text>
+</g></svg>
+<svg class="func_g" x="1089.430943621775" y="624" width="1.1628885855164857" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/tqdm/std.py:114:create_mp_lock 0.00% (1 1 2.1542e-05 0.016681291)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">create_mp_lock</text>
+</g></svg>
+<svg class="func_g" x="1089.430943621775" y="648" width="1.1628885855164857" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/tqdm/std.py:88:__init__ 0.00% (1 1 2.5001e-05 0.016708042)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__init__</text>
+</g></svg>
+<svg class="func_g" x="1089.430943621775" y="672" width="1.1628885855164857" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/tqdm/std.py:766:get_lock 0.00% (1 1 4.079e-05 0.016752416000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">get_lock</text>
+</g></svg>
+<svg class="func_g" x="1089.430943621775" y="696" width="1.1628885855164857" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/tqdm/std.py:664:__new__ 0.00% (8 8 2.3544e-05 0.016778875000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">__new__</text>
+</g></svg>
+<svg class="func_g" x="1089.430943621775" y="720" width="1.1542467029548424" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:86:generate_individuals 0.01% (4 4 8.8961e-05 0.017262875)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_individuals</text>
+</g></svg>
+<svg class="func_g" x="1089.430943621775" y="744" width="1.1542467029548424" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 0.30% (4 4 0.005025295 0.026748292000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="1089.430943621775" y="768" width="1.1542467029548424" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="1089.430943621775" y="792" width="1.1542467029548424" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="1094.0468050933516" y="432" width="1" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.len&gt; 0.12% (32078 32078 0.002079409 0.002079409)</title>
+    <rect height="100%" width="100%" fill="rgb(182, 182, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.len&gt;</text>
+</g></svg>
+<svg class="func_g" x="1098.0355249713991" y="432" width="13.665844840191369" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.asarray&gt; 1.22% (44086 44086 0.02046125 0.02046125)</title>
+    <rect height="100%" width="100%" fill="rgb(166, 166, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.asarray&gt;</text>
+</g></svg>
+<svg class="func_g" x="1098.3971693485341" y="456" width="1.10745350184441" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:862:_in1d 0.18% (16016 16016 0.002940242 0.002940242)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_in1d</text>
+</g></svg>
+<svg class="func_g" x="1098.3971693485341" y="480" width="1.10745350184441" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:1015:isin 2.81% (8008 8008 0.047087154000000006 0.059395801000000005)</title>
+    <rect height="100%" width="100%" fill="rgb(225, 225, 225)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">isin</text>
+</g></svg>
+<svg class="func_g" x="1098.415001190608" y="504" width="1.0896216597703363" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 0.34% (8000 8000 0.005644457 0.06663435000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="1098.415001190608" y="528" width="1.0896216597703359" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="1098.415001190608" y="552" width="1.0896216597703359" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="1098.415001190608" y="576" width="1.0896216597703359" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="1100.8574804431335" y="456" width="10.843889368457031" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 0.99% (12004 12004 0.016524161000000002 0.016524161000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="1100.8574804431335" y="480" width="10.843889368457031" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="1100.8574804431335" y="504" width="10.843889368457031" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="1100.8574804431335" y="528" width="10.843889368457031" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="1112.7013698115904" y="432" width="2.2913714544323347" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.empty&gt; 0.27% (12032 12032 0.004592001 0.004592001)</title>
+    <rect height="100%" width="100%" fill="rgb(198, 198, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.empty&gt;</text>
+</g></svg>
+<svg class="func_g" x="1112.702713740191" y="456" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/numeric.py:290:full 0.16% (4008 4008 0.002687091 0.002687091)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">full</text>
+</g></svg>
+<svg class="func_g" x="1112.702713740191" y="480" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:215:generate_experiment 0.68% (4000 4000 0.011309383000000001 0.014368028000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiment</text>
+</g></svg>
+<svg class="func_g" x="1112.702713740191" y="504" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:271:&lt;listcomp&gt; 6.37% (4000 4000 0.106696754 0.14173364500000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;listcomp&gt;</text>
+</g></svg>
+<svg class="func_g" x="1112.702713740191" y="528" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:252:generate_experiments 0.08% (4 4 0.0014042100000000001 0.145898583)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiments</text>
+</g></svg>
+<svg class="func_g" x="1112.702713740191" y="552" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 1.43% (4 4 0.023968291000000003 0.21275929200000002)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="1112.702713740191" y="576" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="1112.702713740191" y="600" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="1114.6287182451686" y="456" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:339:_unique1d 0.11% (8000 8000 0.001816993 0.001816993)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_unique1d</text>
+</g></svg>
+<svg class="func_g" x="1114.6287182451686" y="480" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:145:unique 2.03% (8000 8000 0.03395353 0.084489302)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">unique</text>
+</g></svg>
+<svg class="func_g" x="1114.6287182451686" y="504" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 0.39% (8000 8000 0.00647536 0.093940277)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="1114.6287182451686" y="528" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="1114.6287182451686" y="552" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="1114.6287182451686" y="576" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="1115.9977292122257" y="432" width="3.360100749106757" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.zeros&gt; 0.36% (12020 12020 0.006083053000000001 0.006083053000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(214, 214, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.zeros&gt;</text>
+</g></svg>
+<svg class="func_g" x="1116.0004177861886" y="456" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:862:_in1d 0.12% (8008 8008 0.0020716650000000003 0.0020716650000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_in1d</text>
+</g></svg>
+<svg class="func_g" x="1116.0004177861886" y="480" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:1015:isin 2.81% (8008 8008 0.047087154000000006 0.059395801000000005)</title>
+    <rect height="100%" width="100%" fill="rgb(225, 225, 225)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">isin</text>
+</g></svg>
+<svg class="func_g" x="1116.0129819231236" y="504" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 0.34% (8000 8000 0.005644457 0.06663435000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="1116.0129819231236" y="528" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="1116.0129819231236" y="552" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="1116.0129819231236" y="576" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="1117.4853083696503" y="456" width="1.8624274335598074" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:215:generate_experiment 0.24% (4000 4000 0.003993554 0.003993554)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiment</text>
+</g></svg>
+<svg class="func_g" x="1117.4853083696503" y="480" width="1.8624274335598074" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:271:&lt;listcomp&gt; 6.37% (4000 4000 0.106696754 0.14173364500000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;listcomp&gt;</text>
+</g></svg>
+<svg class="func_g" x="1117.4853083696503" y="504" width="1.8624274335598074" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:252:generate_experiments 0.08% (4 4 0.0014042100000000001 0.145898583)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiments</text>
+</g></svg>
+<svg class="func_g" x="1117.4853083696503" y="528" width="1.8624274335598074" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 1.43% (4 4 0.023968291000000003 0.21275929200000002)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="1117.4853083696503" y="552" width="1.8624274335598074" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="1117.4853083696503" y="576" width="1.8624274335598074" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="1121.609221014042" y="432" width="1.105572001803822" height="23"><g>
+    <title>~:0:&lt;method 'all' of 'numpy.ndarray' objects&gt; 0.18% (12162 12162 0.002937617 0.018300492)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'all' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1122.3215926935684" y="456" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 0.12% (8154 8154 0.001949664 0.012108943)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="1122.3215926935684" y="480" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="1122.3215926935684" y="504" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="1122.3215926935684" y="528" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="1123.7466043433894" y="432" width="2.5159587674677653" height="23"><g>
+    <title>~:0:&lt;method 'flatten' of 'numpy.ndarray' objects&gt; 0.29% (8000 8000 0.004905337 0.004905337)</title>
+    <rect height="100%" width="100%" fill="rgb(182, 182, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'flatten' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1123.7466043433894" y="456" width="2.5159587674677653" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:339:_unique1d 0.29% (8000 8000 0.004905337 0.004905337)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_unique1d</text>
+</g></svg>
+<svg class="func_g" x="1123.7466043433894" y="480" width="2.5159587674677653" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:145:unique 2.03% (8000 8000 0.03395353 0.084489302)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">unique</text>
+</g></svg>
+<svg class="func_g" x="1123.7466043433894" y="504" width="2.5159587674677653" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 0.39% (8000 8000 0.00647536 0.093940277)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="1123.7466043433894" y="528" width="2.5159587674677653" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="1123.7466043433894" y="552" width="2.5159587674677653" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="1123.7466043433894" y="576" width="2.5159587674677653" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="1127.527920558677" y="432" width="1.181818267829612" height="23"><g>
+    <title>~:0:&lt;method 'ravel' of 'numpy.ndarray' objects&gt; 0.18% (24020 24020 0.003043993 0.003043993)</title>
+    <rect height="100%" width="100%" fill="rgb(182, 182, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'ravel' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1127.528845181554" y="456" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:862:_in1d 0.12% (16016 16016 0.0019759120000000002 0.0019759120000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_in1d</text>
+</g></svg>
+<svg class="func_g" x="1127.528845181554" y="480" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:1015:isin 2.81% (8008 8008 0.047087154000000006 0.059395801000000005)</title>
+    <rect height="100%" width="100%" fill="rgb(225, 225, 225)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">isin</text>
+</g></svg>
+<svg class="func_g" x="1127.5408286001762" y="504" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 0.34% (8000 8000 0.005644457 0.06663435000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="1127.5408286001762" y="528" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="1127.5408286001762" y="552" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="1127.5408286001762" y="576" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="1129.799780609211" y="432" width="16.76667517279893" height="23"><g>
+    <title>~:0:&lt;method 'reduce' of 'numpy.ufunc' objects&gt; 1.48% (16219 16219 0.024787415 0.024787415)</title>
+    <rect height="100%" width="100%" fill="rgb(198, 198, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'reduce' of 'numpy.ufunc' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1129.799780609211" y="456" width="7.928244512606323" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/_methods.py:67:_all 0.74% (12162 12162 0.012456360000000001 0.012456360000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(232, 232, 232)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_all</text>
+</g></svg>
+<svg class="func_g" x="1129.799780609211" y="480" width="7.928244512606323" height="23"><g>
+    <title>~:0:&lt;method 'all' of 'numpy.ndarray' objects&gt; 0.17% (12162 12162 0.002906515 0.015362875000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'all' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1129.799780609211" y="504" width="2.0039149240734817" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/numeric.py:2475:array_equal 0.06% (4000 4000 0.00097816 0.006157215000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">array_equal</text>
+</g></svg>
+<svg class="func_g" x="1129.799780609211" y="528" width="2.0039149240734817" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 0.43% (4000 4000 0.0071863050000000005 0.014097784)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="1129.799780609211" y="552" width="2.0039149240734817" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="1129.799780609211" y="576" width="2.0039149240734817" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="1129.799780609211" y="600" width="2.0039149240734817" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="1132.8204460308718" y="504" width="4.907579090945356" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 0.12% (8154 8154 0.001949664 0.012108943)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="1132.8204460308718" y="528" width="4.907579090945356" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="1132.8204460308718" y="552" width="4.907579090945356" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="1132.8204460308718" y="576" width="4.907579090945356" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="1138.7280251218174" y="456" width="4.513899649044932" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/_methods.py:118:_mean 0.46% (16 16 0.007692791000000001 0.007692791000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_mean</text>
+</g></svg>
+<svg class="func_g" x="1138.8159466970733" y="480" width="4.425978073788933" height="23"><g>
+    <title>~:0:&lt;method 'mean' of 'numpy.ndarray' objects&gt; 0.01% (8 8 8.675000000000001e-05 0.007822291)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'mean' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1138.8159466970733" y="504" width="4.425978073788933" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 0.00% (8 8 2.1085000000000002e-05 0.007843376)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="1138.8159466970733" y="528" width="4.425978073788933" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="1138.8159466970733" y="552" width="4.425978073788934" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="1138.8159466970733" y="576" width="4.425978073788934" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="1144.2419247708622" y="456" width="2.324531011147675" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/fromnumeric.py:69:_wrapreduction 0.28% (4041 4041 0.0046382640000000004 0.0046382640000000004)</title>
+    <rect height="100%" width="100%" fill="rgb(232, 232, 232)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_wrapreduction</text>
+</g></svg>
+<svg class="func_g" x="1144.4047244837186" y="480" width="2.1617312982910555" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/fromnumeric.py:3328:prod 0.25% (4000 4000 0.0042061780000000005 0.011925283)</title>
+    <rect height="100%" width="100%" fill="rgb(225, 225, 225)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">prod</text>
+</g></svg>
+<svg class="func_g" x="1144.4047244837186" y="504" width="2.1617312982910555" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:215:generate_experiment 0.12% (4000 4000 0.0020167740000000003 0.013942057)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiment</text>
+</g></svg>
+<svg class="func_g" x="1144.4047244837186" y="528" width="2.1617312982910555" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:271:&lt;listcomp&gt; 6.37% (4000 4000 0.106696754 0.14173364500000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;listcomp&gt;</text>
+</g></svg>
+<svg class="func_g" x="1144.4047244837186" y="552" width="2.1617312982910555" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:252:generate_experiments 0.08% (4 4 0.0014042100000000001 0.145898583)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiments</text>
+</g></svg>
+<svg class="func_g" x="1144.4047244837186" y="576" width="2.1617312982910555" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 1.43% (4 4 0.023968291000000003 0.21275929200000002)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="1144.4047244837186" y="600" width="2.1617312982910555" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="1144.4047244837186" y="624" width="2.1617312982910555" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="1149.120522491916" y="432" width="18.645932465339584" height="23"><g>
+    <title>~:0:&lt;method 'set' of '_contextvars.ContextVar' objects&gt; 1.64% (4038 4038 0.027409286 0.027409286)</title>
+    <rect height="100%" width="100%" fill="rgb(198, 198, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'set' of '_contextvars.ContextVar' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1149.1307979908045" y="456" width="18.635656966451247" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/_ufunc_config.py:464:inner 1.64% (4013 4013 0.02739495 0.02739495)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">inner</text>
+</g></svg>
+<svg class="func_g" x="1149.1307979908045" y="480" width="18.57424553992186" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src/dgps.py:252:generate_experiments 0.73% (4000 4000 0.012165015000000001 0.040492981000000004)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_experiments</text>
+</g></svg>
+<svg class="func_g" x="1149.1307979908045" y="504" width="18.57424553992186" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 1.43% (4 4 0.023968291000000003 0.21275929200000002)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="1149.1307979908045" y="528" width="18.57424553992186" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="1149.1307979908045" y="552" width="18.57424553992186" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+<svg class="func_g" x="1168.7683665612967" y="432" width="30.027623643635277" height="23"><g>
+    <title>~:0:&lt;method 'sort' of 'numpy.ndarray' objects&gt; 2.59% (8000 8000 0.043288605 0.043288605)</title>
+    <rect height="100%" width="100%" fill="rgb(198, 198, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'sort' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="1168.7683665612967" y="456" width="30.027623643635277" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:339:_unique1d 2.59% (8000 8000 0.043288605 0.043288605)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_unique1d</text>
+</g></svg>
+<svg class="func_g" x="1168.7683665612967" y="480" width="30.027623643635277" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:145:unique 2.03% (8000 8000 0.03395353 0.084489302)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">unique</text>
+</g></svg>
+<svg class="func_g" x="1168.7683665612967" y="504" width="30.027623643635277" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:264:generate_parameter_estimates 0.39% (8000 8000 0.00647536 0.093940277)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="1168.7683665612967" y="528" width="30.027623643635277" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:34:run_simulation 72.08% (4 4 1.206707683 1.430888084)</title>
+    <rect height="100%" width="100%" fill="rgb(211, 211, 211)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_simulation</text>
+</g></svg>
+<svg class="func_g" x="1168.7683665612967" y="552" width="30.027623643635277" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:90:run_multiple_simulations 0.05% (4 4 0.0008561640000000001 1.6721985410000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_multiple_simulations</text>
+</g></svg>
+<svg class="func_g" x="1168.7683665612967" y="576" width="30.027623643635277" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/simulation.py:121:run_from_config 0.07% (1 1 0.001252627 1.67412475)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">run_from_config</text>
+</g></svg>
+</svg>
