@@ -17,7 +17,7 @@ from src_optimized.non_vectorized_simulation import (
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PROFILES_DIR = PROJECT_ROOT / "profiles"
+PROFILES_DIR = PROJECT_ROOT / "performance_results" / "benchmarks"
 
 TIMINGS_PATH = PROFILES_DIR / "benchmark_comparison_timings.csv"
 SUMMARY_PATH = PROFILES_DIR / "benchmark_comparison_summary.txt"

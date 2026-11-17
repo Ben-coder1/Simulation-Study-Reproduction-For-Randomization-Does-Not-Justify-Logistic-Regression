@@ -20,7 +20,7 @@ import src_optimized.non_vectorized_simulation as non_vectorized_module
 # Assumes this script is one directory below the project root.
 # If saved directly in the project root, use .parent instead.
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PROFILES_DIR = PROJECT_ROOT / "profiles"
+PROFILES_DIR = PROJECT_ROOT / "performance_results" / "numerical_stability"
 
 CSV_PATH = PROFILES_DIR / "convergence_comparisons_results.csv"
 SUMMARY_PATH = PROFILES_DIR / "convergence_comparisons_summary.txt"

@@ -49,8 +49,10 @@ Using the assignment coefficient from logistic regression is biased when the dat
 | `make analyze` | Runs analysis. |
 | `make figures` | Creates the figures. |
 | `make benchmark` | Benchmarks the original, vectorized, and non-vectorized pipelines. |
-| `make performance` | Writes a full timing grid and a faceted timing plot by population size. |
+| `make timing` | Writes a full timing grid and a faceted timing plot by population size. |
 | `make memory` | Writes a full peak-Python-memory grid and a matching faceted memory plot. |
+| `make base_profiler` | Profiles the original simulation. |
+| `make optimized_profiler` | Profiles the optimized simulation. |
 
 # AI Use
 

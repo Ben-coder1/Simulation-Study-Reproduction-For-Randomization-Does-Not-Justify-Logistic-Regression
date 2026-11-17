@@ -4,11 +4,10 @@ import subprocess
 import sys
 from pathlib import Path
 
-from configuration_optimized import RESULTS_DIR
 from src_optimized.simulation import run_from_config
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PROFILE_DIR = PROJECT_ROOT / "profiles" / "optimized"
+PROFILE_DIR = PROJECT_ROOT / "performance_results" / "profiles" / "optimized"
 PROFILE_LOCATION = PROFILE_DIR / "optimized_simulation.prof"
 REPORT_LOCATION = PROFILE_DIR / "optimized_simulation_profile.txt"
 FLAME_GRAPH_LOCATION = PROFILE_DIR / "optimized_simulation_flamegraph.svg"

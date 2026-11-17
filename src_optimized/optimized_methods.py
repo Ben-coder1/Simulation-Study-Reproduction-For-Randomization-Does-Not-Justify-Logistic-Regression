@@ -84,148 +84,172 @@ class fast_LogitModelEstimator(ModelParameterEstimator):
         self,
         experiment_results: list[ExperimentResults],
     ) -> tuple[np.ndarray, np.ndarray]:
-        E = len(experiment_results)
-        if E == 0:
+        n_experiments = len(experiment_results)
+        if n_experiments == 0:
             return np.array([]), np.array([])
 
         # Covariates are shared across experiments.
-        C = np.asarray(
+        shared_covariates = np.asarray(
             experiment_results[0].covariates, dtype=np.float64
         )
-        if C.ndim == 1:
-            C = C.reshape(-1, 1)
-        if C.ndim != 2:
+        if shared_covariates.ndim == 1:
+            shared_covariates = shared_covariates.reshape(-1, 1)
+        if shared_covariates.ndim != 2:
             raise ValueError("Covariates must be a 1D or 2D array.")
-        if not np.isfinite(C).all():
+        if not np.isfinite(shared_covariates).all():
             raise ValueError("Covariates must be finite.")
 
-        n, k = C.shape
-        if n == 0:
+        n_individuals, n_covariates = shared_covariates.shape
+        if n_individuals == 0:
             raise ValueError("Experiments must contain observations.")
 
-        A = np.empty((E, n), dtype=np.float64)
-        Y = np.empty((E, n), dtype=np.float64)
+        assignment_matrix = np.empty(
+            (n_experiments, n_individuals), dtype=np.float64
+        )
+        outcome_matrix = np.empty(
+            (n_experiments, n_individuals), dtype=np.float64
+        )
 
-        for idx, result in enumerate(experiment_results):
-            C_i = np.asarray(result.covariates, dtype=np.float64)
-            if C_i.ndim == 1:
-                C_i = C_i.reshape(-1, 1)
+        for experiment_index, experiment_result in enumerate(experiment_results):
+            experiment_covariates = np.asarray(
+                experiment_result.covariates, dtype=np.float64
+            )
+            if experiment_covariates.ndim == 1:
+                experiment_covariates = experiment_covariates.reshape(-1, 1)
 
-            if not np.array_equal(C_i, C):
+            if not np.array_equal(experiment_covariates, shared_covariates):
                 raise ValueError(
-                    f"Experiment {idx}: covariates must match the "
+                    f"Experiment {experiment_index}: covariates must match the "
                     "first experiment, including row ordering."
                 )
 
-            a = np.asarray(
-                result.assignments, dtype=np.float64
+            assignments = np.asarray(
+                experiment_result.assignments, dtype=np.float64
             ).ravel()
-            y = np.asarray(
-                result.outcomes, dtype=np.float64
+            outcomes = np.asarray(
+                experiment_result.outcomes, dtype=np.float64
             ).ravel()
 
-            if a.size != n or y.size != n:
+            if assignments.size != n_individuals or outcomes.size != n_individuals:
                 raise ValueError(
-                    f"Experiment {idx}: covariates, assignments, and "
+                    f"Experiment {experiment_index}: covariates, assignments, and "
                     "outcomes must have the same observation count."
                 )
 
             # Assignments are assumed to be binary, as guaranteed upstream.
-            if not np.isin(y, (0, 1)).all():
+            if not np.isin(outcomes, (0, 1)).all():
                 raise ValueError(
-                    f"Experiment {idx}: outcomes must contain only 0 and 1."
+                    f"Experiment {experiment_index}: outcomes must contain only 0 and 1."
                 )
 
             for group in (0, 1):
-                group_y = y[a == group]
+                group_outcomes = outcomes[assignments == group]
                 if not (
-                    np.any(group_y == 0) and np.any(group_y == 1)
+                    np.any(group_outcomes == 0) and np.any(group_outcomes == 1)
                 ):
                     raise ValueError(
-                        f"Experiment {idx}: assignment group {group} "
+                        f"Experiment {experiment_index}: assignment group {group} "
                         "must contain at least one outcome 0 and "
                         "at least one outcome 1."
                     )
 
-            A[idx] = a
-            Y[idx] = y
+            assignment_matrix[experiment_index] = assignments
+            outcome_matrix[experiment_index] = outcomes
 
         # No padding: every experiment has the same sample size.
-        p = k + 2
-        X = np.empty((E, n, p), dtype=np.float64)
-        X[:, :, 0] = 1.0
-        X[:, :, 1] = A
-        X[:, :, 2:] = C[None, :, :]
+        n_parameters = n_covariates + 2
+        design_matrices = np.empty(
+            (n_experiments, n_individuals, n_parameters), dtype=np.float64
+        )
+        design_matrices[:, :, 0] = 1.0
+        design_matrices[:, :, 1] = assignment_matrix
+        design_matrices[:, :, 2:] = shared_covariates[None, :, :]
 
-        beta = np.zeros((E, p), dtype=np.float64)
-        active = np.arange(E)
+        coefficient_matrix = np.zeros(
+            (n_experiments, n_parameters), dtype=np.float64
+        )
+        active_experiment_indices = np.arange(n_experiments)
 
         for _ in range(self.max_iter):
-            if active.size == 0:
+            if active_experiment_indices.size == 0:
                 break
 
-            Xa = X[active]
-            ya = Y[active]
-            ba = beta[active]
+            active_design_matrices = design_matrices[active_experiment_indices]
+            active_outcomes = outcome_matrix[active_experiment_indices]
+            active_coefficients = coefficient_matrix[active_experiment_indices]
 
-            eta = (Xa @ ba[..., None])[..., 0]
-            mu = expit(eta)
+            linear_predictors = (
+                active_design_matrices @ active_coefficients[..., None]
+            )[..., 0]
+            fitted_probabilities = expit(linear_predictors)
 
-            XT = Xa.transpose(0, 2, 1)
-            grad = (XT @ (ya - mu)[..., None])[..., 0]
-            weights = mu * (1.0 - mu)
-            H = (XT * weights[:, None, :]) @ Xa
+            transposed_design_matrices = active_design_matrices.transpose(0, 2, 1)
+            score_vectors = (
+                transposed_design_matrices
+                @ (active_outcomes - fitted_probabilities)[..., None]
+            )[..., 0]
+            logistic_weights = fitted_probabilities * (1.0 - fitted_probabilities)
+            hessian_matrices = (
+                transposed_design_matrices * logistic_weights[:, None, :]
+            ) @ active_design_matrices
 
-            finite = (
-                np.isfinite(H).all(axis=(1, 2))
-                & np.isfinite(grad).all(axis=1)
+            are_finite = (
+                np.isfinite(hessian_matrices).all(axis=(1, 2))
+                & np.isfinite(score_vectors).all(axis=1)
             )
-            if not finite.all():
+            if not are_finite.all():
                 raise LogitEstimationError(
                     "Nonfinite gradient or Hessian in experiments "
-                    f"{active[~finite].tolist()}."
+                    f"{active_experiment_indices[~are_finite].tolist()}."
                 )
 
             try:
-                delta = np.linalg.solve(H, grad[..., None])[..., 0]
-            except np.linalg.LinAlgError as exc:
+                newton_steps = np.linalg.solve(
+                    hessian_matrices, score_vectors[..., None]
+                )[..., 0]
+            except np.linalg.LinAlgError as error:
                 # Identify the failing experiments for a useful error.
-                failed = []
-                for j, idx in enumerate(active):
+                failed_experiment_indices = []
+                for active_position, experiment_index in enumerate(
+                    active_experiment_indices
+                ):
                     try:
-                        np.linalg.solve(H[j], grad[j])
+                        np.linalg.solve(
+                            hessian_matrices[active_position],
+                            score_vectors[active_position],
+                        )
                     except np.linalg.LinAlgError:
-                        failed.append(int(idx))
+                        failed_experiment_indices.append(int(experiment_index))
 
                 raise LogitEstimationError(
-                    f"Singular Hessian in experiments {failed}. "
+                    f"Singular Hessian in experiments {failed_experiment_indices}. "
                     "Possible collinearity or separation."
-                ) from exc
+                ) from error
 
-            updated = ba + delta
-            finite = (
-                np.isfinite(delta).all(axis=1)
-                & np.isfinite(updated).all(axis=1)
+            updated_coefficients = active_coefficients + newton_steps
+            are_finite = (
+                np.isfinite(newton_steps).all(axis=1)
+                & np.isfinite(updated_coefficients).all(axis=1)
             )
-            if not finite.all():
+            if not are_finite.all():
                 raise LogitEstimationError(
                     "Nonfinite Newton update in experiments "
-                    f"{active[~finite].tolist()}."
+                    f"{active_experiment_indices[~are_finite].tolist()}."
                 )
 
-            beta[active] = updated
+            coefficient_matrix[active_experiment_indices] = updated_coefficients
 
-            converged = np.max(np.abs(delta), axis=1) <= self.tol
-            active = active[~converged]
+            has_converged = np.max(np.abs(newton_steps), axis=1) <= self.tol
+            active_experiment_indices = active_experiment_indices[~has_converged]
 
-        if active.size:
+        if active_experiment_indices.size:
             raise LogitEstimationError(
-                f"Experiments {active.tolist()} did not converge "
+                f"Experiments {active_experiment_indices.tolist()} did not converge "
                 f"within {self.max_iter} iterations. Possible separation "
                 "or numerical instability."
             )
 
-        return beta[:, 1].copy(), beta
+        return coefficient_matrix[:, 1].copy(), coefficient_matrix
 
 class fast_LogitModelPlugIn(ModelParameterEstimator):
     def __init__(self, max_iter: int = 35, tol: float = 1e-8):
@@ -241,180 +265,216 @@ class fast_LogitModelPlugIn(ModelParameterEstimator):
         self,
         experiment_results: list[ExperimentResults],
     ) -> tuple[np.ndarray, np.ndarray]:
-        E = len(experiment_results)
-        if E == 0:
+        n_experiments = len(experiment_results)
+        if n_experiments == 0:
             return np.array([]), np.array([])
 
-        C = np.asarray(
+        shared_covariates = np.asarray(
             experiment_results[0].covariates,
             dtype=np.float64,
         )
-        if C.ndim == 1:
-            C = C.reshape(-1, 1)
-        if C.ndim != 2:
+        if shared_covariates.ndim == 1:
+            shared_covariates = shared_covariates.reshape(-1, 1)
+        if shared_covariates.ndim != 2:
             raise ValueError("Covariates must be a 1D or 2D array.")
-        if not np.isfinite(C).all():
+        if not np.isfinite(shared_covariates).all():
             raise ValueError("Covariates must be finite.")
 
-        n, k = C.shape
-        p = k + 2
+        n_individuals, n_covariates = shared_covariates.shape
+        n_parameters = n_covariates + 2
 
-        A = np.empty((E, n), dtype=np.float64)
-        Y = np.empty((E, n), dtype=np.float64)
-        valid = np.ones(E, dtype=bool)
+        assignment_matrix = np.empty(
+            (n_experiments, n_individuals), dtype=np.float64
+        )
+        outcome_matrix = np.empty(
+            (n_experiments, n_individuals), dtype=np.float64
+        )
+        valid_experiment_mask = np.ones(n_experiments, dtype=bool)
 
         # Input preparation; expensive fitting operations are batched below.
-        for idx, result in enumerate(experiment_results):
-            C_i = np.asarray(result.covariates, dtype=np.float64)
-            if C_i.ndim == 1:
-                C_i = C_i.reshape(-1, 1)
+        for experiment_index, experiment_result in enumerate(experiment_results):
+            experiment_covariates = np.asarray(
+                experiment_result.covariates, dtype=np.float64
+            )
+            if experiment_covariates.ndim == 1:
+                experiment_covariates = experiment_covariates.reshape(-1, 1)
 
-            if not np.array_equal(C_i, C):
+            if not np.array_equal(experiment_covariates, shared_covariates):
                 raise ValueError(
-                    f"Experiment {idx}: covariates must match the first "
+                    f"Experiment {experiment_index}: covariates must match the first "
                     "experiment, including row ordering."
                 )
 
-            a = np.asarray(
-                result.assignments, dtype=np.float64
+            assignments = np.asarray(
+                experiment_result.assignments, dtype=np.float64
             ).ravel()
-            y = np.asarray(
-                result.outcomes, dtype=np.float64
+            outcomes = np.asarray(
+                experiment_result.outcomes, dtype=np.float64
             ).ravel()
 
-            if a.size != n or y.size != n:
+            if assignments.size != n_individuals or outcomes.size != n_individuals:
                 raise ValueError(
                     "Covariates, assignments, and outcomes must have "
                     "the same number of observations."
                 )
 
-            if not np.isin(a, (0, 1)).all():
+            if not np.isin(assignments, (0, 1)).all():
                 raise ValueError("Assignments must contain only 0 and 1.")
 
-            if not np.isin(y, (0, 1)).all():
+            if not np.isin(outcomes, (0, 1)).all():
                 raise ValueError("Outcomes must contain only 0 and 1.")
 
-            A[idx] = a
-            Y[idx] = y
+            assignment_matrix[experiment_index] = assignments
+            outcome_matrix[experiment_index] = outcomes
 
-            if np.unique(y).size < 2:
+            if np.unique(outcomes).size < 2:
                 warnings.warn(
                     "Outcomes must include both 0 and 1. Returning NaN.",
                     RuntimeWarning,
                     stacklevel=2,
                 )
-                valid[idx] = False
+                valid_experiment_mask[experiment_index] = False
 
-            elif np.unique(a).size < 2:
+            elif np.unique(assignments).size < 2:
                 warnings.warn(
                     "Assignments must include both treated and control "
                     "observations. Returning nans.",
                     UserWarning,
                     stacklevel=2,
                 )
-                valid[idx] = False
+                valid_experiment_mask[experiment_index] = False
 
-        beta = np.full((E, p), np.nan, dtype=np.float64)
-        plug_in_estimates = np.full(E, np.nan, dtype=np.float64)
+        coefficient_matrix = np.full(
+            (n_experiments, n_parameters), np.nan, dtype=np.float64
+        )
+        plug_in_estimates = np.full(
+            n_experiments, np.nan, dtype=np.float64
+        )
 
-        valid_idx = np.flatnonzero(valid)
-        if valid_idx.size == 0:
-            return plug_in_estimates, beta
+        valid_experiment_indices = np.flatnonzero(valid_experiment_mask)
+        if valid_experiment_indices.size == 0:
+            return plug_in_estimates, coefficient_matrix
 
         # Pack only valid experiments; no padding is needed.
-        V = valid_idx.size
-        X = np.empty((V, n, p), dtype=np.float64)
-        X[:, :, 0] = 1.0
-        X[:, :, 1] = A[valid_idx]
-        X[:, :, 2:] = C[None, :, :]
+        n_valid_experiments = valid_experiment_indices.size
+        design_matrices = np.empty(
+            (n_valid_experiments, n_individuals, n_parameters),
+            dtype=np.float64,
+        )
+        design_matrices[:, :, 0] = 1.0
+        design_matrices[:, :, 1] = assignment_matrix[valid_experiment_indices]
+        design_matrices[:, :, 2:] = shared_covariates[None, :, :]
 
-        y_valid = Y[valid_idx]
-        b = np.zeros((V, p), dtype=np.float64)
-        active = np.arange(V)
+        valid_outcomes = outcome_matrix[valid_experiment_indices]
+        valid_coefficients = np.zeros(
+            (n_valid_experiments, n_parameters), dtype=np.float64
+        )
+        active_valid_indices = np.arange(n_valid_experiments)
 
         # Batched Newton–Raphson.
         for _ in range(self.max_iter):
-            if active.size == 0:
+            if active_valid_indices.size == 0:
                 break
 
-            Xa = X[active]
-            ya = y_valid[active]
-            ba = b[active]
+            active_design_matrices = design_matrices[active_valid_indices]
+            active_outcomes = valid_outcomes[active_valid_indices]
+            active_coefficients = valid_coefficients[active_valid_indices]
 
-            eta = (Xa @ ba[..., None])[..., 0]
-            mu = expit(eta)
+            linear_predictors = (
+                active_design_matrices @ active_coefficients[..., None]
+            )[..., 0]
+            fitted_probabilities = expit(linear_predictors)
 
-            XT = Xa.transpose(0, 2, 1)
-            grad = (XT @ (ya - mu)[..., None])[..., 0]
-            weights = mu * (1.0 - mu)
-            H = (XT * weights[:, None, :]) @ Xa
+            transposed_design_matrices = active_design_matrices.transpose(0, 2, 1)
+            score_vectors = (
+                transposed_design_matrices
+                @ (active_outcomes - fitted_probabilities)[..., None]
+            )[..., 0]
+            logistic_weights = fitted_probabilities * (1.0 - fitted_probabilities)
+            hessian_matrices = (
+                transposed_design_matrices * logistic_weights[:, None, :]
+            ) @ active_design_matrices
 
-            finite = (
-                np.isfinite(grad).all(axis=1)
-                & np.isfinite(H).all(axis=(1, 2))
+            are_finite = (
+                np.isfinite(score_vectors).all(axis=1)
+                & np.isfinite(hessian_matrices).all(axis=(1, 2))
             )
-            if not finite.all():
+            if not are_finite.all():
                 raise RuntimeError(
                     "Nonfinite gradient or Hessian in experiments "
-                    f"{valid_idx[active[~finite]].tolist()}."
+                    f"{valid_experiment_indices[active_valid_indices[~are_finite]].tolist()}."
                 )
 
             try:
-                delta = np.linalg.solve(H, grad[..., None])[..., 0]
-            except np.linalg.LinAlgError as exc:
-                failed = []
-                for j, local_idx in enumerate(active):
+                newton_steps = np.linalg.solve(
+                    hessian_matrices, score_vectors[..., None]
+                )[..., 0]
+            except np.linalg.LinAlgError as error:
+                failed_experiment_indices = []
+                for active_position, valid_position in enumerate(
+                    active_valid_indices
+                ):
                     try:
-                        np.linalg.solve(H[j], grad[j])
+                        np.linalg.solve(
+                            hessian_matrices[active_position],
+                            score_vectors[active_position],
+                        )
                     except np.linalg.LinAlgError:
-                        failed.append(int(valid_idx[local_idx]))
+                        failed_experiment_indices.append(
+                            int(valid_experiment_indices[valid_position])
+                        )
 
                 raise RuntimeError(
-                    f"Singular Hessian in experiments {failed}. "
+                    f"Singular Hessian in experiments {failed_experiment_indices}. "
                     "Possible collinearity or separation."
-                ) from exc
+                ) from error
 
-            updated = ba + delta
-            finite = (
-                np.isfinite(delta).all(axis=1)
-                & np.isfinite(updated).all(axis=1)
+            updated_coefficients = active_coefficients + newton_steps
+            are_finite = (
+                np.isfinite(newton_steps).all(axis=1)
+                & np.isfinite(updated_coefficients).all(axis=1)
             )
-            if not finite.all():
+            if not are_finite.all():
                 raise RuntimeError(
                     "Nonfinite Newton update in experiments "
-                    f"{valid_idx[active[~finite]].tolist()}."
+                    f"{valid_experiment_indices[active_valid_indices[~are_finite]].tolist()}."
                 )
 
-            b[active] = updated
+            valid_coefficients[active_valid_indices] = updated_coefficients
 
             # Converged fits do not participate in subsequent iterations.
-            converged = np.max(np.abs(delta), axis=1) <= self.tol
-            active = active[~converged]
+            has_converged = np.max(np.abs(newton_steps), axis=1) <= self.tol
+            active_valid_indices = active_valid_indices[~has_converged]
 
-        if active.size:
+        if active_valid_indices.size:
             raise LogitEstimationError(
-                f"Experiments {valid_idx[active].tolist()} did not converge "
+                f"Experiments {valid_experiment_indices[active_valid_indices].tolist()} did not converge "
                 f"within {self.max_iter} iterations. Possible separation "
                 "or numerical instability."
             )
 
-        beta[valid_idx] = b
+        coefficient_matrix[valid_experiment_indices] = valid_coefficients
 
         # Counterfactual predictions, shape (V, n).
-        control_eta = b[:, 0, None] + b[:, 2:] @ C.T
-        treated_eta = control_eta + b[:, 1, None]
-
-        treatment_rate = expit(treated_eta).mean(axis=1)
-        control_rate = expit(control_eta).mean(axis=1)
-
-        boundary = (
-            (treatment_rate == 0.0)
-            | (treatment_rate == 1.0)
-            | (control_rate == 0.0)
-            | (control_rate == 1.0)
+        control_linear_predictors = (
+            valid_coefficients[:, 0, None]
+            + valid_coefficients[:, 2:] @ shared_covariates.T
+        )
+        treated_linear_predictors = (
+            control_linear_predictors + valid_coefficients[:, 1, None]
         )
 
-        for _ in valid_idx[boundary]:
+        treatment_success_rates = expit(treated_linear_predictors).mean(axis=1)
+        control_success_rates = expit(control_linear_predictors).mean(axis=1)
+
+        boundary_rate_mask = (
+            (treatment_success_rates == 0.0)
+            | (treatment_success_rates == 1.0)
+            | (control_success_rates == 0.0)
+            | (control_success_rates == 1.0)
+        )
+
+        for _experiment_index in valid_experiment_indices[boundary_rate_mask]:
             warnings.warn(
                 "Success rate is 0 or 1 in treatment or control group "
                 "in experiment. Log-odds calculation is undefined or "
@@ -423,13 +483,13 @@ class fast_LogitModelPlugIn(ModelParameterEstimator):
                 stacklevel=2,
             )
 
-        interior = ~boundary
-        plug_in_estimates[valid_idx[interior]] = (
-            logit(treatment_rate[interior])
-            - logit(control_rate[interior])
+        interior_rate_mask = ~boundary_rate_mask
+        plug_in_estimates[valid_experiment_indices[interior_rate_mask]] = (
+            logit(treatment_success_rates[interior_rate_mask])
+            - logit(control_success_rates[interior_rate_mask])
         )
 
-        return plug_in_estimates, beta
+        return plug_in_estimates, coefficient_matrix
 
 
 PARAMETER_ESTIMATORS = {

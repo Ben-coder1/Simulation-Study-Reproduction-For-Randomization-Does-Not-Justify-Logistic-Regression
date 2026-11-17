@@ -1,0 +1,13 @@
+repeat,first_version,method,runtime_seconds
+1,original,original,5.411478
+1,original,optimized,0.697280
+1,original,non_vectorized,2.841938
+2,optimized,original,5.399570
+2,optimized,optimized,0.689708
+2,optimized,non_vectorized,2.843136
+3,non_vectorized,original,5.410573
+3,non_vectorized,optimized,0.725801
+3,non_vectorized,non_vectorized,2.856140
+4,original,original,5.392079
+4,original,optimized,0.728670
+4,original,non_vectorized,2.827473

@@ -15,7 +15,7 @@ N_INDIVIDUALS = range(1000, 15001, 1000)
 
 # This script is one directory below the project root.
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PROFILES_DIR = PROJECT_ROOT / "profiles"
+PROFILES_DIR = PROJECT_ROOT / "performance_results" / "runtime"
 PROFILES_DIR.mkdir(parents=True, exist_ok=True)
 
 CSV_PATH = PROFILES_DIR / "runtime_by_individuals.csv"

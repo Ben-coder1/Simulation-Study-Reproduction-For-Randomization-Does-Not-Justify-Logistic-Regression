@@ -4,11 +4,10 @@ import subprocess
 import sys
 from pathlib import Path
 
-from configuration import RESULTS_DIR
 from src.simulation import run_from_config
 
 
-PROFILE_DIR = Path(RESULTS_DIR) / "profiling"
+PROFILE_DIR = Path(__file__).resolve().parents[1] / "performance_results" / "profiles" / "base"
 PROFILE_LOCATION = PROFILE_DIR / "simulation.prof"
 REPORT_LOCATION = PROFILE_DIR / "simulation_profile.txt"
 FLAME_GRAPH_LOCATION = PROFILE_DIR / "simulation_flamegraph.svg"

@@ -24,11 +24,11 @@ from src_optimized.non_vectorized_simulation import (
 # Assumes this script is one directory below the project root.
 # If saved directly in the project root, use .parent instead.
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PROFILES_DIR = PROJECT_ROOT / "profiles"
+PROFILES_DIR = PROJECT_ROOT / "performance_results" / "runtime"
 
-TIMINGS_PATH = PROFILES_DIR / "performance_comparisons_timings.csv"
-SUMMARY_PATH = PROFILES_DIR / "performance_comparisons_summary.txt"
-PLOT_PATH = PROFILES_DIR / "performance_comparisons.png"
+TIMINGS_PATH = PROFILES_DIR / "timing_comparisons_timings.csv"
+SUMMARY_PATH = PROFILES_DIR / "timing_comparisons_summary.txt"
+PLOT_PATH = PROFILES_DIR / "timing_comparisons.png"
 
 CSV_FIELDS = [
     "n_individuals",
@@ -138,7 +138,7 @@ def collect_runtime_data(
     comparison_number = 0
 
     with (
-        TemporaryDirectory(prefix="performance_comparisons_") as temp_dir,
+        TemporaryDirectory(prefix="timing_comparisons_") as temp_dir,
         csv_path.open("w", newline="", encoding="utf-8") as file,
     ):
         writer = csv.DictWriter(file, fieldnames=CSV_FIELDS)
@@ -163,7 +163,7 @@ def collect_runtime_data(
 
                     for name, module, run_function in run_order:
                         print(
-                            f"\nPerformance comparisons — {name}: "
+                            f"\nTiming comparisons — {name}: "
                             f"{n_individuals:,} individuals, "
                             f"{n_experiments:,} experiments, "
                             f"repeat {repeat + 1}/{repeats}"
@@ -276,7 +276,7 @@ def graph_runtime_data(
 
     # Write the summary before generating figures.
     lines = [
-        "Performance comparisons — simulation implementations",
+        "Timing comparisons — simulation implementations",
         "",
         "Times include generation, estimation, and pickle serialization.",
         "Reported times are medians across successful repeats.",
@@ -387,7 +387,7 @@ def graph_runtime_data(
             bbox_to_anchor=(0.5, 0.93),
         )
     fig.suptitle(
-        "Performance comparisons — simulation implementations"
+        "Timing comparisons — simulation implementations"
     )
     fig.tight_layout(rect=(0, 0, 1, 0.88))
     fig.savefig(plot_path, dpi=200)

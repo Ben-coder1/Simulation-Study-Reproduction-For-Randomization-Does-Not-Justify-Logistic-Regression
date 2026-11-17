@@ -26,7 +26,7 @@ from src_optimized.simulation import run_from_config as run_optimized_simulation
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
-PROFILES_DIR = PROJECT_ROOT / "profiles"
+PROFILES_DIR = PROJECT_ROOT / "performance_results" / "memory"
 MEMORY_PATH = PROFILES_DIR / "memory_comparisons_grid.csv"
 SUMMARY_PATH = PROFILES_DIR / "memory_comparisons_summary.txt"
 PLOT_PATH = PROFILES_DIR / "memory_comparisons.png"
