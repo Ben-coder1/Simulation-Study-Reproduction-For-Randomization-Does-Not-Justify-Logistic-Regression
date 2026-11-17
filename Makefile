@@ -47,3 +47,7 @@ memory:
 
 optimized_validation:
 	python -m pytest -s tests/test_method_optimized.py
+
+stability_check:
+	python -m profiling.numerical_stability
+

@@ -1,23 +1,39 @@
 Convergence comparisons — simulation implementations
 
-Includes existing configured runs and the performance grid.
+Includes existing configured runs and an additional size grid.
 Grid individual counts: (100, 500, 1000, 5000)
 Grid experiment counts: (10, 50, 100, 250, 500, 1000, 2000)
 Grid repeats: 5
-Grid seeds: 12345 through 12349
+Grid seeds: 12345 through 12484
 
-Grid seeds and run-order rotation match the performance script.
+Grid sizes, DGP settings, repeats, and run-order rotation
+match the supplied performance comparison.
+Each grid configuration/repeat uses a distinct seed, shared
+across the three implementations.
+Seed formula: BASE_SEED + configuration_index * REPEATS + repeat
+Here configuration_index and repeat are zero-based.
+These grid seeds differ from the original performance script
+after the first configuration unless its formula is updated.
 Matching seeds do not guarantee identical data across
 implementations if their RNG usage differs.
+Distinct seeds do not by themselves prove statistical independence.
 
-Passed means no detected nonconvergence, caught error, or
-nonfinite output. Other warnings are reported separately.
-Separation flags reflect estimator messages, not a dedicated
-complete/quasi-complete separation test.
+Statuses describe entire pipeline runs, not counts or percentages
+of experiments that failed to converge.
+Passed means no recognized nonconvergence, caught error, or
+nonfinite checked output was detected.
+Silent fitting failures may not be detected by this wrapper.
+Other warnings are reported separately and do not necessarily
+change a passed status.
+Separation flags reflect explicit diagnostic mentions, not a
+dedicated complete/quasi-complete separation test.
+A separation warning alone does not change a passed status.
 Experiment indices in diagnostics are zero-based.
 A failed batch may stop before all experiments are diagnosed.
-Configured runs preserve the full configuration list and RNG
-spawning; an exception may stop that configured pipeline.
+The wrapper uses each implementation's fitting defaults; it
+does not enforce matching tolerances or iteration limits.
+Configured runs preserve each module's configuration list, seed,
+and normal RNG spawning; an exception may stop that pipeline.
 Runtime includes the pipeline and diagnostic checks and is
 not intended to replace the performance benchmark.
 
@@ -51,848 +67,954 @@ non_vectorized, seed=100:
 
 All run results:
 
-config / original: individuals=None, experiments=None, repeat=1, seed=100, status=passed, runtime=8.7005s
+config / original: individuals=None, experiments=None, repeat=1, seed=100, status=passed, runtime=5.4305s
 
-config / optimized: individuals=None, experiments=None, repeat=1, seed=100, status=passed, runtime=4.1360s
+config / optimized: individuals=None, experiments=None, repeat=1, seed=100, status=passed, runtime=0.7858s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-config / non_vectorized: individuals=None, experiments=None, repeat=1, seed=100, status=passed, runtime=5.3847s
+config / non_vectorized: individuals=None, experiments=None, repeat=1, seed=100, status=passed, runtime=2.8309s
 
-performance_grid / original: individuals=100, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0094s
+performance_grid / original: individuals=100, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0052s
 
-performance_grid / optimized: individuals=100, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0027s
+performance_grid / optimized: individuals=100, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0008s
 
-performance_grid / non_vectorized: individuals=100, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0079s
+performance_grid / non_vectorized: individuals=100, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0028s
 
-performance_grid / optimized: individuals=100, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0025s
+performance_grid / optimized: individuals=100, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0007s
 
-performance_grid / non_vectorized: individuals=100, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0079s
+performance_grid / non_vectorized: individuals=100, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0028s
 
-performance_grid / original: individuals=100, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0090s
+performance_grid / original: individuals=100, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0050s
 
-performance_grid / non_vectorized: individuals=100, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0074s
+performance_grid / non_vectorized: individuals=100, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0027s
 
-performance_grid / original: individuals=100, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0085s
+performance_grid / original: individuals=100, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0047s
 
-performance_grid / optimized: individuals=100, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0025s
+performance_grid / optimized: individuals=100, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0007s
 
-performance_grid / original: individuals=100, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0088s
+performance_grid / original: individuals=100, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0050s
 
-performance_grid / optimized: individuals=100, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0024s
+performance_grid / optimized: individuals=100, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0006s
 
-performance_grid / non_vectorized: individuals=100, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0078s
+performance_grid / non_vectorized: individuals=100, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0027s
 
-performance_grid / optimized: individuals=100, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0027s
+performance_grid / optimized: individuals=100, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0006s
 
-performance_grid / non_vectorized: individuals=100, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0092s
+performance_grid / non_vectorized: individuals=100, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0028s
 
-performance_grid / original: individuals=100, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0095s
+performance_grid / original: individuals=100, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0051s
 
-performance_grid / non_vectorized: individuals=100, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.0351s
+performance_grid / non_vectorized: individuals=100, experiments=50, repeat=1, seed=12350, status=passed, runtime=0.0128s
 
-performance_grid / original: individuals=100, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.0398s
+performance_grid / original: individuals=100, experiments=50, repeat=1, seed=12350, status=passed, runtime=0.0239s
 
-performance_grid / optimized: individuals=100, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.0080s
+performance_grid / optimized: individuals=100, experiments=50, repeat=1, seed=12350, status=passed, runtime=0.0019s
 
-performance_grid / original: individuals=100, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.0388s
+performance_grid / original: individuals=100, experiments=50, repeat=2, seed=12351, status=passed, runtime=0.0241s
 
-performance_grid / optimized: individuals=100, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.0079s
+performance_grid / optimized: individuals=100, experiments=50, repeat=2, seed=12351, status=passed, runtime=0.0018s
 
-performance_grid / non_vectorized: individuals=100, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.0378s
+performance_grid / non_vectorized: individuals=100, experiments=50, repeat=2, seed=12351, status=passed, runtime=0.0126s
 
-performance_grid / optimized: individuals=100, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.0077s
+performance_grid / optimized: individuals=100, experiments=50, repeat=3, seed=12352, status=passed, runtime=0.0019s
 
-performance_grid / non_vectorized: individuals=100, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.0336s
+performance_grid / non_vectorized: individuals=100, experiments=50, repeat=3, seed=12352, status=passed, runtime=0.0129s
 
-performance_grid / original: individuals=100, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.0367s
+performance_grid / original: individuals=100, experiments=50, repeat=3, seed=12352, status=passed, runtime=0.0240s
 
-performance_grid / non_vectorized: individuals=100, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.0345s
+performance_grid / non_vectorized: individuals=100, experiments=50, repeat=4, seed=12353, status=passed, runtime=0.0126s
 
-performance_grid / original: individuals=100, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.0390s
+performance_grid / original: individuals=100, experiments=50, repeat=4, seed=12353, status=passed, runtime=0.0237s
 
-performance_grid / optimized: individuals=100, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.0083s
+performance_grid / optimized: individuals=100, experiments=50, repeat=4, seed=12353, status=passed, runtime=0.0019s
 
-performance_grid / original: individuals=100, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.0430s
+performance_grid / original: individuals=100, experiments=50, repeat=5, seed=12354, status=passed, runtime=0.0246s
 
-performance_grid / optimized: individuals=100, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.0078s
+performance_grid / optimized: individuals=100, experiments=50, repeat=5, seed=12354, status=passed, runtime=0.0018s
 
-performance_grid / non_vectorized: individuals=100, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.0344s
+performance_grid / non_vectorized: individuals=100, experiments=50, repeat=5, seed=12354, status=passed, runtime=0.0131s
 
-performance_grid / optimized: individuals=100, experiments=100, repeat=1, seed=12345, status=passed, runtime=0.0140s
+performance_grid / optimized: individuals=100, experiments=100, repeat=1, seed=12355, status=passed, runtime=0.0033s
 
-performance_grid / non_vectorized: individuals=100, experiments=100, repeat=1, seed=12345, status=passed, runtime=0.0695s
+performance_grid / non_vectorized: individuals=100, experiments=100, repeat=1, seed=12355, status=passed, runtime=0.0246s
 
-performance_grid / original: individuals=100, experiments=100, repeat=1, seed=12345, status=passed, runtime=0.0783s
+performance_grid / original: individuals=100, experiments=100, repeat=1, seed=12355, status=passed, runtime=0.0468s
 
-performance_grid / non_vectorized: individuals=100, experiments=100, repeat=2, seed=12346, status=passed, runtime=0.0677s
+performance_grid / non_vectorized: individuals=100, experiments=100, repeat=2, seed=12356, status=passed, runtime=0.0261s
 
-performance_grid / original: individuals=100, experiments=100, repeat=2, seed=12346, status=passed, runtime=0.0759s
+performance_grid / original: individuals=100, experiments=100, repeat=2, seed=12356, status=passed, runtime=0.0488s
 
-performance_grid / optimized: individuals=100, experiments=100, repeat=2, seed=12346, status=passed, runtime=0.0111s
+performance_grid / optimized: individuals=100, experiments=100, repeat=2, seed=12356, status=passed, runtime=0.0032s
 
-performance_grid / original: individuals=100, experiments=100, repeat=3, seed=12347, status=passed, runtime=0.0663s
+performance_grid / original: individuals=100, experiments=100, repeat=3, seed=12357, status=passed, runtime=0.0472s
 
-performance_grid / optimized: individuals=100, experiments=100, repeat=3, seed=12347, status=passed, runtime=0.0105s
+performance_grid / optimized: individuals=100, experiments=100, repeat=3, seed=12357, status=passed, runtime=0.0032s
 
-performance_grid / non_vectorized: individuals=100, experiments=100, repeat=3, seed=12347, status=passed, runtime=0.0598s
+performance_grid / non_vectorized: individuals=100, experiments=100, repeat=3, seed=12357, status=passed, runtime=0.0246s
 
-performance_grid / optimized: individuals=100, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.0107s
+performance_grid / optimized: individuals=100, experiments=100, repeat=4, seed=12358, status=passed, runtime=0.0032s
 
-performance_grid / non_vectorized: individuals=100, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.0644s
+performance_grid / non_vectorized: individuals=100, experiments=100, repeat=4, seed=12358, status=passed, runtime=0.0248s
 
-performance_grid / original: individuals=100, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.0706s
+performance_grid / original: individuals=100, experiments=100, repeat=4, seed=12358, status=passed, runtime=0.0468s
 
-performance_grid / non_vectorized: individuals=100, experiments=100, repeat=5, seed=12349, status=passed, runtime=0.0660s
+performance_grid / non_vectorized: individuals=100, experiments=100, repeat=5, seed=12359, status=passed, runtime=0.0251s
 
-performance_grid / original: individuals=100, experiments=100, repeat=5, seed=12349, status=passed, runtime=0.0750s
+performance_grid / original: individuals=100, experiments=100, repeat=5, seed=12359, status=passed, runtime=0.0471s
 
-performance_grid / optimized: individuals=100, experiments=100, repeat=5, seed=12349, status=passed, runtime=0.0115s
+performance_grid / optimized: individuals=100, experiments=100, repeat=5, seed=12359, status=passed, runtime=0.0032s
 
-performance_grid / original: individuals=100, experiments=250, repeat=1, seed=12345, status=passed, runtime=0.1771s
+performance_grid / original: individuals=100, experiments=250, repeat=1, seed=12360, status=passed, runtime=0.1173s
 
-performance_grid / optimized: individuals=100, experiments=250, repeat=1, seed=12345, status=passed, runtime=0.0251s
+performance_grid / optimized: individuals=100, experiments=250, repeat=1, seed=12360, status=passed, runtime=0.0074s
 
-performance_grid / non_vectorized: individuals=100, experiments=250, repeat=1, seed=12345, status=passed, runtime=0.1600s
+performance_grid / non_vectorized: individuals=100, experiments=250, repeat=1, seed=12360, status=passed, runtime=0.0616s
 
-performance_grid / optimized: individuals=100, experiments=250, repeat=2, seed=12346, status=passed, runtime=0.0250s
+performance_grid / optimized: individuals=100, experiments=250, repeat=2, seed=12361, status=passed, runtime=0.0074s
 
-performance_grid / non_vectorized: individuals=100, experiments=250, repeat=2, seed=12346, status=passed, runtime=0.1587s
+performance_grid / non_vectorized: individuals=100, experiments=250, repeat=2, seed=12361, status=passed, runtime=0.0624s
 
-performance_grid / original: individuals=100, experiments=250, repeat=2, seed=12346, status=passed, runtime=0.1733s
+performance_grid / original: individuals=100, experiments=250, repeat=2, seed=12361, status=passed, runtime=0.1176s
 
-performance_grid / non_vectorized: individuals=100, experiments=250, repeat=3, seed=12347, status=passed, runtime=0.1450s
+performance_grid / non_vectorized: individuals=100, experiments=250, repeat=3, seed=12362, status=passed, runtime=0.0617s
 
-performance_grid / original: individuals=100, experiments=250, repeat=3, seed=12347, status=passed, runtime=0.1662s
+performance_grid / original: individuals=100, experiments=250, repeat=3, seed=12362, status=passed, runtime=0.1166s
 
-performance_grid / optimized: individuals=100, experiments=250, repeat=3, seed=12347, status=passed, runtime=0.0237s
+performance_grid / optimized: individuals=100, experiments=250, repeat=3, seed=12362, status=passed, runtime=0.0075s
 
-performance_grid / original: individuals=100, experiments=250, repeat=4, seed=12348, status=passed, runtime=0.1733s
+performance_grid / original: individuals=100, experiments=250, repeat=4, seed=12363, status=passed, runtime=0.1165s
 
-performance_grid / optimized: individuals=100, experiments=250, repeat=4, seed=12348, status=passed, runtime=0.0245s
+performance_grid / optimized: individuals=100, experiments=250, repeat=4, seed=12363, status=passed, runtime=0.0075s
 
-performance_grid / non_vectorized: individuals=100, experiments=250, repeat=4, seed=12348, status=passed, runtime=0.1573s
+performance_grid / non_vectorized: individuals=100, experiments=250, repeat=4, seed=12363, status=passed, runtime=0.0617s
 
-performance_grid / optimized: individuals=100, experiments=250, repeat=5, seed=12349, status=passed, runtime=0.0251s
+performance_grid / optimized: individuals=100, experiments=250, repeat=5, seed=12364, status=passed, runtime=0.0074s
 
-performance_grid / non_vectorized: individuals=100, experiments=250, repeat=5, seed=12349, status=passed, runtime=0.1610s
+performance_grid / non_vectorized: individuals=100, experiments=250, repeat=5, seed=12364, status=passed, runtime=0.0607s
 
-performance_grid / original: individuals=100, experiments=250, repeat=5, seed=12349, status=passed, runtime=0.1785s
+performance_grid / original: individuals=100, experiments=250, repeat=5, seed=12364, status=passed, runtime=0.1146s
 
-performance_grid / non_vectorized: individuals=100, experiments=500, repeat=1, seed=12345, status=passed, runtime=0.3195s
+performance_grid / non_vectorized: individuals=100, experiments=500, repeat=1, seed=12365, status=passed, runtime=0.1224s
 
-performance_grid / original: individuals=100, experiments=500, repeat=1, seed=12345, status=passed, runtime=0.3491s
+performance_grid / original: individuals=100, experiments=500, repeat=1, seed=12365, status=passed, runtime=0.2312s
 
-performance_grid / optimized: individuals=100, experiments=500, repeat=1, seed=12345, status=passed, runtime=0.0484s
+performance_grid / optimized: individuals=100, experiments=500, repeat=1, seed=12365, status=passed, runtime=0.0143s
 
-performance_grid / original: individuals=100, experiments=500, repeat=2, seed=12346, status=passed, runtime=0.3458s
+performance_grid / original: individuals=100, experiments=500, repeat=2, seed=12366, status=passed, runtime=0.2311s
 
-performance_grid / optimized: individuals=100, experiments=500, repeat=2, seed=12346, status=passed, runtime=0.0502s
+performance_grid / optimized: individuals=100, experiments=500, repeat=2, seed=12366, status=passed, runtime=0.0140s
 
-performance_grid / non_vectorized: individuals=100, experiments=500, repeat=2, seed=12346, status=passed, runtime=0.3125s
+performance_grid / non_vectorized: individuals=100, experiments=500, repeat=2, seed=12366, status=passed, runtime=0.1223s
 
-performance_grid / optimized: individuals=100, experiments=500, repeat=3, seed=12347, status=passed, runtime=0.0461s
+performance_grid / optimized: individuals=100, experiments=500, repeat=3, seed=12367, status=passed, runtime=0.0144s
 
-performance_grid / non_vectorized: individuals=100, experiments=500, repeat=3, seed=12347, status=passed, runtime=0.2924s
+performance_grid / non_vectorized: individuals=100, experiments=500, repeat=3, seed=12367, status=passed, runtime=0.1249s
 
-performance_grid / original: individuals=100, experiments=500, repeat=3, seed=12347, status=passed, runtime=0.3202s
+performance_grid / original: individuals=100, experiments=500, repeat=3, seed=12367, status=passed, runtime=0.2335s
 
-performance_grid / non_vectorized: individuals=100, experiments=500, repeat=4, seed=12348, status=passed, runtime=0.3193s
+performance_grid / non_vectorized: individuals=100, experiments=500, repeat=4, seed=12368, status=passed, runtime=0.1224s
 
-performance_grid / original: individuals=100, experiments=500, repeat=4, seed=12348, status=passed, runtime=0.3468s
+performance_grid / original: individuals=100, experiments=500, repeat=4, seed=12368, status=passed, runtime=0.2316s
 
-performance_grid / optimized: individuals=100, experiments=500, repeat=4, seed=12348, status=passed, runtime=0.0479s
+performance_grid / optimized: individuals=100, experiments=500, repeat=4, seed=12368, status=passed, runtime=0.0144s
 
-performance_grid / original: individuals=100, experiments=500, repeat=5, seed=12349, status=passed, runtime=0.3509s
+performance_grid / original: individuals=100, experiments=500, repeat=5, seed=12369, status=passed, runtime=0.2382s
 
-performance_grid / optimized: individuals=100, experiments=500, repeat=5, seed=12349, status=passed, runtime=0.0530s
+performance_grid / optimized: individuals=100, experiments=500, repeat=5, seed=12369, status=passed, runtime=0.0146s
 
-performance_grid / non_vectorized: individuals=100, experiments=500, repeat=5, seed=12349, status=passed, runtime=0.3406s
+performance_grid / non_vectorized: individuals=100, experiments=500, repeat=5, seed=12369, status=passed, runtime=0.1259s
 
-performance_grid / optimized: individuals=100, experiments=1000, repeat=1, seed=12345, status=passed, runtime=0.1039s
+performance_grid / optimized: individuals=100, experiments=1000, repeat=1, seed=12370, status=passed, runtime=0.0283s
 
-performance_grid / non_vectorized: individuals=100, experiments=1000, repeat=1, seed=12345, status=passed, runtime=0.6777s
+performance_grid / non_vectorized: individuals=100, experiments=1000, repeat=1, seed=12370, status=passed, runtime=0.2426s
 
-performance_grid / original: individuals=100, experiments=1000, repeat=1, seed=12345, status=passed, runtime=0.7577s
+performance_grid / original: individuals=100, experiments=1000, repeat=1, seed=12370, status=passed, runtime=0.4563s
 
-performance_grid / non_vectorized: individuals=100, experiments=1000, repeat=2, seed=12346, status=passed, runtime=0.6246s
+performance_grid / non_vectorized: individuals=100, experiments=1000, repeat=2, seed=12371, status=passed, runtime=0.2619s
 
-performance_grid / original: individuals=100, experiments=1000, repeat=2, seed=12346, status=passed, runtime=0.6870s
+performance_grid / original: individuals=100, experiments=1000, repeat=2, seed=12371, status=passed, runtime=0.4729s
 
-performance_grid / optimized: individuals=100, experiments=1000, repeat=2, seed=12346, status=passed, runtime=0.0971s
+performance_grid / optimized: individuals=100, experiments=1000, repeat=2, seed=12371, status=passed, runtime=0.0283s
 
-performance_grid / original: individuals=100, experiments=1000, repeat=3, seed=12347, status=passed, runtime=0.6412s
+performance_grid / original: individuals=100, experiments=1000, repeat=3, seed=12372, status=passed, runtime=0.4654s
 
-performance_grid / optimized: individuals=100, experiments=1000, repeat=3, seed=12347, status=passed, runtime=0.0933s
+performance_grid / optimized: individuals=100, experiments=1000, repeat=3, seed=12372, status=passed, runtime=0.0286s
 
-performance_grid / non_vectorized: individuals=100, experiments=1000, repeat=3, seed=12347, status=passed, runtime=0.5818s
+performance_grid / non_vectorized: individuals=100, experiments=1000, repeat=3, seed=12372, status=passed, runtime=0.2465s
 
-performance_grid / optimized: individuals=100, experiments=1000, repeat=4, seed=12348, status=passed, runtime=0.0958s
+performance_grid / optimized: individuals=100, experiments=1000, repeat=4, seed=12373, status=passed, runtime=0.0291s
 
-performance_grid / non_vectorized: individuals=100, experiments=1000, repeat=4, seed=12348, status=passed, runtime=0.6283s
+performance_grid / non_vectorized: individuals=100, experiments=1000, repeat=4, seed=12373, status=passed, runtime=0.2497s
 
-performance_grid / original: individuals=100, experiments=1000, repeat=4, seed=12348, status=passed, runtime=0.6909s
+performance_grid / original: individuals=100, experiments=1000, repeat=4, seed=12373, status=passed, runtime=0.4717s
 
-performance_grid / non_vectorized: individuals=100, experiments=1000, repeat=5, seed=12349, status=passed, runtime=0.6313s
+performance_grid / non_vectorized: individuals=100, experiments=1000, repeat=5, seed=12374, status=passed, runtime=0.2464s
 
-performance_grid / original: individuals=100, experiments=1000, repeat=5, seed=12349, status=passed, runtime=0.7017s
+performance_grid / original: individuals=100, experiments=1000, repeat=5, seed=12374, status=passed, runtime=0.4669s
 
-performance_grid / optimized: individuals=100, experiments=1000, repeat=5, seed=12349, status=passed, runtime=0.0983s
+performance_grid / optimized: individuals=100, experiments=1000, repeat=5, seed=12374, status=passed, runtime=0.0293s
 
-performance_grid / original: individuals=100, experiments=2000, repeat=1, seed=12345, status=passed, runtime=1.4059s
+performance_grid / original: individuals=100, experiments=2000, repeat=1, seed=12375, status=passed, runtime=0.9317s
 
-performance_grid / optimized: individuals=100, experiments=2000, repeat=1, seed=12345, status=passed, runtime=0.2290s
+performance_grid / optimized: individuals=100, experiments=2000, repeat=1, seed=12375, status=passed, runtime=0.0572s
 
-performance_grid / non_vectorized: individuals=100, experiments=2000, repeat=1, seed=12345, status=passed, runtime=1.2707s
+performance_grid / non_vectorized: individuals=100, experiments=2000, repeat=1, seed=12375, status=passed, runtime=0.4922s
 
-performance_grid / optimized: individuals=100, experiments=2000, repeat=2, seed=12346, status=passed, runtime=0.1950s
+performance_grid / optimized: individuals=100, experiments=2000, repeat=2, seed=12376, status=passed, runtime=0.0696s
 
-performance_grid / non_vectorized: individuals=100, experiments=2000, repeat=2, seed=12346, status=passed, runtime=1.2649s
+performance_grid / non_vectorized: individuals=100, experiments=2000, repeat=2, seed=12376, status=passed, runtime=0.4890s
 
-performance_grid / original: individuals=100, experiments=2000, repeat=2, seed=12346, status=passed, runtime=1.3660s
+performance_grid / original: individuals=100, experiments=2000, repeat=2, seed=12376, status=passed, runtime=0.9226s
 
-performance_grid / non_vectorized: individuals=100, experiments=2000, repeat=3, seed=12347, status=passed, runtime=1.1551s
+performance_grid / non_vectorized: individuals=100, experiments=2000, repeat=3, seed=12377, status=passed, runtime=0.4876s
 
-performance_grid / original: individuals=100, experiments=2000, repeat=3, seed=12347, status=passed, runtime=1.2773s
+performance_grid / original: individuals=100, experiments=2000, repeat=3, seed=12377, status=passed, runtime=0.9231s
 
-performance_grid / optimized: individuals=100, experiments=2000, repeat=3, seed=12347, status=passed, runtime=0.1911s
+performance_grid / optimized: individuals=100, experiments=2000, repeat=3, seed=12377, status=passed, runtime=0.0566s
 
-performance_grid / original: individuals=100, experiments=2000, repeat=4, seed=12348, status=passed, runtime=2.5711s
+performance_grid / original: individuals=100, experiments=2000, repeat=4, seed=12378, status=passed, runtime=0.9368s
 
-performance_grid / optimized: individuals=100, experiments=2000, repeat=4, seed=12348, status=passed, runtime=0.4913s
+performance_grid / optimized: individuals=100, experiments=2000, repeat=4, seed=12378, status=passed, runtime=0.0562s
 
-performance_grid / non_vectorized: individuals=100, experiments=2000, repeat=4, seed=12348, status=passed, runtime=4.5357s
+performance_grid / non_vectorized: individuals=100, experiments=2000, repeat=4, seed=12378, status=passed, runtime=0.4957s
 
-performance_grid / optimized: individuals=100, experiments=2000, repeat=5, seed=12349, status=passed, runtime=0.6828s
+performance_grid / optimized: individuals=100, experiments=2000, repeat=5, seed=12379, status=passed, runtime=0.0689s
 
-performance_grid / non_vectorized: individuals=100, experiments=2000, repeat=5, seed=12349, status=passed, runtime=4.7053s
+performance_grid / non_vectorized: individuals=100, experiments=2000, repeat=5, seed=12379, status=passed, runtime=0.4837s
 
-performance_grid / original: individuals=100, experiments=2000, repeat=5, seed=12349, status=passed, runtime=4.6279s
+performance_grid / original: individuals=100, experiments=2000, repeat=5, seed=12379, status=passed, runtime=0.9144s
 
-performance_grid / non_vectorized: individuals=500, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0327s
+performance_grid / non_vectorized: individuals=500, experiments=10, repeat=1, seed=12380, status=passed, runtime=0.0048s
 
-performance_grid / original: individuals=500, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0137s
+performance_grid / original: individuals=500, experiments=10, repeat=1, seed=12380, status=passed, runtime=0.0087s
 
-performance_grid / optimized: individuals=500, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0057s
+performance_grid / optimized: individuals=500, experiments=10, repeat=1, seed=12380, status=passed, runtime=0.0013s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=500, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0134s
+performance_grid / original: individuals=500, experiments=10, repeat=2, seed=12381, status=passed, runtime=0.0085s
 
-performance_grid / optimized: individuals=500, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0047s
+performance_grid / optimized: individuals=500, experiments=10, repeat=2, seed=12381, status=passed, runtime=0.0013s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0108s
+performance_grid / non_vectorized: individuals=500, experiments=10, repeat=2, seed=12381, status=passed, runtime=0.0046s
 
-performance_grid / optimized: individuals=500, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0047s
+performance_grid / optimized: individuals=500, experiments=10, repeat=3, seed=12382, status=passed, runtime=0.0013s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0100s
+performance_grid / non_vectorized: individuals=500, experiments=10, repeat=3, seed=12382, status=passed, runtime=0.0048s
 
-performance_grid / original: individuals=500, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0155s
+performance_grid / original: individuals=500, experiments=10, repeat=3, seed=12382, status=passed, runtime=0.0087s
 
-performance_grid / non_vectorized: individuals=500, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0129s
+performance_grid / non_vectorized: individuals=500, experiments=10, repeat=4, seed=12383, status=passed, runtime=0.0047s
 
-performance_grid / original: individuals=500, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0551s
+performance_grid / original: individuals=500, experiments=10, repeat=4, seed=12383, status=passed, runtime=0.0084s
 
-performance_grid / optimized: individuals=500, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0224s
+performance_grid / optimized: individuals=500, experiments=10, repeat=4, seed=12383, status=passed, runtime=0.0013s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=500, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0682s
+performance_grid / original: individuals=500, experiments=10, repeat=5, seed=12384, status=passed, runtime=0.0086s
 
-performance_grid / optimized: individuals=500, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0227s
+performance_grid / optimized: individuals=500, experiments=10, repeat=5, seed=12384, status=passed, runtime=0.0013s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0456s
+performance_grid / non_vectorized: individuals=500, experiments=10, repeat=5, seed=12384, status=passed, runtime=0.0047s
 
-performance_grid / optimized: individuals=500, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.0870s
+performance_grid / optimized: individuals=500, experiments=50, repeat=1, seed=12385, status=passed, runtime=0.0044s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.2106s
+performance_grid / non_vectorized: individuals=500, experiments=50, repeat=1, seed=12385, status=passed, runtime=0.0223s
 
-performance_grid / original: individuals=500, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.2835s
+performance_grid / original: individuals=500, experiments=50, repeat=1, seed=12385, status=passed, runtime=0.0419s
 
-performance_grid / non_vectorized: individuals=500, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.2231s
+performance_grid / non_vectorized: individuals=500, experiments=50, repeat=2, seed=12386, status=passed, runtime=0.0222s
 
-performance_grid / original: individuals=500, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.1176s
+performance_grid / original: individuals=500, experiments=50, repeat=2, seed=12386, status=passed, runtime=0.0418s
 
-performance_grid / optimized: individuals=500, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.0196s
+performance_grid / optimized: individuals=500, experiments=50, repeat=2, seed=12386, status=passed, runtime=0.0043s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=500, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.1574s
+performance_grid / original: individuals=500, experiments=50, repeat=3, seed=12387, status=passed, runtime=0.0422s
 
-performance_grid / optimized: individuals=500, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.0156s
+performance_grid / optimized: individuals=500, experiments=50, repeat=3, seed=12387, status=passed, runtime=0.0042s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.0442s
+performance_grid / non_vectorized: individuals=500, experiments=50, repeat=3, seed=12387, status=passed, runtime=0.0221s
 
-performance_grid / optimized: individuals=500, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.0168s
+performance_grid / optimized: individuals=500, experiments=50, repeat=4, seed=12388, status=passed, runtime=0.0042s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.0426s
+performance_grid / non_vectorized: individuals=500, experiments=50, repeat=4, seed=12388, status=passed, runtime=0.0223s
 
-performance_grid / original: individuals=500, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.0544s
+performance_grid / original: individuals=500, experiments=50, repeat=4, seed=12388, status=passed, runtime=0.0419s
 
-performance_grid / non_vectorized: individuals=500, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.0447s
+performance_grid / non_vectorized: individuals=500, experiments=50, repeat=5, seed=12389, status=passed, runtime=0.0221s
 
-performance_grid / original: individuals=500, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.0552s
+performance_grid / original: individuals=500, experiments=50, repeat=5, seed=12389, status=passed, runtime=0.0420s
 
-performance_grid / optimized: individuals=500, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.0159s
+performance_grid / optimized: individuals=500, experiments=50, repeat=5, seed=12389, status=passed, runtime=0.0042s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=500, experiments=100, repeat=1, seed=12345, status=passed, runtime=0.4397s
+performance_grid / original: individuals=500, experiments=100, repeat=1, seed=12390, status=passed, runtime=0.0831s
 
-performance_grid / optimized: individuals=500, experiments=100, repeat=1, seed=12345, status=passed, runtime=0.1496s
+performance_grid / optimized: individuals=500, experiments=100, repeat=1, seed=12390, status=passed, runtime=0.0079s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=100, repeat=1, seed=12345, status=passed, runtime=0.1598s
+performance_grid / non_vectorized: individuals=500, experiments=100, repeat=1, seed=12390, status=passed, runtime=0.0443s
 
-performance_grid / optimized: individuals=500, experiments=100, repeat=2, seed=12346, status=passed, runtime=0.0526s
+performance_grid / optimized: individuals=500, experiments=100, repeat=2, seed=12391, status=passed, runtime=0.0078s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=100, repeat=2, seed=12346, status=passed, runtime=0.4300s
+performance_grid / non_vectorized: individuals=500, experiments=100, repeat=2, seed=12391, status=passed, runtime=0.0438s
 
-performance_grid / original: individuals=500, experiments=100, repeat=2, seed=12346, status=passed, runtime=0.5389s
+performance_grid / original: individuals=500, experiments=100, repeat=2, seed=12391, status=passed, runtime=0.0829s
 
-performance_grid / non_vectorized: individuals=500, experiments=100, repeat=3, seed=12347, status=passed, runtime=0.4253s
+performance_grid / non_vectorized: individuals=500, experiments=100, repeat=3, seed=12392, status=passed, runtime=0.0439s
 
-performance_grid / original: individuals=500, experiments=100, repeat=3, seed=12347, status=passed, runtime=0.2999s
+performance_grid / original: individuals=500, experiments=100, repeat=3, seed=12392, status=passed, runtime=0.0828s
 
-performance_grid / optimized: individuals=500, experiments=100, repeat=3, seed=12347, status=passed, runtime=0.1417s
+performance_grid / optimized: individuals=500, experiments=100, repeat=3, seed=12392, status=passed, runtime=0.0078s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=500, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.3881s
+performance_grid / original: individuals=500, experiments=100, repeat=4, seed=12393, status=passed, runtime=0.0830s
 
-performance_grid / optimized: individuals=500, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.1458s
+performance_grid / optimized: individuals=500, experiments=100, repeat=4, seed=12393, status=passed, runtime=0.0077s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.3594s
+performance_grid / non_vectorized: individuals=500, experiments=100, repeat=4, seed=12393, status=passed, runtime=0.0438s
 
-performance_grid / optimized: individuals=500, experiments=100, repeat=5, seed=12349, status=passed, runtime=0.1573s
+performance_grid / optimized: individuals=500, experiments=100, repeat=5, seed=12394, status=passed, runtime=0.0080s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=100, repeat=5, seed=12349, status=passed, runtime=0.4170s
+performance_grid / non_vectorized: individuals=500, experiments=100, repeat=5, seed=12394, status=passed, runtime=0.0440s
 
-performance_grid / original: individuals=500, experiments=100, repeat=5, seed=12349, status=passed, runtime=0.1769s
+performance_grid / original: individuals=500, experiments=100, repeat=5, seed=12394, status=passed, runtime=0.0834s
 
-performance_grid / non_vectorized: individuals=500, experiments=250, repeat=1, seed=12345, status=passed, runtime=0.7346s
+performance_grid / non_vectorized: individuals=500, experiments=250, repeat=1, seed=12395, status=passed, runtime=0.1094s
 
-performance_grid / original: individuals=500, experiments=250, repeat=1, seed=12345, status=passed, runtime=0.5193s
+performance_grid / original: individuals=500, experiments=250, repeat=1, seed=12395, status=passed, runtime=0.2067s
 
-performance_grid / optimized: individuals=500, experiments=250, repeat=1, seed=12345, status=passed, runtime=0.0932s
+performance_grid / optimized: individuals=500, experiments=250, repeat=1, seed=12395, status=passed, runtime=0.0188s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=500, experiments=250, repeat=2, seed=12346, status=passed, runtime=0.3366s
+performance_grid / original: individuals=500, experiments=250, repeat=2, seed=12396, status=passed, runtime=0.2044s
 
-performance_grid / optimized: individuals=500, experiments=250, repeat=2, seed=12346, status=passed, runtime=0.0841s
+performance_grid / optimized: individuals=500, experiments=250, repeat=2, seed=12396, status=passed, runtime=0.0186s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=250, repeat=2, seed=12346, status=passed, runtime=0.8001s
+performance_grid / non_vectorized: individuals=500, experiments=250, repeat=2, seed=12396, status=passed, runtime=0.1090s
 
-performance_grid / optimized: individuals=500, experiments=250, repeat=3, seed=12347, status=passed, runtime=0.1702s
+performance_grid / optimized: individuals=500, experiments=250, repeat=3, seed=12397, status=passed, runtime=0.0188s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=250, repeat=3, seed=12347, status=passed, runtime=0.2216s
+performance_grid / non_vectorized: individuals=500, experiments=250, repeat=3, seed=12397, status=passed, runtime=0.1096s
 
-performance_grid / original: individuals=500, experiments=250, repeat=3, seed=12347, status=passed, runtime=1.1539s
+performance_grid / original: individuals=500, experiments=250, repeat=3, seed=12397, status=passed, runtime=0.2072s
 
-performance_grid / non_vectorized: individuals=500, experiments=250, repeat=4, seed=12348, status=passed, runtime=0.7538s
+performance_grid / non_vectorized: individuals=500, experiments=250, repeat=4, seed=12398, status=passed, runtime=0.1096s
 
-performance_grid / original: individuals=500, experiments=250, repeat=4, seed=12348, status=passed, runtime=1.1773s
+performance_grid / original: individuals=500, experiments=250, repeat=4, seed=12398, status=passed, runtime=0.2064s
 
-performance_grid / optimized: individuals=500, experiments=250, repeat=4, seed=12348, status=passed, runtime=0.3194s
+performance_grid / optimized: individuals=500, experiments=250, repeat=4, seed=12398, status=passed, runtime=0.0188s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=500, experiments=250, repeat=5, seed=12349, status=passed, runtime=1.1431s
+performance_grid / original: individuals=500, experiments=250, repeat=5, seed=12399, status=passed, runtime=0.2071s
 
-performance_grid / optimized: individuals=500, experiments=250, repeat=5, seed=12349, status=passed, runtime=0.2712s
+performance_grid / optimized: individuals=500, experiments=250, repeat=5, seed=12399, status=passed, runtime=0.0185s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=250, repeat=5, seed=12349, status=passed, runtime=0.4188s
+performance_grid / non_vectorized: individuals=500, experiments=250, repeat=5, seed=12399, status=passed, runtime=0.1097s
 
-performance_grid / optimized: individuals=500, experiments=500, repeat=1, seed=12345, status=passed, runtime=0.4101s
+performance_grid / optimized: individuals=500, experiments=500, repeat=1, seed=12400, status=passed, runtime=0.0371s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=500, repeat=1, seed=12345, status=passed, runtime=0.5922s
+performance_grid / non_vectorized: individuals=500, experiments=500, repeat=1, seed=12400, status=passed, runtime=0.2204s
 
-performance_grid / original: individuals=500, experiments=500, repeat=1, seed=12345, status=passed, runtime=1.9966s
+performance_grid / original: individuals=500, experiments=500, repeat=1, seed=12400, status=passed, runtime=0.4117s
 
-performance_grid / non_vectorized: individuals=500, experiments=500, repeat=2, seed=12346, status=passed, runtime=1.9063s
+performance_grid / non_vectorized: individuals=500, experiments=500, repeat=2, seed=12401, status=passed, runtime=0.2174s
 
-performance_grid / original: individuals=500, experiments=500, repeat=2, seed=12346, status=passed, runtime=2.1303s
+performance_grid / original: individuals=500, experiments=500, repeat=2, seed=12401, status=passed, runtime=0.4115s
 
-performance_grid / optimized: individuals=500, experiments=500, repeat=2, seed=12346, status=passed, runtime=0.1581s
+performance_grid / optimized: individuals=500, experiments=500, repeat=2, seed=12401, status=passed, runtime=0.0379s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=500, experiments=500, repeat=3, seed=12347, status=passed, runtime=0.5286s
+performance_grid / original: individuals=500, experiments=500, repeat=3, seed=12402, status=passed, runtime=0.4077s
 
-performance_grid / optimized: individuals=500, experiments=500, repeat=3, seed=12347, status=passed, runtime=0.1528s
+performance_grid / optimized: individuals=500, experiments=500, repeat=3, seed=12402, status=passed, runtime=0.0372s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=500, repeat=3, seed=12347, status=passed, runtime=0.4098s
+performance_grid / non_vectorized: individuals=500, experiments=500, repeat=3, seed=12402, status=passed, runtime=0.2157s
 
-performance_grid / optimized: individuals=500, experiments=500, repeat=4, seed=12348, status=passed, runtime=0.3212s
+performance_grid / optimized: individuals=500, experiments=500, repeat=4, seed=12403, status=passed, runtime=0.0366s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=500, repeat=4, seed=12348, status=passed, runtime=2.1685s
+performance_grid / non_vectorized: individuals=500, experiments=500, repeat=4, seed=12403, status=passed, runtime=0.2193s
 
-performance_grid / original: individuals=500, experiments=500, repeat=4, seed=12348, status=passed, runtime=2.7854s
+performance_grid / original: individuals=500, experiments=500, repeat=4, seed=12403, status=passed, runtime=0.4141s
 
-performance_grid / non_vectorized: individuals=500, experiments=500, repeat=5, seed=12349, status=passed, runtime=2.1593s
+performance_grid / non_vectorized: individuals=500, experiments=500, repeat=5, seed=12404, status=passed, runtime=0.2167s
 
-performance_grid / original: individuals=500, experiments=500, repeat=5, seed=12349, status=passed, runtime=3.1842s
+performance_grid / original: individuals=500, experiments=500, repeat=5, seed=12404, status=passed, runtime=0.4107s
 
-performance_grid / optimized: individuals=500, experiments=500, repeat=5, seed=12349, status=passed, runtime=0.8325s
+performance_grid / optimized: individuals=500, experiments=500, repeat=5, seed=12404, status=passed, runtime=0.0367s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=500, experiments=1000, repeat=1, seed=12345, status=passed, runtime=5.8765s
+performance_grid / original: individuals=500, experiments=1000, repeat=1, seed=12405, status=passed, runtime=0.8290s
 
-performance_grid / optimized: individuals=500, experiments=1000, repeat=1, seed=12345, status=passed, runtime=1.6754s
+performance_grid / optimized: individuals=500, experiments=1000, repeat=1, seed=12405, status=passed, runtime=0.0766s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=1000, repeat=1, seed=12345, status=passed, runtime=4.3951s
+performance_grid / non_vectorized: individuals=500, experiments=1000, repeat=1, seed=12405, status=passed, runtime=0.4375s
 
-performance_grid / optimized: individuals=500, experiments=1000, repeat=2, seed=12346, status=passed, runtime=1.6572s
+performance_grid / optimized: individuals=500, experiments=1000, repeat=2, seed=12406, status=passed, runtime=0.0742s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=1000, repeat=2, seed=12346, status=passed, runtime=4.5096s
+performance_grid / non_vectorized: individuals=500, experiments=1000, repeat=2, seed=12406, status=passed, runtime=0.4297s
 
-performance_grid / original: individuals=500, experiments=1000, repeat=2, seed=12346, status=passed, runtime=5.5301s
+performance_grid / original: individuals=500, experiments=1000, repeat=2, seed=12406, status=passed, runtime=0.8186s
 
-performance_grid / non_vectorized: individuals=500, experiments=1000, repeat=3, seed=12347, status=passed, runtime=4.1261s
+performance_grid / non_vectorized: individuals=500, experiments=1000, repeat=3, seed=12407, status=passed, runtime=0.4520s
 
-performance_grid / original: individuals=500, experiments=1000, repeat=3, seed=12347, status=passed, runtime=5.2936s
+performance_grid / original: individuals=500, experiments=1000, repeat=3, seed=12407, status=passed, runtime=0.8380s
 
-performance_grid / optimized: individuals=500, experiments=1000, repeat=3, seed=12347, status=passed, runtime=1.6374s
+performance_grid / optimized: individuals=500, experiments=1000, repeat=3, seed=12407, status=passed, runtime=0.0775s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=500, experiments=1000, repeat=4, seed=12348, status=passed, runtime=5.3462s
+performance_grid / original: individuals=500, experiments=1000, repeat=4, seed=12408, status=passed, runtime=0.8260s
 
-performance_grid / optimized: individuals=500, experiments=1000, repeat=4, seed=12348, status=passed, runtime=1.6371s
+performance_grid / optimized: individuals=500, experiments=1000, repeat=4, seed=12408, status=passed, runtime=0.0742s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=1000, repeat=4, seed=12348, status=passed, runtime=4.2325s
+performance_grid / non_vectorized: individuals=500, experiments=1000, repeat=4, seed=12408, status=passed, runtime=0.4419s
 
-performance_grid / optimized: individuals=500, experiments=1000, repeat=5, seed=12349, status=passed, runtime=1.6789s
+performance_grid / optimized: individuals=500, experiments=1000, repeat=5, seed=12409, status=passed, runtime=0.0770s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=1000, repeat=5, seed=12349, status=passed, runtime=4.3658s
+performance_grid / non_vectorized: individuals=500, experiments=1000, repeat=5, seed=12409, status=passed, runtime=0.4368s
 
-performance_grid / original: individuals=500, experiments=1000, repeat=5, seed=12349, status=passed, runtime=5.3226s
+performance_grid / original: individuals=500, experiments=1000, repeat=5, seed=12409, status=passed, runtime=0.8288s
 
-performance_grid / non_vectorized: individuals=500, experiments=2000, repeat=1, seed=12345, status=passed, runtime=8.4192s
+performance_grid / non_vectorized: individuals=500, experiments=2000, repeat=1, seed=12410, status=passed, runtime=0.9786s
 
-performance_grid / original: individuals=500, experiments=2000, repeat=1, seed=12345, status=passed, runtime=10.7363s
+performance_grid / original: individuals=500, experiments=2000, repeat=1, seed=12410, status=passed, runtime=1.8127s
 
-performance_grid / optimized: individuals=500, experiments=2000, repeat=1, seed=12345, status=passed, runtime=3.4349s
+performance_grid / optimized: individuals=500, experiments=2000, repeat=1, seed=12410, status=passed, runtime=0.1695s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=500, experiments=2000, repeat=2, seed=12346, status=passed, runtime=11.2217s
+performance_grid / original: individuals=500, experiments=2000, repeat=2, seed=12411, status=passed, runtime=1.8910s
 
-performance_grid / optimized: individuals=500, experiments=2000, repeat=2, seed=12346, status=passed, runtime=3.2570s
+performance_grid / optimized: individuals=500, experiments=2000, repeat=2, seed=12411, status=passed, runtime=0.1735s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=2000, repeat=2, seed=12346, status=passed, runtime=8.6463s
+performance_grid / non_vectorized: individuals=500, experiments=2000, repeat=2, seed=12411, status=passed, runtime=0.8886s
 
-performance_grid / optimized: individuals=500, experiments=2000, repeat=3, seed=12347, status=passed, runtime=3.2494s
+performance_grid / optimized: individuals=500, experiments=2000, repeat=3, seed=12412, status=passed, runtime=0.1478s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=2000, repeat=3, seed=12347, status=passed, runtime=8.5505s
+performance_grid / non_vectorized: individuals=500, experiments=2000, repeat=3, seed=12412, status=passed, runtime=0.8727s
 
-performance_grid / original: individuals=500, experiments=2000, repeat=3, seed=12347, status=passed, runtime=9.2190s
+performance_grid / original: individuals=500, experiments=2000, repeat=3, seed=12412, status=passed, runtime=1.6528s
 
-performance_grid / non_vectorized: individuals=500, experiments=2000, repeat=4, seed=12348, status=passed, runtime=1.6238s
+performance_grid / non_vectorized: individuals=500, experiments=2000, repeat=4, seed=12413, status=passed, runtime=0.8644s
 
-performance_grid / original: individuals=500, experiments=2000, repeat=4, seed=12348, status=passed, runtime=3.0246s
+performance_grid / original: individuals=500, experiments=2000, repeat=4, seed=12413, status=passed, runtime=1.6422s
 
-performance_grid / optimized: individuals=500, experiments=2000, repeat=4, seed=12348, status=passed, runtime=0.9670s
+performance_grid / optimized: individuals=500, experiments=2000, repeat=4, seed=12413, status=passed, runtime=0.1463s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=500, experiments=2000, repeat=5, seed=12349, status=passed, runtime=3.6754s
+performance_grid / original: individuals=500, experiments=2000, repeat=5, seed=12414, status=passed, runtime=1.6358s
 
-performance_grid / optimized: individuals=500, experiments=2000, repeat=5, seed=12349, status=passed, runtime=1.0170s
+performance_grid / optimized: individuals=500, experiments=2000, repeat=5, seed=12414, status=passed, runtime=0.1488s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=500, experiments=2000, repeat=5, seed=12349, status=passed, runtime=9.4083s
+performance_grid / non_vectorized: individuals=500, experiments=2000, repeat=5, seed=12414, status=passed, runtime=0.8760s
 
-performance_grid / optimized: individuals=1000, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0384s
+performance_grid / optimized: individuals=1000, experiments=10, repeat=1, seed=12415, status=passed, runtime=0.0021s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0620s
+performance_grid / non_vectorized: individuals=1000, experiments=10, repeat=1, seed=12415, status=passed, runtime=0.0063s
 
-performance_grid / original: individuals=1000, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.0844s
+performance_grid / original: individuals=1000, experiments=10, repeat=1, seed=12415, status=passed, runtime=0.0114s
 
-performance_grid / non_vectorized: individuals=1000, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0640s
+performance_grid / non_vectorized: individuals=1000, experiments=10, repeat=2, seed=12416, status=passed, runtime=0.0062s
 
-performance_grid / original: individuals=1000, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0822s
+performance_grid / original: individuals=1000, experiments=10, repeat=2, seed=12416, status=passed, runtime=0.0115s
 
-performance_grid / optimized: individuals=1000, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.0365s
+performance_grid / optimized: individuals=1000, experiments=10, repeat=2, seed=12416, status=passed, runtime=0.0019s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=1000, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0802s
+performance_grid / original: individuals=1000, experiments=10, repeat=3, seed=12417, status=passed, runtime=0.0116s
 
-performance_grid / optimized: individuals=1000, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0362s
+performance_grid / optimized: individuals=1000, experiments=10, repeat=3, seed=12417, status=passed, runtime=0.0019s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.0604s
+performance_grid / non_vectorized: individuals=1000, experiments=10, repeat=3, seed=12417, status=passed, runtime=0.0063s
 
-performance_grid / optimized: individuals=1000, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0369s
+performance_grid / optimized: individuals=1000, experiments=10, repeat=4, seed=12418, status=passed, runtime=0.0018s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0596s
+performance_grid / non_vectorized: individuals=1000, experiments=10, repeat=4, seed=12418, status=passed, runtime=0.0064s
 
-performance_grid / original: individuals=1000, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.0842s
+performance_grid / original: individuals=1000, experiments=10, repeat=4, seed=12418, status=passed, runtime=0.0114s
 
-performance_grid / non_vectorized: individuals=1000, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0626s
+performance_grid / non_vectorized: individuals=1000, experiments=10, repeat=5, seed=12419, status=passed, runtime=0.0063s
 
-performance_grid / original: individuals=1000, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0954s
+performance_grid / original: individuals=1000, experiments=10, repeat=5, seed=12419, status=passed, runtime=0.0115s
 
-performance_grid / optimized: individuals=1000, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.0499s
+performance_grid / optimized: individuals=1000, experiments=10, repeat=5, seed=12419, status=passed, runtime=0.0018s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=1000, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.4150s
+performance_grid / original: individuals=1000, experiments=50, repeat=1, seed=12420, status=passed, runtime=0.0546s
 
-performance_grid / optimized: individuals=1000, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.1519s
+performance_grid / optimized: individuals=1000, experiments=50, repeat=1, seed=12420, status=passed, runtime=0.0065s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.3031s
+performance_grid / non_vectorized: individuals=1000, experiments=50, repeat=1, seed=12420, status=passed, runtime=0.0287s
 
-performance_grid / optimized: individuals=1000, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.1554s
+performance_grid / optimized: individuals=1000, experiments=50, repeat=2, seed=12421, status=passed, runtime=0.0062s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.2960s
+performance_grid / non_vectorized: individuals=1000, experiments=50, repeat=2, seed=12421, status=passed, runtime=0.0288s
 
-performance_grid / original: individuals=1000, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.3935s
+performance_grid / original: individuals=1000, experiments=50, repeat=2, seed=12421, status=passed, runtime=0.0546s
 
-performance_grid / non_vectorized: individuals=1000, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.2769s
+performance_grid / non_vectorized: individuals=1000, experiments=50, repeat=3, seed=12422, status=passed, runtime=0.0288s
 
-performance_grid / original: individuals=1000, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.3691s
+performance_grid / original: individuals=1000, experiments=50, repeat=3, seed=12422, status=passed, runtime=0.0545s
 
-performance_grid / optimized: individuals=1000, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.1637s
+performance_grid / optimized: individuals=1000, experiments=50, repeat=3, seed=12422, status=passed, runtime=0.0064s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=1000, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.4194s
+performance_grid / original: individuals=1000, experiments=50, repeat=4, seed=12423, status=passed, runtime=0.0547s
 
-performance_grid / optimized: individuals=1000, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.2925s
+performance_grid / optimized: individuals=1000, experiments=50, repeat=4, seed=12423, status=passed, runtime=0.0062s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.2688s
+performance_grid / non_vectorized: individuals=1000, experiments=50, repeat=4, seed=12423, status=passed, runtime=0.0288s
 
-performance_grid / optimized: individuals=1000, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.1692s
+performance_grid / optimized: individuals=1000, experiments=50, repeat=5, seed=12424, status=passed, runtime=0.0062s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.2873s
+performance_grid / non_vectorized: individuals=1000, experiments=50, repeat=5, seed=12424, status=passed, runtime=0.0290s
 
-performance_grid / original: individuals=1000, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.3992s
+performance_grid / original: individuals=1000, experiments=50, repeat=5, seed=12424, status=passed, runtime=0.0547s
 
-performance_grid / non_vectorized: individuals=1000, experiments=100, repeat=1, seed=12345, status=passed, runtime=0.5292s
+performance_grid / non_vectorized: individuals=1000, experiments=100, repeat=1, seed=12425, status=passed, runtime=0.0570s
 
-performance_grid / original: individuals=1000, experiments=100, repeat=1, seed=12345, status=passed, runtime=0.7782s
+performance_grid / original: individuals=1000, experiments=100, repeat=1, seed=12425, status=passed, runtime=0.1086s
 
-performance_grid / optimized: individuals=1000, experiments=100, repeat=1, seed=12345, status=passed, runtime=0.3054s
+performance_grid / optimized: individuals=1000, experiments=100, repeat=1, seed=12425, status=passed, runtime=0.0120s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=1000, experiments=100, repeat=2, seed=12346, status=passed, runtime=0.7627s
+performance_grid / original: individuals=1000, experiments=100, repeat=2, seed=12426, status=passed, runtime=0.1081s
 
-performance_grid / optimized: individuals=1000, experiments=100, repeat=2, seed=12346, status=passed, runtime=0.2959s
+performance_grid / optimized: individuals=1000, experiments=100, repeat=2, seed=12426, status=passed, runtime=0.0117s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=100, repeat=2, seed=12346, status=passed, runtime=0.5176s
+performance_grid / non_vectorized: individuals=1000, experiments=100, repeat=2, seed=12426, status=passed, runtime=0.0570s
 
-performance_grid / optimized: individuals=1000, experiments=100, repeat=3, seed=12347, status=passed, runtime=0.2902s
+performance_grid / optimized: individuals=1000, experiments=100, repeat=3, seed=12427, status=passed, runtime=0.0117s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=100, repeat=3, seed=12347, status=passed, runtime=0.7300s
+performance_grid / non_vectorized: individuals=1000, experiments=100, repeat=3, seed=12427, status=passed, runtime=0.0572s
 
-performance_grid / original: individuals=1000, experiments=100, repeat=3, seed=12347, status=passed, runtime=0.7434s
+performance_grid / original: individuals=1000, experiments=100, repeat=3, seed=12427, status=passed, runtime=0.1086s
 
-performance_grid / non_vectorized: individuals=1000, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.5433s
+performance_grid / non_vectorized: individuals=1000, experiments=100, repeat=4, seed=12428, status=passed, runtime=0.0573s
 
-performance_grid / original: individuals=1000, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.7338s
+performance_grid / original: individuals=1000, experiments=100, repeat=4, seed=12428, status=passed, runtime=0.1079s
 
-performance_grid / optimized: individuals=1000, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.2898s
+performance_grid / optimized: individuals=1000, experiments=100, repeat=4, seed=12428, status=passed, runtime=0.0118s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=1000, experiments=100, repeat=5, seed=12349, status=passed, runtime=0.7328s
+performance_grid / original: individuals=1000, experiments=100, repeat=5, seed=12429, status=passed, runtime=0.1084s
 
-performance_grid / optimized: individuals=1000, experiments=100, repeat=5, seed=12349, status=passed, runtime=0.2888s
+performance_grid / optimized: individuals=1000, experiments=100, repeat=5, seed=12429, status=passed, runtime=0.0117s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=100, repeat=5, seed=12349, status=passed, runtime=0.5237s
+performance_grid / non_vectorized: individuals=1000, experiments=100, repeat=5, seed=12429, status=passed, runtime=0.0570s
 
-performance_grid / optimized: individuals=1000, experiments=250, repeat=1, seed=12345, status=passed, runtime=0.7169s
+performance_grid / optimized: individuals=1000, experiments=250, repeat=1, seed=12430, status=passed, runtime=0.0294s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=250, repeat=1, seed=12345, status=passed, runtime=1.3048s
+performance_grid / non_vectorized: individuals=1000, experiments=250, repeat=1, seed=12430, status=passed, runtime=0.1378s
 
-performance_grid / original: individuals=1000, experiments=250, repeat=1, seed=12345, status=passed, runtime=1.8601s
+performance_grid / original: individuals=1000, experiments=250, repeat=1, seed=12430, status=passed, runtime=0.2654s
 
-performance_grid / non_vectorized: individuals=1000, experiments=250, repeat=2, seed=12346, status=passed, runtime=1.2918s
+performance_grid / non_vectorized: individuals=1000, experiments=250, repeat=2, seed=12431, status=passed, runtime=0.1407s
 
-performance_grid / original: individuals=1000, experiments=250, repeat=2, seed=12346, status=passed, runtime=1.8281s
+performance_grid / original: individuals=1000, experiments=250, repeat=2, seed=12431, status=passed, runtime=0.2688s
 
-performance_grid / optimized: individuals=1000, experiments=250, repeat=2, seed=12346, status=passed, runtime=0.7307s
+performance_grid / optimized: individuals=1000, experiments=250, repeat=2, seed=12431, status=passed, runtime=0.0290s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=1000, experiments=250, repeat=3, seed=12347, status=passed, runtime=1.8249s
+performance_grid / original: individuals=1000, experiments=250, repeat=3, seed=12432, status=passed, runtime=0.2656s
 
-performance_grid / optimized: individuals=1000, experiments=250, repeat=3, seed=12347, status=passed, runtime=0.7139s
+performance_grid / optimized: individuals=1000, experiments=250, repeat=3, seed=12432, status=passed, runtime=0.0288s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=250, repeat=3, seed=12347, status=passed, runtime=1.2792s
+performance_grid / non_vectorized: individuals=1000, experiments=250, repeat=3, seed=12432, status=passed, runtime=0.1403s
 
-performance_grid / optimized: individuals=1000, experiments=250, repeat=4, seed=12348, status=passed, runtime=0.7255s
+performance_grid / optimized: individuals=1000, experiments=250, repeat=4, seed=12433, status=passed, runtime=0.0287s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=250, repeat=4, seed=12348, status=passed, runtime=1.3032s
+performance_grid / non_vectorized: individuals=1000, experiments=250, repeat=4, seed=12433, status=passed, runtime=0.1403s
 
-performance_grid / original: individuals=1000, experiments=250, repeat=4, seed=12348, status=passed, runtime=1.8483s
+performance_grid / original: individuals=1000, experiments=250, repeat=4, seed=12433, status=passed, runtime=0.2670s
 
-performance_grid / non_vectorized: individuals=1000, experiments=250, repeat=5, seed=12349, status=passed, runtime=1.2956s
+performance_grid / non_vectorized: individuals=1000, experiments=250, repeat=5, seed=12434, status=passed, runtime=0.1403s
 
-performance_grid / original: individuals=1000, experiments=250, repeat=5, seed=12349, status=passed, runtime=1.8471s
+performance_grid / original: individuals=1000, experiments=250, repeat=5, seed=12434, status=passed, runtime=0.2658s
 
-performance_grid / optimized: individuals=1000, experiments=250, repeat=5, seed=12349, status=passed, runtime=0.7374s
+performance_grid / optimized: individuals=1000, experiments=250, repeat=5, seed=12434, status=passed, runtime=0.0292s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=1000, experiments=500, repeat=1, seed=12345, status=passed, runtime=3.9292s
+performance_grid / original: individuals=1000, experiments=500, repeat=1, seed=12435, status=passed, runtime=0.5363s
 
-performance_grid / optimized: individuals=1000, experiments=500, repeat=1, seed=12345, status=passed, runtime=1.5054s
+performance_grid / optimized: individuals=1000, experiments=500, repeat=1, seed=12435, status=passed, runtime=0.0576s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=500, repeat=1, seed=12345, status=passed, runtime=2.5591s
+performance_grid / non_vectorized: individuals=1000, experiments=500, repeat=1, seed=12435, status=passed, runtime=0.2847s
 
-performance_grid / optimized: individuals=1000, experiments=500, repeat=2, seed=12346, status=passed, runtime=1.5160s
+performance_grid / optimized: individuals=1000, experiments=500, repeat=2, seed=12436, status=passed, runtime=0.0599s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=500, repeat=2, seed=12346, status=passed, runtime=2.8399s
+performance_grid / non_vectorized: individuals=1000, experiments=500, repeat=2, seed=12436, status=passed, runtime=0.2846s
 
-performance_grid / original: individuals=1000, experiments=500, repeat=2, seed=12346, status=passed, runtime=3.7512s
+performance_grid / original: individuals=1000, experiments=500, repeat=2, seed=12436, status=passed, runtime=0.5320s
 
-performance_grid / non_vectorized: individuals=1000, experiments=500, repeat=3, seed=12347, status=passed, runtime=2.6284s
+performance_grid / non_vectorized: individuals=1000, experiments=500, repeat=3, seed=12437, status=passed, runtime=0.2994s
 
-performance_grid / original: individuals=1000, experiments=500, repeat=3, seed=12347, status=passed, runtime=3.9392s
+performance_grid / original: individuals=1000, experiments=500, repeat=3, seed=12437, status=passed, runtime=0.5327s
 
-performance_grid / optimized: individuals=1000, experiments=500, repeat=3, seed=12347, status=passed, runtime=1.4983s
+performance_grid / optimized: individuals=1000, experiments=500, repeat=3, seed=12437, status=passed, runtime=0.0595s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=1000, experiments=500, repeat=4, seed=12348, status=passed, runtime=4.0404s
+performance_grid / original: individuals=1000, experiments=500, repeat=4, seed=12438, status=passed, runtime=0.5413s
 
-performance_grid / optimized: individuals=1000, experiments=500, repeat=4, seed=12348, status=passed, runtime=1.5219s
+performance_grid / optimized: individuals=1000, experiments=500, repeat=4, seed=12438, status=passed, runtime=0.0570s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=500, repeat=4, seed=12348, status=passed, runtime=2.7591s
+performance_grid / non_vectorized: individuals=1000, experiments=500, repeat=4, seed=12438, status=passed, runtime=0.2836s
 
-performance_grid / optimized: individuals=1000, experiments=500, repeat=5, seed=12349, status=passed, runtime=1.4855s
+performance_grid / optimized: individuals=1000, experiments=500, repeat=5, seed=12439, status=passed, runtime=0.0581s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=500, repeat=5, seed=12349, status=passed, runtime=2.9123s
+performance_grid / non_vectorized: individuals=1000, experiments=500, repeat=5, seed=12439, status=passed, runtime=0.2795s
 
-performance_grid / original: individuals=1000, experiments=500, repeat=5, seed=12349, status=passed, runtime=0.9973s
+performance_grid / original: individuals=1000, experiments=500, repeat=5, seed=12439, status=passed, runtime=0.5309s
 
-performance_grid / non_vectorized: individuals=1000, experiments=1000, repeat=1, seed=12345, status=passed, runtime=1.0422s
+performance_grid / non_vectorized: individuals=1000, experiments=1000, repeat=1, seed=12440, status=passed, runtime=0.5605s
 
-performance_grid / original: individuals=1000, experiments=1000, repeat=1, seed=12345, status=passed, runtime=1.5378s
+performance_grid / original: individuals=1000, experiments=1000, repeat=1, seed=12440, status=passed, runtime=1.0640s
 
-performance_grid / optimized: individuals=1000, experiments=1000, repeat=1, seed=12345, status=passed, runtime=0.6209s
+performance_grid / optimized: individuals=1000, experiments=1000, repeat=1, seed=12440, status=passed, runtime=0.1253s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=1000, experiments=1000, repeat=2, seed=12346, status=passed, runtime=1.5460s
+performance_grid / original: individuals=1000, experiments=1000, repeat=2, seed=12441, status=passed, runtime=1.0902s
 
-performance_grid / optimized: individuals=1000, experiments=1000, repeat=2, seed=12346, status=passed, runtime=0.6117s
+performance_grid / optimized: individuals=1000, experiments=1000, repeat=2, seed=12441, status=passed, runtime=0.1125s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=1000, repeat=2, seed=12346, status=passed, runtime=1.0520s
+performance_grid / non_vectorized: individuals=1000, experiments=1000, repeat=2, seed=12441, status=passed, runtime=0.5680s
 
-performance_grid / optimized: individuals=1000, experiments=1000, repeat=3, seed=12347, status=passed, runtime=2.3006s
+performance_grid / optimized: individuals=1000, experiments=1000, repeat=3, seed=12442, status=passed, runtime=0.1146s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=1000, repeat=3, seed=12347, status=passed, runtime=6.3306s
+performance_grid / non_vectorized: individuals=1000, experiments=1000, repeat=3, seed=12442, status=passed, runtime=0.5620s
 
-performance_grid / original: individuals=1000, experiments=1000, repeat=3, seed=12347, status=passed, runtime=8.0015s
+performance_grid / original: individuals=1000, experiments=1000, repeat=3, seed=12442, status=passed, runtime=1.1140s
 
-performance_grid / non_vectorized: individuals=1000, experiments=1000, repeat=4, seed=12348, status=passed, runtime=6.1748s
+performance_grid / non_vectorized: individuals=1000, experiments=1000, repeat=4, seed=12443, status=passed, runtime=0.5960s
 
-performance_grid / original: individuals=1000, experiments=1000, repeat=4, seed=12348, status=passed, runtime=8.0324s
+performance_grid / original: individuals=1000, experiments=1000, repeat=4, seed=12443, status=passed, runtime=1.0845s
 
-performance_grid / optimized: individuals=1000, experiments=1000, repeat=4, seed=12348, status=passed, runtime=3.2909s
+performance_grid / optimized: individuals=1000, experiments=1000, repeat=4, seed=12443, status=passed, runtime=0.1167s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=1000, experiments=1000, repeat=5, seed=12349, status=passed, runtime=8.0995s
+performance_grid / original: individuals=1000, experiments=1000, repeat=5, seed=12444, status=passed, runtime=1.1576s
 
-performance_grid / optimized: individuals=1000, experiments=1000, repeat=5, seed=12349, status=passed, runtime=3.1801s
+performance_grid / optimized: individuals=1000, experiments=1000, repeat=5, seed=12444, status=passed, runtime=0.1275s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=1000, repeat=5, seed=12349, status=passed, runtime=6.1055s
+performance_grid / non_vectorized: individuals=1000, experiments=1000, repeat=5, seed=12444, status=passed, runtime=0.6875s
 
-performance_grid / optimized: individuals=1000, experiments=2000, repeat=1, seed=12345, status=passed, runtime=6.2745s
+performance_grid / optimized: individuals=1000, experiments=2000, repeat=1, seed=12445, status=passed, runtime=0.2755s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=2000, repeat=1, seed=12345, status=passed, runtime=11.1952s
+performance_grid / non_vectorized: individuals=1000, experiments=2000, repeat=1, seed=12445, status=passed, runtime=1.1560s
 
-performance_grid / original: individuals=1000, experiments=2000, repeat=1, seed=12345, status=passed, runtime=5.0490s
+performance_grid / original: individuals=1000, experiments=2000, repeat=1, seed=12445, status=passed, runtime=2.3165s
 
-performance_grid / non_vectorized: individuals=1000, experiments=2000, repeat=2, seed=12346, status=passed, runtime=2.1189s
+performance_grid / non_vectorized: individuals=1000, experiments=2000, repeat=2, seed=12446, status=passed, runtime=1.1704s
 
-performance_grid / original: individuals=1000, experiments=2000, repeat=2, seed=12346, status=passed, runtime=3.1884s
+performance_grid / original: individuals=1000, experiments=2000, repeat=2, seed=12446, status=passed, runtime=2.3489s
 
-performance_grid / optimized: individuals=1000, experiments=2000, repeat=2, seed=12346, status=passed, runtime=6.2547s
+performance_grid / optimized: individuals=1000, experiments=2000, repeat=2, seed=12446, status=passed, runtime=0.2573s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=1000, experiments=2000, repeat=3, seed=12347, status=passed, runtime=14.1534s
+performance_grid / original: individuals=1000, experiments=2000, repeat=3, seed=12447, status=passed, runtime=2.3287s
 
-performance_grid / optimized: individuals=1000, experiments=2000, repeat=3, seed=12347, status=passed, runtime=1.3279s
+performance_grid / optimized: individuals=1000, experiments=2000, repeat=3, seed=12447, status=passed, runtime=0.2328s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=2000, repeat=3, seed=12347, status=passed, runtime=2.5908s
+performance_grid / non_vectorized: individuals=1000, experiments=2000, repeat=3, seed=12447, status=passed, runtime=1.1610s
 
-performance_grid / optimized: individuals=1000, experiments=2000, repeat=4, seed=12348, status=passed, runtime=6.9174s
+performance_grid / optimized: individuals=1000, experiments=2000, repeat=4, seed=12448, status=passed, runtime=0.2276s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=1000, experiments=2000, repeat=4, seed=12348, status=passed, runtime=12.1184s
+performance_grid / non_vectorized: individuals=1000, experiments=2000, repeat=4, seed=12448, status=passed, runtime=1.1494s
 
-performance_grid / original: individuals=1000, experiments=2000, repeat=4, seed=12348, status=passed, runtime=17.1619s
+performance_grid / original: individuals=1000, experiments=2000, repeat=4, seed=12448, status=passed, runtime=2.1640s
 
-performance_grid / non_vectorized: individuals=1000, experiments=2000, repeat=5, seed=12349, status=passed, runtime=11.7480s
+performance_grid / non_vectorized: individuals=1000, experiments=2000, repeat=5, seed=12449, status=passed, runtime=1.1380s
 
-performance_grid / original: individuals=1000, experiments=2000, repeat=5, seed=12349, status=passed, runtime=18.4724s
+performance_grid / original: individuals=1000, experiments=2000, repeat=5, seed=12449, status=passed, runtime=2.1621s
 
-performance_grid / optimized: individuals=1000, experiments=2000, repeat=5, seed=12349, status=passed, runtime=6.5992s
+performance_grid / optimized: individuals=1000, experiments=2000, repeat=5, seed=12449, status=passed, runtime=0.2268s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=5000, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.4743s
+performance_grid / original: individuals=5000, experiments=10, repeat=1, seed=12450, status=passed, runtime=0.0326s
 
-performance_grid / optimized: individuals=5000, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.1601s
+performance_grid / optimized: individuals=5000, experiments=10, repeat=1, seed=12450, status=passed, runtime=0.0068s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=10, repeat=1, seed=12345, status=passed, runtime=0.1468s
+performance_grid / non_vectorized: individuals=5000, experiments=10, repeat=1, seed=12450, status=passed, runtime=0.0179s
 
-performance_grid / optimized: individuals=5000, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.1577s
+performance_grid / optimized: individuals=5000, experiments=10, repeat=2, seed=12451, status=passed, runtime=0.0067s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.1450s
+performance_grid / non_vectorized: individuals=5000, experiments=10, repeat=2, seed=12451, status=passed, runtime=0.0179s
 
-performance_grid / original: individuals=5000, experiments=10, repeat=2, seed=12346, status=passed, runtime=0.2544s
+performance_grid / original: individuals=5000, experiments=10, repeat=2, seed=12451, status=passed, runtime=0.0324s
 
-performance_grid / non_vectorized: individuals=5000, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.1546s
+performance_grid / non_vectorized: individuals=5000, experiments=10, repeat=3, seed=12452, status=passed, runtime=0.0177s
 
-performance_grid / original: individuals=5000, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.2507s
+performance_grid / original: individuals=5000, experiments=10, repeat=3, seed=12452, status=passed, runtime=0.0321s
 
-performance_grid / optimized: individuals=5000, experiments=10, repeat=3, seed=12347, status=passed, runtime=0.1508s
+performance_grid / optimized: individuals=5000, experiments=10, repeat=3, seed=12452, status=passed, runtime=0.0067s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=5000, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.2498s
+performance_grid / original: individuals=5000, experiments=10, repeat=4, seed=12453, status=passed, runtime=0.0322s
 
-performance_grid / optimized: individuals=5000, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.1581s
+performance_grid / optimized: individuals=5000, experiments=10, repeat=4, seed=12453, status=passed, runtime=0.0067s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=10, repeat=4, seed=12348, status=passed, runtime=0.1583s
+performance_grid / non_vectorized: individuals=5000, experiments=10, repeat=4, seed=12453, status=passed, runtime=0.0178s
 
-performance_grid / optimized: individuals=5000, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.1566s
+performance_grid / optimized: individuals=5000, experiments=10, repeat=5, seed=12454, status=passed, runtime=0.0066s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.1497s
+performance_grid / non_vectorized: individuals=5000, experiments=10, repeat=5, seed=12454, status=passed, runtime=0.0178s
 
-performance_grid / original: individuals=5000, experiments=10, repeat=5, seed=12349, status=passed, runtime=0.2579s
+performance_grid / original: individuals=5000, experiments=10, repeat=5, seed=12454, status=passed, runtime=0.0322s
 
-performance_grid / non_vectorized: individuals=5000, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.6493s
+performance_grid / non_vectorized: individuals=5000, experiments=50, repeat=1, seed=12455, status=passed, runtime=0.0816s
 
-performance_grid / original: individuals=5000, experiments=50, repeat=1, seed=12345, status=passed, runtime=1.1893s
+performance_grid / original: individuals=5000, experiments=50, repeat=1, seed=12455, status=passed, runtime=0.1531s
 
-performance_grid / optimized: individuals=5000, experiments=50, repeat=1, seed=12345, status=passed, runtime=0.9535s
+performance_grid / optimized: individuals=5000, experiments=50, repeat=1, seed=12455, status=passed, runtime=0.0262s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=5000, experiments=50, repeat=2, seed=12346, status=passed, runtime=1.1786s
+performance_grid / original: individuals=5000, experiments=50, repeat=2, seed=12456, status=passed, runtime=0.1540s
 
-performance_grid / optimized: individuals=5000, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.6879s
+performance_grid / optimized: individuals=5000, experiments=50, repeat=2, seed=12456, status=passed, runtime=0.0257s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=50, repeat=2, seed=12346, status=passed, runtime=0.6876s
+performance_grid / non_vectorized: individuals=5000, experiments=50, repeat=2, seed=12456, status=passed, runtime=0.0816s
 
-performance_grid / optimized: individuals=5000, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.7016s
+performance_grid / optimized: individuals=5000, experiments=50, repeat=3, seed=12457, status=passed, runtime=0.0260s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=50, repeat=3, seed=12347, status=passed, runtime=0.6605s
+performance_grid / non_vectorized: individuals=5000, experiments=50, repeat=3, seed=12457, status=passed, runtime=0.0817s
 
-performance_grid / original: individuals=5000, experiments=50, repeat=3, seed=12347, status=passed, runtime=1.3605s
+performance_grid / original: individuals=5000, experiments=50, repeat=3, seed=12457, status=passed, runtime=0.1536s
 
-performance_grid / non_vectorized: individuals=5000, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.6901s
+performance_grid / non_vectorized: individuals=5000, experiments=50, repeat=4, seed=12458, status=passed, runtime=0.0815s
 
-performance_grid / original: individuals=5000, experiments=50, repeat=4, seed=12348, status=passed, runtime=1.1627s
+performance_grid / original: individuals=5000, experiments=50, repeat=4, seed=12458, status=passed, runtime=0.1536s
 
-performance_grid / optimized: individuals=5000, experiments=50, repeat=4, seed=12348, status=passed, runtime=0.6888s
+performance_grid / optimized: individuals=5000, experiments=50, repeat=4, seed=12458, status=passed, runtime=0.0259s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=5000, experiments=50, repeat=5, seed=12349, status=passed, runtime=1.1728s
+performance_grid / original: individuals=5000, experiments=50, repeat=5, seed=12459, status=passed, runtime=0.1550s
 
-performance_grid / optimized: individuals=5000, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.8914s
+performance_grid / optimized: individuals=5000, experiments=50, repeat=5, seed=12459, status=passed, runtime=0.0262s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=50, repeat=5, seed=12349, status=passed, runtime=0.6949s
+performance_grid / non_vectorized: individuals=5000, experiments=50, repeat=5, seed=12459, status=passed, runtime=0.0814s
 
-performance_grid / optimized: individuals=5000, experiments=100, repeat=1, seed=12345, status=passed, runtime=1.4344s
+performance_grid / optimized: individuals=5000, experiments=100, repeat=1, seed=12460, status=passed, runtime=0.0498s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=100, repeat=1, seed=12345, status=passed, runtime=1.3298s
+performance_grid / non_vectorized: individuals=5000, experiments=100, repeat=1, seed=12460, status=passed, runtime=0.1613s
 
-performance_grid / original: individuals=5000, experiments=100, repeat=1, seed=12345, status=passed, runtime=2.6484s
+performance_grid / original: individuals=5000, experiments=100, repeat=1, seed=12460, status=passed, runtime=0.3037s
 
-performance_grid / non_vectorized: individuals=5000, experiments=100, repeat=2, seed=12346, status=passed, runtime=1.4901s
+performance_grid / non_vectorized: individuals=5000, experiments=100, repeat=2, seed=12461, status=passed, runtime=0.1611s
 
-performance_grid / original: individuals=5000, experiments=100, repeat=2, seed=12346, status=passed, runtime=2.6381s
+performance_grid / original: individuals=5000, experiments=100, repeat=2, seed=12461, status=passed, runtime=0.3042s
 
-performance_grid / optimized: individuals=5000, experiments=100, repeat=2, seed=12346, status=passed, runtime=1.5478s
+performance_grid / optimized: individuals=5000, experiments=100, repeat=2, seed=12461, status=passed, runtime=0.0501s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=5000, experiments=100, repeat=3, seed=12347, status=passed, runtime=3.9516s
+performance_grid / original: individuals=5000, experiments=100, repeat=3, seed=12462, status=passed, runtime=0.3043s
 
-performance_grid / optimized: individuals=5000, experiments=100, repeat=3, seed=12347, status=passed, runtime=3.8617s
+performance_grid / optimized: individuals=5000, experiments=100, repeat=3, seed=12462, status=passed, runtime=0.0495s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=100, repeat=3, seed=12347, status=passed, runtime=2.7078s
+performance_grid / non_vectorized: individuals=5000, experiments=100, repeat=3, seed=12462, status=passed, runtime=0.1611s
 
-performance_grid / optimized: individuals=5000, experiments=100, repeat=4, seed=12348, status=passed, runtime=0.7089s
+performance_grid / optimized: individuals=5000, experiments=100, repeat=4, seed=12463, status=passed, runtime=0.0495s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=100, repeat=4, seed=12348, status=passed, runtime=6.0853s
+performance_grid / non_vectorized: individuals=5000, experiments=100, repeat=4, seed=12463, status=passed, runtime=0.1614s
 
-performance_grid / original: individuals=5000, experiments=100, repeat=4, seed=12348, status=passed, runtime=8.6308s
+performance_grid / original: individuals=5000, experiments=100, repeat=4, seed=12463, status=passed, runtime=0.3033s
 
-performance_grid / non_vectorized: individuals=5000, experiments=100, repeat=5, seed=12349, status=passed, runtime=3.3638s
+performance_grid / non_vectorized: individuals=5000, experiments=100, repeat=5, seed=12464, status=passed, runtime=0.1604s
 
-performance_grid / original: individuals=5000, experiments=100, repeat=5, seed=12349, status=passed, runtime=5.8486s
+performance_grid / original: individuals=5000, experiments=100, repeat=5, seed=12464, status=passed, runtime=0.3049s
 
-performance_grid / optimized: individuals=5000, experiments=100, repeat=5, seed=12349, status=passed, runtime=3.5468s
+performance_grid / optimized: individuals=5000, experiments=100, repeat=5, seed=12464, status=passed, runtime=0.0497s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=5000, experiments=250, repeat=1, seed=12345, status=passed, runtime=6.8768s
+performance_grid / original: individuals=5000, experiments=250, repeat=1, seed=12465, status=passed, runtime=0.7695s
 
-performance_grid / optimized: individuals=5000, experiments=250, repeat=1, seed=12345, status=passed, runtime=6.2156s
+performance_grid / optimized: individuals=5000, experiments=250, repeat=1, seed=12465, status=passed, runtime=0.1235s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=250, repeat=1, seed=12345, status=passed, runtime=7.6688s
+performance_grid / non_vectorized: individuals=5000, experiments=250, repeat=1, seed=12465, status=passed, runtime=0.3984s
 
-performance_grid / optimized: individuals=5000, experiments=250, repeat=2, seed=12346, status=passed, runtime=8.5467s
+performance_grid / optimized: individuals=5000, experiments=250, repeat=2, seed=12466, status=passed, runtime=0.1219s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=250, repeat=2, seed=12346, status=passed, runtime=6.5660s
+performance_grid / non_vectorized: individuals=5000, experiments=250, repeat=2, seed=12466, status=passed, runtime=0.3975s
 
-performance_grid / original: individuals=5000, experiments=250, repeat=2, seed=12346, status=passed, runtime=6.0615s
+performance_grid / original: individuals=5000, experiments=250, repeat=2, seed=12466, status=passed, runtime=0.7572s
 
-performance_grid / non_vectorized: individuals=5000, experiments=250, repeat=3, seed=12347, status=passed, runtime=4.5782s
+performance_grid / non_vectorized: individuals=5000, experiments=250, repeat=3, seed=12467, status=passed, runtime=0.3984s
 
-performance_grid / original: individuals=5000, experiments=250, repeat=3, seed=12347, status=passed, runtime=8.5371s
+performance_grid / original: individuals=5000, experiments=250, repeat=3, seed=12467, status=passed, runtime=0.7576s
 
-performance_grid / optimized: individuals=5000, experiments=250, repeat=3, seed=12347, status=passed, runtime=3.9217s
+performance_grid / optimized: individuals=5000, experiments=250, repeat=3, seed=12467, status=passed, runtime=0.1219s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=5000, experiments=250, repeat=4, seed=12348, status=passed, runtime=6.4880s
+performance_grid / original: individuals=5000, experiments=250, repeat=4, seed=12468, status=passed, runtime=0.7596s
 
-performance_grid / optimized: individuals=5000, experiments=250, repeat=4, seed=12348, status=passed, runtime=3.8381s
+performance_grid / optimized: individuals=5000, experiments=250, repeat=4, seed=12468, status=passed, runtime=0.1210s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=250, repeat=4, seed=12348, status=passed, runtime=3.3789s
+performance_grid / non_vectorized: individuals=5000, experiments=250, repeat=4, seed=12468, status=passed, runtime=0.3995s
 
-performance_grid / optimized: individuals=5000, experiments=250, repeat=5, seed=12349, status=passed, runtime=4.0267s
+performance_grid / optimized: individuals=5000, experiments=250, repeat=5, seed=12469, status=passed, runtime=0.1207s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=250, repeat=5, seed=12349, status=passed, runtime=3.8846s
+performance_grid / non_vectorized: individuals=5000, experiments=250, repeat=5, seed=12469, status=passed, runtime=0.3986s
 
-performance_grid / original: individuals=5000, experiments=250, repeat=5, seed=12349, status=passed, runtime=6.4490s
+performance_grid / original: individuals=5000, experiments=250, repeat=5, seed=12469, status=passed, runtime=0.7576s
 
-performance_grid / non_vectorized: individuals=5000, experiments=500, repeat=1, seed=12345, status=passed, runtime=7.5517s
+performance_grid / non_vectorized: individuals=5000, experiments=500, repeat=1, seed=12470, status=passed, runtime=0.7971s
 
-performance_grid / original: individuals=5000, experiments=500, repeat=1, seed=12345, status=passed, runtime=17.0390s
+performance_grid / original: individuals=5000, experiments=500, repeat=1, seed=12470, status=passed, runtime=1.5112s
 
-performance_grid / optimized: individuals=5000, experiments=500, repeat=1, seed=12345, status=passed, runtime=14.9193s
+performance_grid / optimized: individuals=5000, experiments=500, repeat=1, seed=12470, status=passed, runtime=0.2666s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=5000, experiments=500, repeat=2, seed=12346, status=passed, runtime=20.7347s
+performance_grid / original: individuals=5000, experiments=500, repeat=2, seed=12471, status=passed, runtime=1.5086s
 
-performance_grid / optimized: individuals=5000, experiments=500, repeat=2, seed=12346, status=passed, runtime=7.8043s
+performance_grid / optimized: individuals=5000, experiments=500, repeat=2, seed=12471, status=passed, runtime=0.2405s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=500, repeat=2, seed=12346, status=passed, runtime=6.7910s
+performance_grid / non_vectorized: individuals=5000, experiments=500, repeat=2, seed=12471, status=passed, runtime=0.7948s
 
-performance_grid / optimized: individuals=5000, experiments=500, repeat=3, seed=12347, status=passed, runtime=15.3479s
+performance_grid / optimized: individuals=5000, experiments=500, repeat=3, seed=12472, status=passed, runtime=0.2419s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=500, repeat=3, seed=12347, status=passed, runtime=14.0289s
+performance_grid / non_vectorized: individuals=5000, experiments=500, repeat=3, seed=12472, status=passed, runtime=0.7943s
 
-performance_grid / original: individuals=5000, experiments=500, repeat=3, seed=12347, status=passed, runtime=16.5207s
+performance_grid / original: individuals=5000, experiments=500, repeat=3, seed=12472, status=passed, runtime=1.5132s
 
-performance_grid / non_vectorized: individuals=5000, experiments=500, repeat=4, seed=12348, status=passed, runtime=7.0152s
+performance_grid / non_vectorized: individuals=5000, experiments=500, repeat=4, seed=12473, status=passed, runtime=0.7932s
 
-performance_grid / original: individuals=5000, experiments=500, repeat=4, seed=12348, status=passed, runtime=9.5136s
+performance_grid / original: individuals=5000, experiments=500, repeat=4, seed=12473, status=passed, runtime=1.5092s
 
-performance_grid / optimized: individuals=5000, experiments=500, repeat=4, seed=12348, status=passed, runtime=2.5354s
+performance_grid / optimized: individuals=5000, experiments=500, repeat=4, seed=12473, status=passed, runtime=0.2426s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=5000, experiments=500, repeat=5, seed=12349, status=passed, runtime=8.6270s
+performance_grid / original: individuals=5000, experiments=500, repeat=5, seed=12474, status=passed, runtime=1.5144s
 
-performance_grid / optimized: individuals=5000, experiments=500, repeat=5, seed=12349, status=passed, runtime=7.0750s
+performance_grid / optimized: individuals=5000, experiments=500, repeat=5, seed=12474, status=passed, runtime=0.2415s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=500, repeat=5, seed=12349, status=passed, runtime=6.2518s
+performance_grid / non_vectorized: individuals=5000, experiments=500, repeat=5, seed=12474, status=passed, runtime=0.7929s
 
-performance_grid / optimized: individuals=5000, experiments=1000, repeat=1, seed=12345, status=passed, runtime=13.9621s
+performance_grid / optimized: individuals=5000, experiments=1000, repeat=1, seed=12475, status=passed, runtime=0.5447s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=1000, repeat=1, seed=12345, status=passed, runtime=12.2281s
+performance_grid / non_vectorized: individuals=5000, experiments=1000, repeat=1, seed=12475, status=passed, runtime=1.5914s
 
-performance_grid / original: individuals=5000, experiments=1000, repeat=1, seed=12345, status=passed, runtime=23.0291s
+performance_grid / original: individuals=5000, experiments=1000, repeat=1, seed=12475, status=passed, runtime=3.0355s
 
-performance_grid / non_vectorized: individuals=5000, experiments=1000, repeat=2, seed=12346, status=passed, runtime=12.3020s
+performance_grid / non_vectorized: individuals=5000, experiments=1000, repeat=2, seed=12476, status=passed, runtime=1.5983s
 
-performance_grid / original: individuals=5000, experiments=1000, repeat=2, seed=12346, status=passed, runtime=23.1857s
+performance_grid / original: individuals=5000, experiments=1000, repeat=2, seed=12476, status=passed, runtime=3.1041s
 
-performance_grid / optimized: individuals=5000, experiments=1000, repeat=2, seed=12346, status=passed, runtime=15.1036s
+performance_grid / optimized: individuals=5000, experiments=1000, repeat=2, seed=12476, status=passed, runtime=0.5067s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=5000, experiments=1000, repeat=3, seed=12347, status=passed, runtime=28.3889s
+performance_grid / original: individuals=5000, experiments=1000, repeat=3, seed=12477, status=passed, runtime=3.0702s
 
-performance_grid / optimized: individuals=5000, experiments=1000, repeat=3, seed=12347, status=passed, runtime=7.2093s
+performance_grid / optimized: individuals=5000, experiments=1000, repeat=3, seed=12477, status=passed, runtime=0.4807s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=1000, repeat=3, seed=12347, status=passed, runtime=5.9743s
+performance_grid / non_vectorized: individuals=5000, experiments=1000, repeat=3, seed=12477, status=passed, runtime=1.5856s
 
-performance_grid / optimized: individuals=5000, experiments=1000, repeat=4, seed=12348, status=passed, runtime=4.7150s
+performance_grid / optimized: individuals=5000, experiments=1000, repeat=4, seed=12478, status=passed, runtime=0.4846s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=1000, repeat=4, seed=12348, status=passed, runtime=4.5585s
+performance_grid / non_vectorized: individuals=5000, experiments=1000, repeat=4, seed=12478, status=passed, runtime=1.5896s
 
-performance_grid / original: individuals=5000, experiments=1000, repeat=4, seed=12348, status=passed, runtime=8.4071s
+performance_grid / original: individuals=5000, experiments=1000, repeat=4, seed=12478, status=passed, runtime=3.0230s
 
-performance_grid / non_vectorized: individuals=5000, experiments=1000, repeat=5, seed=12349, status=passed, runtime=4.6907s
+performance_grid / non_vectorized: individuals=5000, experiments=1000, repeat=5, seed=12479, status=passed, runtime=1.5914s
 
-performance_grid / original: individuals=5000, experiments=1000, repeat=5, seed=12349, status=passed, runtime=40.9992s
+performance_grid / original: individuals=5000, experiments=1000, repeat=5, seed=12479, status=passed, runtime=3.0183s
 
-performance_grid / optimized: individuals=5000, experiments=1000, repeat=5, seed=12349, status=passed, runtime=15.6743s
+performance_grid / optimized: individuals=5000, experiments=1000, repeat=5, seed=12479, status=passed, runtime=0.4851s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=5000, experiments=2000, repeat=1, seed=12345, status=passed, runtime=54.2217s
+performance_grid / original: individuals=5000, experiments=2000, repeat=1, seed=12480, status=passed, runtime=6.2744s
 
-performance_grid / optimized: individuals=5000, experiments=2000, repeat=1, seed=12345, status=passed, runtime=22.9186s
+performance_grid / optimized: individuals=5000, experiments=2000, repeat=1, seed=12480, status=passed, runtime=1.2149s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=2000, repeat=1, seed=12345, status=passed, runtime=26.0951s
+performance_grid / non_vectorized: individuals=5000, experiments=2000, repeat=1, seed=12480, status=passed, runtime=3.4172s
 
-performance_grid / optimized: individuals=5000, experiments=2000, repeat=2, seed=12346, status=passed, runtime=29.9442s
+performance_grid / optimized: individuals=5000, experiments=2000, repeat=2, seed=12481, status=passed, runtime=1.0653s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=2000, repeat=2, seed=12346, status=passed, runtime=19.6725s
+performance_grid / non_vectorized: individuals=5000, experiments=2000, repeat=2, seed=12481, status=passed, runtime=3.1913s
 
-performance_grid / original: individuals=5000, experiments=2000, repeat=2, seed=12346, status=passed, runtime=44.3278s
+performance_grid / original: individuals=5000, experiments=2000, repeat=2, seed=12481, status=passed, runtime=6.0861s
 
-performance_grid / non_vectorized: individuals=5000, experiments=2000, repeat=3, seed=12347, status=passed, runtime=25.5198s
+performance_grid / non_vectorized: individuals=5000, experiments=2000, repeat=3, seed=12482, status=passed, runtime=3.1774s
 
-performance_grid / original: individuals=5000, experiments=2000, repeat=3, seed=12347, status=passed, runtime=49.1022s
+performance_grid / original: individuals=5000, experiments=2000, repeat=3, seed=12482, status=passed, runtime=6.0275s
 
-performance_grid / optimized: individuals=5000, experiments=2000, repeat=3, seed=12347, status=passed, runtime=30.8494s
+performance_grid / optimized: individuals=5000, experiments=2000, repeat=3, seed=12482, status=passed, runtime=0.9556s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / original: individuals=5000, experiments=2000, repeat=4, seed=12348, status=passed, runtime=49.4061s
+performance_grid / original: individuals=5000, experiments=2000, repeat=4, seed=12483, status=passed, runtime=6.0383s
 
-performance_grid / optimized: individuals=5000, experiments=2000, repeat=4, seed=12348, status=passed, runtime=21.3219s
+performance_grid / optimized: individuals=5000, experiments=2000, repeat=4, seed=12483, status=passed, runtime=0.9578s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=2000, repeat=4, seed=12348, status=passed, runtime=22.0197s
+performance_grid / non_vectorized: individuals=5000, experiments=2000, repeat=4, seed=12483, status=passed, runtime=3.1728s
 
-performance_grid / optimized: individuals=5000, experiments=2000, repeat=5, seed=12349, status=passed, runtime=31.1087s
+performance_grid / optimized: individuals=5000, experiments=2000, repeat=5, seed=12484, status=passed, runtime=0.9886s
+  Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul
 
-performance_grid / non_vectorized: individuals=5000, experiments=2000, repeat=5, seed=12349, status=passed, runtime=28.0601s
+performance_grid / non_vectorized: individuals=5000, experiments=2000, repeat=5, seed=12484, status=passed, runtime=3.2336s
 
-performance_grid / original: individuals=5000, experiments=2000, repeat=5, seed=12349, status=passed, runtime=39.3549s
+performance_grid / original: individuals=5000, experiments=2000, repeat=5, seed=12484, status=passed, runtime=6.2503s

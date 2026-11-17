@@ -406,7 +406,7 @@ if __name__ == "__main__":
         csv_path=TIMINGS_PATH,
         individual_counts=(100, 500, 1000, 5000),
         experiment_counts=(10, 50, 100, 250, 500, 1000,2000),
-        repeats=1,  # Increase to 3 for less noisy measurements.
+        repeats=5,  
         base_seed=12345,
     )
 
