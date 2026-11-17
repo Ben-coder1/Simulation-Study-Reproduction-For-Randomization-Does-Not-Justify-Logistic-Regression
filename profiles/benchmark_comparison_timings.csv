@@ -1,7 +1,7 @@
-repeat,first_version,original_seconds,optimized_seconds
-1,original,13.595882,6.013797
-2,optimized,13.556539,5.865235
-3,original,12.853996,6.536484
-4,optimized,13.759369,6.028146
-5,original,13.826931,6.651834
-6,optimized,13.331344,6.116480
+repeat,first_version,method,runtime_seconds
+1,original,original,29.416274
+1,original,optimized,9.898378
+1,original,non_vectorized,15.815054
+2,optimized,original,24.241071
+2,optimized,optimized,9.543698
+2,optimized,non_vectorized,14.655639

@@ -1,4 +1,4 @@
-.PHONY: all simulate analyze figures test clean profile complexity profile_optimized benchmark optimized_validation
+.PHONY: all simulate analyze figures test clean profile complexity profile_optimized benchmark performance memory optimized_validation
 
 test: 
 	python -m pytest
@@ -38,6 +38,12 @@ complexity:
 
 benchmark: 
 	python -m profiling.benchmark_comparisons
+
+performance:
+	python -m profiling.performance_comparisons
+
+memory:
+	python -m profiling.memory_comparisons
 
 optimized_validation:
 	python -m pytest -s tests/test_method_optimized.py

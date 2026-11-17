@@ -1,4 +1,4 @@
-"""Benchmark original and optimized pipelines independently."""
+"""Benchmark all simulation pipelines independently."""
 
 import csv
 import gc
@@ -11,6 +11,9 @@ import matplotlib.pyplot as plt
 # Adjust the original import if its module has a different location.
 from src.simulation import run_from_config as run_original
 from src_optimized.simulation import run_from_config as run_optimized
+from src_optimized.non_vectorized_simulation import (
+    run_from_config as run_non_vectorized,
+)
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -20,11 +23,18 @@ TIMINGS_PATH = PROFILES_DIR / "benchmark_comparison_timings.csv"
 SUMMARY_PATH = PROFILES_DIR / "benchmark_comparison_summary.txt"
 PLOT_PATH = PROFILES_DIR / "benchmark_comparison.png"
 
-N_REPEATS = 20
+N_REPEATS = 2
 
 RUNNERS = {
     "original": run_original,
     "optimized": run_optimized,
+    "non_vectorized": run_non_vectorized,
+}
+
+DISPLAY_NAMES = {
+    "original": "Original",
+    "optimized": "Optimized / vectorized",
+    "non_vectorized": "Non-vectorized",
 }
 
 
@@ -49,31 +59,20 @@ def save_results(timings):
         "w", newline="", encoding="utf-8"
     ) as file:
         writer = csv.writer(file)
-        writer.writerow(
-            [
-                "repeat",
-                "first_version",
-                "original_seconds",
-                "optimized_seconds",
-            ]
-        )
+        writer.writerow(["repeat", "first_version", "method", "runtime_seconds"])
 
-        for index, (original, optimized) in enumerate(
-            zip(timings["original"], timings["optimized"]),
-            start=1,
-        ):
-            writer.writerow(
-                [
-                    index,
-                    "original" if index % 2 else "optimized",
-                    f"{original:.6f}",
-                    f"{optimized:.6f}",
-                ]
-            )
-
-    original_median = median(timings["original"])
-    optimized_median = median(timings["optimized"])
-    speedup = original_median / optimized_median
+        for index in range(len(timings["original"])):
+            order = list(RUNNERS)
+            first_version = order[index % len(order)]
+            for version in order:
+                writer.writerow(
+                    [
+                        index + 1,
+                        first_version,
+                        version,
+                        f"{timings[version][index]:.6f}",
+                    ]
+                )
 
     lines = [
         "End-to-end benchmark comparison",
@@ -85,15 +84,15 @@ def save_results(timings):
         "",
     ]
 
+    original_median = median(timings["original"])
     for version, values in timings.items():
         lines.append(
-            f"{version}: "
+            f"{DISPLAY_NAMES[version]}: "
             f"median={median(values):.6f} s, "
             f"min={min(values):.6f} s, "
-            f"max={max(values):.6f} s"
+            f"max={max(values):.6f} s, "
+            f"speedup_vs_original={original_median / median(values):.3f}x"
         )
-
-    lines.append(f"\nMedian speedup: {speedup:.3f}x")
 
     SUMMARY_PATH.write_text(
         "\n".join(lines) + "\n",
@@ -104,24 +103,22 @@ def save_results(timings):
 
     fig, ax = plt.subplots(figsize=(8, 5))
 
-    ax.plot(
-        repeats,
-        timings["original"],
-        marker="o",
-        linestyle="-",
-        label="Original",
-    )
-    ax.plot(
-        repeats,
-        timings["optimized"],
-        marker="s",
-        linestyle="--",
-        label="Optimized",
-    )
+    for version, marker, linestyle in (
+        ("original", "o", "-"),
+        ("optimized", "s", "--"),
+        ("non_vectorized", "^", ":"),
+    ):
+        ax.plot(
+            repeats,
+            timings[version],
+            marker=marker,
+            linestyle=linestyle,
+            label=DISPLAY_NAMES[version],
+        )
 
     ax.set_xlabel("Benchmark repeat")
     ax.set_ylabel("End-to-end runtime (seconds)")
-    ax.set_title("Original versus optimized pipeline runtime")
+    ax.set_title("End-to-end simulation pipeline runtime")
     ax.set_xticks(repeats)
     ax.grid(True, linestyle="--", alpha=0.4)
     ax.legend()
@@ -132,21 +129,20 @@ def save_results(timings):
 
 
 def main():
-    timings = {"original": [], "optimized": []}
+    timings = {version: [] for version in RUNNERS}
 
     print(
-        "Warming up both versions; these times are discarded.",
+        "Warming up all implementations; these times are discarded.",
         flush=True,
     )
     timed_run("original")
     timed_run("optimized")
+    timed_run("non_vectorized")
 
     for repeat in range(N_REPEATS):
-        order = (
-            ["original", "optimized"]
-            if repeat % 2 == 0
-            else ["optimized", "original"]
-        )
+        versions = list(RUNNERS)
+        offset = repeat % len(versions)
+        order = versions[offset:] + versions[:offset]
 
         # Only record a paired repeat after both versions succeed.
         pair = {}
@@ -170,16 +166,17 @@ def main():
 
     for version, values in timings.items():
         print(
-            f"{version}: "
+            f"{DISPLAY_NAMES[version]}: "
             f"median={median(values):.3f} s, "
             f"min={min(values):.3f} s, "
             f"max={max(values):.3f} s"
         )
 
-    print(
-        "\nMedian speedup: "
-        f"{median(timings['original']) / median(timings['optimized']):.2f}x"
-    )
+    for version in ("optimized", "non_vectorized"):
+        print(
+            f"Median speedup ({DISPLAY_NAMES[version]} vs original): "
+            f"{median(timings['original']) / median(timings[version]):.2f}x"
+        )
 
     print(f"\nTimings: {TIMINGS_PATH.resolve()}")
     print(f"Summary: {SUMMARY_PATH.resolve()}")

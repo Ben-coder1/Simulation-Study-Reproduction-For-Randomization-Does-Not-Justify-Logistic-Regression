@@ -3,9 +3,8 @@ Scope: each version's run_from_config() entry point.
 Includes data generation, estimation, and pipeline file saving.
 Excludes imports, warm-up, and benchmark report generation.
 No numerical-equivalence checks are performed.
-Completed repeats per version: 6
+Completed repeats per version: 2
 
-original: median=13.576210 s, min=12.853996 s, max=13.826931 s
-optimized: median=6.072313 s, min=5.865235 s, max=6.651834 s
-
-Median speedup: 2.236x
+Original: median=26.828672 s, min=24.241071 s, max=29.416274 s, speedup_vs_original=1.000x
+Optimized / vectorized: median=9.721038 s, min=9.543698 s, max=9.898378 s, speedup_vs_original=2.760x
+Non-vectorized: median=15.235347 s, min=14.655639 s, max=15.815054 s, speedup_vs_original=1.761x

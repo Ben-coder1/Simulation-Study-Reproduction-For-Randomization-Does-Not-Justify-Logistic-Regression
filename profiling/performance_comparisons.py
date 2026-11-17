@@ -347,9 +347,7 @@ def graph_runtime_data(
         ax.set_ylabel("Median runtime (seconds)")
         ax.grid(True, alpha=0.3)
 
-        if plotted:
-            ax.legend()
-        else:
+        if not plotted:
             ax.text(
                 0.5,
                 0.5,
@@ -378,10 +376,20 @@ def graph_runtime_data(
     for ax in list(axes.flat)[len(populations):]:
         ax.set_visible(False)
 
+    # A single figure-level legend keeps the four population panels readable.
+    handles, labels = axes.flat[0].get_legend_handles_labels()
+    if handles:
+        fig.legend(
+            handles,
+            labels,
+            loc="upper center",
+            ncol=len(handles),
+            bbox_to_anchor=(0.5, 0.93),
+        )
     fig.suptitle(
         "Performance comparisons — simulation implementations"
     )
-    fig.tight_layout(rect=(0, 0, 1, 0.96))
+    fig.tight_layout(rect=(0, 0, 1, 0.88))
     fig.savefig(plot_path, dpi=200)
 
     if show:
@@ -389,27 +397,7 @@ def graph_runtime_data(
 
     plt.close(fig)
 
-    # Separate figure for each population size.
-    for n_ind in populations:
-        fig, ax = plt.subplots(figsize=(8, 5))
-        draw_population(ax, n_ind)
-        ax.set_title(
-            f"Performance comparisons — {n_ind:,} individuals"
-        )
-        fig.tight_layout()
-
-        individual_plot_path = plot_path.with_name(
-            f"{plot_path.stem}_{n_ind}_individuals"
-            f"{plot_path.suffix}"
-        )
-        fig.savefig(individual_plot_path, dpi=200)
-        plt.close(fig)
-
-        print(
-            f"Individual graph: {individual_plot_path.resolve()}"
-        )
-
-    print(f"Combined graph:   {plot_path.resolve()}")
+    print(f"Faceted graph:    {plot_path.resolve()}")
     print(f"Summary:          {summary_path.resolve()}")
 
 
@@ -418,7 +406,7 @@ if __name__ == "__main__":
         csv_path=TIMINGS_PATH,
         individual_counts=(100, 500, 1000, 5000),
         experiment_counts=(10, 50, 100, 250, 500, 1000,2000),
-        repeats=5,  # Increase to 3 for less noisy measurements.
+        repeats=1,  # Increase to 3 for less noisy measurements.
         base_seed=12345,
     )
 
