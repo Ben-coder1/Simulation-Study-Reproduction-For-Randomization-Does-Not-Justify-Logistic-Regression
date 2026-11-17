@@ -107,7 +107,7 @@ As you can see from the charts it runs faster, however it takes up a lot more me
 
 However, the speedup depends drastically on what computer you are using. The charts you see above were all from my mac, while my older pc actually had much less speedup, including no improvement when simulating 5000 individuals.
 
-One other thing to note is that this code, when run on my mac (but not my windows), often produces the following: "Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul". According to the internet, this is a known mac bug, and need not be evidence of convergence issues, especially as my regression tests pass.
+One other thing to note is that this code, when run on my mac (but not my windows), often produces the following: "Warnings: RuntimeWarning: divide by zero encountered in matmul | RuntimeWarning: invalid value encountered in matmul | RuntimeWarning: overflow encountered in matmul". According to the internet, this is a known mac bug, and need not be evidence of convergence issues, especially as my regression tests pass. 
 
 
 

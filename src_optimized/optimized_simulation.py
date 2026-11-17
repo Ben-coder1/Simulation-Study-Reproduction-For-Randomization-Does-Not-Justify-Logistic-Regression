@@ -3,7 +3,7 @@ from pathlib import Path
 
 import numpy as np
 
-from configuration import PICKLE_LOCATION, SEED, SIMULATIONS
+from configuration_optimized import PICKLE_LOCATION, SEED, SIMULATIONS
 from src.dgps import (
     EXPERIMENT_DGPS,
     INDIVIDUAL_DGPS,

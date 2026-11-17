@@ -1,4 +1,4 @@
-The entire runtime of the simulation was a little less than 37 seconds. THe profiler showed that the vast majority of time is spent on estimating the coefficients and not generating the data. 
+The entire runtime of the simulation was a little less than 13 seconds on my mac computer. THe profiler showed that the vast majority of time is spent on estimating the coefficients and not generating the data. 
 Particularly long amounts of time are spent with the logistic regression fit method. This can be seen in performance_results/profiles/base/simulation_profile.txt or the associated flamegraph showbn here:
 
 ![base-flamgegraph](../performance_results/profiles/base/simulation_flamegraph.svg)

@@ -10,7 +10,7 @@ import matplotlib.pyplot as plt
 
 # Adjust the original import if its module has a different location.
 from src.simulation import run_from_config as run_original
-from src_optimized.simulation import run_from_config as run_optimized
+from src_optimized.optimized_simulation import run_from_config as run_optimized
 from src_optimized.non_vectorized_simulation import (
     run_from_config as run_non_vectorized,
 )

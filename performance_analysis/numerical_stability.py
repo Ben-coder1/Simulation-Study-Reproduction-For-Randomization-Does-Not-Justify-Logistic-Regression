@@ -12,7 +12,7 @@ from tqdm.auto import tqdm
 from tqdm.std import tqdm as tqdm_base
 
 import src.simulation as original_module
-import src_optimized.simulation as optimized_module
+import src_optimized.optimized_simulation as optimized_module
 import src_optimized.non_vectorized_simulation as non_vectorized_module
 
 

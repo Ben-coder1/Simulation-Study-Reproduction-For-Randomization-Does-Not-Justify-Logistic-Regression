@@ -9,11 +9,11 @@ import numpy as np
 
 # Adjust these imports if your simulation files are located elsewhere.
 import src.simulation as original_module
-import src_optimized.simulation as optimized_module
+import src_optimized.optimized_simulation as optimized_module
 import src_optimized.non_vectorized_simulation as non_vectorized_module
 
 from src.simulation import run_from_config as run_original_simulations
-from src_optimized.simulation import (
+from src_optimized.optimized_simulation import (
     run_from_config as run_optimized_simulations,
 )
 from src_optimized.non_vectorized_simulation import (

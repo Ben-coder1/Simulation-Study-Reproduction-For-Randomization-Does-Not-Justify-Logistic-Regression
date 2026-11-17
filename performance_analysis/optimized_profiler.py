@@ -4,7 +4,7 @@ import subprocess
 import sys
 from pathlib import Path
 
-from src_optimized.simulation import run_from_config
+from src_optimized.optimized_simulation import run_from_config
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PROFILE_DIR = PROJECT_ROOT / "performance_results" / "profiles" / "optimized"

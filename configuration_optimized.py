@@ -3,7 +3,7 @@ from pathlib import Path
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 
-RESULTS_DIR = PROJECT_ROOT / "optimized_results"
+RESULTS_DIR = PROJECT_ROOT / "results"
 RAW_RESULTS_DIR = RESULTS_DIR / "raw"
 TABLES_DIR = RESULTS_DIR / "tables"
 FIGURES_DIR = RESULTS_DIR / "figures"

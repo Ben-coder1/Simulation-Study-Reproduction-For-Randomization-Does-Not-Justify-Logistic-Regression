@@ -47,6 +47,8 @@ Using the assignment coefficient from logistic regression is biased when the dat
 | `make clean` | Removes temporary files and results folder. |
 | `make test` | Runs tests using pytest. |
 | `make simulate` | Runs simulations. |
+| `make simulate-optimized` | Runs the optimized simulation and records its completion. |
+| `make all-optimized` | Runs the optimized simulation, then analyzes its results and creates figures in `results`. |
 | `make analyze` | Runs analysis. |
 | `make figures` | Creates the figures. |
 | `make complexity` | Measures simulation runtime as the number of individuals changes. |
