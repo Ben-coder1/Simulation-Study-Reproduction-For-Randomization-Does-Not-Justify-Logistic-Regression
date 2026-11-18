@@ -48,8 +48,8 @@ estimator_results = {
     },
 }
 ```
-
-This improved runtime by about 1.9x for the entire simulation. No impact on memory usage or stability gains
+## Impact 
+This improved runtime by about 1.9x for the original simulation suite. No impact on memory usage or stability gains
 
 The main trade off is in code readability and extensibility. Before, my simulation method took in a list of methods, but now I instead just always use this one method, and do not take them in as separate methods.
 
@@ -99,6 +99,8 @@ for _ in range(self.max_iter):
     ...
 ```
 
+## Impact
+
 As you can see from the charts it runs faster, however it takes up a lot more memory. This can be seen by the associated charts.
 
 
@@ -111,7 +113,53 @@ One other thing to note is that this code, when run on my mac (but not my window
 
 
 
+# Optimization 3
+
+
+This handles the same issue/bottleneck as before.
+
+
+
+I applied parallelization to the logistic regression fitting.
+
+## Code Change
+
+
+```python
+ def generate_parameter_estimates(
+        self,
+        experiment_results: list[ExperimentResults],
+    ) -> tuple[np.ndarray, np.ndarray]:
+        n_chunks = min(self.workers, len(experiment_results))
+        estimate = self.estimator.generate_parameter_estimates
+        if n_chunks <= 1:
+            return estimate(experiment_results)
+
+        chunk_size, remainder = divmod(len(experiment_results), n_chunks)
+        chunks = []
+        start = 0
+        for chunk_index in range(n_chunks):
+            stop = start + chunk_size + (chunk_index < remainder)
+            chunks.append(experiment_results[start:stop])
+            start = stop
+
+        # map yields results in chunk order even if a later chunk finishes first.
+        plug_in_estimates, coefficients = zip(*self.executor.map(estimate, chunks))
+        return (
+            np.concatenate(plug_in_estimates),
+            np.concatenate(coefficients, axis=0),
+        )
+```
+
+## Impact
+
+It improved runtime over the vectorized but non-parallel by about 1.4x. Refer to the previous charts for comparisons. It has the same memory usage, and has greater timing improvemenets when there are more experiments, and more individuals. It is actually slower when there are few individuals and few experiements. 
+
+
+
 # LESSONS LEARNED
 Removing duplicated code was the best return on investment since it gave a sizeable performance boost for minimal results. I was minimally surprised about where time was spent. I rogiinally planned to vectorize the experiment creations, but since the profiling showed that very little time was spent there I decided against it. In general, I think any optimziatinos regarding the DGP would not be worth it here.
+
+The other improvmeent that was a great return on investmenet was parallelization, as it provided noticeable improvement without too much extra work. 
 
 One other thing I learned is that an optimization may have different levels of effect on different hardware. While obviously possible, I did not expect such thigns to happen here. 

@@ -1,0 +1,109 @@
+Vectorized simulation with two fitting threads
+Profiled pipeline wall time: 1.117 s
+Summed fit profile time: 1.789 s
+Profiled fit chunks: 8
+The flamegraph aggregates fit time across both workers.
+         287326 function calls in 1.789 seconds
+
+   Ordered by: cumulative time
+
+   ncalls  tottime  percall  cumtime  percall filename:lineno(function)
+        8    1.274    0.159    1.789    0.224 optimized_methods.py:348(generate_parameter_estimates)
+     8000    0.009    0.000    0.274    0.000 _arraysetops_impl.py:145(unique)
+     8000    0.069    0.000    0.262    0.000 _arraysetops_impl.py:339(_unique1d)
+     8000    0.172    0.000    0.172    0.000 {method 'sort' of 'numpy.ndarray' objects}
+     8000    0.007    0.000    0.121    0.000 _arraysetops_impl.py:1015(isin)
+     8000    0.094    0.000    0.112    0.000 _arraysetops_impl.py:862(_in1d)
+    44108    0.064    0.000    0.064    0.000 {built-in method numpy.asarray}
+    12308    0.003    0.000    0.028    0.000 {method 'all' of 'numpy.ndarray' objects}
+    12374    0.026    0.000    0.026    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+     4000    0.014    0.000    0.025    0.000 numeric.py:2475(array_equal)
+    12308    0.003    0.000    0.025    0.000 _methods.py:67(_all)
+     8000    0.017    0.000    0.017    0.000 {method 'flatten' of 'numpy.ndarray' objects}
+       50    0.009    0.000    0.009    0.000 _linalg.py:320(solve)
+     8008    0.006    0.000    0.006    0.000 {built-in method numpy.zeros}
+       16    0.000    0.000    0.004    0.000 {method 'mean' of 'numpy.ndarray' objects}
+       16    0.000    0.000    0.004    0.000 _methods.py:118(_mean)
+    24008    0.003    0.000    0.003    0.000 {method 'ravel' of 'numpy.ndarray' objects}
+     8000    0.002    0.000    0.003    0.000 {built-in method builtins.all}
+     8048    0.003    0.000    0.003    0.000 {built-in method numpy.empty}
+     8000    0.002    0.000    0.003    0.000 _arraysetops_impl.py:132(_unpack_tuple)
+    16000    0.002    0.000    0.002    0.000 _arraysetops_impl.py:876(<genexpr>)
+    32019    0.002    0.000    0.002    0.000 {built-in method builtins.len}
+     8000    0.002    0.000    0.002    0.000 {method 'reshape' of 'numpy.ndarray' objects}
+    20024    0.001    0.000    0.001    0.000 {built-in method numpy.asanyarray}
+     8000    0.001    0.000    0.001    0.000 _arraysetops_impl.py:140(_unique_dispatcher)
+     8000    0.001    0.000    0.001    0.000 _arraysetops_impl.py:1010(_isin_dispatcher)
+       50    0.000    0.000    0.001    0.000 fromnumeric.py:3052(max)
+       50    0.000    0.000    0.001    0.000 fromnumeric.py:69(_wrapreduction)
+        6    0.000    0.000    0.001    0.000 warnings.py:97(_showwarnmsg)
+        6    0.000    0.000    0.001    0.000 warnings.py:20(_showwarnmsg_impl)
+        6    0.000    0.000    0.000    0.000 warnings.py:118(_formatwarnmsg)
+        6    0.000    0.000    0.000    0.000 warnings.py:35(_formatwarnmsg_impl)
+     4000    0.000    0.000    0.000    0.000 numeric.py:2456(_array_equal_dispatcher)
+        6    0.000    0.000    0.000    0.000 linecache.py:26(getline)
+        6    0.000    0.000    0.000    0.000 linecache.py:36(getlines)
+        1    0.000    0.000    0.000    0.000 linecache.py:80(updatecache)
+       50    0.000    0.000    0.000    0.000 _linalg.py:148(_commonType)
+        1    0.000    0.000    0.000    0.000 tokenize.py:392(open)
+       50    0.000    0.000    0.000    0.000 _ufunc_config.py:440(__enter__)
+        1    0.000    0.000    0.000    0.000 {method 'readlines' of '_io._IOBase' objects}
+        8    0.000    0.000    0.000    0.000 numeric.py:646(flatnonzero)
+      100    0.000    0.000    0.000    0.000 _linalg.py:123(_makearray)
+       16    0.000    0.000    0.000    0.000 numeric.py:290(full)
+       16    0.000    0.000    0.000    0.000 _methods.py:76(_count_reduce_items)
+        1    0.000    0.000    0.000    0.000 {built-in method io.open}
+        6    0.000    0.000    0.000    0.000 {method 'write' of '_io.TextIOWrapper' objects}
+        8    0.000    0.000    0.000    0.000 fromnumeric.py:2018(nonzero)
+      100    0.000    0.000    0.000    0.000 _linalg.py:142(_realType)
+       50    0.000    0.000    0.000    0.000 _ufunc_config.py:456(__exit__)
+        8    0.000    0.000    0.000    0.000 fromnumeric.py:51(_wrapfunc)
+      150    0.000    0.000    0.000    0.000 _linalg.py:128(isComplexType)
+       50    0.000    0.000    0.000    0.000 _ufunc_config.py:430(__init__)
+        1    0.000    0.000    0.000    0.000 {built-in method posix.stat}
+       50    0.000    0.000    0.000    0.000 {built-in method numpy._core._multiarray_umath._make_extobj}
+        1    0.000    0.000    0.000    0.000 tokenize.py:299(detect_encoding)
+        8    0.000    0.000    0.000    0.000 fromnumeric.py:1904(ravel)
+        8    0.000    0.000    0.000    0.000 numeric.py:137(ones)
+       50    0.000    0.000    0.000    0.000 fromnumeric.py:70(<dictcomp>)
+        8    0.000    0.000    0.000    0.000 {built-in method numpy.arange}
+       50    0.000    0.000    0.000    0.000 _linalg.py:198(_assert_stacked_square)
+      282    0.000    0.000    0.000    0.000 {built-in method builtins.issubclass}
+       50    0.000    0.000    0.000    0.000 {method 'transpose' of 'numpy.ndarray' objects}
+        8    0.000    0.000    0.000    0.000 {method 'nonzero' of 'numpy.ndarray' objects}
+       50    0.000    0.000    0.000    0.000 _linalg.py:192(_assert_stacked_2d)
+       50    0.000    0.000    0.000    0.000 {method 'set' of '_contextvars.ContextVar' objects}
+       50    0.000    0.000    0.000    0.000 {method 'astype' of 'numpy.ndarray' objects}
+        8    0.000    0.000    0.000    0.000 cProfile.py:118(__exit__)
+       50    0.000    0.000    0.000    0.000 {method 'reset' of '_contextvars.ContextVar' objects}
+       50    0.000    0.000    0.000    0.000 {method '__array_wrap__' of 'numpy.ndarray' objects}
+        5    0.000    0.000    0.000    0.000 <frozen codecs>:319(decode)
+      108    0.000    0.000    0.000    0.000 {built-in method builtins.getattr}
+        6    0.000    0.000    0.000    0.000 warnings.py:404(__init__)
+        1    0.000    0.000    0.000    0.000 {method '__exit__' of '_io._IOBase' objects}
+        1    0.000    0.000    0.000    0.000 tokenize.py:323(read_or_stop)
+        5    0.000    0.000    0.000    0.000 {built-in method _codecs.utf_8_decode}
+       40    0.000    0.000    0.000    0.000 {built-in method builtins.isinstance}
+        1    0.000    0.000    0.000    0.000 {method 'readline' of '_io.BufferedReader' objects}
+      100    0.000    0.000    0.000    0.000 {method 'get' of 'dict' objects}
+       50    0.000    0.000    0.000    0.000 {method 'items' of 'dict' objects}
+        1    0.000    0.000    0.000    0.000 tokenize.py:329(find_cookie)
+       50    0.000    0.000    0.000    0.000 fromnumeric.py:3047(_max_dispatcher)
+       50    0.000    0.000    0.000    0.000 _linalg.py:316(_solve_dispatcher)
+       24    0.000    0.000    0.000    0.000 multiarray.py:1098(copyto)
+        2    0.000    0.000    0.000    0.000 {method 'match' of 're.Pattern' objects}
+        1    0.000    0.000    0.000    0.000 <frozen codecs>:309(__init__)
+        8    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
+       16    0.000    0.000    0.000    0.000 {built-in method numpy.lib.array_utils.normalize_axis_index}
+        6    0.000    0.000    0.000    0.000 {method 'strip' of 'str' objects}
+        8    0.000    0.000    0.000    0.000 numeric.py:642(_flatnonzero_dispatcher)
+        8    0.000    0.000    0.000    0.000 fromnumeric.py:2014(_nonzero_dispatcher)
+        8    0.000    0.000    0.000    0.000 fromnumeric.py:1900(_ravel_dispatcher)
+        1    0.000    0.000    0.000    0.000 {method 'startswith' of 'bytes' objects}
+        1    0.000    0.000    0.000    0.000 {method 'decode' of 'bytes' objects}
+        1    0.000    0.000    0.000    0.000 {method 'startswith' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 {method 'seek' of '_io.BufferedReader' objects}
+        1    0.000    0.000    0.000    0.000 {method 'endswith' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 <frozen codecs>:260(__init__)
+
+

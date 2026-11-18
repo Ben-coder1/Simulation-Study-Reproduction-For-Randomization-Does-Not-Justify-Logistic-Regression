@@ -9,9 +9,11 @@ from unittest.mock import patch
 import matplotlib.pyplot as plt
 import numpy as np
 
+from performance_analysis.progress import comparison_progress
 import src.simulation as original_module
 import src_optimized.optimized_simulation as optimized_module
 import src_optimized.non_vectorized_simulation as non_vectorized_module
+from src_optimized import simulate_parallel
 
 from src.simulation import run_from_config as run_original_simulations
 from src_optimized.optimized_simulation import (
@@ -45,6 +47,7 @@ METHOD_LABELS = [
     ("original", "Original"),
     ("optimized", "Optimized / vectorized"),
     ("non_vectorized", "Non-vectorized"),
+    ("parallel", "Vectorized, 2 threads"),
 ]
 
 
@@ -82,14 +85,24 @@ def measure_one_run(
     Timing includes data generation, estimation, and pickle serialization.
     Normal configuration files and pickle outputs are not modified.
     """
-    with (
-        patch.object(module, "SIMULATIONS", [simulation_config]),
-        patch.object(module, "SEED", seed),
-        patch.object(module, "PICKLE_LOCATION", pickle_path),
-    ):
+    if module is simulate_parallel:
         start = perf_counter()
-        results = run_function()
+        results = run_function(
+            workers=2,
+            simulation_configs=[simulation_config],
+            seed=seed,
+            pickle_path=pickle_path,
+        )
         elapsed = perf_counter() - start
+    else:
+        with (
+            patch.object(module, "SIMULATIONS", [simulation_config]),
+            patch.object(module, "SEED", seed),
+            patch.object(module, "PICKLE_LOCATION", pickle_path),
+        ):
+            start = perf_counter()
+            results = run_function()
+            elapsed = perf_counter() - start
 
     # Release returned arrays before the next measured run.
     del results
@@ -104,7 +117,7 @@ def collect_runtime_data(
     base_seed: int = 12345,
 ) -> Path:
     """
-    Run all three implementations and write each measurement to CSV.
+    Run all implementations and write each measurement to CSV.
 
     All implementations receive the same seed for each comparison.
     Failed runs are recorded and excluded from runtime plots.
@@ -133,13 +146,17 @@ def collect_runtime_data(
             non_vectorized_module,
             run_non_vectorized_simulations,
         ),
+        ("parallel", simulate_parallel, simulate_parallel.run_from_config),
     ]
 
     comparison_number = 0
+    total = len(individual_counts) * len(experiment_counts) * repeats * len(methods)
+    last = ""
 
     with (
         TemporaryDirectory(prefix="timing_comparisons_") as temp_dir,
         csv_path.open("w", newline="", encoding="utf-8") as file,
+        comparison_progress("Timing grid", total) as progress,
     ):
         writer = csv.DictWriter(file, fieldnames=CSV_FIELDS)
         writer.writeheader()
@@ -153,7 +170,7 @@ def collect_runtime_data(
                 )
 
                 for repeat in range(repeats):
-                    # Identical seed for all three implementations.
+                    # Identical seed for all implementations.
                     seed = base_seed + repeat
 
                     # Rotate which implementation runs first.
@@ -162,12 +179,11 @@ def collect_runtime_data(
                     comparison_number += 1
 
                     for name, module, run_function in run_order:
-                        print(
-                            f"\nTiming comparisons — {name}: "
-                            f"{n_individuals:,} individuals, "
-                            f"{n_experiments:,} experiments, "
+                        current = (
+                            f"{name}, n={n_individuals:,}, experiments={n_experiments:,}, "
                             f"repeat {repeat + 1}/{repeats}"
                         )
+                        progress.set_postfix_str(current + last)
 
                         row = {
                             "n_individuals": n_individuals,
@@ -192,17 +208,20 @@ def collect_runtime_data(
                             )
 
                             row["runtime_seconds"] = elapsed
-                            print(f"Runtime: {elapsed:.4f} seconds")
+                            last = f", last={elapsed:.4f} s"
 
                         except Exception as exc:
                             row["status"] = "failed"
                             row["error"] = (
                                 f"{type(exc).__name__}: {exc}"
                             )
-                            print(f"FAILED: {row['error']}")
+                            progress.write(f"FAILED ({current}): {row['error']}")
+                            last = ", last=failed"
 
                         writer.writerow(row)
                         file.flush()
+                        progress.set_postfix_str(current + last, refresh=False)
+                        progress.update()
 
     print(f"\nTimings saved to: {csv_path.resolve()}")
     return csv_path
@@ -280,15 +299,16 @@ def graph_runtime_data(
         "",
         "Times include generation, estimation, and pickle serialization.",
         "Reported times are medians across successful repeats.",
-        "Speedups are relative to the original implementation.",
+        "The two-thread speedup is relative to full-batch vectorized.",
+        "The other speedups are relative to the original implementation.",
         "Failed runs are excluded from timing statistics.",
         "These measurements compare complete pipelines, not just fitting.",
         "",
         f"{'Individuals':>12} {'Experiments':>12} "
         f"{'Original (s)':>14} {'Vectorized (s)':>16} "
-        f"{'Non-vectorized (s)':>20} "
+        f"{'Non-vectorized (s)':>20} {'2 threads (s)':>16} "
         f"{'Vectorized speedup':>20} "
-        f"{'Non-vectorized speedup':>24}",
+        f"{'Non-vectorized speedup':>24} {'2-thread speedup':>20}",
     ]
 
     for n_ind, n_exp in sorted(configurations):
@@ -297,14 +317,17 @@ def graph_runtime_data(
         non_vectorized = medians.get(
             (n_ind, n_exp, "non_vectorized")
         )
+        parallel = medians.get((n_ind, n_exp, "parallel"))
 
         lines.append(
             f"{n_ind:>12,} {n_exp:>12,} "
             f"{format_runtime(original):>14} "
             f"{format_runtime(optimized):>16} "
             f"{format_runtime(non_vectorized):>20} "
+            f"{format_runtime(parallel):>16} "
             f"{format_speedup(original, optimized):>20} "
-            f"{format_speedup(original, non_vectorized):>24}"
+            f"{format_speedup(original, non_vectorized):>24} "
+            f"{format_speedup(optimized, parallel):>20}"
         )
 
     if failures:

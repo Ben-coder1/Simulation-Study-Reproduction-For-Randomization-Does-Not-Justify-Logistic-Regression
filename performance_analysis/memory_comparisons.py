@@ -15,9 +15,11 @@ from unittest.mock import patch
 import matplotlib.pyplot as plt
 import numpy as np
 
+from performance_analysis.progress import comparison_progress
 import src.simulation as original_module
 import src_optimized.non_vectorized_simulation as non_vectorized_module
 import src_optimized.optimized_simulation as optimized_module
+from src_optimized import simulate_parallel
 from src.simulation import run_from_config as run_original_simulations
 from src_optimized.non_vectorized_simulation import (
     run_from_config as run_non_vectorized_simulations,
@@ -46,6 +48,7 @@ METHOD_LABELS = [
     ("original", "Original"),
     ("optimized", "Optimized / vectorized"),
     ("non_vectorized", "Non-vectorized"),
+    ("parallel", "Vectorized, 2 threads"),
 ]
 
 
@@ -69,12 +72,17 @@ def measure_peak_memory(module, run_function, config, seed, pickle_path) -> floa
     gc.collect()
     tracemalloc.start()
     try:
-        with (
-            patch.object(module, "SIMULATIONS", [config]),
-            patch.object(module, "SEED", seed),
-            patch.object(module, "PICKLE_LOCATION", pickle_path),
-        ):
-            result = run_function()
+        if module is simulate_parallel:
+            result = run_function(
+                workers=2, simulation_configs=[config], seed=seed, pickle_path=pickle_path
+            )
+        else:
+            with (
+                patch.object(module, "SIMULATIONS", [config]),
+                patch.object(module, "SEED", seed),
+                patch.object(module, "PICKLE_LOCATION", pickle_path),
+            ):
+                result = run_function()
         _, peak_bytes = tracemalloc.get_traced_memory()
         del result
         return peak_bytes / (1024**2)
@@ -101,14 +109,18 @@ def collect_memory_data(
         ("original", original_module, run_original_simulations),
         ("optimized", optimized_module, run_optimized_simulations),
         ("non_vectorized", non_vectorized_module, run_non_vectorized_simulations),
+        ("parallel", simulate_parallel, simulate_parallel.run_from_config),
     ]
     csv_path = Path(csv_path)
     csv_path.parent.mkdir(parents=True, exist_ok=True)
     comparison_number = 0
+    total = len(individual_counts) * len(experiment_counts) * repeats * len(methods)
+    last = ""
 
     with (
         TemporaryDirectory(prefix="memory_comparisons_") as temp_dir,
         csv_path.open("w", newline="", encoding="utf-8") as file,
+        comparison_progress("Memory grid", total) as progress,
     ):
         writer = csv.DictWriter(file, fieldnames=CSV_FIELDS)
         writer.writeheader()
@@ -120,6 +132,11 @@ def collect_memory_data(
                     offset = comparison_number % len(methods)
                     comparison_number += 1
                     for name, module, run_function in methods[offset:] + methods[:offset]:
+                        current = (
+                            f"{name}, n={n_individuals:,}, experiments={n_experiments:,}, "
+                            f"repeat {repeat + 1}/{repeats}"
+                        )
+                        progress.set_postfix_str(current + last)
                         row = {
                             "n_individuals": n_individuals,
                             "n_experiments": n_experiments,
@@ -136,14 +153,16 @@ def collect_memory_data(
                                 Path(temp_dir) / f"{name}.pkl",
                             )
                             row["peak_python_memory_mib"] = peak
-                            print(f"{name}: {n_individuals:,} individuals, "
-                                  f"{n_experiments:,} experiments: {peak:.2f} MiB")
+                            last = f", last={peak:.2f} MiB"
                         except Exception as exc:
                             row["status"] = "failed"
                             row["error"] = f"{type(exc).__name__}: {exc}"
-                            print(f"FAILED: {row['error']}")
+                            progress.write(f"FAILED ({current}): {row['error']}")
+                            last = ", last=failed"
                         writer.writerow(row)
                         file.flush()
+                        progress.set_postfix_str(current + last, refresh=False)
+                        progress.update()
     return csv_path
 
 
@@ -176,6 +195,7 @@ def graph_memory_data(
         "Memory comparisons — simulation implementations",
         "Values are median peak Python allocations (MiB) across successful repeats.",
         "tracemalloc excludes native allocations outside Python's allocator.",
+        "The two-thread peak covers the entire run and both workers.",
         "",
     ]
     for n_ind, n_exp in sorted(configurations):
@@ -214,7 +234,14 @@ def graph_memory_data(
             bbox_to_anchor=(0.5, 0.93),
         )
     fig.suptitle("Memory comparisons — simulation implementations")
-    fig.tight_layout(rect=(0, 0, 1, 0.88))
+    fig.text(
+        0.5, 0.018,
+        "Only two lines are visible because the two vectorized series overlap "
+        "and the two non-vectorized series overlap.",
+        ha="center",
+        fontsize=9,
+    )
+    fig.tight_layout(rect=(0, 0.055, 1, 0.88))
     fig.savefig(plot_path, dpi=200)
     if show:
         plt.show()

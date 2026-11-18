@@ -1,517 +1,517 @@
-         8565951 function calls (8545907 primitive calls) in 12.973 seconds
+         8565951 function calls (8545907 primitive calls) in 12.780 seconds
 
    Ordered by: cumulative time
 
    ncalls  tottime  percall  cumtime  percall filename:lineno(function)
-        1    0.000    0.000   12.973   12.973 simulation.py:121(run_from_config)
-        1    0.001    0.001   12.973   12.973 simulation.py:92(run_multiple_simulations)
-        4    0.001    0.000   12.971    3.243 simulation.py:41(run_simulation)
-     8000    0.018    0.000    9.001    0.001 discrete_model.py:2834(fit)
-     8000    0.011    0.000    8.714    0.001 discrete_model.py:246(fit)
-     8000    0.050    0.000    8.703    0.001 model.py:374(fit)
-     8000    0.024    0.000    8.527    0.001 optimizer.py:37(_fit)
-     8000    0.473    0.000    8.490    0.001 optimizer.py:457(_fit_newton)
-        4    0.046    0.012    6.607    1.652 methods.py:145(generate_parameter_estimates)
-        4    0.046    0.011    6.106    1.526 methods.py:72(generate_parameter_estimates)
-   183364    1.722    0.000    3.660    0.000 discrete_model.py:554(predict)
-    55788    0.095    0.000    2.246    0.000 model.py:591(hess)
-   191364    2.206    0.000    2.225    0.000 discrete_model.py:2597(cdf)
-    55788    0.967    0.000    2.151    0.000 discrete_model.py:2793(hessian)
-    47788    0.159    0.000    2.107    0.000 discrete_model.py:231(_check_perfect_pred)
-    55788    0.094    0.000    1.849    0.000 model.py:588(score)
-    55788    0.623    0.000    1.755    0.000 discrete_model.py:2712(score)
-     8000    0.044    0.000    1.566    0.000 discrete_model.py:540(__init__)
-     8000    0.009    0.000    1.488    0.000 discrete_model.py:198(__init__)
-     8000    0.009    0.000    1.479    0.000 model.py:286(__init__)
-   323396    1.252    0.000    1.252    0.000 {method 'reduce' of 'numpy.ufunc' objects}
-    47788    0.069    0.000    0.948    0.000 numeric.py:2243(allclose)
-     8000    0.059    0.000    0.749    0.000 tools.py:85(add_constant)
-     8000    0.011    0.000    0.739    0.000 discrete_model.py:204(initialize)
-    16000    0.013    0.000    0.739    0.000 model.py:585(f)
-     8000    0.023    0.000    0.731    0.000 model.py:99(__init__)
-     8000    0.041    0.000    0.728    0.000 tools.py:480(matrix_rank)
-    47788    0.457    0.000    0.727    0.000 numeric.py:2337(isclose)
-    16000    0.285    0.000    0.726    0.000 discrete_model.py:2652(loglike)
-     8000    0.012    0.000    0.703    0.000 model.py:142(_handle_data)
-     8000    0.019    0.000    0.689    0.000 data.py:735(handle_data)
-     8000    0.024    0.000    0.657    0.000 data.py:66(__init__)
-    47788    0.266    0.000    0.655    0.000 _linalg.py:320(solve)
-     8000    0.044    0.000    0.600    0.000 _decomp_qr.py:26(qr)
-    68016    0.063    0.000    0.581    0.000 fromnumeric.py:69(_wrapreduction)
-     8000    0.053    0.000    0.581    0.000 data.py:130(_handle_constant)
-   167364    0.175    0.000    0.532    0.000 fromnumeric.py:89(_wrapreduction_any_all)
-    16008    0.021    0.000    0.518    0.000 _arraysetops_impl.py:1015(isin)
-     4000    0.035    0.000    0.496    0.000 methods.py:214(plug_in_differential_log_odds)
-    16008    0.284    0.000    0.490    0.000 _arraysetops_impl.py:862(_in1d)
-   111576    0.059    0.000    0.473    0.000 fromnumeric.py:2589(all)
-     8000    0.006    0.000    0.420    0.000 fromnumeric.py:2962(ptp)
-     8000    0.010    0.000    0.413    0.000 _methods.py:235(_ptp)
-     8000    0.091    0.000    0.297    0.000 _twodim_base_impl.py:497(triu)
-    24008    0.015    0.000    0.277    0.000 fromnumeric.py:3190(min)
-     8000    0.009    0.000    0.275    0.000 model.py:1317(predict)
-    24008    0.014    0.000    0.273    0.000 fromnumeric.py:3052(max)
-     8000    0.061    0.000    0.266    0.000 discrete_model.py:5792(__init__)
-        4    0.024    0.006    0.226    0.057 dgps.py:252(generate_experiments)
-     8000    0.201    0.000    0.210    0.000 _decomp_qr.py:11(safecall)
-     8000    0.017    0.000    0.202    0.000 _twodim_base_impl.py:376(tri)
-    24000    0.181    0.000    0.201    0.000 _shape_base_impl.py:621(column_stack)
-    55788    0.093    0.000    0.174    0.000 _linalg.py:148(_commonType)
-    55788    0.028    0.000    0.146    0.000 fromnumeric.py:2477(any)
-     8000    0.145    0.000    0.145    0.000 {method 'outer' of 'numpy.ufunc' objects}
+        1    0.000    0.000   12.780   12.780 simulation.py:162(run_from_config)
+        1    0.001    0.001   12.780   12.780 simulation.py:125(run_multiple_simulations)
+        4    0.001    0.000   12.778    3.195 simulation.py:56(run_simulation)
+     8000    0.017    0.000    8.897    0.001 discrete_model.py:2834(fit)
+     8000    0.011    0.000    8.618    0.001 discrete_model.py:246(fit)
+     8000    0.047    0.000    8.607    0.001 model.py:374(fit)
+     8000    0.023    0.000    8.441    0.001 optimizer.py:37(_fit)
+     8000    0.458    0.000    8.406    0.001 optimizer.py:457(_fit_newton)
+        4    0.044    0.011    6.507    1.627 methods.py:199(generate_parameter_estimates)
+        4    0.044    0.011    6.035    1.509 methods.py:109(generate_parameter_estimates)
+   183364    1.704    0.000    3.653    0.000 discrete_model.py:554(predict)
+    55788    0.093    0.000    2.241    0.000 model.py:591(hess)
+   191364    2.220    0.000    2.238    0.000 discrete_model.py:2597(cdf)
+    55788    0.963    0.000    2.148    0.000 discrete_model.py:2793(hessian)
+    47788    0.156    0.000    2.094    0.000 discrete_model.py:231(_check_perfect_pred)
+    55788    0.091    0.000    1.830    0.000 model.py:588(score)
+    55788    0.616    0.000    1.739    0.000 discrete_model.py:2712(score)
+     8000    0.044    0.000    1.536    0.000 discrete_model.py:540(__init__)
+     8000    0.009    0.000    1.460    0.000 discrete_model.py:198(__init__)
+     8000    0.009    0.000    1.451    0.000 model.py:286(__init__)
+   323396    1.244    0.000    1.244    0.000 {method 'reduce' of 'numpy.ufunc' objects}
+    47788    0.068    0.000    0.936    0.000 numeric.py:2243(allclose)
+     8000    0.057    0.000    0.743    0.000 tools.py:85(add_constant)
+    16000    0.012    0.000    0.734    0.000 model.py:585(f)
+     8000    0.012    0.000    0.722    0.000 discrete_model.py:204(initialize)
+    16000    0.282    0.000    0.721    0.000 discrete_model.py:2652(loglike)
+     8000    0.021    0.000    0.720    0.000 model.py:99(__init__)
+    47788    0.450    0.000    0.718    0.000 numeric.py:2337(isclose)
+     8000    0.039    0.000    0.711    0.000 tools.py:480(matrix_rank)
+     8000    0.012    0.000    0.695    0.000 model.py:142(_handle_data)
+     8000    0.019    0.000    0.681    0.000 data.py:735(handle_data)
+     8000    0.023    0.000    0.650    0.000 data.py:66(__init__)
+    47788    0.257    0.000    0.639    0.000 _linalg.py:320(solve)
+     8000    0.042    0.000    0.585    0.000 _decomp_qr.py:26(qr)
+    68016    0.061    0.000    0.576    0.000 fromnumeric.py:69(_wrapreduction)
+     8000    0.052    0.000    0.576    0.000 data.py:130(_handle_constant)
+   167364    0.168    0.000    0.522    0.000 fromnumeric.py:89(_wrapreduction_any_all)
+    16008    0.021    0.000    0.504    0.000 _arraysetops_impl.py:1015(isin)
+     4000    0.034    0.000    0.489    0.000 methods.py:283(plug_in_differential_log_odds)
+    16008    0.273    0.000    0.477    0.000 _arraysetops_impl.py:862(_in1d)
+   111576    0.059    0.000    0.467    0.000 fromnumeric.py:2589(all)
+     8000    0.006    0.000    0.418    0.000 fromnumeric.py:2962(ptp)
+     8000    0.010    0.000    0.412    0.000 _methods.py:235(_ptp)
+     8000    0.090    0.000    0.289    0.000 _twodim_base_impl.py:497(triu)
+    24008    0.015    0.000    0.275    0.000 fromnumeric.py:3190(min)
+    24008    0.015    0.000    0.272    0.000 fromnumeric.py:3052(max)
+     8000    0.009    0.000    0.272    0.000 model.py:1317(predict)
+     8000    0.060    0.000    0.259    0.000 discrete_model.py:5792(__init__)
+     8000    0.199    0.000    0.207    0.000 _decomp_qr.py:11(safecall)
+        4    0.024    0.006    0.204    0.051 dgps.py:252(generate_experiments)
+     8000    0.017    0.000    0.196    0.000 _twodim_base_impl.py:376(tri)
+    24000    0.175    0.000    0.196    0.000 _shape_base_impl.py:621(column_stack)
+    55788    0.091    0.000    0.172    0.000 _linalg.py:148(_commonType)
         4    0.001    0.000    0.143    0.036 dgps.py:271(<listcomp>)
-    16000    0.018    0.000    0.139    0.000 _arraysetops_impl.py:145(unique)
-     4000    0.103    0.000    0.139    0.000 dgps.py:215(generate_experiment)
-   103576    0.079    0.000    0.125    0.000 _ufunc_config.py:440(__enter__)
-   238940    0.086    0.000    0.116    0.000 numeric.py:2429(<genexpr>)
-    16000    0.070    0.000    0.112    0.000 _arraysetops_impl.py:339(_unique1d)
-    16008    0.042    0.000    0.106    0.000 _methods.py:118(_mean)
-     8000    0.046    0.000    0.097    0.000 _linalg.py:496(inv)
-40000/20000    0.051    0.000    0.088    0.000 wrapper.py:21(__getattribute__)
-   103576    0.054    0.000    0.075    0.000 _linalg.py:123(_makearray)
-     8000    0.008    0.000    0.073    0.000 _decorators.py:178(__get__)
-    16000    0.015    0.000    0.066    0.000 fromnumeric.py:2338(sum)
-     8000    0.063    0.000    0.064    0.000 discrete_model.py:5098(fittedvalues)
-   107589    0.064    0.000    0.064    0.000 {method 'set' of '_contextvars.ContextVar' objects}
-    32008    0.012    0.000    0.060    0.000 {method 'all' of 'numpy.ndarray' objects}
-     8008    0.008    0.000    0.059    0.000 fromnumeric.py:3735(mean)
-     8000    0.004    0.000    0.058    0.000 {method 'mean' of 'numpy.ndarray' objects}
-     4013    0.012    0.000    0.057    0.000 _ufunc_config.py:464(inner)
-   470760    0.054    0.000    0.054    0.000 {built-in method numpy.asarray}
-   167364    0.054    0.000    0.054    0.000 fromnumeric.py:91(<dictcomp>)
-   103576    0.032    0.000    0.053    0.000 _ufunc_config.py:456(__exit__)
-   159364    0.038    0.000    0.050    0.000 _linalg.py:128(isComplexType)
-    32008    0.011    0.000    0.048    0.000 _methods.py:67(_all)
-    95632    0.047    0.000    0.047    0.000 {built-in method builtins.abs}
+    55788    0.027    0.000    0.141    0.000 fromnumeric.py:2477(any)
+     8000    0.139    0.000    0.139    0.000 {method 'outer' of 'numpy.ufunc' objects}
+     4000    0.104    0.000    0.139    0.000 dgps.py:215(generate_experiment)
+    16000    0.017    0.000    0.135    0.000 _arraysetops_impl.py:145(unique)
+   103576    0.078    0.000    0.122    0.000 _ufunc_config.py:440(__enter__)
+   238940    0.085    0.000    0.115    0.000 numeric.py:2429(<genexpr>)
+    16000    0.067    0.000    0.109    0.000 _arraysetops_impl.py:339(_unique1d)
+    16008    0.041    0.000    0.103    0.000 _methods.py:118(_mean)
+     8000    0.043    0.000    0.090    0.000 _linalg.py:496(inv)
+40000/20000    0.051    0.000    0.087    0.000 wrapper.py:21(__getattribute__)
+   103576    0.051    0.000    0.072    0.000 _linalg.py:123(_makearray)
+     8000    0.008    0.000    0.070    0.000 _decorators.py:178(__get__)
+    16000    0.015    0.000    0.064    0.000 fromnumeric.py:2338(sum)
+     8000    0.061    0.000    0.062    0.000 discrete_model.py:5098(fittedvalues)
+     8008    0.008    0.000    0.058    0.000 fromnumeric.py:3735(mean)
+    32008    0.011    0.000    0.058    0.000 {method 'all' of 'numpy.ndarray' objects}
+     8000    0.003    0.000    0.056    0.000 {method 'mean' of 'numpy.ndarray' objects}
+   167364    0.053    0.000    0.053    0.000 fromnumeric.py:91(<dictcomp>)
+   470760    0.053    0.000    0.053    0.000 {built-in method numpy.asarray}
+   103576    0.032    0.000    0.051    0.000 _ufunc_config.py:456(__exit__)
+    95632    0.049    0.000    0.049    0.000 {built-in method builtins.abs}
+   159364    0.036    0.000    0.049    0.000 _linalg.py:128(isComplexType)
    387064    0.047    0.000    0.047    0.000 {built-in method builtins.isinstance}
-    47788    0.020    0.000    0.045    0.000 _index_tricks_impl.py:947(diag_indices)
+    32008    0.011    0.000    0.046    0.000 _methods.py:67(_all)
+    47788    0.020    0.000    0.044    0.000 _index_tricks_impl.py:947(diag_indices)
 223312/223304    0.044    0.000    0.044    0.000 {built-in method builtins.getattr}
-    16000    0.006    0.000    0.041    0.000 {method 'sum' of 'numpy.ndarray' objects}
+   107589    0.041    0.000    0.041    0.000 {method 'set' of '_contextvars.ContextVar' objects}
+    16000    0.006    0.000    0.040    0.000 {method 'sum' of 'numpy.ndarray' objects}
     20000    0.030    0.000    0.039    0.000 numeric.py:137(ones)
-     8000    0.014    0.000    0.039    0.000 model.py:1257(_transform_predict_exog)
    103576    0.029    0.000    0.038    0.000 _linalg.py:142(_realType)
-   103576    0.037    0.000    0.037    0.000 _ufunc_config.py:430(__init__)
-     8000    0.011    0.000    0.037    0.000 data.py:355(_convert_endog_exog)
-     8000    0.018    0.000    0.036    0.000 _function_base_impl.py:579(asarray_chkfinite)
-    63788    0.035    0.000    0.035    0.000 {built-in method numpy.arange}
+     8000    0.013    0.000    0.037    0.000 model.py:1257(_transform_predict_exog)
+     8000    0.010    0.000    0.036    0.000 data.py:355(_convert_endog_exog)
+   103576    0.036    0.000    0.036    0.000 _ufunc_config.py:430(__init__)
+     4013    0.012    0.000    0.035    0.000 _ufunc_config.py:464(inner)
+     8000    0.017    0.000    0.035    0.000 _function_base_impl.py:579(asarray_chkfinite)
     16008    0.027    0.000    0.035    0.000 numeric.py:64(zeros_like)
-    16000    0.006    0.000    0.035    0.000 _methods.py:50(_sum)
+    63788    0.035    0.000    0.035    0.000 {built-in method numpy.arange}
+    16000    0.006    0.000    0.034    0.000 _methods.py:50(_sum)
    302940    0.033    0.000    0.033    0.000 multiarray.py:761(dot)
      8000    0.010    0.000    0.032    0.000 validation.py:42(array_like)
-        4    0.005    0.001    0.029    0.007 dgps.py:86(generate_individuals)
-   247506    0.029    0.000    0.029    0.000 {built-in method builtins.hasattr}
-     8000    0.012    0.000    0.028    0.000 _twodim_base_impl.py:245(diag)
+        4    0.005    0.001    0.030    0.008 dgps.py:86(generate_individuals)
+   247506    0.028    0.000    0.028    0.000 {built-in method builtins.hasattr}
     68016    0.028    0.000    0.028    0.000 fromnumeric.py:70(<dictcomp>)
-    16008    0.025    0.000    0.027    0.000 _methods.py:76(_count_reduce_items)
+     8000    0.011    0.000    0.027    0.000 _twodim_base_impl.py:245(diag)
    302948    0.027    0.000    0.027    0.000 {built-in method builtins.issubclass}
-   107589    0.027    0.000    0.027    0.000 {built-in method numpy._core._multiarray_umath._make_extobj}
     16000    0.015    0.000    0.027    0.000 _twodim_base_impl.py:34(_min_int)
-    16000    0.021    0.000    0.026    0.000 data.py:139(_is_using_pandas)
-    80000    0.025    0.000    0.025    0.000 wrapper.py:22(get)
+    16008    0.024    0.000    0.026    0.000 _methods.py:76(_count_reduce_items)
+   107589    0.026    0.000    0.026    0.000 {built-in method numpy._core._multiarray_umath._make_extobj}
+    16000    0.020    0.000    0.025    0.000 data.py:139(_is_using_pandas)
+    80000    0.024    0.000    0.024    0.000 wrapper.py:22(get)
     16000    0.024    0.000    0.024    0.000 {method 'sort' of 'numpy.ndarray' objects}
-     8000    0.008    0.000    0.024    0.000 model.py:1542(__init__)
-    24000    0.009    0.000    0.023    0.000 _shape_base_impl.py:617(_column_stack_dispatcher)
+     8000    0.008    0.000    0.023    0.000 model.py:1542(__init__)
+    24000    0.008    0.000    0.022    0.000 _shape_base_impl.py:617(_column_stack_dispatcher)
      8000    0.013    0.000    0.022    0.000 _asarray.py:27(require)
+        8    0.000    0.000    0.021    0.003 std.py:664(__new__)
     55788    0.021    0.000    0.021    0.000 _linalg.py:198(_assert_stacked_square)
-   107589    0.021    0.000    0.021    0.000 {method 'reset' of '_contextvars.ContextVar' objects}
     16008    0.009    0.000    0.020    0.000 {built-in method builtins.all}
-        8    0.000    0.000    0.019    0.002 std.py:664(__new__)
-    48016    0.019    0.000    0.019    0.000 {built-in method numpy.zeros}
+   107589    0.020    0.000    0.020    0.000 {method 'reset' of '_contextvars.ContextVar' objects}
+        8    0.000    0.000    0.020    0.002 std.py:766(get_lock)
+        1    0.000    0.000    0.020    0.020 std.py:88(__init__)
+        1    0.000    0.000    0.019    0.019 std.py:114(create_mp_lock)
+        1    0.000    0.000    0.019    0.019 context.py:70(RLock)
+    48016    0.018    0.000    0.018    0.000 {built-in method numpy.zeros}
    235387    0.018    0.000    0.018    0.000 {method 'items' of 'dict' objects}
-        8    0.000    0.000    0.018    0.002 std.py:766(get_lock)
-        1    0.000    0.000    0.018    0.018 std.py:88(__init__)
-        1    0.000    0.000    0.018    0.018 std.py:114(create_mp_lock)
-        1    0.000    0.000    0.018    0.018 context.py:70(RLock)
    171600    0.017    0.000    0.017    0.000 {method 'get' of 'dict' objects}
    183796    0.017    0.000    0.017    0.000 {built-in method numpy.asanyarray}
     56024    0.017    0.000    0.017    0.000 {built-in method numpy.array}
-    55788    0.016    0.000    0.016    0.000 _linalg.py:192(_assert_stacked_2d)
-     8000    0.009    0.000    0.016    0.000 model.py:1232(__init__)
     16008    0.016    0.000    0.016    0.000 getlimits.py:697(__init__)
-     8000    0.013    0.000    0.016    0.000 discrete_model.py:4939(__init__)
-     8000    0.009    0.000    0.016    0.000 data.py:455(_get_yarr)
-     4000    0.012    0.000    0.015    0.000 numeric.py:290(full)
-    24000    0.009    0.000    0.014    0.000 shape_base.py:208(_arrays_for_stack_dispatcher)
+    55788    0.016    0.000    0.016    0.000 _linalg.py:192(_assert_stacked_2d)
+     8000    0.008    0.000    0.015    0.000 data.py:455(_get_yarr)
+     8000    0.009    0.000    0.015    0.000 model.py:1232(__init__)
+     8000    0.011    0.000    0.014    0.000 discrete_model.py:4939(__init__)
+     4000    0.011    0.000    0.014    0.000 numeric.py:290(full)
       6/2    0.000    0.000    0.014    0.007 <frozen importlib._bootstrap>:1165(_find_and_load)
-     4000    0.002    0.000    0.014    0.000 fromnumeric.py:3328(prod)
       6/2    0.000    0.000    0.014    0.007 <frozen importlib._bootstrap>:1120(_find_and_load_unlocked)
       6/2    0.000    0.000    0.014    0.007 <frozen importlib._bootstrap>:666(_load_unlocked)
-   111576    0.014    0.000    0.014    0.000 fromnumeric.py:2584(_all_dispatcher)
+     4000    0.002    0.000    0.014    0.000 fromnumeric.py:3328(prod)
       4/2    0.000    0.000    0.014    0.007 <frozen importlib._bootstrap_external>:934(exec_module)
-    40008    0.014    0.000    0.014    0.000 {built-in method numpy.empty}
+   111576    0.014    0.000    0.014    0.000 fromnumeric.py:2584(_all_dispatcher)
+    24000    0.009    0.000    0.014    0.000 shape_base.py:208(_arrays_for_stack_dispatcher)
      16/4    0.000    0.000    0.013    0.003 <frozen importlib._bootstrap>:233(_call_with_frames_removed)
       4/2    0.000    0.000    0.013    0.007 {built-in method builtins.exec}
+    40008    0.013    0.000    0.013    0.000 {built-in method numpy.empty}
+     8000    0.007    0.000    0.013    0.000 fromnumeric.py:1695(diagonal)
      8000    0.003    0.000    0.013    0.000 {method 'any' of 'numpy.ndarray' objects}
     63788    0.013    0.000    0.013    0.000 {method 'astype' of 'numpy.ndarray' objects}
-     8000    0.006    0.000    0.013    0.000 fromnumeric.py:1695(diagonal)
-    16000    0.012    0.000    0.012    0.000 {method 'flatten' of 'numpy.ndarray' objects}
         6    0.000    0.000    0.012    0.002 <frozen importlib._bootstrap>:566(module_from_spec)
         2    0.000    0.000    0.012    0.006 <frozen importlib._bootstrap_external>:1231(create_module)
         2    0.012    0.006    0.012    0.006 {built-in method _imp.create_dynamic}
-        1    0.000    0.000    0.011    0.011 synchronize.py:193(__init__)
-        1    0.000    0.000    0.011    0.011 synchronize.py:50(__init__)
+    16000    0.012    0.000    0.012    0.000 {method 'flatten' of 'numpy.ndarray' objects}
+        1    0.000    0.000    0.012    0.012 synchronize.py:193(__init__)
+        1    0.000    0.000    0.012    0.012 synchronize.py:50(__init__)
     48024    0.011    0.000    0.011    0.000 _arraysetops_impl.py:876(<genexpr>)
-     8000    0.007    0.000    0.010    0.000 optimizer.py:22(check_kwargs)
     88064    0.010    0.000    0.010    0.000 {built-in method builtins.len}
-     8000    0.003    0.000    0.010    0.000 _methods.py:58(_any)
-    38008    0.010    0.000    0.010    0.000 getlimits.py:721(max)
      8000    0.008    0.000    0.010    0.000 shape_base.py:80(atleast_2d)
-     8000    0.008    0.000    0.010    0.000 blas.py:384(getter)
+    38008    0.010    0.000    0.010    0.000 getlimits.py:721(max)
+     8000    0.007    0.000    0.010    0.000 optimizer.py:22(check_kwargs)
+     8000    0.003    0.000    0.010    0.000 _methods.py:58(_any)
     52016    0.009    0.000    0.009    0.000 {method 'ravel' of 'numpy.ndarray' objects}
      8000    0.007    0.000    0.009    0.000 getlimits.py:493(__new__)
+     8000    0.007    0.000    0.009    0.000 blas.py:384(getter)
     55788    0.009    0.000    0.009    0.000 {method '__array_wrap__' of 'numpy.ndarray' objects}
-     8000    0.007    0.000    0.008    0.000 validation.py:425(string_like)
+     8000    0.006    0.000    0.008    0.000 validation.py:425(string_like)
      8000    0.004    0.000    0.008    0.000 data.py:467(_get_xarr)
-    40018    0.008    0.000    0.008    0.000 {method 'update' of 'dict' objects}
-    16000    0.006    0.000    0.008    0.000 _arraysetops_impl.py:132(_unpack_tuple)
-    47788    0.008    0.000    0.008    0.000 numeric.py:2239(_allclose_dispatcher)
-    16000    0.006    0.000    0.008    0.000 data.py:62(_is_structured_ndarray)
     16000    0.006    0.000    0.008    0.000 data.py:159(_is_recarray)
-     8000    0.008    0.000    0.008    0.000 {method 'astype' of 'numpy.generic' objects}
-     8000    0.004    0.000    0.008    0.000 data.py:696(handle_data_class_factory)
+    40018    0.008    0.000    0.008    0.000 {method 'update' of 'dict' objects}
+    47788    0.008    0.000    0.008    0.000 numeric.py:2239(_allclose_dispatcher)
+    16000    0.006    0.000    0.008    0.000 _arraysetops_impl.py:132(_unpack_tuple)
+    16000    0.006    0.000    0.008    0.000 data.py:62(_is_structured_ndarray)
      8000    0.006    0.000    0.007    0.000 model.py:122(_check_kwargs)
-    80018    0.007    0.000    0.007    0.000 {method 'append' of 'list' objects}
     47788    0.007    0.000    0.007    0.000 numeric.py:2333(_isclose_dispatcher)
+     8000    0.007    0.000    0.007    0.000 {method 'astype' of 'numpy.generic' objects}
+        1    0.000    0.000    0.007    0.007 synchronize.py:1(<module>)
+    80018    0.007    0.000    0.007    0.000 {method 'append' of 'list' objects}
     47788    0.007    0.000    0.007    0.000 _linalg.py:316(_solve_dispatcher)
     55788    0.007    0.000    0.007    0.000 fromnumeric.py:2472(_any_dispatcher)
-     8000    0.005    0.000    0.007    0.000 data.py:472(_check_integrity)
-        1    0.000    0.000    0.007    0.007 synchronize.py:1(<module>)
-        1    0.000    0.000    0.007    0.007 resource_tracker.py:1(<module>)
+     8000    0.004    0.000    0.007    0.000 data.py:696(handle_data_class_factory)
+     8000    0.005    0.000    0.006    0.000 data.py:472(_check_integrity)
      8000    0.005    0.000    0.006    0.000 _asarray.py:109(<setcomp>)
+        1    0.000    0.000    0.006    0.006 resource_tracker.py:1(<module>)
     12000    0.005    0.000    0.006    0.000 data.py:477(wrap_output)
      8000    0.005    0.000    0.006    0.000 model.py:1239(initialize)
     16000    0.006    0.000    0.006    0.000 getlimits.py:708(min)
     10608    0.003    0.000    0.006    0.000 std.py:1166(__iter__)
-    16008    0.005    0.000    0.005    0.000 {method 'reshape' of 'numpy.ndarray' objects}
+        1    0.000    0.000    0.005    0.005 resource_tracker.py:172(register)
+        1    0.000    0.000    0.005    0.005 resource_tracker.py:180(_send)
+        1    0.000    0.000    0.005    0.005 resource_tracker.py:94(ensure_running)
+        1    0.000    0.000    0.005    0.005 util.py:450(spawnv_passfds)
     40008    0.005    0.000    0.005    0.000 multiarray.py:1098(copyto)
+    16008    0.005    0.000    0.005    0.000 {method 'reshape' of 'numpy.ndarray' objects}
+        1    0.005    0.005    0.005    0.005 {built-in method _posixsubprocess.fork_exec}
      8000    0.005    0.000    0.005    0.000 {method 'diagonal' of 'numpy.ndarray' objects}
-        1    0.000    0.000    0.004    0.004 resource_tracker.py:172(register)
-        1    0.000    0.000    0.004    0.004 resource_tracker.py:180(_send)
-        1    0.000    0.000    0.004    0.004 resource_tracker.py:94(ensure_running)
-    32006    0.004    0.000    0.004    0.000 {method 'pop' of 'dict' objects}
-        1    0.000    0.000    0.004    0.004 util.py:450(spawnv_passfds)
     32016    0.004    0.000    0.004    0.000 multiarray.py:107(empty_like)
-        1    0.004    0.004    0.004    0.004 {built-in method _posixsubprocess.fork_exec}
+    32006    0.004    0.000    0.004    0.000 {method 'pop' of 'dict' objects}
     36037    0.004    0.000    0.004    0.000 multiarray.py:180(concatenate)
-     8000    0.003    0.000    0.003    0.000 data.py:125(_is_using_ndarray_type)
     24008    0.003    0.000    0.003    0.000 fromnumeric.py:3185(_min_dispatcher)
-    24000    0.003    0.000    0.003    0.000 {method 'setdefault' of 'dict' objects}
     24008    0.003    0.000    0.003    0.000 fromnumeric.py:3047(_max_dispatcher)
-    16004    0.003    0.000    0.003    0.000 {method 'squeeze' of 'numpy.ndarray' objects}
-        8    0.000    0.000    0.003    0.000 asyncio.py:23(__init__)
-       16    0.000    0.000    0.003    0.000 std.py:1471(display)
+     8000    0.003    0.000    0.003    0.000 data.py:125(_is_using_ndarray_type)
+    24000    0.003    0.000    0.003    0.000 {method 'setdefault' of 'dict' objects}
+    16000    0.003    0.000    0.003    0.000 data.py:190(_to_pandas)
     20000    0.003    0.000    0.003    0.000 multiarray.py:383(where)
-        8    0.000    0.000    0.002    0.000 std.py:958(__init__)
+    16004    0.003    0.000    0.003    0.000 {method 'squeeze' of 'numpy.ndarray' objects}
+       16    0.000    0.000    0.002    0.000 std.py:1471(display)
     16008    0.002    0.000    0.002    0.000 {built-in method numpy.lib.array_utils.normalize_axis_index}
-    16000    0.002    0.000    0.002    0.000 data.py:190(_to_pandas)
     16000    0.002    0.000    0.002    0.000 fromnumeric.py:2333(_sum_dispatcher)
     24000    0.002    0.000    0.002    0.000 {method 'keys' of 'dict' objects}
-    16000    0.002    0.000    0.002    0.000 {method '__array__' of 'numpy.ndarray' objects}
+        8    0.000    0.000    0.002    0.000 asyncio.py:23(__init__)
     16008    0.002    0.000    0.002    0.000 _arraysetops_impl.py:1010(_isin_dispatcher)
-     8008    0.002    0.000    0.002    0.000 {method 'difference' of 'set' objects}
-    16008    0.002    0.000    0.002    0.000 numeric.py:58(_zeros_like_dispatcher)
+    16000    0.002    0.000    0.002    0.000 {method '__array__' of 'numpy.ndarray' objects}
      8000    0.002    0.000    0.002    0.000 wrapper.py:14(__init__)
+        8    0.000    0.000    0.002    0.000 std.py:958(__init__)
+    16008    0.002    0.000    0.002    0.000 numeric.py:58(_zeros_like_dispatcher)
     16000    0.002    0.000    0.002    0.000 _arraysetops_impl.py:140(_unique_dispatcher)
+     8008    0.002    0.000    0.002    0.000 {method 'difference' of 'set' objects}
     16000    0.002    0.000    0.002    0.000 {method 'extend' of 'list' objects}
        16    0.000    0.000    0.002    0.000 std.py:1156(__str__)
        16    0.000    0.000    0.002    0.000 std.py:462(format_meter)
        16    0.000    0.000    0.002    0.000 std.py:1270(close)
-     8000    0.002    0.000    0.002    0.000 model.py:134(<listcomp>)
      4000    0.001    0.000    0.001    0.000 <string>:2(__init__)
-    12000    0.001    0.000    0.001    0.000 data.py:501(attach_columns)
+     8000    0.001    0.000    0.001    0.000 model.py:134(<listcomp>)
         8    0.000    0.000    0.001    0.000 std.py:1332(refresh)
-     8000    0.001    0.000    0.001    0.000 _misc.py:181(_datacopied)
      8000    0.001    0.000    0.001    0.000 _twodim_base_impl.py:437(_trilu_dispatcher)
      8000    0.001    0.000    0.001    0.000 _linalg.py:492(_unary_dispatcher)
-       48    0.000    0.000    0.001    0.000 utils.py:307(disp_len)
+    12000    0.001    0.000    0.001    0.000 data.py:501(attach_columns)
+     8000    0.001    0.000    0.001    0.000 _misc.py:181(_datacopied)
      8008    0.001    0.000    0.001    0.000 fromnumeric.py:3730(_mean_dispatcher)
+       48    0.000    0.000    0.001    0.000 utils.py:307(disp_len)
        48    0.000    0.000    0.001    0.000 utils.py:303(_text_width)
-       48    0.000    0.000    0.001    0.000 {built-in method builtins.sum}
-     8000    0.001    0.000    0.001    0.000 fromnumeric.py:1691(_diagonal_dispatcher)
      8004    0.001    0.000    0.001    0.000 {built-in method builtins.setattr}
+       48    0.000    0.000    0.001    0.000 {built-in method builtins.sum}
      8000    0.001    0.000    0.001    0.000 fromnumeric.py:2958(_ptp_dispatcher)
-     8000    0.001    0.000    0.001    0.000 {method 'upper' of 'str' objects}
+     8000    0.001    0.000    0.001    0.000 fromnumeric.py:1691(_diagonal_dispatcher)
+        1    0.000    0.000    0.001    0.001 _monitor.py:31(__init__)
      4022    0.001    0.000    0.001    0.000 <frozen abc>:117(__instancecheck__)
-     8000    0.001    0.000    0.001    0.000 shape_base.py:76(_atleast_2d_dispatcher)
      8000    0.001    0.000    0.001    0.000 _twodim_base_impl.py:241(_diag_dispatcher)
-    10616    0.001    0.000    0.001    0.000 {built-in method time.time}
+     8000    0.001    0.000    0.001    0.000 shape_base.py:76(_atleast_2d_dispatcher)
+     8000    0.001    0.000    0.001    0.000 {method 'upper' of 'str' objects}
      8000    0.001    0.000    0.001    0.000 {method 'lower' of 'str' objects}
+    10616    0.001    0.000    0.001    0.000 {built-in method time.time}
      3678    0.001    0.000    0.001    0.000 utils.py:304(<genexpr>)
         4    0.000    0.000    0.001    0.000 <frozen importlib._bootstrap_external>:1007(get_code)
+        4    0.000    0.000    0.001    0.000 methods.py:79(find_true_parameters)
+        4    0.000    0.000    0.001    0.000 methods.py:14(differential_log_odds)
      10/6    0.000    0.000    0.001    0.000 <frozen importlib._bootstrap>:1207(_handle_fromlist)
         2    0.000    0.000    0.001    0.000 {built-in method builtins.__import__}
-        4    0.000    0.000    0.001    0.000 methods.py:55(find_true_parameters)
-        4    0.000    0.000    0.001    0.000 methods.py:12(differential_log_odds)
        16    0.000    0.000    0.001    0.000 std.py:455(print_status)
+        1    0.000    0.000    0.001    0.001 threading.py:945(start)
+        1    0.000    0.000    0.000    0.000 threading.py:611(wait)
      4000    0.000    0.000    0.000    0.000 {built-in method builtins.round}
+        1    0.000    0.000    0.000    0.000 threading.py:295(wait)
      4022    0.000    0.000    0.000    0.000 {built-in method _abc._abc_instancecheck}
-        1    0.000    0.000    0.000    0.000 _monitor.py:31(__init__)
      4000    0.000    0.000    0.000    0.000 fromnumeric.py:3323(_prod_dispatcher)
        16    0.000    0.000    0.000    0.000 utils.py:315(disp_trim)
-        8    0.000    0.000    0.000    0.000 utils.py:196(__init__)
         6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1054(_find_spec)
+        1    0.000    0.000    0.000    0.000 threading.py:283(_acquire_restore)
         4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:727(_compile_bytecode)
-        4    0.000    0.000    0.000    0.000 {built-in method marshal.loads}
-        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1127(get_data)
         6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1499(find_spec)
         6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1467(_get_spec)
+        4    0.000    0.000    0.000    0.000 {built-in method marshal.loads}
+        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1127(get_data)
+       10    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1607(find_spec)
+        1    0.000    0.000    0.000    0.000 {built-in method _pickle.dump}
+     3630    0.000    0.000    0.000    0.000 {built-in method unicodedata.east_asian_width}
+        1    0.000    0.000    0.000    0.000 {built-in method io.open}
        48    0.000    0.000    0.000    0.000 utils.py:177(inner)
        16    0.000    0.000    0.000    0.000 std.py:449(fp_write)
-       32    0.000    0.000    0.000    0.000 {method 'write' of '_io.TextIOWrapper' objects}
-       10    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1607(find_spec)
-        1    0.000    0.000    0.000    0.000 {built-in method io.open}
-     3630    0.000    0.000    0.000    0.000 {built-in method unicodedata.east_asian_width}
-        1    0.000    0.000    0.000    0.000 {built-in method _pickle.dump}
-        1    0.000    0.000    0.000    0.000 threading.py:945(start)
-        8    0.000    0.000    0.000    0.000 std.py:687(_decr_instances)
         4    0.000    0.000    0.000    0.000 {built-in method io.open_code}
-        1    0.000    0.000    0.000    0.000 threading.py:611(wait)
-        1    0.000    0.000    0.000    0.000 threading.py:295(wait)
-        5    0.000    0.000    0.000    0.000 {method '__exit__' of '_io._IOBase' objects}
+       32    0.000    0.000    0.000    0.000 {method 'write' of '_io.TextIOWrapper' objects}
+        1    0.000    0.000    0.000    0.000 threading.py:856(__init__)
+        8    0.000    0.000    0.000    0.000 std.py:687(_decr_instances)
+        2    0.000    0.000    0.000    0.000 signal.py:69(pthread_sigmask)
        13    0.000    0.000    0.000    0.000 {built-in method builtins.__build_class__}
+        5    0.000    0.000    0.000    0.000 {method '__exit__' of '_io._IOBase' objects}
        32    0.000    0.000    0.000    0.000 std.py:108(__enter__)
        40    0.000    0.000    0.000    0.000 std.py:100(acquire)
-        4    0.000    0.000    0.000    0.000 {method 'acquire' of '_thread.lock' objects}
-        8    0.000    0.000    0.000    0.000 std.py:680(_get_free_pos)
-       37    0.000    0.000    0.000    0.000 {method 'format' of 'str' objects}
-        2    0.000    0.000    0.000    0.000 signal.py:69(pthread_sigmask)
-       24    0.000    0.000    0.000    0.000 _weakrefset.py:63(__iter__)
-        8    0.000    0.000    0.000    0.000 utils.py:270(inner)
-        1    0.000    0.000    0.000    0.000 threading.py:856(__init__)
-       32    0.000    0.000    0.000    0.000 std.py:111(__exit__)
-       21    0.000    0.000    0.000    0.000 {built-in method posix.stat}
-        1    0.000    0.000    0.000    0.000 pathlib.py:1111(mkdir)
-        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:493(_init_module_attrs)
-       40    0.000    0.000    0.000    0.000 std.py:104(release)
-       20    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:140(_path_stat)
-       32    0.000    0.000    0.000    0.000 utils.py:256(_is_ascii)
-        1    0.000    0.000    0.000    0.000 util.py:1(<module>)
         4    0.000    0.000    0.000    0.000 signal.py:72(<genexpr>)
-        1    0.000    0.000    0.000    0.000 synchronize.py:121(_make_name)
-        8    0.000    0.000    0.000    0.000 std.py:683(<setcomp>)
-       24    0.000    0.000    0.000    0.000 std.py:397(format_interval)
-        3    0.000    0.000    0.000    0.000 {built-in method builtins.next}
-       40    0.000    0.000    0.000    0.000 {method 'acquire' of '_multiprocessing.SemLock' objects}
-        1    0.000    0.000    0.000    0.000 tempfile.py:154(__next__)
-        1    0.000    0.000    0.000    0.000 {built-in method posix.mkdir}
-       16    0.000    0.000    0.000    0.000 std.py:1453(format_dict)
-        9    0.000    0.000    0.000    0.000 _weakrefset.py:85(add)
-       46    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:126(_path_join)
+       24    0.000    0.000    0.000    0.000 _weakrefset.py:63(__iter__)
+        8    0.000    0.000    0.000    0.000 std.py:680(_get_free_pos)
+       21    0.000    0.000    0.000    0.000 {built-in method posix.stat}
+        8    0.000    0.000    0.000    0.000 utils.py:270(inner)
         2    0.000    0.000    0.000    0.000 signal.py:24(_int_to_enum)
-        1    0.000    0.000    0.000    0.000 pathlib.py:868(__new__)
-        8    0.000    0.000    0.000    0.000 {built-in method fromtimestamp}
-        8    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:437(cache_from_source)
-        1    0.000    0.000    0.000    0.000 simulation.py:122(<listcomp>)
-       10    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:392(cached)
-        1    0.000    0.000    0.000    0.000 tempfile.py:143(rng)
-        1    0.000    0.000    0.000    0.000 pathlib.py:504(_from_parts)
-        4    0.000    0.000    0.000    0.000 {method 'read' of '_io.BufferedReader' objects}
-        8    0.000    0.000    0.000    0.000 _weakrefset.py:110(remove)
-       16    0.000    0.000    0.000    0.000 _weakrefset.py:27(__exit__)
-        8    0.000    0.000    0.000    0.000 functools.py:393(__get__)
-        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:169(__enter__)
-        1    0.000    0.000    0.000    0.000 random.py:119(__init__)
-        1    0.000    0.000    0.000    0.000 util.py:189(__init__)
-        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:567(_get_cached)
+       37    0.000    0.000    0.000    0.000 {method 'format' of 'str' objects}
+       20    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:140(_path_stat)
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:493(_init_module_attrs)
+        4    0.000    0.000    0.000    0.000 {method 'acquire' of '_thread.lock' objects}
+        1    0.000    0.000    0.000    0.000 pathlib.py:1111(mkdir)
+       32    0.000    0.000    0.000    0.000 utils.py:256(_is_ascii)
+       40    0.000    0.000    0.000    0.000 std.py:104(release)
+       32    0.000    0.000    0.000    0.000 std.py:111(__exit__)
+        8    0.000    0.000    0.000    0.000 utils.py:196(__init__)
+        1    0.000    0.000    0.000    0.000 util.py:1(<module>)
+       24    0.000    0.000    0.000    0.000 std.py:397(format_interval)
+        8    0.000    0.000    0.000    0.000 std.py:683(<setcomp>)
+       40    0.000    0.000    0.000    0.000 {method 'acquire' of '_multiprocessing.SemLock' objects}
         2    0.000    0.000    0.000    0.000 threading.py:562(__init__)
-        8    0.000    0.000    0.000    0.000 {built-in method posix.get_terminal_size}
-       16    0.000    0.000    0.000    0.000 std.py:183(__format__)
-       24    0.000    0.000    0.000    0.000 {method 'remove' of 'set' objects}
-        8    0.000    0.000    0.000    0.000 {built-in method now}
-        1    0.000    0.000    0.000    0.000 random.py:128(seed)
-        8    0.000    0.000    0.000    0.000 std.py:436(status_printer)
-        1    0.000    0.000    0.000    0.000 pathlib.py:484(_parse_args)
-       16    0.000    0.000    0.000    0.000 std.py:1293(fp_write)
+        1    0.000    0.000    0.000    0.000 threading.py:1324(_make_invoke_excepthook)
+        1    0.000    0.000    0.000    0.000 util.py:189(__init__)
+        1    0.000    0.000    0.000    0.000 synchronize.py:121(_make_name)
+       46    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:126(_path_join)
+        3    0.000    0.000    0.000    0.000 {built-in method builtins.next}
+        1    0.000    0.000    0.000    0.000 {built-in method posix.mkdir}
+        1    0.000    0.000    0.000    0.000 pathlib.py:868(__new__)
         2    0.000    0.000    0.000    0.000 enum.py:688(__call__)
+        1    0.000    0.000    0.000    0.000 tempfile.py:154(__next__)
+        9    0.000    0.000    0.000    0.000 _weakrefset.py:85(add)
+       16    0.000    0.000    0.000    0.000 std.py:1453(format_dict)
+        8    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:437(cache_from_source)
+        1    0.000    0.000    0.000    0.000 simulation.py:164(<listcomp>)
+        1    0.000    0.000    0.000    0.000 pathlib.py:504(_from_parts)
+        8    0.000    0.000    0.000    0.000 {built-in method fromtimestamp}
+        8    0.000    0.000    0.000    0.000 _weakrefset.py:110(remove)
+       10    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:392(cached)
+       16    0.000    0.000    0.000    0.000 _weakrefset.py:27(__exit__)
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:169(__enter__)
+        1    0.000    0.000    0.000    0.000 {built-in method _thread.start_new_thread}
+       16    0.000    0.000    0.000    0.000 std.py:151(__init__)
+        1    0.000    0.000    0.000    0.000 tempfile.py:143(rng)
+        8    0.000    0.000    0.000    0.000 {built-in method now}
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:567(_get_cached)
+        2    0.000    0.000    0.000    0.000 threading.py:243(__init__)
+       16    0.000    0.000    0.000    0.000 std.py:183(__format__)
+        8    0.000    0.000    0.000    0.000 std.py:436(status_printer)
+       24    0.000    0.000    0.000    0.000 {method 'remove' of 'set' objects}
+        1    0.000    0.000    0.000    0.000 random.py:119(__init__)
+        1    0.000    0.000    0.000    0.000 pathlib.py:484(_parse_args)
+        8    0.000    0.000    0.000    0.000 {built-in method posix.get_terminal_size}
         6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:159(_path_isfile)
-        1    0.000    0.000    0.000    0.000 {function Random.seed at 0x105fe8ae0}
+       16    0.000    0.000    0.000    0.000 std.py:1293(fp_write)
+        1    0.000    0.000    0.000    0.000 random.py:128(seed)
         8    0.000    0.000    0.000    0.000 utils.py:249(_supports_unicode)
         6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:150(_path_is_mode_type)
        48    0.000    0.000    0.000    0.000 {method 'sub' of 're.Pattern' objects}
-       40    0.000    0.000    0.000    0.000 {method 'release' of '_multiprocessing.SemLock' objects}
-       25    0.000    0.000    0.000    0.000 {method 'add' of 'set' objects}
-        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1602(_get_spec)
-        1    0.000    0.000    0.000    0.000 pathlib.py:56(parse_parts)
-        1    0.000    0.000    0.000    0.000 {built-in method _thread.start_new_thread}
-        1    0.000    0.000    0.000    0.000 lapack.py:906(get_lapack_funcs)
        46    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:128(<listcomp>)
-       16    0.000    0.000    0.000    0.000 std.py:151(__init__)
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1602(_get_spec)
+        8    0.000    0.000    0.000    0.000 functools.py:393(__get__)
+        1    0.000    0.000    0.000    0.000 lapack.py:906(get_lapack_funcs)
+       40    0.000    0.000    0.000    0.000 {method 'release' of '_multiprocessing.SemLock' objects}
+        1    0.000    0.000    0.000    0.000 {function Random.seed at 0x10a3acae0}
+        1    0.000    0.000    0.000    0.000 pathlib.py:56(parse_parts)
+        4    0.000    0.000    0.000    0.000 {method 'read' of '_io.BufferedReader' objects}
         6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:179(_get_module_lock)
        16    0.000    0.000    0.000    0.000 _weakrefset.py:53(_commit_removals)
-        2    0.000    0.000    0.000    0.000 threading.py:243(__init__)
         1    0.000    0.000    0.000    0.000 pathlib.py:1245(is_dir)
+        2    0.000    0.000    0.000    0.000 {built-in method _signal.pthread_sigmask}
+       25    0.000    0.000    0.000    0.000 {method 'add' of 'set' objects}
+        1    0.000    0.000    0.000    0.000 blas.py:326(_get_funcs)
       336    0.000    0.000    0.000    0.000 {built-in method builtins.ord}
     13/11    0.000    0.000    0.000    0.000 <frozen abc>:121(__subclasscheck__)
-        1    0.000    0.000    0.000    0.000 spawn.py:1(<module>)
-       16    0.000    0.000    0.000    0.000 utils.py:205(__eq__)
-        1    0.000    0.000    0.000    0.000 blas.py:326(_get_funcs)
-        8    0.000    0.000    0.000    0.000 utils.py:139(__init__)
-        1    0.000    0.000    0.000    0.000 pathlib.py:1008(stat)
         6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:778(spec_from_file_location)
+        8    0.000    0.000    0.000    0.000 utils.py:108(__eq__)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1239(exec_module)
        40    0.000    0.000    0.000    0.000 {built-in method builtins.max}
+        1    0.000    0.000    0.000    0.000 spawn.py:1(<module>)
         8    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:132(_path_split)
+        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:642(_classify_pyc)
+        1    0.000    0.000    0.000    0.000 pathlib.py:1008(stat)
+        4    0.000    0.000    0.000    0.000 dgps.py:48(__init__)
     13/11    0.000    0.000    0.000    0.000 {built-in method _abc._abc_subclasscheck}
         6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:173(__exit__)
-        8    0.000    0.000    0.000    0.000 utils.py:108(__eq__)
-        2    0.000    0.000    0.000    0.000 {built-in method _signal.pthread_sigmask}
        16    0.000    0.000    0.000    0.000 utils.py:170(disable_on_exception)
-        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1239(exec_module)
-        4    0.000    0.000    0.000    0.000 dgps.py:48(__init__)
-        1    0.000    0.000    0.000    0.000 threading.py:1324(_make_invoke_excepthook)
-        8    0.000    0.000    0.000    0.000 utils.py:235(_is_utf)
-        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1146(path_stats)
-       24    0.000    0.000    0.000    0.000 utils.py:135(wrapper_setattr)
-        7    0.000    0.000    0.000    0.000 _monitor.py:103(report)
-       16    0.000    0.000    0.000    0.000 _weakrefset.py:21(__enter__)
-       32    0.000    0.000    0.000    0.000 {method 'flush' of '_io.TextIOWrapper' objects}
-        1    0.000    0.000    0.000    0.000 random.py:480(choices)
-       11    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x101023400}
-       18    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:405(parent)
-        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:125(release)
-        2    0.000    0.000    0.000    0.000 {built-in method _imp.exec_dynamic}
-       16    0.000    0.000    0.000    0.000 std.py:1163(__hash__)
-        6    0.000    0.000    0.000    0.000 __init__.py:101(find_spec)
-        3    0.000    0.000    0.000    0.000 pathlib.py:546(__fspath__)
-        1    0.000    0.000    0.000    0.000 util.py:174(register_after_fork)
-        9    0.000    0.000    0.000    0.000 {method 'fileno' of '_io.TextIOWrapper' objects}
-        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:100(acquire)
-       56    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:244(_verbose_message)
-        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:642(_classify_pyc)
-       64    0.000    0.000    0.000    0.000 {built-in method builtins.divmod}
-        1    0.000    0.000    0.000    0.000 weakref.py:104(__init__)
-       16    0.000    0.000    0.000    0.000 std.py:1159(_comparable)
-        1    0.000    0.000    0.000    0.000 subprocess.py:300(_args_from_interpreter_flags)
-        8    0.000    0.000    0.000    0.000 std.py:228(__call__)
-       57    0.000    0.000    0.000    0.000 {method 'join' of 'str' objects}
-       12    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:84(_unpack_uint32)
-       16    0.000    0.000    0.000    0.000 utils.py:122(__getattr__)
-        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:71(__init__)
-        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:198(cb)
-        8    0.000    0.000    0.000    0.000 std.py:1153(__del__)
-       41    0.000    0.000    0.000    0.000 {method 'acquire' of '_thread.RLock' objects}
-        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:675(_validate_timestamp_pyc)
-        1    0.000    0.000    0.000    0.000 random.py:493(<listcomp>)
-        4    0.000    0.000    0.000    0.000 dgps.py:195(set_conditional_outcomes)
-       15    0.000    0.000    0.000    0.000 {built-in method _thread.allocate_lock}
-       24    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1030(__exit__)
-        3    0.000    0.000    0.000    0.000 pathlib.py:536(__str__)
-       24    0.000    0.000    0.000    0.000 std.py:223(__init__)
-       41    0.000    0.000    0.000    0.000 {method 'release' of '_thread.RLock' objects}
-       10    0.000    0.000    0.000    0.000 {method 'encode' of 'str' objects}
-       16    0.000    0.000    0.000    0.000 std.py:165(colour)
-        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:920(find_spec)
-      100    0.000    0.000    0.000    0.000 {method 'rstrip' of 'str' objects}
-        1    0.000    0.000    0.000    0.000 weakref.py:164(__setitem__)
-       24    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1026(__enter__)
-       20    0.000    0.000    0.000    0.000 {method 'pop' of 'list' objects}
-        1    0.000    0.000    0.000    0.000 blas.py:259(find_best_blas_type)
-        2    0.000    0.000    0.000    0.000 {built-in method posix.pipe}
+        8    0.000    0.000    0.000    0.000 utils.py:139(__init__)
         2    0.000    0.000    0.000    0.000 enum.py:1095(__new__)
-        7    0.000    0.000    0.000    0.000 pathlib.py:239(splitroot)
-       12    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1424(_path_importer_cache)
+        2    0.000    0.000    0.000    0.000 {built-in method _imp.exec_dynamic}
+        9    0.000    0.000    0.000    0.000 {method 'fileno' of '_io.TextIOWrapper' objects}
+       32    0.000    0.000    0.000    0.000 {method 'flush' of '_io.TextIOWrapper' objects}
+       24    0.000    0.000    0.000    0.000 utils.py:135(wrapper_setattr)
+        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1146(path_stats)
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:100(acquire)
+       16    0.000    0.000    0.000    0.000 _weakrefset.py:21(__enter__)
+        7    0.000    0.000    0.000    0.000 _monitor.py:103(report)
+       15    0.000    0.000    0.000    0.000 {built-in method _thread.allocate_lock}
+        8    0.000    0.000    0.000    0.000 utils.py:235(_is_utf)
+        6    0.000    0.000    0.000    0.000 __init__.py:101(find_spec)
+       16    0.000    0.000    0.000    0.000 utils.py:205(__eq__)
+        1    0.000    0.000    0.000    0.000 subprocess.py:300(_args_from_interpreter_flags)
+       12    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:84(_unpack_uint32)
+       16    0.000    0.000    0.000    0.000 std.py:1163(__hash__)
+        3    0.000    0.000    0.000    0.000 pathlib.py:546(__fspath__)
+       56    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:244(_verbose_message)
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:125(release)
+       18    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:405(parent)
+        8    0.000    0.000    0.000    0.000 std.py:1153(__del__)
+        1    0.000    0.000    0.000    0.000 random.py:480(choices)
+       64    0.000    0.000    0.000    0.000 {built-in method builtins.divmod}
+       41    0.000    0.000    0.000    0.000 {method 'release' of '_thread.RLock' objects}
+       16    0.000    0.000    0.000    0.000 utils.py:122(__getattr__)
+       16    0.000    0.000    0.000    0.000 std.py:1159(_comparable)
+        2    0.000    0.000    0.000    0.000 {built-in method posix.pipe}
+       57    0.000    0.000    0.000    0.000 {method 'join' of 'str' objects}
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:71(__init__)
+        1    0.000    0.000    0.000    0.000 weakref.py:104(__init__)
+        1    0.000    0.000    0.000    0.000 util.py:174(register_after_fork)
+        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:675(_validate_timestamp_pyc)
+       41    0.000    0.000    0.000    0.000 {method 'acquire' of '_thread.RLock' objects}
        46    0.000    0.000    0.000    0.000 {method 'rpartition' of 'str' objects}
+        4    0.000    0.000    0.000    0.000 dgps.py:195(set_conditional_outcomes)
+        3    0.000    0.000    0.000    0.000 pathlib.py:536(__str__)
+       24    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1030(__exit__)
        16    0.000    0.000    0.000    0.000 utils.py:91(__init__)
-        4    0.000    0.000    0.000    0.000 simulation.py:137(<listcomp>)
-        1    0.000    0.000    0.000    0.000 spawn.py:36(set_executable)
-       17    0.000    0.000    0.000    0.000 {built-in method builtins.id}
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:920(find_spec)
+       10    0.000    0.000    0.000    0.000 {method 'encode' of 'str' objects}
+       11    0.000    0.000    0.000    0.000 {built-in method __new__ of type object at 0x104fcb400}
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:198(cb)
+       24    0.000    0.000    0.000    0.000 std.py:223(__init__)
+       20    0.000    0.000    0.000    0.000 {method 'pop' of 'list' objects}
+       24    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:1026(__enter__)
+      100    0.000    0.000    0.000    0.000 {method 'rstrip' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 random.py:493(<listcomp>)
+       16    0.000    0.000    0.000    0.000 std.py:165(colour)
        16    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:134(<genexpr>)
-        8    0.000    0.000    0.000    0.000 utils.py:265(_screen_shape_wrapper)
+        1    0.000    0.000    0.000    0.000 threading.py:1453(current_thread)
        16    0.000    0.000    0.000    0.000 _weakrefset.py:17(__init__)
+        8    0.000    0.000    0.000    0.000 utils.py:265(_screen_shape_wrapper)
+        7    0.000    0.000    0.000    0.000 pathlib.py:239(splitroot)
+        1    0.000    0.000    0.000    0.000 weakref.py:164(__setitem__)
+       12    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1424(_path_importer_cache)
+        1    0.000    0.000    0.000    0.000 blas.py:259(find_best_blas_type)
+        2    0.000    0.000    0.000    0.000 {method '__exit__' of '_thread.RLock' objects}
        16    0.000    0.000    0.000    0.000 utils.py:95(__format__)
         4    0.000    0.000    0.000    0.000 dgps.py:153(__init__)
-        1    0.000    0.000    0.000    0.000 synchronize.py:46(SemLock)
         6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:748(find_spec)
+        1    0.000    0.000    0.000    0.000 synchronize.py:46(SemLock)
+        4    0.000    0.000    0.000    0.000 simulation.py:179(<listcomp>)
        16    0.000    0.000    0.000    0.000 {built-in method _weakref.proxy}
-       10    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:67(_relax_case)
-        1    0.000    0.000    0.000    0.000 threading.py:286(_is_owned)
-        8    0.000    0.000    0.000    0.000 {built-in method builtins.min}
+        8    0.000    0.000    0.000    0.000 std.py:228(__call__)
         1    0.000    0.000    0.000    0.000 util.py:185(Finalize)
-        1    0.000    0.000    0.000    0.000 synchronize.py:217(Condition)
-        1    0.000    0.000    0.000    0.000 threading.py:1206(daemon)
+        1    0.000    0.000    0.000    0.000 spawn.py:36(set_executable)
+        1    0.000    0.000    0.000    0.000 std.py:96(<listcomp>)
         1    0.000    0.000    0.000    0.000 synchronize.py:370(Barrier)
-        1    0.000    0.000    0.000    0.000 <frozen os>:806(fsencode)
-        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:599(_check_name_wrapper)
-        1    0.000    0.000    0.000    0.000 threading.py:1221(daemon)
-        2    0.000    0.000    0.000    0.000 {built-in method atexit.register}
-        1    0.000    0.000    0.000    0.000 threading.py:280(_release_save)
-        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:357(__init__)
-       36    0.000    0.000    0.000    0.000 {built-in method _imp.acquire_lock}
-        2    0.000    0.000    0.000    0.000 pathlib.py:523(_format_parsed_parts)
-        3    0.000    0.000    0.000    0.000 {built-in method posix.close}
-        1    0.000    0.000    0.000    0.000 {built-in method posix.sysconf}
-        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:180(_path_isabs)
-       36    0.000    0.000    0.000    0.000 {built-in method _imp.release_lock}
-        1    0.000    0.000    0.000    0.000 threading.py:1453(current_thread)
-        1    0.000    0.000    0.000    0.000 weakref.py:289(update)
-        2    0.000    0.000    0.000    0.000 {method '__exit__' of '_thread.RLock' objects}
-        1    0.000    0.000    0.000    0.000 resource_tracker.py:58(ResourceTracker)
-        1    0.000    0.000    0.000    0.000 pathlib.py:777(parent)
-        1    0.000    0.000    0.000    0.000 resource_tracker.py:60(__init__)
+       17    0.000    0.000    0.000    0.000 {built-in method builtins.id}
+        8    0.000    0.000    0.000    0.000 {built-in method builtins.min}
         1    0.000    0.000    0.000    0.000 {built-in method posix.write}
-        9    0.000    0.000    0.000    0.000 threading.py:575(is_set)
-       10    0.000    0.000    0.000    0.000 {method 'startswith' of 'str' objects}
-        1    0.000    0.000    0.000    0.000 util.py:108(_platform_supports_abstract_sockets)
-        8    0.000    0.000    0.000    0.000 {method 'endswith' of 'str' objects}
-        1    0.000    0.000    0.000    0.000 synchronize.py:328(Event)
-        6    0.000    0.000    0.000    0.000 {built-in method _imp.find_frozen}
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:357(__init__)
+        2    0.000    0.000    0.000    0.000 pathlib.py:523(_format_parsed_parts)
+       10    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:67(_relax_case)
+        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:599(_check_name_wrapper)
+        1    0.000    0.000    0.000    0.000 weakref.py:289(update)
+       36    0.000    0.000    0.000    0.000 {built-in method _imp.acquire_lock}
+       36    0.000    0.000    0.000    0.000 {built-in method _imp.release_lock}
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:180(_path_isabs)
+        1    0.000    0.000    0.000    0.000 pathlib.py:777(parent)
+        3    0.000    0.000    0.000    0.000 {built-in method posix.close}
+        1    0.000    0.000    0.000    0.000 synchronize.py:217(Condition)
+        1    0.000    0.000    0.000    0.000 resource_tracker.py:60(__init__)
+        1    0.000    0.000    0.000    0.000 threading.py:1221(daemon)
        16    0.000    0.000    0.000    0.000 std.py:161(colour)
+       10    0.000    0.000    0.000    0.000 {method 'startswith' of 'str' objects}
         6    0.000    0.000    0.000    0.000 {built-in method _imp.is_builtin}
         4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:48(_new_module)
+        6    0.000    0.000    0.000    0.000 {built-in method _imp.find_frozen}
+        1    0.000    0.000    0.000    0.000 threading.py:280(_release_save)
+        1    0.000    0.000    0.000    0.000 <frozen os>:806(fsencode)
+        2    0.000    0.000    0.000    0.000 {built-in method atexit.register}
        12    0.000    0.000    0.000    0.000 {built-in method from_bytes}
-        8    0.000    0.000    0.000    0.000 {method 'rfind' of 'str' objects}
+        9    0.000    0.000    0.000    0.000 threading.py:575(is_set)
+        4    0.000    0.000    0.000    0.000 simulation.py:25(__init__)
+        1    0.000    0.000    0.000    0.000 {built-in method posix.sysconf}
+        1    0.000    0.000    0.000    0.000 resource_tracker.py:58(ResourceTracker)
+       13    0.000    0.000    0.000    0.000 {method '__exit__' of '_thread.lock' objects}
+        1    0.000    0.000    0.000    0.000 {built-in method builtins.sorted}
+        8    0.000    0.000    0.000    0.000 {method 'endswith' of 'str' objects}
         6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:165(__init__)
-        4    0.000    0.000    0.000    0.000 simulation.py:21(__init__)
+       13    0.000    0.000    0.000    0.000 {built-in method _thread.get_ident}
+        8    0.000    0.000    0.000    0.000 {method 'rfind' of 'str' objects}
+        1    0.000    0.000    0.000    0.000 threading.py:271(__enter__)
+        1    0.000    0.000    0.000    0.000 util.py:108(_platform_supports_abstract_sockets)
         2    0.000    0.000    0.000    0.000 {built-in method builtins.locals}
        15    0.000    0.000    0.000    0.000 {built-in method posix.fspath}
-       13    0.000    0.000    0.000    0.000 {method '__exit__' of '_thread.lock' objects}
-       13    0.000    0.000    0.000    0.000 {built-in method _thread.get_ident}
         1    0.000    0.000    0.000    0.000 weakref.py:347(__new__)
-        1    0.000    0.000    0.000    0.000 threading.py:271(__enter__)
-        8    0.000    0.000    0.000    0.000 {built-in method math.floor}
-        1    0.000    0.000    0.000    0.000 {built-in method builtins.sorted}
-        1    0.000    0.000    0.000    0.000 __init__.py:146(_DType_reduce)
         8    0.000    0.000    0.000    0.000 {method 'random' of '_random.Random' objects}
-        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1097(__init__)
         1    0.000    0.000    0.000    0.000 context.py:237(get_context)
         8    0.000    0.000    0.000    0.000 std.py:1308(<lambda>)
+        1    0.000    0.000    0.000    0.000 threading.py:286(_is_owned)
         1    0.000    0.000    0.000    0.000 weakref.py:352(__init__)
-        1    0.000    0.000    0.000    0.000 {method 'lstrip' of 'str' objects}
-        6    0.000    0.000    0.000    0.000 {built-in method sys.intern}
-        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1220(__init__)
-        1    0.000    0.000    0.000    0.000 threading.py:90(RLock)
         8    0.000    0.000    0.000    0.000 {built-in method builtins.iter}
-        4    0.000    0.000    0.000    0.000 {built-in method _imp._fix_co_filename}
+        1    0.000    0.000    0.000    0.000 __init__.py:146(_DType_reduce)
         1    0.000    0.000    0.000    0.000 synchronize.py:90(_make_methods)
-        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:413(has_location)
+        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1097(__init__)
+        2    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1220(__init__)
+        8    0.000    0.000    0.000    0.000 {built-in method math.floor}
+        1    0.000    0.000    0.000    0.000 synchronize.py:328(Event)
         2    0.000    0.000    0.000    0.000 {built-in method posix.getpid}
-        1    0.000    0.000    0.000    0.000 pathlib.py:515(_from_parsed_parts)
-        1    0.000    0.000    0.000    0.000 synchronize.py:130(Semaphore)
-        1    0.000    0.000    0.000    0.000 util.py:371(ForkAwareThreadLock)
-        1    0.000    0.000    0.000    0.000 threading.py:283(_acquire_restore)
-        1    0.000    0.000    0.000    0.000 std.py:96(<listcomp>)
         2    0.000    0.000    0.000    0.000 {method 'setter' of 'property' objects}
-        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
-        1    0.000    0.000    0.000    0.000 threading.py:274(__exit__)
+        4    0.000    0.000    0.000    0.000 {built-in method _imp._fix_co_filename}
+        6    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap>:413(has_location)
+        1    0.000    0.000    0.000    0.000 threading.py:1206(daemon)
+        6    0.000    0.000    0.000    0.000 {built-in method sys.intern}
+        1    0.000    0.000    0.000    0.000 pathlib.py:515(_from_parsed_parts)
+        1    0.000    0.000    0.000    0.000 threading.py:90(RLock)
+        1    0.000    0.000    0.000    0.000 util.py:371(ForkAwareThreadLock)
+        1    0.000    0.000    0.000    0.000 synchronize.py:130(Semaphore)
         4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:1122(get_filename)
-        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:931(create_module)
-        4    0.000    0.000    0.000    0.000 methods.py:143(__init__)
-        1    0.000    0.000    0.000    0.000 {built-in method _stat.S_ISDIR}
-        1    0.000    0.000    0.000    0.000 subprocess.py:290(_optim_args_from_interpreter_flags)
-        1    0.000    0.000    0.000    0.000 {method '__enter__' of '_thread.lock' objects}
-        1    0.000    0.000    0.000    0.000 synchronize.py:149(BoundedSemaphore)
-        1    0.000    0.000    0.000    0.000 synchronize.py:166(Lock)
+        1    0.000    0.000    0.000    0.000 threading.py:274(__exit__)
         1    0.000    0.000    0.000    0.000 process.py:37(current_process)
-        1    0.000    0.000    0.000    0.000 {method 'reverse' of 'list' objects}
-        1    0.000    0.000    0.000    0.000 util.py:388(ForkAwareLocal)
-        1    0.000    0.000    0.000    0.000 {method 'append' of 'collections.deque' objects}
-        2    0.000    0.000    0.000    0.000 __init__.py:108(<lambda>)
-        4    0.000    0.000    0.000    0.000 methods.py:69(__init__)
         1    0.000    0.000    0.000    0.000 synchronize.py:191(RLock)
+        4    0.000    0.000    0.000    0.000 <frozen importlib._bootstrap_external>:931(create_module)
         1    0.000    0.000    0.000    0.000 context.py:197(get_start_method)
+        1    0.000    0.000    0.000    0.000 {method 'lstrip' of 'str' objects}
+        4    0.000    0.000    0.000    0.000 methods.py:197(__init__)
+        1    0.000    0.000    0.000    0.000 synchronize.py:149(BoundedSemaphore)
+        1    0.000    0.000    0.000    0.000 subprocess.py:290(_optim_args_from_interpreter_flags)
+        1    0.000    0.000    0.000    0.000 simulation.py:117(__init__)
+        1    0.000    0.000    0.000    0.000 synchronize.py:166(Lock)
+        1    0.000    0.000    0.000    0.000 util.py:388(ForkAwareLocal)
+        1    0.000    0.000    0.000    0.000 {method '__enter__' of '_thread.lock' objects}
+        4    0.000    0.000    0.000    0.000 methods.py:106(__init__)
         1    0.000    0.000    0.000    0.000 resource_tracker.py:54(ReentrantCallError)
-        1    0.000    0.000    0.000    0.000 simulation.py:89(__init__)
-        1    0.000    0.000    0.000    0.000 {method 'release' of '_thread.lock' objects}
-        1    0.000    0.000    0.000    0.000 util.py:48(debug)
+        2    0.000    0.000    0.000    0.000 __init__.py:108(<lambda>)
+        1    0.000    0.000    0.000    0.000 {built-in method _stat.S_ISDIR}
         1    0.000    0.000    0.000    0.000 {method '_recursion_count' of '_thread.RLock' objects}
+        1    0.000    0.000    0.000    0.000 util.py:48(debug)
         1    0.000    0.000    0.000    0.000 spawn.py:45(get_executable)
+        1    0.000    0.000    0.000    0.000 {method 'append' of 'collections.deque' objects}
+        1    0.000    0.000    0.000    0.000 {method 'reverse' of 'list' objects}
+        1    0.000    0.000    0.000    0.000 {method 'release' of '_thread.lock' objects}
+        1    0.000    0.000    0.000    0.000 {method 'disable' of '_lsprof.Profiler' objects}
 
 

@@ -1,31 +1,16 @@
 import warnings
-from contextlib import contextmanager
 from itertools import product
-from unittest.mock import patch
 
 import numpy as np
 from statsmodels.tools.sm_exceptions import ConvergenceWarning
-from tqdm.auto import tqdm
-from tqdm.std import tqdm as tqdm_base
 
+from performance_analysis.progress import comparison_progress
 from src.dgps import IndividualConditionalOutcomesUniformDGP, ExperimentDGP
 from src.methods import LogitModelEstimator, LogitModelPlugIn
 from src_optimized.optimized_methods import (
     fast_LogitModelEstimator,
     fast_LogitModelPlugIn,
 )
-
-
-@contextmanager
-def suppress_inner_tqdm():
-    original_init = tqdm_base.__init__
-
-    def disabled_init(self, *args, **kwargs):
-        kwargs["disable"] = True
-        original_init(self, *args, **kwargs)
-
-    with patch.object(tqdm_base, "__init__", disabled_init):
-        yield
 
 
 def _run_logit_accuracy_grid(
@@ -53,7 +38,7 @@ def _run_logit_accuracy_grid(
     # Initialize once: never reset inside any of the loops.
     rng = np.random.default_rng(seed)
 
-    estimate_name = "plug-in" if plugin else "assignment"
+    estimate_name = "plug-in" if plugin else "treatment coefficient"
 
     grid = product(
         individual_counts,
@@ -66,12 +51,7 @@ def _run_logit_accuracy_grid(
         * n_regenerations
     )
 
-    with tqdm(
-        total=total,
-        desc=f"Logit {estimate_name} accuracy",
-        unit="comparison",
-        dynamic_ncols=True,
-    ) as progress:
+    with comparison_progress(f"Logit {estimate_name} accuracy", total) as progress:
         for n_individuals, n_experiments, regeneration in grid:
             context = (
                 f"{estimate_name}: "
@@ -83,24 +63,22 @@ def _run_logit_accuracy_grid(
             progress.set_postfix(
                 individuals=n_individuals,
                 experiments=n_experiments,
-                population=f"{regeneration}/{n_regenerations}",
+                draw=f"{regeneration}/{n_regenerations}",
             )
 
-            # Suppress progress bars created by population/experiment generators.
-            with suppress_inner_tqdm():
-                individuals = IndividualConditionalOutcomesUniformDGP(
-                    n=n_individuals,
-                    treatment_outcome_threshold=treatment_threshold,
-                    control_outcome_threshold=control_threshold,
-                ).generate_individuals(rng=rng)
+            individuals = IndividualConditionalOutcomesUniformDGP(
+                n=n_individuals,
+                treatment_outcome_threshold=treatment_threshold,
+                control_outcome_threshold=control_threshold,
+            ).generate_individuals(rng=rng)
 
-                # Individuals are shared within this batch, while treatment
-                # assignments vary across experiments.
-                experiments = ExperimentDGP(
-                    n_exp=n_experiments,
-                    p_treatment=p_treatment,
-                    conditional_outcomes=individuals,
-                ).generate_experiments(rng=rng)
+            # Individuals are shared within this batch, while treatment
+            # assignments vary across experiments.
+            experiments = ExperimentDGP(
+                n_exp=n_experiments,
+                p_treatment=p_treatment,
+                conditional_outcomes=individuals,
+            ).generate_experiments(rng=rng)
 
             # Check the requirement for both estimator variants.
             for idx, experiment in enumerate(experiments):
@@ -133,8 +111,7 @@ def _run_logit_accuracy_grid(
                 )
 
             # A nonconverged reference fit is not an accuracy target.
-            # Suppress nested estimator progress bars.
-            with warnings.catch_warnings(), suppress_inner_tqdm():
+            with warnings.catch_warnings():
                 warnings.simplefilter("error", ConvergenceWarning)
 
                 old_estimates, old_beta = (
@@ -205,31 +182,6 @@ def _run_logit_accuracy_grid(
                     err_msg=f"{context}: fast assignment column mismatch.",
                 )
 
-            max_beta_errors = np.max(
-                np.abs(fast_beta - old_beta),
-                axis=0,
-            )
-            max_estimate_error = np.max(
-                np.abs(fast_estimates - old_estimates)
-            )
-
-            output_lines = [
-                f"\nPASS: {context}, p_treatment={p_treatment}.",
-                "Maximum absolute coefficient differences:",
-            ]
-
-            for name, error in zip(
-                ("intercept", "assignment", "covariate"),
-                max_beta_errors,
-            ):
-                output_lines.append(f"  {name}: {error:.3e}")
-
-            output_lines.append(
-                f"Maximum absolute {estimate_name} difference: "
-                f"{max_estimate_error:.3e}"
-            )
-
-            tqdm.write("\n".join(output_lines))
             progress.update(1)
 
 

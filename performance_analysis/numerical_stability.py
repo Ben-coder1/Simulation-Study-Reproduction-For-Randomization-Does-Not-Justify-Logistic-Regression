@@ -16,6 +16,7 @@ from tqdm.std import tqdm as tqdm_base
 import src.simulation as original_module
 import src_optimized.optimized_simulation as optimized_module
 import src_optimized.non_vectorized_simulation as non_vectorized_module
+from src_optimized import simulate_parallel
 
 
 # Store diagnostic reports separately from timing measurements.
@@ -35,6 +36,7 @@ METHODS = [
     ("original", original_module),
     ("optimized", optimized_module),
     ("non_vectorized", non_vectorized_module),
+    ("parallel", simulate_parallel),
 ]
 
 CSV_FIELDS = [
@@ -234,17 +236,21 @@ def check_one_run(
         warnings.simplefilter("always")
 
         try:
-            with (
-                patch.object(module, "SIMULATIONS", configs),
-                patch.object(module, "SEED", seed),
-                patch.object(module, "PICKLE_LOCATION", pickle_path),
-                patch.object(
-                    tqdm_base,
-                    "__init__",
-                    disabled_tqdm_init,
-                ),
-            ):
-                results = module.run_from_config()
+            with patch.object(tqdm_base, "__init__", disabled_tqdm_init):
+                if module is simulate_parallel:
+                    results = module.run_from_config(
+                        workers=2,
+                        simulation_configs=configs,
+                        seed=seed,
+                        pickle_path=pickle_path,
+                    )
+                else:
+                    with (
+                        patch.object(module, "SIMULATIONS", configs),
+                        patch.object(module, "SEED", seed),
+                        patch.object(module, "PICKLE_LOCATION", pickle_path),
+                    ):
+                        results = module.run_from_config()
 
             report["nonfinite_outputs"] = find_nonfinite_outputs(
                 results
@@ -370,7 +376,7 @@ def write_summary(reports: list[dict]) -> None:
         "Grid sizes, DGP settings, repeats, and run-order rotation",
         "match the supplied performance comparison.",
         "Each grid configuration/repeat uses a distinct seed, shared",
-        "across the three implementations.",
+        "across all implementations. The parallel runner uses two threads.",
         "Seed formula: BASE_SEED + configuration_index * REPEATS + repeat",
         "Here configuration_index and repeat are zero-based.",
         "These grid seeds differ from the original performance script",
@@ -389,7 +395,8 @@ def write_summary(reports: list[dict]) -> None:
         "Separation flags reflect explicit diagnostic mentions, not a",
         "dedicated complete/quasi-complete separation test.",
         "A separation warning alone does not change a passed status.",
-        "Experiment indices in diagnostics are zero-based.",
+        "Experiment indices in diagnostics are zero-based and relative to",
+        "the chunk for errors raised by a parallel fit.",
         "A failed batch may stop before all experiments are diagnosed.",
         "The wrapper uses each implementation's fitting defaults; it",
         "does not enforce matching tolerances or iteration limits.",

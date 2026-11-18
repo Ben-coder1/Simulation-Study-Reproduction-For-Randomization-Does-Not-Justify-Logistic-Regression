@@ -4,15 +4,15 @@ import csv
 import gc
 from pathlib import Path
 from statistics import median
+from tempfile import TemporaryDirectory
 from time import perf_counter
+from unittest.mock import patch
 
 import matplotlib.pyplot as plt
 
-from src.simulation import run_from_config as run_original
-from src_optimized.optimized_simulation import run_from_config as run_optimized
-from src_optimized.non_vectorized_simulation import (
-    run_from_config as run_non_vectorized,
-)
+from performance_analysis.progress import comparison_progress
+from src import simulation as original_module
+from src_optimized import non_vectorized_simulation, optimized_simulation, simulate_parallel
 
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -25,15 +25,17 @@ PLOT_PATH = PROFILES_DIR / "benchmark_comparison.png"
 N_REPEATS = 10
 
 RUNNERS = {
-    "original": run_original,
-    "optimized": run_optimized,
-    "non_vectorized": run_non_vectorized,
+    "original": original_module,
+    "optimized": optimized_simulation,
+    "non_vectorized": non_vectorized_simulation,
+    "parallel": simulate_parallel,
 }
 
 DISPLAY_NAMES = {
     "original": "Original",
     "optimized": "Optimized / vectorized",
     "non_vectorized": "Non-vectorized",
+    "parallel": "Vectorized, 2 threads",
 }
 
 
@@ -51,9 +53,18 @@ def timed_run(version):
     """
     gc.collect()
 
-    start = perf_counter()
-    result = RUNNERS[version]()
-    elapsed = perf_counter() - start
+    module = RUNNERS[version]
+    with TemporaryDirectory(prefix="benchmark_comparison_") as directory:
+        pickle_path = Path(directory) / "simulation.pkl"
+        if module is simulate_parallel:
+            start = perf_counter()
+            result = module.run_from_config(workers=2, pickle_path=pickle_path)
+            elapsed = perf_counter() - start
+        else:
+            with patch.object(module, "PICKLE_LOCATION", pickle_path):
+                start = perf_counter()
+                result = module.run_from_config()
+                elapsed = perf_counter() - start
 
     # Exclude disposal of returned results from the timed interval.
     del result
@@ -99,6 +110,7 @@ def save_results(timings):
     ]
 
     original_median = median(timings["original"])
+    vectorized_median = median(timings["optimized"])
     for version, values in timings.items():
         lines.append(
             f"{DISPLAY_NAMES[version]}: "
@@ -107,6 +119,10 @@ def save_results(timings):
             f"max={max(values):.6f} s, "
             f"speedup_vs_original={original_median / median(values):.3f}x"
         )
+    lines.append(
+        f"Two-thread speedup vs full-batch vectorized: "
+        f"{vectorized_median / median(timings['parallel']):.3f}x"
+    )
 
     SUMMARY_PATH.write_text(
         "\n".join(lines) + "\n",
@@ -121,6 +137,7 @@ def save_results(timings):
         ("original", "o", "-"),
         ("optimized", "s", "--"),
         ("non_vectorized", "^", ":"),
+        ("parallel", "D", "-."),
     ):
         ax.plot(
             repeats,
@@ -143,39 +160,38 @@ def save_results(timings):
 
 
 def main():
-    """Warm up and time all three simulation pipelines repeatedly."""
+    """Warm up and time each simulation pipeline repeatedly."""
     timings = {version: [] for version in RUNNERS}
 
-    print(
-        "Warming up all implementations; these times are discarded.",
-        flush=True,
-    )
-    timed_run("original")
-    timed_run("optimized")
-    timed_run("non_vectorized")
+    versions = list(RUNNERS)
+    with comparison_progress("Benchmark warm-up", len(versions)) as progress:
+        for version in versions:
+            progress.set_postfix_str(version)
+            timed_run(version)
+            progress.update()
 
-    for repeat in range(N_REPEATS):
-        versions = list(RUNNERS)
-        offset = repeat % len(versions)
-        order = versions[offset:] + versions[:offset]
+    total = N_REPEATS * len(versions)
+    last = ""
+    with comparison_progress("Benchmark runs", total) as progress:
+        for repeat in range(N_REPEATS):
+            offset = repeat % len(versions)
+            order = versions[offset:] + versions[:offset]
 
-        # Record a repeat only after all three implementations succeed.
-        pair = {}
+            # Record a repeat only after all implementations succeed.
+            pair = {}
+            for version in order:
+                current = f"{version}, repeat {repeat + 1}/{N_REPEATS}"
+                progress.set_postfix_str(current + last)
+                pair[version] = timed_run(version)
+                last = f", last={pair[version]:.3f} s"
+                progress.set_postfix_str(current + last, refresh=False)
+                progress.update()
 
-        for version in order:
-            pair[version] = timed_run(version)
+            for version in timings:
+                timings[version].append(pair[version])
 
-            print(
-                f"Repeat {repeat + 1}/{N_REPEATS}: "
-                f"{version} = {pair[version]:.3f} seconds",
-                flush=True,
-            )
-
-        for version in timings:
-            timings[version].append(pair[version])
-
-        # Preserve results after every completed repeat.
-        save_results(timings)
+            # Preserve results after every completed repeat.
+            save_results(timings)
 
     print("\nEnd-to-end runtime summary:")
 
@@ -187,11 +203,15 @@ def main():
             f"max={max(values):.3f} s"
         )
 
-    for version in ("optimized", "non_vectorized"):
+    for version in ("optimized", "non_vectorized", "parallel"):
         print(
             f"Median speedup ({DISPLAY_NAMES[version]} vs original): "
             f"{median(timings['original']) / median(timings[version]):.2f}x"
         )
+    print(
+        f"Median speedup (two threads vs full-batch vectorized): "
+        f"{median(timings['optimized']) / median(timings['parallel']):.2f}x"
+    )
 
     print(f"\nTimings: {TIMINGS_PATH.resolve()}")
     print(f"Summary: {SUMMARY_PATH.resolve()}")

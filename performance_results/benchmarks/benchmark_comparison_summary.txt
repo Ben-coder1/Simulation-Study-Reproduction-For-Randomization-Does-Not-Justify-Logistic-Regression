@@ -5,6 +5,8 @@ Excludes imports, warm-up, and benchmark report generation.
 No numerical-equivalence checks are performed.
 Completed repeats per version: 10
 
-Original: median=10.048649 s, min=9.990134 s, max=10.118874 s, speedup_vs_original=1.000x
-Optimized / vectorized: median=1.405304 s, min=1.358099 s, max=1.483521 s, speedup_vs_original=7.151x
-Non-vectorized: median=5.276324 s, min=5.247523 s, max=5.328233 s, speedup_vs_original=1.904x
+Original: median=10.047746 s, min=9.965179 s, max=10.114118 s, speedup_vs_original=1.000x
+Optimized / vectorized: median=1.385219 s, min=1.358536 s, max=1.442159 s, speedup_vs_original=7.254x
+Non-vectorized: median=5.278888 s, min=5.236410 s, max=5.317014 s, speedup_vs_original=1.903x
+Vectorized, 2 threads: median=0.994325 s, min=0.971232 s, max=1.033806 s, speedup_vs_original=10.105x
+Two-thread speedup vs full-batch vectorized: 1.393x

@@ -1,0 +1,438 @@
+<?xml version="1.0" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg version="1.1" width="1200" height="264"
+     xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+<style type="text/css">
+    .func_g:hover { stroke:black; stroke-width:0.5; cursor:pointer; }
+</style>
+<svg class="func_g" x="0.0" y="96" width="158.2254921343146" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:145:unique 13.27% (8000 8000 0.008713158 0.273663827)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">unique</text>
+</g></svg>
+<svg class="func_g" x="0.0" y="72" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:132:_unpack_tuple 0.14% (8000 8000 0.0022048600000000003 0.0027929420000000005)</title>
+    <rect height="100%" width="100%" fill="rgb(57, 242, 168)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_unpack_tuple</text>
+</g></svg>
+<svg class="func_g" x="1.6250140521954952" y="72" width="151.18430664528609" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:339:_unique1d 12.68% (8000 8000 0.068995084 0.26156201)</title>
+    <rect height="100%" width="100%" fill="rgb(57, 242, 168)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_unique1d</text>
+</g></svg>
+<svg class="func_g" x="1.9389124275293281" y="48" width="1" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.empty&gt; 0.13% (8000 8000 0.0027002959999999996 0.0027002959999999996)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.empty&gt;</text>
+</g></svg>
+<svg class="func_g" x="3.51002237005133" y="48" width="9.096979944426248" height="23"><g>
+    <title>~:0:&lt;method 'flatten' of 'numpy.ndarray' objects&gt; 0.84% (8000 8000 0.017353868 0.017353868)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'flatten' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="13.607002314477578" y="48" width="99.05899244483251" height="23"><g>
+    <title>~:0:&lt;method 'sort' of 'numpy.ndarray' objects&gt; 8.34% (8000 8000 0.17197325900000002 0.17197325900000002)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'sort' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="159.2254921343146" y="96" width="1039.7604462275945" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 86.73% (8 8 1.273944093 1.7887744159999999)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="160.04552162478177" y="72" width="13.367489774338488" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/numeric.py:2475:array_equal 1.20% (4000 4000 0.014054733 0.024693673)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">array_equal</text>
+</g></svg>
+<svg class="func_g" x="160.51294948909504" y="48" width="4.72261367627902" height="23"><g>
+    <title>~:0:&lt;method 'all' of 'numpy.ndarray' objects&gt; 0.48% (4000 4000 0.0011022740000000003 0.009835563)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'all' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="160.51294948909504" y="24" width="4.081278933427312" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/_methods.py:67:_all 0.42% (4365 4365 0.001150949823174376 0.008733289)</title>
+    <rect height="100%" width="100%" fill="rgb(99, 206, 42)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_all</text>
+</g></svg>
+<svg class="func_g" x="160.51294948909504" y="0" width="3.411623195488507" height="23"><g>
+    <title>~:0:&lt;method 'reduce' of 'numpy.ufunc' objects&gt; 0.37% (4365 4365 0.007582339176825624 0.007582339176825624)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'reduce' of 'numpy.ufunc' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="174.9011866961003" y="72" width="158.2254921343146" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:145:unique 13.27% (8000 8000 0.008713158 0.273663827)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">unique</text>
+</g></svg>
+<svg class="func_g" x="174.9011866961003" y="48" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:132:_unpack_tuple 0.14% (8000 8000 0.0022048600000000003 0.0027929420000000005)</title>
+    <rect height="100%" width="100%" fill="rgb(57, 242, 168)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_unpack_tuple</text>
+</g></svg>
+<svg class="func_g" x="176.5262007482958" y="48" width="151.18430664528609" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:339:_unique1d 12.68% (8000 8000 0.068995084 0.26156201)</title>
+    <rect height="100%" width="100%" fill="rgb(57, 242, 168)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_unique1d</text>
+</g></svg>
+<svg class="func_g" x="176.84009912362964" y="24" width="1" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.empty&gt; 0.13% (8000 8000 0.0027002959999999996 0.0027002959999999996)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.empty&gt;</text>
+</g></svg>
+<svg class="func_g" x="178.4112090661516" y="24" width="9.096979944426248" height="23"><g>
+    <title>~:0:&lt;method 'flatten' of 'numpy.ndarray' objects&gt; 0.84% (8000 8000 0.017353868 0.017353868)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'flatten' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="188.50818901057787" y="24" width="99.05899244483251" height="23"><g>
+    <title>~:0:&lt;method 'sort' of 'numpy.ndarray' objects&gt; 8.34% (8000 8000 0.17197325900000002 0.17197325900000002)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 165, 95)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'sort' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="334.5901467680131" y="72" width="69.26832587447338" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:1015:isin 5.86% (8000 8000 0.006627532 0.12077148400000003)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">isin</text>
+</g></svg>
+<svg class="func_g" x="334.5901467680131" y="48" width="64.05999938924464" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:862:_in1d 5.42% (8000 8000 0.09411953 0.11181983599999999)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_in1d</text>
+</g></svg>
+<svg class="func_g" x="334.98887985309335" y="24" width="1" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.all&gt; 0.16% (8000 8000 0.0017555310000000003 0.0033568120000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.all&gt;</text>
+</g></svg>
+<svg class="func_g" x="337.8932172936461" y="24" width="1.0922952956547247" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.asarray&gt; 0.17% (16000 16000 0.0035960670000000005 0.0035960670000000005)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.asarray&gt;</text>
+</g></svg>
+<svg class="func_g" x="339.98551258930087" y="24" width="2.7122614013060926" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.zeros&gt; 0.31% (8000 8000 0.006380333000000002 0.006380333000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.zeros&gt;</text>
+</g></svg>
+<svg class="func_g" x="404.8615284072686" y="72" width="4.464366060633142" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/linalg/_linalg.py:320:solve 0.46% (50 50 0.008669386000000001 0.009391708000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">solve</text>
+</g></svg>
+<svg class="func_g" x="410.660639186796" y="72" width="33.42155242265893" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.asarray&gt; 2.87% (12008 12008 0.05916096500000001 0.05916096500000001)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.asarray&gt;</text>
+</g></svg>
+<svg class="func_g" x="445.17150174622043" y="72" width="9.491715865749178" height="23"><g>
+    <title>~:0:&lt;method 'all' of 'numpy.ndarray' objects&gt; 0.87% (8308 8308 0.0021377410000000003 0.018032308)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'all' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="445.17150174622043" y="48" width="8.247916615727354" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/_methods.py:67:_all 0.77% (7943 7943 0.0020947261768256235 0.015894567)</title>
+    <rect height="100%" width="100%" fill="rgb(99, 206, 42)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_all</text>
+</g></svg>
+<svg class="func_g" x="445.17150174622043" y="24" width="7.0291446280371765" height="23"><g>
+    <title>~:0:&lt;method 'reduce' of 'numpy.ufunc' objects&gt; 0.67% (7943 7943 0.013799840823174375 0.013799840823174375)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'reduce' of 'numpy.ufunc' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="455.66321761196957" y="72" width="1.3069761536614015" height="23"><g>
+    <title>~:0:&lt;method 'mean' of 'numpy.ndarray' objects&gt; 0.19% (16 16 2.7920000000000004e-05 0.003965043)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 215, 125)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'mean' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="455.66321761196957" y="48" width="1.2907314939666077" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/_methods.py:118:_mean 0.19% (16 16 0.00011249000000000002 0.003937123000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_mean</text>
+</g></svg>
+<svg class="func_g" x="455.71982838915386" y="24" width="1.168670796686825" height="23"><g>
+    <title>~:0:&lt;method 'reduce' of 'numpy.ufunc' objects&gt; 0.18% (16 16 0.003727335 0.003727335)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'reduce' of 'numpy.ufunc' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="0.0" y="144" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/_methods.py:67:_all 0.16% (12308 12308 0.003245676 0.024627856000000004)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 90, 49)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_all</text>
+</g></svg>
+<svg class="func_g" x="0.0" y="168" width="1" height="23"><g>
+    <title>~:0:&lt;method 'all' of 'numpy.ndarray' objects&gt; 0.16% (12308 12308 0.003245676 0.024627856000000004)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'all' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="0.6664933200806973" y="192" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 0.10% (8308 8308 0.0021377410000000003 0.018032308)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="2.572540848115365" y="144" width="7.17744823374626" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/numeric.py:2475:array_equal 0.68% (4000 4000 0.014054733 0.024693673)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">array_equal</text>
+</g></svg>
+<svg class="func_g" x="2.572540848115365" y="168" width="7.1774482337462615" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 0.68% (4000 4000 0.014054733 0.024693673)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="10.749989081861626" y="144" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:132:_unpack_tuple 0.11% (8000 8000 0.0022048600000000003 0.0027929420000000005)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_unpack_tuple</text>
+</g></svg>
+<svg class="func_g" x="10.749989081861626" y="168" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:145:unique 0.11% (8000 8000 0.0022048600000000003 0.0027929420000000005)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">unique</text>
+</g></svg>
+<svg class="func_g" x="10.749989081861626" y="192" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 0.42% (8000 8000 0.008713158 0.273663827)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="12.521015395126154" y="144" width="4.069566138143791" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:145:unique 0.42% (8000 8000 0.008713158 0.273663827)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 140, 79)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">unique</text>
+</g></svg>
+<svg class="func_g" x="12.521015395126154" y="168" width="4.069566138143791" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 0.42% (8000 8000 0.008713158 0.273663827)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="17.590581533269944" y="144" width="39.143325938171486" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:339:_unique1d 3.35% (8000 8000 0.068995084 0.26156201)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_unique1d</text>
+</g></svg>
+<svg class="func_g" x="17.590581533269944" y="168" width="39.14332593817149" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:145:unique 3.35% (8000 8000 0.068995084 0.26156201)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">unique</text>
+</g></svg>
+<svg class="func_g" x="17.590581533269944" y="192" width="39.143325938171486" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 0.42% (8000 8000 0.008713158 0.273663827)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="57.73390747144143" y="144" width="53.76145184398224" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:862:_in1d 4.56% (8000 8000 0.09411953 0.11181983599999999)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_in1d</text>
+</g></svg>
+<svg class="func_g" x="57.73390747144143" y="168" width="53.76145184398224" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:1015:isin 4.56% (8000 8000 0.09411953 0.11181983599999999)</title>
+    <rect height="100%" width="100%" fill="rgb(225, 225, 225)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">isin</text>
+</g></svg>
+<svg class="func_g" x="57.73390747144143" y="192" width="53.76145184398224" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 0.32% (8000 8000 0.006627532 0.12077148400000003)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="112.49535931542367" y="144" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:876:&lt;genexpr&gt; 0.11% (16000 16000 0.002286591 0.002286591)</title>
+    <rect height="100%" width="100%" fill="rgb(182, 182, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;genexpr&gt;</text>
+</g></svg>
+<svg class="func_g" x="114.28923171778476" y="144" width="2.856088895285084" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:1015:isin 0.32% (8000 8000 0.006627532 0.12077148400000003)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 115, 64)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">isin</text>
+</g></svg>
+<svg class="func_g" x="114.28923171778476" y="168" width="2.856088895285084" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 0.32% (8000 8000 0.006627532 0.12077148400000003)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="118.36335978682719" y="144" width="4.044098328539187" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/linalg/_linalg.py:320:solve 0.42% (50 50 0.008669386000000001 0.009391708000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">solve</text>
+</g></svg>
+<svg class="func_g" x="118.36335978682719" y="168" width="4.044098328539187" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 0.42% (50 50 0.008669386000000001 0.009391708000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="123.40745811536638" y="144" width="740.2173445909168" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 61.77% (8 8 1.273944093 1.7887744159999999)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 240, 141)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="865.8104807515936" y="144" width="1" height="23"><g>
+    <title>~:0:&lt;built-in method builtins.len&gt; 0.11% (32019 32019 0.0022270510000000003 0.0022270510000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(182, 182, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method builtins.len&gt;</text>
+</g></svg>
+<svg class="func_g" x="868.016493319742" y="144" width="36.13370948800289" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.asarray&gt; 3.09% (44108 44108 0.06382240000000002 0.06382240000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(166, 166, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.asarray&gt;</text>
+</g></svg>
+<svg class="func_g" x="868.325207600596" y="168" width="1.0922952956547247" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:862:_in1d 0.17% (16000 16000 0.0035960670000000005 0.0035960670000000005)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_in1d</text>
+</g></svg>
+<svg class="func_g" x="868.325207600596" y="192" width="1.0922952956547247" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:1015:isin 4.56% (8000 8000 0.09411953 0.11181983599999999)</title>
+    <rect height="100%" width="100%" fill="rgb(225, 225, 225)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">isin</text>
+</g></svg>
+<svg class="func_g" x="868.325207600596" y="216" width="1.0922952956547247" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 0.32% (8000 8000 0.006627532 0.12077148400000003)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="870.7286503850861" y="168" width="33.42155242265893" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 2.87% (12008 12008 0.05916096500000001 0.05916096500000001)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="905.150202807745" y="144" width="1" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.empty&gt; 0.14% (8048 8048 0.0028649589999999994 0.0028649589999999994)</title>
+    <rect height="100%" width="100%" fill="rgb(198, 198, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.empty&gt;</text>
+</g></svg>
+<svg class="func_g" x="905.1699110942006" y="168" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:339:_unique1d 0.13% (8000 8000 0.0027002959999999996 0.0027002959999999996)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_unique1d</text>
+</g></svg>
+<svg class="func_g" x="905.1699110942006" y="192" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:145:unique 3.35% (8000 8000 0.068995084 0.26156201)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">unique</text>
+</g></svg>
+<svg class="func_g" x="905.1699110942006" y="216" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 0.42% (8000 8000 0.008713158 0.273663827)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="906.8192514079234" y="144" width="2.7254741511989677" height="23"><g>
+    <title>~:0:&lt;built-in method numpy.zeros&gt; 0.31% (8008 8008 0.006403042000000001 0.006403042000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(214, 214, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;built-in method numpy.zeros&gt;</text>
+</g></svg>
+<svg class="func_g" x="906.8192514079234" y="168" width="2.712261401306092" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:862:_in1d 0.31% (8000 8000 0.006380333000000002 0.006380333000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_in1d</text>
+</g></svg>
+<svg class="func_g" x="906.8192514079234" y="192" width="2.712261401306092" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:1015:isin 4.56% (8000 8000 0.09411953 0.11181983599999999)</title>
+    <rect height="100%" width="100%" fill="rgb(225, 225, 225)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">isin</text>
+</g></svg>
+<svg class="func_g" x="906.8192514079234" y="216" width="2.712261401306092" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 0.32% (8000 8000 0.006627532 0.12077148400000003)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="910.587199642302" y="144" width="1" height="23"><g>
+    <title>~:0:&lt;method 'all' of 'numpy.ndarray' objects&gt; 0.16% (12308 12308 0.0032400149999999997 0.027867871000000002)</title>
+    <rect height="100%" width="100%" fill="rgb(255, 190, 110)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'all' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="911.2525304869278" y="168" width="1" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 0.10% (8308 8308 0.0021377410000000003 0.018032308)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="912.4893759821357" y="144" width="9.096979944426248" height="23"><g>
+    <title>~:0:&lt;method 'flatten' of 'numpy.ndarray' objects&gt; 0.84% (8000 8000 0.017353868 0.017353868)</title>
+    <rect height="100%" width="100%" fill="rgb(182, 182, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'flatten' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="912.4893759821357" y="168" width="9.096979944426248" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:339:_unique1d 0.84% (8000 8000 0.017353868 0.017353868)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_unique1d</text>
+</g></svg>
+<svg class="func_g" x="912.4893759821357" y="192" width="9.096979944426248" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:145:unique 3.35% (8000 8000 0.068995084 0.26156201)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">unique</text>
+</g></svg>
+<svg class="func_g" x="912.4893759821357" y="216" width="9.096979944426248" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 0.42% (8000 8000 0.008713158 0.273663827)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="922.6327940092581" y="144" width="1" height="23"><g>
+    <title>~:0:&lt;method 'ravel' of 'numpy.ndarray' objects&gt; 0.16% (24008 24008 0.0033901630000000003 0.0033901630000000003)</title>
+    <rect height="100%" width="100%" fill="rgb(182, 182, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'ravel' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="924.6782113596546" y="144" width="13.902438287395293" height="23"><g>
+    <title>~:0:&lt;method 'reduce' of 'numpy.ufunc' objects&gt; 1.24% (12374 12374 0.025613099000000004 0.025613099000000004)</title>
+    <rect height="100%" width="100%" fill="rgb(198, 198, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'reduce' of 'numpy.ufunc' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="924.6782113596546" y="168" width="11.440767823525684" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/_methods.py:67:_all 1.04% (12308 12308 0.021382179999999997 0.021382179999999997)</title>
+    <rect height="100%" width="100%" fill="rgb(232, 232, 232)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_all</text>
+</g></svg>
+<svg class="func_g" x="924.6782113596546" y="192" width="11.440767823525684" height="23"><g>
+    <title>~:0:&lt;method 'all' of 'numpy.ndarray' objects&gt; 0.16% (12308 12308 0.003245676 0.024627856000000004)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'all' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="924.6782113596546" y="216" width="3.3907895115726534" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/numeric.py:2475:array_equal 0.05% (4000 4000 0.0011022740000000003 0.009835563)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">array_equal</text>
+</g></svg>
+<svg class="func_g" x="924.6782113596546" y="240" width="3.3907895115726534" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 0.68% (4000 4000 0.014054733 0.024693673)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="929.0690008712272" y="216" width="7.049978311953028" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 0.10% (8308 8308 0.0021377410000000003 0.018032308)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="937.1189791831803" y="168" width="1.168670796686826" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/_core/_methods.py:118:_mean 0.18% (16 16 0.003727335 0.003727335)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_mean</text>
+</g></svg>
+<svg class="func_g" x="937.1189791831803" y="192" width="1.168670796686826" height="23"><g>
+    <title>~:0:&lt;method 'mean' of 'numpy.ndarray' objects&gt; 0.01% (16 16 0.00011249000000000002 0.003937123000000001)</title>
+    <rect height="100%" width="100%" fill="rgb(197, 197, 197)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'mean' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="937.1189791831803" y="216" width="1.168670796686826" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 0.00% (16 16 2.7920000000000004e-05 0.003965043)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+<svg class="func_g" x="940.6557552044525" y="144" width="99.05899244483251" height="23"><g>
+    <title>~:0:&lt;method 'sort' of 'numpy.ndarray' objects&gt; 8.34% (8000 8000 0.17197325900000002 0.17197325900000002)</title>
+    <rect height="100%" width="100%" fill="rgb(198, 198, 255)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">&lt;method 'sort' of 'numpy.ndarray' objects&gt;</text>
+</g></svg>
+<svg class="func_g" x="940.6557552044525" y="168" width="99.05899244483251" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:339:_unique1d 8.34% (8000 8000 0.17197325900000002 0.17197325900000002)</title>
+    <rect height="100%" width="100%" fill="rgb(204, 204, 204)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">_unique1d</text>
+</g></svg>
+<svg class="func_g" x="940.6557552044525" y="192" width="99.05899244483251" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/env/lib/python3.11/site-packages/numpy/lib/_arraysetops_impl.py:145:unique 3.35% (8000 8000 0.068995084 0.26156201)</title>
+    <rect height="100%" width="100%" fill="rgb(218, 218, 218)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">unique</text>
+</g></svg>
+<svg class="func_g" x="940.6557552044525" y="216" width="99.05899244483251" height="23"><g>
+    <title>/Users/benmay/Simulation-Study-Reproduction-For-Randomization-Does-Not-Justify-Logistic-Regression/src_optimized/optimized_methods.py:348:generate_parameter_estimates 0.42% (8000 8000 0.008713158 0.273663827)</title>
+    <rect height="100%" width="100%" fill="rgb(190, 190, 190)" rx="2" ry="2" />
+    <text alignment-baseline="central" x="4.0" y="12.0" font-size="12px" fill="rgb(0,0,0)">generate_parameter_estimates</text>
+</g></svg>
+</svg>
