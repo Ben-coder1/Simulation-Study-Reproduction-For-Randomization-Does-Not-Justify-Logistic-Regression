@@ -1,6 +1,5 @@
 from pathlib import Path
 
-
 PROJECT_ROOT = Path(__file__).resolve().parent
 
 RESULTS_DIR = PROJECT_ROOT / "results"
@@ -8,34 +7,19 @@ RAW_RESULTS_DIR = RESULTS_DIR / "raw"
 TABLES_DIR = RESULTS_DIR / "tables"
 FIGURES_DIR = RESULTS_DIR / "figures"
 
-PICKLE_LOCATION = (
-    RAW_RESULTS_DIR / "simulation_data.pkl"
-)
+PICKLE_LOCATION = RAW_RESULTS_DIR / "simulation_data.pkl"
 
-RESULTS_CSV_LOCATION = (
-    TABLES_DIR / "simulation_results.csv"
-)
+RESULTS_CSV_LOCATION = TABLES_DIR / "simulation_results.csv"
 
-BIAS_CSV_LOCATION = (
-    TABLES_DIR / "simulation_bias_results.csv"
-)
+BIAS_CSV_LOCATION = TABLES_DIR / "simulation_bias_results.csv"
 
-RESULTS_IMAGE_LOCATION = (
-    TABLES_DIR / "simulation_results.png"
-)
+RESULTS_IMAGE_LOCATION = TABLES_DIR / "simulation_results.png"
 
-BIAS_IMAGE_LOCATION = (
-    TABLES_DIR / "simulation_bias_results.png"
-)
+BIAS_IMAGE_LOCATION = TABLES_DIR / "simulation_bias_results.png"
 
-VIOLIN_IMAGE_LOCATION = (
-    FIGURES_DIR / "simulation_violin_plots.pdf"
-)
+VIOLIN_IMAGE_LOCATION = FIGURES_DIR / "simulation_violin_plots.pdf"
 
-SCATTER_IMAGE_LOCATION = (
-    FIGURES_DIR
-    / "differential_log_odds_error_scatterplots.pdf"
-)
+SCATTER_IMAGE_LOCATION = FIGURES_DIR / "differential_log_odds_error_scatterplots.pdf"
 
 SEED = 100
 

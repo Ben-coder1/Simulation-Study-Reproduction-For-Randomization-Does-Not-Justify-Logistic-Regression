@@ -1,34 +1,40 @@
-import pytest
-from src.dgps import ExperimentResults
-from src.methods import LogitModelEstimator, DifferentialLogOddsFinder, differential_log_odds, LogitModelPlugIn
-import statsmodels.api as sm
 import numpy as np
+import pytest
+
+from src.dgps import ExperimentResults
+from src.methods import (
+    LogitModelEstimator,
+    LogitModelPlugIn,
+    differential_log_odds,
+)
+
 
 def test_differential_log_odds():
-    treatment_results = [1,1,1,0]
-    control_results = [1,0,0,0]
+    treatment_results = [1, 1, 1, 0]
+    control_results = [1, 0, 0, 0]
 
     diff_log_odds = differential_log_odds(treatment_results, control_results)
     assert diff_log_odds == pytest.approx(2.1972245773362196, rel=1e-9)
 
+
 def test_differential_log_odds_zero_control():
-    treatment_results = [1,1,1,0]
-    control_results = [0,0,0,0]
+    treatment_results = [1, 1, 1, 0]
+    control_results = [0, 0, 0, 0]
 
     with pytest.warns(UserWarning):
         diff_log_odds = differential_log_odds(treatment_results, control_results)
-    
+
     assert np.isnan(diff_log_odds)
-    
+
+
 def test_differential_log_odds_1_control():
-    treatment_results = [1,1,1,0]
-    control_results = [1,1,1,1]
+    treatment_results = [1, 1, 1, 0]
+    control_results = [1, 1, 1, 1]
 
     with pytest.warns(UserWarning):
         diff_log_odds = differential_log_odds(treatment_results, control_results)
-    
+
     assert np.isnan(diff_log_odds)
-    
 
 
 class ThresholdPredictor:
@@ -97,6 +103,7 @@ def test_plug_in_with_different_thresholds():
 
     assert result == pytest.approx(expected)
 
+
 def test_plug_in_with_all_zeros_warns_and_returns_nan():
     predictor = ThresholdPredictor(
         treated_threshold=1,
@@ -115,6 +122,7 @@ def test_plug_in_with_all_zeros_warns_and_returns_nan():
 
     assert np.isnan(result)
 
+
 def test_generate_parameter_estimates():
     # Four observations in each treatment/covariate group:
     #
@@ -126,34 +134,68 @@ def test_generate_parameter_estimates():
     experiment_result = ExperimentResults(
         assignments=np.array(
             [
-                0, 0, 0, 0,  # Control, covariate 0
-                0, 0, 0, 0,  # Control, covariate 1
-                1, 1, 1, 1,  # Treated, covariate 0
-                1, 1, 1, 1,  # Treated, covariate 1
+                0,
+                0,
+                0,
+                0,  # Control, covariate 0
+                0,
+                0,
+                0,
+                0,  # Control, covariate 1
+                1,
+                1,
+                1,
+                1,  # Treated, covariate 0
+                1,
+                1,
+                1,
+                1,  # Treated, covariate 1
             ]
         ),
         covariates=np.array(
             [
-                [0], [0], [0], [0],
-                [1], [1], [1], [1],
-                [0], [0], [0], [0],
-                [1], [1], [1], [1],
+                [0],
+                [0],
+                [0],
+                [0],
+                [1],
+                [1],
+                [1],
+                [1],
+                [0],
+                [0],
+                [0],
+                [0],
+                [1],
+                [1],
+                [1],
+                [1],
             ]
         ),
         outcomes=np.array(
             [
-                0, 0, 0, 1,  # Control rate = 1/4
-                0, 0, 0, 1,  # Control rate = 1/4
-                0, 1, 1, 1,  # Treated rate = 3/4
-                0, 1, 1, 1,  # Treated rate = 3/4
+                0,
+                0,
+                0,
+                1,  # Control rate = 1/4
+                0,
+                0,
+                0,
+                1,  # Control rate = 1/4
+                0,
+                1,
+                1,
+                1,  # Treated rate = 3/4
+                0,
+                1,
+                1,
+                1,  # Treated rate = 3/4
             ]
         ),
     )
 
-    plug_in_estimate, beta_mat = (
-        LogitModelPlugIn().generate_parameter_estimates(
-            experiment_results=[experiment_result]
-        )
+    plug_in_estimate, beta_mat = LogitModelPlugIn().generate_parameter_estimates(
+        experiment_results=[experiment_result]
     )
 
     assert len(beta_mat) == 1
@@ -194,34 +236,68 @@ def test_generate_parameter_estimates_when_covariate_matters():
     experiment_result = ExperimentResults(
         assignments=np.array(
             [
-                0, 0, 0, 0,  # Control, covariate 0
-                1, 1, 1, 1,  # Treated, covariate 0
-                0, 0, 0, 0,  # Control, covariate 1
-                1, 1, 1, 1,  # Treated, covariate 1
+                0,
+                0,
+                0,
+                0,  # Control, covariate 0
+                1,
+                1,
+                1,
+                1,  # Treated, covariate 0
+                0,
+                0,
+                0,
+                0,  # Control, covariate 1
+                1,
+                1,
+                1,
+                1,  # Treated, covariate 1
             ]
         ),
         covariates=np.array(
             [
-                [0], [0], [0], [0],
-                [0], [0], [0], [0],
-                [1], [1], [1], [1],
-                [1], [1], [1], [1],
+                [0],
+                [0],
+                [0],
+                [0],
+                [0],
+                [0],
+                [0],
+                [0],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
             ]
         ),
         outcomes=np.array(
             [
-                0, 0, 0, 1,  # Control, covariate 0: rate 1/4
-                0, 0, 1, 1,  # Treated, covariate 0: rate 1/2
-                0, 0, 1, 1,  # Control, covariate 1: rate 1/2
-                0, 1, 1, 1,  # Treated, covariate 1: rate 3/4
+                0,
+                0,
+                0,
+                1,  # Control, covariate 0: rate 1/4
+                0,
+                0,
+                1,
+                1,  # Treated, covariate 0: rate 1/2
+                0,
+                0,
+                1,
+                1,  # Control, covariate 1: rate 1/2
+                0,
+                1,
+                1,
+                1,  # Treated, covariate 1: rate 3/4
             ]
         ),
     )
 
-    plug_in_estimate, beta_mat = (
-        LogitModelPlugIn().generate_parameter_estimates(
-            experiment_results=[experiment_result]
-        )
+    plug_in_estimate, beta_mat = LogitModelPlugIn().generate_parameter_estimates(
+        experiment_results=[experiment_result]
     )
 
     assert len(beta_mat) == 1
@@ -232,8 +308,8 @@ def test_generate_parameter_estimates_when_covariate_matters():
     expected_beta = np.array(
         [
             -np.log(3),  # Intercept
-            np.log(3),   # Treatment effect
-            np.log(3),   # Covariate effect
+            np.log(3),  # Treatment effect
+            np.log(3),  # Covariate effect
         ]
     )
 
@@ -258,12 +334,8 @@ def test_generate_parameter_estimates_when_covariate_matters():
     treated_probability = 0.625
     control_probability = 0.375
 
-    treated_log_odds = np.log(
-        treated_probability / (1 - treated_probability)
-    )
-    control_log_odds = np.log(
-        control_probability / (1 - control_probability)
-    )
+    treated_log_odds = np.log(treated_probability / (1 - treated_probability))
+    control_log_odds = np.log(control_probability / (1 - control_probability))
 
     expected_plug_in = treated_log_odds - control_log_odds
 
@@ -271,7 +343,6 @@ def test_generate_parameter_estimates_when_covariate_matters():
         expected_plug_in,
         abs=1e-6,
     )
-
 
 
 def experiment_without_covariate_effect():
@@ -285,26 +356,62 @@ def experiment_without_covariate_effect():
     return ExperimentResults(
         assignments=np.array(
             [
-                0, 0, 0, 0,  # Control, covariate=0
-                0, 0, 0, 0,  # Control, covariate=1
-                1, 1, 1, 1,  # Treated, covariate=0
-                1, 1, 1, 1,  # Treated, covariate=1
+                0,
+                0,
+                0,
+                0,  # Control, covariate=0
+                0,
+                0,
+                0,
+                0,  # Control, covariate=1
+                1,
+                1,
+                1,
+                1,  # Treated, covariate=0
+                1,
+                1,
+                1,
+                1,  # Treated, covariate=1
             ]
         ),
         covariates=np.array(
             [
-                [0], [0], [0], [0],
-                [1], [1], [1], [1],
-                [0], [0], [0], [0],
-                [1], [1], [1], [1],
+                [0],
+                [0],
+                [0],
+                [0],
+                [1],
+                [1],
+                [1],
+                [1],
+                [0],
+                [0],
+                [0],
+                [0],
+                [1],
+                [1],
+                [1],
+                [1],
             ]
         ),
         outcomes=np.array(
             [
-                0, 0, 0, 1,  # Control, covariate=0: 1/4
-                0, 0, 0, 1,  # Control, covariate=1: 1/4
-                0, 1, 1, 1,  # Treated, covariate=0: 3/4
-                0, 1, 1, 1,  # Treated, covariate=1: 3/4
+                0,
+                0,
+                0,
+                1,  # Control, covariate=0: 1/4
+                0,
+                0,
+                0,
+                1,  # Control, covariate=1: 1/4
+                0,
+                1,
+                1,
+                1,  # Treated, covariate=0: 3/4
+                0,
+                1,
+                1,
+                1,  # Treated, covariate=1: 3/4
             ]
         ),
     )
@@ -322,26 +429,62 @@ def experiment_with_covariate_effect():
     return ExperimentResults(
         assignments=np.array(
             [
-                0, 0, 0, 0,  # Control, covariate=0
-                1, 1, 1, 1,  # Treated, covariate=0
-                0, 0, 0, 0,  # Control, covariate=1
-                1, 1, 1, 1,  # Treated, covariate=1
+                0,
+                0,
+                0,
+                0,  # Control, covariate=0
+                1,
+                1,
+                1,
+                1,  # Treated, covariate=0
+                0,
+                0,
+                0,
+                0,  # Control, covariate=1
+                1,
+                1,
+                1,
+                1,  # Treated, covariate=1
             ]
         ),
         covariates=np.array(
             [
-                [0], [0], [0], [0],
-                [0], [0], [0], [0],
-                [1], [1], [1], [1],
-                [1], [1], [1], [1],
+                [0],
+                [0],
+                [0],
+                [0],
+                [0],
+                [0],
+                [0],
+                [0],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
             ]
         ),
         outcomes=np.array(
             [
-                0, 0, 0, 1,  # Control, covariate=0: 1/4
-                0, 0, 1, 1,  # Treated, covariate=0: 1/2
-                0, 0, 1, 1,  # Control, covariate=1: 1/2
-                0, 1, 1, 1,  # Treated, covariate=1: 3/4
+                0,
+                0,
+                0,
+                1,  # Control, covariate=0: 1/4
+                0,
+                0,
+                1,
+                1,  # Treated, covariate=0: 1/2
+                0,
+                0,
+                1,
+                1,  # Control, covariate=1: 1/2
+                0,
+                1,
+                1,
+                1,  # Treated, covariate=1: 3/4
             ]
         ),
     )
@@ -349,28 +492,28 @@ def experiment_with_covariate_effect():
 
 def test_generate_parameter_estimates_all_treated_returns_nans():
     experiment = ExperimentResults(
-        assignments=np.array(
-            [1, 1, 1, 1, 1, 1, 1, 1]
-        ),
+        assignments=np.array([1, 1, 1, 1, 1, 1, 1, 1]),
         covariates=np.array(
             [
-                [0], [0], [0], [0],
-                [1], [1], [1], [1],
+                [0],
+                [0],
+                [0],
+                [0],
+                [1],
+                [1],
+                [1],
+                [1],
             ]
         ),
-        outcomes=np.array(
-            [0, 0, 0, 1, 0, 1, 1, 1]
-        ),
+        outcomes=np.array([0, 0, 0, 1, 0, 1, 1, 1]),
     )
 
     with pytest.warns(
         UserWarning,
         match="both treated and control",
     ):
-        plug_in_estimate, beta_mat = (
-            LogitModelPlugIn().generate_parameter_estimates(
-                experiment_results=[experiment]
-            )
+        plug_in_estimate, beta_mat = LogitModelPlugIn().generate_parameter_estimates(
+            experiment_results=[experiment]
         )
 
     assert len(beta_mat) == 1
@@ -381,31 +524,32 @@ def test_generate_parameter_estimates_all_treated_returns_nans():
         np.array([np.nan, np.nan, np.nan]),
     )
     assert np.isnan(plug_in_estimate[0])
+
 
 def test_generate_parameter_estimates_all_control_returns_nans():
     experiment = ExperimentResults(
-        assignments=np.array(
-            [0, 0, 0, 0, 0, 0, 0, 0]
-        ),
+        assignments=np.array([0, 0, 0, 0, 0, 0, 0, 0]),
         covariates=np.array(
             [
-                [0], [0], [0], [0],
-                [1], [1], [1], [1],
+                [0],
+                [0],
+                [0],
+                [0],
+                [1],
+                [1],
+                [1],
+                [1],
             ]
         ),
-        outcomes=np.array(
-            [0, 0, 0, 1, 0, 1, 1, 1]
-        ),
+        outcomes=np.array([0, 0, 0, 1, 0, 1, 1, 1]),
     )
 
     with pytest.warns(
         UserWarning,
         match="both treated and control",
     ):
-        plug_in_estimate, beta_mat = (
-            LogitModelPlugIn().generate_parameter_estimates(
-                experiment_results=[experiment]
-            )
+        plug_in_estimate, beta_mat = LogitModelPlugIn().generate_parameter_estimates(
+            experiment_results=[experiment]
         )
 
     assert len(beta_mat) == 1
@@ -418,7 +562,8 @@ def test_generate_parameter_estimates_all_control_returns_nans():
     assert np.isnan(plug_in_estimate[0])
 
 
-#Testing suite for LogitModel PlugIn
+# Testing suite for LogitModel PlugIn
+
 
 def test_logit_generate_parameter_estimates():
     # Four observations in each treatment/covariate group:
@@ -431,34 +576,68 @@ def test_logit_generate_parameter_estimates():
     experiment_result = ExperimentResults(
         assignments=np.array(
             [
-                0, 0, 0, 0,  # Control, covariate 0
-                0, 0, 0, 0,  # Control, covariate 1
-                1, 1, 1, 1,  # Treated, covariate 0
-                1, 1, 1, 1,  # Treated, covariate 1
+                0,
+                0,
+                0,
+                0,  # Control, covariate 0
+                0,
+                0,
+                0,
+                0,  # Control, covariate 1
+                1,
+                1,
+                1,
+                1,  # Treated, covariate 0
+                1,
+                1,
+                1,
+                1,  # Treated, covariate 1
             ]
         ),
         covariates=np.array(
             [
-                [0], [0], [0], [0],
-                [1], [1], [1], [1],
-                [0], [0], [0], [0],
-                [1], [1], [1], [1],
+                [0],
+                [0],
+                [0],
+                [0],
+                [1],
+                [1],
+                [1],
+                [1],
+                [0],
+                [0],
+                [0],
+                [0],
+                [1],
+                [1],
+                [1],
+                [1],
             ]
         ),
         outcomes=np.array(
             [
-                0, 0, 0, 1,  # Control rate = 1/4
-                0, 0, 0, 1,  # Control rate = 1/4
-                0, 1, 1, 1,  # Treated rate = 3/4
-                0, 1, 1, 1,  # Treated rate = 3/4
+                0,
+                0,
+                0,
+                1,  # Control rate = 1/4
+                0,
+                0,
+                0,
+                1,  # Control rate = 1/4
+                0,
+                1,
+                1,
+                1,  # Treated rate = 3/4
+                0,
+                1,
+                1,
+                1,  # Treated rate = 3/4
             ]
         ),
     )
 
-    assignment_estimates, beta_mat = (
-        LogitModelEstimator().generate_parameter_estimates(
-            experiment_results=[experiment_result]
-        )
+    assignment_estimates, beta_mat = LogitModelEstimator().generate_parameter_estimates(
+        experiment_results=[experiment_result]
     )
 
     assert len(beta_mat) == 1
@@ -490,38 +669,73 @@ def test_logit_generate_parameter_estimates():
         abs=1e-6,
     )
 
+
 def test_logit_generate_parameter_estimates_when_covariate_matters():
     experiment_result = ExperimentResults(
         assignments=np.array(
             [
-                0, 0, 0, 0,  # Control, covariate 0
-                1, 1, 1, 1,  # Treated, covariate 0
-                0, 0, 0, 0,  # Control, covariate 1
-                1, 1, 1, 1,  # Treated, covariate 1
+                0,
+                0,
+                0,
+                0,  # Control, covariate 0
+                1,
+                1,
+                1,
+                1,  # Treated, covariate 0
+                0,
+                0,
+                0,
+                0,  # Control, covariate 1
+                1,
+                1,
+                1,
+                1,  # Treated, covariate 1
             ]
         ),
         covariates=np.array(
             [
-                [0], [0], [0], [0],
-                [0], [0], [0], [0],
-                [1], [1], [1], [1],
-                [1], [1], [1], [1],
+                [0],
+                [0],
+                [0],
+                [0],
+                [0],
+                [0],
+                [0],
+                [0],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
+                [1],
             ]
         ),
         outcomes=np.array(
             [
-                0, 0, 0, 1,  # Control, covariate 0: rate 1/4
-                0, 0, 1, 1,  # Treated, covariate 0: rate 1/2
-                0, 0, 1, 1,  # Control, covariate 1: rate 1/2
-                0, 1, 1, 1,  # Treated, covariate 1: rate 3/4
+                0,
+                0,
+                0,
+                1,  # Control, covariate 0: rate 1/4
+                0,
+                0,
+                1,
+                1,  # Treated, covariate 0: rate 1/2
+                0,
+                0,
+                1,
+                1,  # Control, covariate 1: rate 1/2
+                0,
+                1,
+                1,
+                1,  # Treated, covariate 1: rate 3/4
             ]
         ),
     )
 
-    assignment_estimates, beta_mat = (
-        LogitModelEstimator().generate_parameter_estimates(
-            experiment_results=[experiment_result]
-        )
+    assignment_estimates, beta_mat = LogitModelEstimator().generate_parameter_estimates(
+        experiment_results=[experiment_result]
     )
 
     assert len(beta_mat) == 1
@@ -553,20 +767,23 @@ def test_logit_generate_parameter_estimates_when_covariate_matters():
         abs=1e-6,
     )
 
+
 def test_logit_generate_parameter_estimates_all_treated_returns_nans():
     experiment = ExperimentResults(
-        assignments=np.array(
-            [1, 1, 1, 1, 1, 1, 1, 1]
-        ),
+        assignments=np.array([1, 1, 1, 1, 1, 1, 1, 1]),
         covariates=np.array(
             [
-                [0], [0], [0], [0],
-                [1], [1], [1], [1],
+                [0],
+                [0],
+                [0],
+                [0],
+                [1],
+                [1],
+                [1],
+                [1],
             ]
         ),
-        outcomes=np.array(
-            [0, 0, 0, 1, 0, 1, 1, 1]
-        ),
+        outcomes=np.array([0, 0, 0, 1, 0, 1, 1, 1]),
     )
 
     with pytest.warns(
@@ -589,20 +806,23 @@ def test_logit_generate_parameter_estimates_all_treated_returns_nans():
 
     assert np.isnan(assignment_estimates[0])
 
+
 def test_logit_generate_parameter_estimates_all_control_returns_nans():
     experiment = ExperimentResults(
-        assignments=np.array(
-            [0, 0, 0, 0, 0, 0, 0, 0]
-        ),
+        assignments=np.array([0, 0, 0, 0, 0, 0, 0, 0]),
         covariates=np.array(
             [
-                [0], [0], [0], [0],
-                [1], [1], [1], [1],
+                [0],
+                [0],
+                [0],
+                [0],
+                [1],
+                [1],
+                [1],
+                [1],
             ]
         ),
-        outcomes=np.array(
-            [0, 0, 0, 1, 0, 1, 1, 1]
-        ),
+        outcomes=np.array([0, 0, 0, 1, 0, 1, 1, 1]),
     )
 
     with pytest.warns(

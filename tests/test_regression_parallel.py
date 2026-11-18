@@ -39,13 +39,17 @@ def test_parallel_accuracy_grid(reference_class, seed):
         "plug-in" if reference_class is LogitModelPlugIn else "treatment coefficient"
     )
     with (
-        comparison_progress(f"Parallel logit {estimate_name} accuracy", len(cases)) as progress,
+        comparison_progress(
+            f"Parallel logit {estimate_name} accuracy", len(cases)
+        ) as progress,
         ThreadPoolExecutor(max_workers=2) as executor,
     ):
         parallel = _ParallelEstimator(fast_LogitModelPlugIn(), executor, workers=2)
         for n_individuals, n_experiments, regeneration in cases:
             draw = "uneven split" if n_experiments == 11 else f"{regeneration + 1}/3"
-            progress.set_postfix(individuals=n_individuals, experiments=n_experiments, draw=draw)
+            progress.set_postfix(
+                individuals=n_individuals, experiments=n_experiments, draw=draw
+            )
             individuals = IndividualConditionalOutcomesUniformDGP(
                 n=n_individuals,
                 treatment_outcome_threshold=3 / 4,
@@ -59,13 +63,19 @@ def test_parallel_accuracy_grid(reference_class, seed):
 
             with warnings.catch_warnings():
                 warnings.simplefilter("error", ConvergenceWarning)
-                expected, expected_beta = reference_class().generate_parameter_estimates(
+                expected, expected_beta = (
+                    reference_class().generate_parameter_estimates(experiments)
+                )
+                plug_in, actual_beta = parallel.generate_parameter_estimates(
                     experiments
                 )
-                plug_in, actual_beta = parallel.generate_parameter_estimates(experiments)
 
-            actual = plug_in if reference_class is LogitModelPlugIn else actual_beta[:, 1]
-            context = f"n={n_individuals}, experiments={n_experiments}, draw={regeneration}"
+            actual = (
+                plug_in if reference_class is LogitModelPlugIn else actual_beta[:, 1]
+            )
+            context = (
+                f"n={n_individuals}, experiments={n_experiments}, draw={regeneration}"
+            )
             assert_fit_matches(actual, expected, (n_experiments,), context)
             assert_fit_matches(actual_beta, expected_beta, (n_experiments, 3), context)
             progress.update()
@@ -87,27 +97,52 @@ def test_parallel_run_from_config_matches_original(tmp_path, monkeypatch):
         progress.update()
         progress.set_postfix_str("compare saved outputs")
 
-        with original_path.open("rb") as original_file, parallel_path.open("rb") as parallel_file:
+        with (
+            original_path.open("rb") as original_file,
+            parallel_path.open("rb") as parallel_file,
+        ):
             expected_results = pickle.load(original_file)
             actual_results = pickle.load(parallel_file)
 
         assert len(actual_results) == len(expected_results) == len(SIMULATIONS)
-        for config, actual, expected in zip(SIMULATIONS, actual_results, expected_results):
-            assert actual.keys() == expected.keys() == {"true_parameter", "estimator_results"}
-            np.testing.assert_array_equal(actual["true_parameter"], expected["true_parameter"])
+        for config, actual, expected in zip(
+            SIMULATIONS, actual_results, expected_results
+        ):
+            assert (
+                actual.keys()
+                == expected.keys()
+                == {"true_parameter", "estimator_results"}
+            )
+            np.testing.assert_array_equal(
+                actual["true_parameter"], expected["true_parameter"]
+            )
             actual_estimators = actual["estimator_results"]
             expected_estimators = expected["estimator_results"]
-            assert actual_estimators.keys() == expected_estimators.keys() == {
-                "LogitModelPlugIn", "LogitModelEstimator"
-            }
+            assert (
+                actual_estimators.keys()
+                == expected_estimators.keys()
+                == {"LogitModelPlugIn", "LogitModelEstimator"}
+            )
             n_experiments = config["n_experiments"]
             for name, outputs in actual_estimators.items():
                 reference = expected_estimators[name]
                 assert outputs.keys() == reference.keys() == {"estimates", "auxiliary"}
                 context = f"n={config['n_individuals']}, {name}"
-                assert_fit_matches(outputs["estimates"], reference["estimates"], (n_experiments,), context)
-                assert_fit_matches(outputs["auxiliary"], reference["auxiliary"], (n_experiments, 3), context)
+                assert_fit_matches(
+                    outputs["estimates"],
+                    reference["estimates"],
+                    (n_experiments,),
+                    context,
+                )
+                assert_fit_matches(
+                    outputs["auxiliary"],
+                    reference["auxiliary"],
+                    (n_experiments, 3),
+                    context,
+                )
 
             treatment = actual_estimators["LogitModelEstimator"]
-            np.testing.assert_array_equal(treatment["estimates"], treatment["auxiliary"][:, 1])
+            np.testing.assert_array_equal(
+                treatment["estimates"], treatment["auxiliary"][:, 1]
+            )
         progress.update()

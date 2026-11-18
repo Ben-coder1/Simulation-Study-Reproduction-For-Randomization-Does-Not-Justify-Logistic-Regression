@@ -5,7 +5,7 @@ import numpy as np
 from statsmodels.tools.sm_exceptions import ConvergenceWarning
 
 from performance_analysis.progress import comparison_progress
-from src.dgps import IndividualConditionalOutcomesUniformDGP, ExperimentDGP
+from src.dgps import ExperimentDGP, IndividualConditionalOutcomesUniformDGP
 from src.methods import LogitModelEstimator, LogitModelPlugIn
 from src_optimized.optimized_methods import (
     fast_LogitModelEstimator,
@@ -45,11 +45,7 @@ def _run_logit_accuracy_grid(
         experiment_counts,
         range(1, n_regenerations + 1),
     )
-    total = (
-        len(individual_counts)
-        * len(experiment_counts)
-        * n_regenerations
-    )
+    total = len(individual_counts) * len(experiment_counts) * n_regenerations
 
     with comparison_progress(f"Logit {estimate_name} accuracy", total) as progress:
         for n_individuals, n_experiments, regeneration in grid:
@@ -88,8 +84,7 @@ def _run_logit_accuracy_grid(
                     ]
 
                     if not (
-                        np.any(group_outcomes == 0)
-                        and np.any(group_outcomes == 1)
+                        np.any(group_outcomes == 0) and np.any(group_outcomes == 1)
                     ):
                         raise AssertionError(
                             f"{context}: experiment {idx}, group {group} "
@@ -114,11 +109,11 @@ def _run_logit_accuracy_grid(
             with warnings.catch_warnings():
                 warnings.simplefilter("error", ConvergenceWarning)
 
-                old_estimates, old_beta = (
-                    old_estimator.generate_parameter_estimates(experiments)
+                old_estimates, old_beta = old_estimator.generate_parameter_estimates(
+                    experiments
                 )
-                fast_estimates, fast_beta = (
-                    fast_estimator.generate_parameter_estimates(experiments)
+                fast_estimates, fast_beta = fast_estimator.generate_parameter_estimates(
+                    experiments
                 )
 
             expected_shapes = {
@@ -142,9 +137,7 @@ def _run_logit_accuracy_grid(
                     )
 
                 if not np.isfinite(values).all():
-                    raise AssertionError(
-                        f"{context}: {name} contains NaN or infinity."
-                    )
+                    raise AssertionError(f"{context}: {name} contains NaN or infinity.")
 
             # Absolute tolerance only, for every coefficient.
             np.testing.assert_allclose(
@@ -152,10 +145,7 @@ def _run_logit_accuracy_grid(
                 old_beta,
                 rtol=0.0,
                 atol=1e-4,
-                err_msg=(
-                    f"{context}: coefficient matrices "
-                    "differ by more than 1e-4."
-                ),
+                err_msg=(f"{context}: coefficient matrices differ by more than 1e-4."),
             )
 
             np.testing.assert_allclose(
@@ -164,8 +154,7 @@ def _run_logit_accuracy_grid(
                 rtol=0.0,
                 atol=1e-4,
                 err_msg=(
-                    f"{context}: {estimate_name} estimates "
-                    "differ by more than 1e-4."
+                    f"{context}: {estimate_name} estimates differ by more than 1e-4."
                 ),
             )
 

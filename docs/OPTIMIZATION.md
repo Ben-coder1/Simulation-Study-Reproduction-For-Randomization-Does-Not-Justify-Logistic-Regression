@@ -13,11 +13,7 @@ estimator_results = {}
 for estimator in self.param_estimators:
     estimator_name = type(estimator).__name__
 
-    estimates, auxiliary = (
-        estimator.generate_parameter_estimates(
-            experiment_results
-        )
-    )
+    estimates, auxiliary = estimator.generate_parameter_estimates(experiment_results)
 
     estimator_results[estimator_name] = {
         "estimates": estimates,
@@ -28,10 +24,8 @@ for estimator in self.param_estimators:
 ## After
 
 ```python
-plug_in_estimates, beta_mat = (
-    self.param_estimator.generate_parameter_estimates(
-        experiment_results
-    )
+plug_in_estimates, beta_mat = self.param_estimator.generate_parameter_estimates(
+    experiment_results
 )
 
 logit_estimates = beta_mat[:, 1].copy()
@@ -126,29 +120,29 @@ I applied parallelization to the logistic regression fitting.
 
 
 ```python
- def generate_parameter_estimates(
-        self,
-        experiment_results: list[ExperimentResults],
-    ) -> tuple[np.ndarray, np.ndarray]:
-        n_chunks = min(self.workers, len(experiment_results))
-        estimate = self.estimator.generate_parameter_estimates
-        if n_chunks <= 1:
-            return estimate(experiment_results)
+def generate_parameter_estimates(
+    self,
+    experiment_results: list[ExperimentResults],
+) -> tuple[np.ndarray, np.ndarray]:
+    n_chunks = min(self.workers, len(experiment_results))
+    estimate = self.estimator.generate_parameter_estimates
+    if n_chunks <= 1:
+        return estimate(experiment_results)
 
-        chunk_size, remainder = divmod(len(experiment_results), n_chunks)
-        chunks = []
-        start = 0
-        for chunk_index in range(n_chunks):
-            stop = start + chunk_size + (chunk_index < remainder)
-            chunks.append(experiment_results[start:stop])
-            start = stop
+    chunk_size, remainder = divmod(len(experiment_results), n_chunks)
+    chunks = []
+    start = 0
+    for chunk_index in range(n_chunks):
+        stop = start + chunk_size + (chunk_index < remainder)
+        chunks.append(experiment_results[start:stop])
+        start = stop
 
-        # map yields results in chunk order even if a later chunk finishes first.
-        plug_in_estimates, coefficients = zip(*self.executor.map(estimate, chunks))
-        return (
-            np.concatenate(plug_in_estimates),
-            np.concatenate(coefficients, axis=0),
-        )
+    # map yields results in chunk order even if a later chunk finishes first.
+    plug_in_estimates, coefficients = zip(*self.executor.map(estimate, chunks))
+    return (
+        np.concatenate(plug_in_estimates),
+        np.concatenate(coefficients, axis=0),
+    )
 ```
 
 ## Impact

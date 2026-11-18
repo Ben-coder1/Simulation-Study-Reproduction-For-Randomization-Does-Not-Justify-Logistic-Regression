@@ -1,65 +1,62 @@
 """Estimate log-odds effects with batched logistic regression."""
 
-import numpy as np
-import statsmodels.api as sm
 import warnings
-from src.dgps import ExperimentResults
-from src.dgps import IndividualLevelConditionalOutcomes
+from abc import ABC, abstractmethod
+
+import numpy as np
 from scipy.special import expit, logit
 
-
-
-from abc import ABC, abstractmethod
+from src.dgps import ExperimentResults, IndividualLevelConditionalOutcomes
 
 
 def differential_log_odds(treatment_result, control_result) -> float:
-  """Return the difference in log-odds for two binary outcome arrays.
+    """Return the difference in log-odds for two binary outcome arrays.
 
-  Return NaN with a warning when either success rate is zero or one.
+    Return NaN with a warning when either success rate is zero or one.
 
-  Keyword arguments:
-      treatment_result -- Binary potential outcomes under treatment.
-      control_result -- Binary potential outcomes under control.
+    Keyword arguments:
+        treatment_result -- Binary potential outcomes under treatment.
+        control_result -- Binary potential outcomes under control.
 
-  Raises:
-      ValueError: If an array is empty or contains values other than 0 or 1.
+    Raises:
+        ValueError: If an array is empty or contains values other than 0 or 1.
 
-  Warns:
-      UserWarning: If either observed success rate is zero or one.
-  """
-  t = np.asarray(treatment_result)
-  c = np.asarray(control_result)
+    Warns:
+        UserWarning: If either observed success rate is zero or one.
+    """
+    t = np.asarray(treatment_result)
+    c = np.asarray(control_result)
 
-  # Require observations in both potential-outcome arrays.
-  if t.size == 0 or c.size == 0:
-    raise ValueError("Input arrays must not be empty.")
+    # Require observations in both potential-outcome arrays.
+    if t.size == 0 or c.size == 0:
+        raise ValueError("Input arrays must not be empty.")
 
-  # Log-odds here are defined for binary outcomes.
-  if not np.isin(t, [0, 1]).all():
-    raise ValueError("treatment_result must only contain values in {0, 1}.")
-  if not np.isin(c, [0, 1]).all():
-    raise ValueError("control_result must only contain values in {0, 1}.")
+    # Log-odds here are defined for binary outcomes.
+    if not np.isin(t, [0, 1]).all():
+        raise ValueError("treatment_result must only contain values in {0, 1}.")
+    if not np.isin(c, [0, 1]).all():
+        raise ValueError("control_result must only contain values in {0, 1}.")
 
-  treatment_success_rate = float(np.mean(t))
-  control_success_rate = float(np.mean(c))
+    treatment_success_rate = float(np.mean(t))
+    control_success_rate = float(np.mean(c))
 
-  # Boundary success rates have undefined or infinite log-odds.
-  if treatment_success_rate in (0.0, 1.0) or control_success_rate in (
-      0.0,
-      1.0,
-  ):
-    warnings.warn(
-        "Success rate is 0 or 1 in treatment or control group. "
-        "Log-odds calculation is undefined or infinite; returning NaN.",
-        UserWarning,
-        stacklevel=2,
-    )
-    return np.nan
+    # Boundary success rates have undefined or infinite log-odds.
+    if treatment_success_rate in (0.0, 1.0) or control_success_rate in (
+        0.0,
+        1.0,
+    ):
+        warnings.warn(
+            "Success rate is 0 or 1 in treatment or control group. "
+            "Log-odds calculation is undefined or infinite; returning NaN.",
+            UserWarning,
+            stacklevel=2,
+        )
+        return np.nan
 
-  t_log_odds = np.log(treatment_success_rate / (1.0 - treatment_success_rate))
-  c_log_odds = np.log(control_success_rate / (1.0 - control_success_rate))
+    t_log_odds = np.log(treatment_success_rate / (1.0 - treatment_success_rate))
+    c_log_odds = np.log(control_success_rate / (1.0 - control_success_rate))
 
-  return float(t_log_odds - c_log_odds)
+    return float(t_log_odds - c_log_odds)
 
 
 class TrueParameterFinder(ABC):
@@ -72,7 +69,7 @@ class TrueParameterFinder(ABC):
         Keyword arguments:
             individuals -- Individual potential outcomes and covariates.
         """
-        pass
+
 
 class DifferentialLogOddsFinder(TrueParameterFinder):
     """Compute the population differential log-odds."""
@@ -83,22 +80,23 @@ class DifferentialLogOddsFinder(TrueParameterFinder):
         Keyword arguments:
             individuals -- Individual potential outcomes and covariates.
         """
-        return differential_log_odds(individuals.treatment_outcomes, individuals.control_outcomes)
+        return differential_log_odds(
+            individuals.treatment_outcomes, individuals.control_outcomes
+        )
 
 
 class ModelParameterEstimator(ABC):
     """Define the interface for experiment-level estimators."""
 
     @abstractmethod
-    def generate_parameter_estimates(self, experiment_results: list[ExperimentResults]) -> tuple[np.ndarray, np.ndarray]:
+    def generate_parameter_estimates(
+        self, experiment_results: list[ExperimentResults]
+    ) -> tuple[np.ndarray, np.ndarray]:
         """Return estimates and auxiliary fit information by experiment.
 
         Keyword arguments:
             experiment_results -- Results for the experiments to estimate.
         """
-        pass
-
-
 
 
 class LogitEstimationError(RuntimeError):
@@ -170,12 +168,8 @@ class fast_LogitModelEstimator(ModelParameterEstimator):
         if n_individuals == 0:
             raise ValueError("Experiments must contain observations.")
 
-        assignment_matrix = np.empty(
-            (n_experiments, n_individuals), dtype=np.float64
-        )
-        outcome_matrix = np.empty(
-            (n_experiments, n_individuals), dtype=np.float64
-        )
+        assignment_matrix = np.empty((n_experiments, n_individuals), dtype=np.float64)
+        outcome_matrix = np.empty((n_experiments, n_individuals), dtype=np.float64)
 
         for experiment_index, experiment_result in enumerate(experiment_results):
             experiment_covariates = np.asarray(
@@ -193,9 +187,7 @@ class fast_LogitModelEstimator(ModelParameterEstimator):
             assignments = np.asarray(
                 experiment_result.assignments, dtype=np.float64
             ).ravel()
-            outcomes = np.asarray(
-                experiment_result.outcomes, dtype=np.float64
-            ).ravel()
+            outcomes = np.asarray(experiment_result.outcomes, dtype=np.float64).ravel()
 
             if assignments.size != n_individuals or outcomes.size != n_individuals:
                 raise ValueError(
@@ -211,9 +203,7 @@ class fast_LogitModelEstimator(ModelParameterEstimator):
 
             for group in (0, 1):
                 group_outcomes = outcomes[assignments == group]
-                if not (
-                    np.any(group_outcomes == 0) and np.any(group_outcomes == 1)
-                ):
+                if not (np.any(group_outcomes == 0) and np.any(group_outcomes == 1)):
                     raise ValueError(
                         f"Experiment {experiment_index}: assignment group {group} "
                         "must contain at least one outcome 0 and "
@@ -232,9 +222,7 @@ class fast_LogitModelEstimator(ModelParameterEstimator):
         design_matrices[:, :, 1] = assignment_matrix
         design_matrices[:, :, 2:] = shared_covariates[None, :, :]
 
-        coefficient_matrix = np.zeros(
-            (n_experiments, n_parameters), dtype=np.float64
-        )
+        coefficient_matrix = np.zeros((n_experiments, n_parameters), dtype=np.float64)
         active_experiment_indices = np.arange(n_experiments)
 
         for _ in range(self.max_iter):
@@ -260,10 +248,9 @@ class fast_LogitModelEstimator(ModelParameterEstimator):
                 transposed_design_matrices * logistic_weights[:, None, :]
             ) @ active_design_matrices
 
-            are_finite = (
-                np.isfinite(hessian_matrices).all(axis=(1, 2))
-                & np.isfinite(score_vectors).all(axis=1)
-            )
+            are_finite = np.isfinite(hessian_matrices).all(axis=(1, 2)) & np.isfinite(
+                score_vectors
+            ).all(axis=1)
             if not are_finite.all():
                 raise LogitEstimationError(
                     "Nonfinite gradient or Hessian in experiments "
@@ -294,10 +281,9 @@ class fast_LogitModelEstimator(ModelParameterEstimator):
                 ) from error
 
             updated_coefficients = active_coefficients + newton_steps
-            are_finite = (
-                np.isfinite(newton_steps).all(axis=1)
-                & np.isfinite(updated_coefficients).all(axis=1)
-            )
+            are_finite = np.isfinite(newton_steps).all(axis=1) & np.isfinite(
+                updated_coefficients
+            ).all(axis=1)
             if not are_finite.all():
                 raise LogitEstimationError(
                     "Nonfinite Newton update in experiments "
@@ -317,6 +303,7 @@ class fast_LogitModelEstimator(ModelParameterEstimator):
             )
 
         return coefficient_matrix[:, 1].copy(), coefficient_matrix
+
 
 class fast_LogitModelPlugIn(ModelParameterEstimator):
     """Fit batched logistic models and compute marginal plug-in contrasts.
@@ -389,12 +376,8 @@ class fast_LogitModelPlugIn(ModelParameterEstimator):
         n_individuals, n_covariates = shared_covariates.shape
         n_parameters = n_covariates + 2
 
-        assignment_matrix = np.empty(
-            (n_experiments, n_individuals), dtype=np.float64
-        )
-        outcome_matrix = np.empty(
-            (n_experiments, n_individuals), dtype=np.float64
-        )
+        assignment_matrix = np.empty((n_experiments, n_individuals), dtype=np.float64)
+        outcome_matrix = np.empty((n_experiments, n_individuals), dtype=np.float64)
         valid_experiment_mask = np.ones(n_experiments, dtype=bool)
 
         # Input preparation; expensive fitting operations are batched below.
@@ -414,9 +397,7 @@ class fast_LogitModelPlugIn(ModelParameterEstimator):
             assignments = np.asarray(
                 experiment_result.assignments, dtype=np.float64
             ).ravel()
-            outcomes = np.asarray(
-                experiment_result.outcomes, dtype=np.float64
-            ).ravel()
+            outcomes = np.asarray(experiment_result.outcomes, dtype=np.float64).ravel()
 
             if assignments.size != n_individuals or outcomes.size != n_individuals:
                 raise ValueError(
@@ -453,9 +434,7 @@ class fast_LogitModelPlugIn(ModelParameterEstimator):
         coefficient_matrix = np.full(
             (n_experiments, n_parameters), np.nan, dtype=np.float64
         )
-        plug_in_estimates = np.full(
-            n_experiments, np.nan, dtype=np.float64
-        )
+        plug_in_estimates = np.full(n_experiments, np.nan, dtype=np.float64)
 
         valid_experiment_indices = np.flatnonzero(valid_experiment_mask)
         if valid_experiment_indices.size == 0:
@@ -501,10 +480,9 @@ class fast_LogitModelPlugIn(ModelParameterEstimator):
                 transposed_design_matrices * logistic_weights[:, None, :]
             ) @ active_design_matrices
 
-            are_finite = (
-                np.isfinite(score_vectors).all(axis=1)
-                & np.isfinite(hessian_matrices).all(axis=(1, 2))
-            )
+            are_finite = np.isfinite(score_vectors).all(axis=1) & np.isfinite(
+                hessian_matrices
+            ).all(axis=(1, 2))
             if not are_finite.all():
                 raise RuntimeError(
                     "Nonfinite gradient or Hessian in experiments "
@@ -517,9 +495,7 @@ class fast_LogitModelPlugIn(ModelParameterEstimator):
                 )[..., 0]
             except np.linalg.LinAlgError as error:
                 failed_experiment_indices = []
-                for active_position, valid_position in enumerate(
-                    active_valid_indices
-                ):
+                for active_position, valid_position in enumerate(active_valid_indices):
                     try:
                         np.linalg.solve(
                             hessian_matrices[active_position],
@@ -536,10 +512,9 @@ class fast_LogitModelPlugIn(ModelParameterEstimator):
                 ) from error
 
             updated_coefficients = active_coefficients + newton_steps
-            are_finite = (
-                np.isfinite(newton_steps).all(axis=1)
-                & np.isfinite(updated_coefficients).all(axis=1)
-            )
+            are_finite = np.isfinite(newton_steps).all(axis=1) & np.isfinite(
+                updated_coefficients
+            ).all(axis=1)
             if not are_finite.all():
                 raise RuntimeError(
                     "Nonfinite Newton update in experiments "
@@ -590,10 +565,9 @@ class fast_LogitModelPlugIn(ModelParameterEstimator):
             )
 
         interior_rate_mask = ~boundary_rate_mask
-        plug_in_estimates[valid_experiment_indices[interior_rate_mask]] = (
-            logit(treatment_success_rates[interior_rate_mask])
-            - logit(control_success_rates[interior_rate_mask])
-        )
+        plug_in_estimates[valid_experiment_indices[interior_rate_mask]] = logit(
+            treatment_success_rates[interior_rate_mask]
+        ) - logit(control_success_rates[interior_rate_mask])
 
         return plug_in_estimates, coefficient_matrix
 
@@ -602,6 +576,4 @@ PARAMETER_ESTIMATORS = {
     "fast_logit": fast_LogitModelEstimator,
     "fast_logit_plugin": fast_LogitModelPlugIn,
 }
-TRUTH_PARAMETER_FINDERS = {
-    "differential_log_odds": DifferentialLogOddsFinder
-}
+TRUTH_PARAMETER_FINDERS = {"differential_log_odds": DifferentialLogOddsFinder}

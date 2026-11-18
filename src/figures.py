@@ -42,7 +42,6 @@ from configuration import (
 )
 from src.methods import PARAMETER_ESTIMATORS
 
-
 # ---------------------------------------------------------------------
 # Shared figure settings
 # ---------------------------------------------------------------------
@@ -77,6 +76,7 @@ SCATTER_POINT_ALPHA = 0.40
 # Data-loading and result-extraction functions
 # ---------------------------------------------------------------------
 
+
 def load_simulation_results(
     pickle_location: str | Path = PICKLE_LOCATION,
 ) -> list[dict]:
@@ -85,8 +85,7 @@ def load_simulation_results(
 
     if not pickle_path.is_file():
         raise FileNotFoundError(
-            "Simulation pickle not found at "
-            f"{pickle_path.resolve()}."
+            f"Simulation pickle not found at {pickle_path.resolve()}."
         )
 
     with pickle_path.open("rb") as file:
@@ -99,9 +98,7 @@ def load_simulation_results(
         )
 
     if not simulation_results:
-        raise ValueError(
-            "The simulation-results pickle is empty."
-        )
+        raise ValueError("The simulation-results pickle is empty.")
 
     return simulation_results
 
@@ -118,13 +115,10 @@ def get_estimator_class_name(
     """
     if method_name not in PARAMETER_ESTIMATORS:
         raise KeyError(
-            f"Estimator {method_name!r} is not registered in "
-            "PARAMETER_ESTIMATORS."
+            f"Estimator {method_name!r} is not registered in PARAMETER_ESTIMATORS."
         )
 
-    return PARAMETER_ESTIMATORS[
-        method_name
-    ].__name__
+    return PARAMETER_ESTIMATORS[method_name].__name__
 
 
 def format_method_name(
@@ -146,10 +140,7 @@ def join_method_names(
     method_names: list[str],
 ) -> str:
     """Join estimator names grammatically for a figure title."""
-    labels = [
-        format_method_name(method_name)
-        for method_name in method_names
-    ]
+    labels = [format_method_name(method_name) for method_name in method_names]
 
     if len(labels) == 1:
         return labels[0]
@@ -157,10 +148,7 @@ def join_method_names(
     if len(labels) == 2:
         return f"{labels[0]} and {labels[1]}"
 
-    return (
-        ", ".join(labels[:-1])
-        + f", and {labels[-1]}"
-    )
+    return ", ".join(labels[:-1]) + f", and {labels[-1]}"
 
 
 def get_method_colors(
@@ -175,9 +163,7 @@ def get_method_colors(
         second method -> blue
     """
     if number_of_methods <= 0:
-        raise ValueError(
-            "number_of_methods must be positive."
-        )
+        raise ValueError("number_of_methods must be positive.")
 
     if number_of_methods == 2:
         return [
@@ -187,10 +173,7 @@ def get_method_colors(
 
     color_map = plt.get_cmap("tab10")
 
-    return [
-        color_map(index % color_map.N)
-        for index in range(number_of_methods)
-    ]
+    return [color_map(index % color_map.N) for index in range(number_of_methods)]
 
 
 def get_method_estimates(
@@ -214,10 +197,7 @@ def get_method_estimates(
         pairing.
     """
     if not isinstance(simulation_result, dict):
-        raise TypeError(
-            f"Simulation result {simulation_number} must be a "
-            "dictionary."
-        )
+        raise TypeError(f"Simulation result {simulation_number} must be a dictionary.")
 
     if "estimator_results" not in simulation_result:
         raise KeyError(
@@ -225,9 +205,7 @@ def get_method_estimates(
             "'estimator_results'."
         )
 
-    estimator_results = simulation_result[
-        "estimator_results"
-    ]
+    estimator_results = simulation_result["estimator_results"]
 
     if not isinstance(estimator_results, dict):
         raise TypeError(
@@ -235,9 +213,7 @@ def get_method_estimates(
             f"{simulation_number} must be a dictionary."
         )
 
-    estimator_class_name = get_estimator_class_name(
-        method_name
-    )
+    estimator_class_name = get_estimator_class_name(method_name)
 
     if estimator_class_name not in estimator_results:
         raise KeyError(
@@ -247,9 +223,7 @@ def get_method_estimates(
             f"{list(estimator_results)}."
         )
 
-    method_result = estimator_results[
-        estimator_class_name
-    ]
+    method_result = estimator_results[estimator_class_name]
 
     if not isinstance(method_result, dict):
         raise TypeError(
@@ -278,9 +252,7 @@ def get_method_estimates(
         return estimates
 
     finite_mask = np.isfinite(estimates)
-    number_omitted = int(
-        np.sum(~finite_mask)
-    )
+    number_omitted = int(np.sum(~finite_mask))
 
     if number_omitted:
         warnings.warn(
@@ -307,20 +279,14 @@ def get_true_parameter(
 ) -> float:
     """Extract the true marginal differential log-odds parameter."""
     if not isinstance(simulation_result, dict):
-        raise TypeError(
-            f"Simulation result {simulation_number} must be a "
-            "dictionary."
-        )
+        raise TypeError(f"Simulation result {simulation_number} must be a dictionary.")
 
     if "true_parameter" not in simulation_result:
         raise KeyError(
-            f"Simulation result {simulation_number} does not contain "
-            "'true_parameter'."
+            f"Simulation result {simulation_number} does not contain 'true_parameter'."
         )
 
-    true_parameter = float(
-        simulation_result["true_parameter"]
-    )
+    true_parameter = float(simulation_result["true_parameter"])
 
     if not np.isfinite(true_parameter):
         raise ValueError(
@@ -350,9 +316,7 @@ def validate_configurations(
         )
 
     if not simulations:
-        raise ValueError(
-            "SIMULATIONS cannot be empty."
-        )
+        raise ValueError("SIMULATIONS cannot be empty.")
 
     expected_methods = None
 
@@ -362,8 +326,7 @@ def validate_configurations(
     ):
         if not isinstance(simulation_config, dict):
             raise TypeError(
-                f"Simulation configuration {simulation_number} must "
-                "be a dictionary."
+                f"Simulation configuration {simulation_number} must be a dictionary."
             )
 
         required_keys = {
@@ -371,9 +334,7 @@ def validate_configurations(
             "param_estimators",
         }
 
-        missing_keys = (
-            required_keys - simulation_config.keys()
-        )
+        missing_keys = required_keys - simulation_config.keys()
 
         if missing_keys:
             raise KeyError(
@@ -381,9 +342,7 @@ def validate_configurations(
                 f"missing keys: {sorted(missing_keys)}."
             )
 
-        method_names = list(
-            simulation_config["param_estimators"]
-        )
+        method_names = list(simulation_config["param_estimators"])
 
         if not method_names:
             raise ValueError(
@@ -392,13 +351,10 @@ def validate_configurations(
             )
 
         estimator_class_names = [
-            get_estimator_class_name(method_name)
-            for method_name in method_names
+            get_estimator_class_name(method_name) for method_name in method_names
         ]
 
-        if len(estimator_class_names) != len(
-            set(estimator_class_names)
-        ):
+        if len(estimator_class_names) != len(set(estimator_class_names)):
             raise ValueError(
                 f"Simulation configuration {simulation_number} maps "
                 "multiple method names to the same estimator class. "
@@ -423,6 +379,7 @@ def validate_configurations(
 # Violin plots
 # ---------------------------------------------------------------------
 
+
 def create_violin_plots(
     simulation_results: list[dict],
     simulations: list[dict] = SIMULATIONS,
@@ -442,9 +399,7 @@ def create_violin_plots(
         simulations,
     )
 
-    method_colors = get_method_colors(
-        len(method_names)
-    )
+    method_colors = get_method_colors(len(method_names))
 
     plot_data = []
     maximum_absolute_deviation = 0.0
@@ -474,20 +429,12 @@ def create_violin_plots(
         for estimates in method_estimates:
             maximum_absolute_deviation = max(
                 maximum_absolute_deviation,
-                float(
-                    np.max(
-                        np.abs(
-                            estimates - true_parameter
-                        )
-                    )
-                ),
+                float(np.max(np.abs(estimates - true_parameter))),
             )
 
         plot_data.append(
             {
-                "n_individuals": simulation_config[
-                    "n_individuals"
-                ],
+                "n_individuals": simulation_config["n_individuals"],
                 "method_estimates": method_estimates,
                 "true_parameter": true_parameter,
             }
@@ -496,14 +443,12 @@ def create_violin_plots(
     if maximum_absolute_deviation == 0.0:
         maximum_absolute_deviation = 0.1
 
-    y_axis_half_range = (
-        1.05 * maximum_absolute_deviation
-    )
+    y_axis_half_range = 1.05 * maximum_absolute_deviation
 
     title = (
-    "Simulated Distribution of Treatment Effect Estimators under "
-    "non-logit randomization model: "
-    f"{join_method_names(method_names)}"
+        "Simulated Distribution of Treatment Effect Estimators under "
+        "non-logit randomization model: "
+        f"{join_method_names(method_names)}"
     )
 
     wrapped_title = textwrap.fill(
@@ -562,9 +507,7 @@ def create_violin_plots(
             )
 
             violin_parts = axis.violinplot(
-                dataset=simulation_data[
-                    "method_estimates"
-                ],
+                dataset=simulation_data["method_estimates"],
                 positions=positions,
                 widths=0.75,
                 showmeans=True,
@@ -572,12 +515,8 @@ def create_violin_plots(
                 showextrema=False,
             )
 
-            for method_index, violin_body in enumerate(
-                violin_parts["bodies"]
-            ):
-                violin_body.set_facecolor(
-                    method_colors[method_index]
-                )
+            for method_index, violin_body in enumerate(violin_parts["bodies"]):
+                violin_body.set_facecolor(method_colors[method_index])
                 violin_body.set_edgecolor("black")
                 violin_body.set_linewidth(0.8)
                 violin_body.set_alpha(0.75)
@@ -587,17 +526,11 @@ def create_violin_plots(
                 "cmedians",
             ):
                 if part_name in violin_parts:
-                    violin_parts[
-                        part_name
-                    ].set_color("black")
+                    violin_parts[part_name].set_color("black")
 
-                    violin_parts[
-                        part_name
-                    ].set_linewidth(1.0)
+                    violin_parts[part_name].set_linewidth(1.0)
 
-            true_parameter = simulation_data[
-                "true_parameter"
-            ]
+            true_parameter = simulation_data["true_parameter"]
 
             axis.axhline(
                 y=true_parameter,
@@ -612,9 +545,7 @@ def create_violin_plots(
                 true_parameter + y_axis_half_range,
             )
 
-            axis.set_xticks(
-                positions
-            )
+            axis.set_xticks(positions)
 
             axis.set_xticklabels(
                 [
@@ -628,19 +559,12 @@ def create_violin_plots(
                 ha="center",
             )
 
-            axis.set_title(
-                "n = "
-                f"{simulation_data['n_individuals']:,}"
-            )
+            axis.set_title(f"n = {simulation_data['n_individuals']:,}")
 
-            axis.set_xlabel(
-                "Estimator"
-            )
+            axis.set_xlabel("Estimator")
 
             if simulation_number == 1:
-                axis.set_ylabel(
-                    "Differential log-odds estimate"
-                )
+                axis.set_ylabel("Differential log-odds estimate")
 
             axis.grid(
                 axis="y",
@@ -657,9 +581,7 @@ def create_violin_plots(
                 alpha=0.75,
                 label=format_method_name(method_name),
             )
-            for index, method_name in enumerate(
-                method_names
-            )
+            for index, method_name in enumerate(method_names)
         ]
 
         legend_handles.append(
@@ -682,7 +604,6 @@ def create_violin_plots(
             fontweight="normal",
             linespacing=1.2,
         )
-
 
         figure.legend(
             handles=legend_handles,
@@ -713,11 +634,7 @@ def create_violin_plots(
             left=0.105,
             right=0.985,
             top=0.66,
-            bottom=(
-                0.27
-                if wrapped_caption
-                else 0.18
-            ),
+            bottom=(0.27 if wrapped_caption else 0.18),
             wspace=0.48,
         )
 
@@ -732,9 +649,7 @@ def save_violin_plots(
     output_path = Path(output_location)
 
     if output_path.suffix.lower() != ".pdf":
-        raise ValueError(
-            "VIOLIN_IMAGE_LOCATION must use a .pdf extension."
-        )
+        raise ValueError("VIOLIN_IMAGE_LOCATION must use a .pdf extension.")
 
     output_path.parent.mkdir(
         parents=True,
@@ -758,6 +673,7 @@ def save_violin_plots(
 # ---------------------------------------------------------------------
 # Paired-error scatterplots
 # ---------------------------------------------------------------------
+
 
 def create_error_scatterplots(
     simulation_results: list[dict],
@@ -827,14 +743,9 @@ def create_error_scatterplots(
             simulation_number,
         )
 
-        finite_mask = (
-            np.isfinite(first_estimates)
-            & np.isfinite(second_estimates)
-        )
+        finite_mask = np.isfinite(first_estimates) & np.isfinite(second_estimates)
 
-        number_omitted = int(
-            np.sum(~finite_mask)
-        )
+        number_omitted = int(np.sum(~finite_mask))
 
         if number_omitted:
             warnings.warn(
@@ -853,27 +764,15 @@ def create_error_scatterplots(
 
         plot_data.append(
             {
-                "n_individuals": simulation_config[
-                    "n_individuals"
-                ],
-                "first_errors": (
-                    first_estimates[finite_mask]
-                    - true_parameter
-                ),
-                "second_errors": (
-                    second_estimates[finite_mask]
-                    - true_parameter
-                ),
+                "n_individuals": simulation_config["n_individuals"],
+                "first_errors": (first_estimates[finite_mask] - true_parameter),
+                "second_errors": (second_estimates[finite_mask] - true_parameter),
             }
         )
 
-    first_method_label = format_method_name(
-        method_names[0]
-    )
+    first_method_label = format_method_name(method_names[0])
 
-    second_method_label = format_method_name(
-        method_names[1]
-    )
+    second_method_label = format_method_name(method_names[1])
 
     maximum_absolute_error = max(
         float(
@@ -881,12 +780,8 @@ def create_error_scatterplots(
                 np.abs(
                     np.concatenate(
                         (
-                            simulation_data[
-                                "first_errors"
-                            ],
-                            simulation_data[
-                                "second_errors"
-                            ],
+                            simulation_data["first_errors"],
+                            simulation_data["second_errors"],
                         )
                     )
                 )
@@ -898,9 +793,7 @@ def create_error_scatterplots(
     if maximum_absolute_error == 0.0:
         maximum_absolute_error = 0.1
 
-    axis_limit = (
-        1.05 * maximum_absolute_error
-    )
+    axis_limit = 1.05 * maximum_absolute_error
 
     wrapped_title = textwrap.fill(
         (
@@ -953,18 +846,16 @@ def create_error_scatterplots(
             axis.set_facecolor("none")
 
             axis.scatter(
-            # x-axis: Plug-in estimate minus truth
-            simulation_data["second_errors"],
-
-            # y-axis: Logit estimate minus truth
-            simulation_data["first_errors"],
-
-            s=SCATTER_POINT_SIZE,
-            color=SCATTER_POINT_COLOR,
-            alpha=SCATTER_POINT_ALPHA,
-            edgecolors="none",
-            rasterized=True,
-)
+                # x-axis: Plug-in estimate minus truth
+                simulation_data["second_errors"],
+                # y-axis: Logit estimate minus truth
+                simulation_data["first_errors"],
+                s=SCATTER_POINT_SIZE,
+                color=SCATTER_POINT_COLOR,
+                alpha=SCATTER_POINT_ALPHA,
+                edgecolors="none",
+                rasterized=True,
+            )
 
             axis.axvline(
                 x=0.0,
@@ -997,10 +888,7 @@ def create_error_scatterplots(
                 adjustable="box",
             )
 
-            axis.set_title(
-                "n = "
-                f"{simulation_data['n_individuals']:,}"
-            )
+            axis.set_title(f"n = {simulation_data['n_individuals']:,}")
 
             axis.grid(
                 linestyle=":",
@@ -1020,11 +908,7 @@ def create_error_scatterplots(
 
         figure.supxlabel(
             "Plug-in - True",
-            y=(
-                0.15
-                if wrapped_caption
-                else 0.06
-            ),
+            y=(0.15 if wrapped_caption else 0.06),
         )
 
         figure.supylabel(
@@ -1033,8 +917,7 @@ def create_error_scatterplots(
         )
 
         figure.supylabel(
-            f"{first_method_label}"
-            "- true",
+            f"{first_method_label}- true",
             x=0.025,
         )
 
@@ -1053,11 +936,7 @@ def create_error_scatterplots(
             left=0.08,
             right=0.99,
             top=0.82,
-            bottom=(
-                0.24
-                if wrapped_caption
-                else 0.14
-            ),
+            bottom=(0.24 if wrapped_caption else 0.14),
             wspace=0.25,
         )
 
@@ -1072,9 +951,7 @@ def save_error_scatterplots(
     output_path = Path(output_location)
 
     if output_path.suffix.lower() != ".pdf":
-        raise ValueError(
-            "SCATTER_IMAGE_LOCATION must use a .pdf extension."
-        )
+        raise ValueError("SCATTER_IMAGE_LOCATION must use a .pdf extension.")
 
     output_path.parent.mkdir(
         parents=True,
@@ -1099,11 +976,10 @@ def save_error_scatterplots(
 # Main entry point: generate every figure
 # ---------------------------------------------------------------------
 
+
 def main() -> None:
     """Load one pickle and generate all configured figures."""
-    simulation_results = load_simulation_results(
-        PICKLE_LOCATION
-    )
+    simulation_results = load_simulation_results(PICKLE_LOCATION)
 
     violin_figure = create_violin_plots(
         simulation_results=simulation_results,

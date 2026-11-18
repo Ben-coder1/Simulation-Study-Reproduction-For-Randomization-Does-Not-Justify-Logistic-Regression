@@ -6,11 +6,10 @@ from time import perf_counter
 
 import matplotlib.pyplot as plt
 
-from configuration import RESULTS_DIR, SEED
-from src.simulation import Simulation
+from configuration import SEED
 from src.dgps import EXPERIMENT_DGPS, INDIVIDUAL_DGPS
 from src.methods import PARAMETER_ESTIMATORS, TRUTH_PARAMETER_FINDERS
-
+from src.simulation import Simulation
 
 N_EXPERIMENTS = 1000
 N_INDIVIDUALS = range(1000, 15001, 1000)
@@ -22,6 +21,8 @@ PROFILES_DIR.mkdir(parents=True, exist_ok=True)
 
 CSV_PATH = PROFILES_DIR / "runtime_by_individuals.csv"
 PLOT_PATH = PROFILES_DIR / "runtime_by_individuals.png"
+
+
 def build_simulation(n_individuals):
     """Build a baseline simulation with the requested population size.
 
@@ -42,9 +43,7 @@ def build_simulation(n_individuals):
             PARAMETER_ESTIMATORS["logit"](),
             PARAMETER_ESTIMATORS["logit_plugin"](),
         ],
-        true_parameter_finder=TRUTH_PARAMETER_FINDERS[
-            "differential_log_odds"
-        ](),
+        true_parameter_finder=TRUTH_PARAMETER_FINDERS["differential_log_odds"](),
     )
 
 
@@ -59,13 +58,9 @@ def save_results(results):
 
     with CSV_PATH.open("w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
-        writer.writerow(
-            ["n_individuals", "n_experiments", "runtime_seconds"]
-        )
+        writer.writerow(["n_individuals", "n_experiments", "runtime_seconds"])
         for n_individuals, elapsed in results:
-            writer.writerow(
-                [n_individuals, N_EXPERIMENTS, f"{elapsed:.6f}"]
-            )
+            writer.writerow([n_individuals, N_EXPERIMENTS, f"{elapsed:.6f}"])
 
     counts = [row[0] for row in results]
     runtimes = [row[1] for row in results]
@@ -74,9 +69,7 @@ def save_results(results):
     ax.plot(counts, runtimes, marker="o", linewidth=2)
     ax.set_xlabel("Number of individuals")
     ax.set_ylabel("Runtime (seconds)")
-    ax.set_title(
-        f"Simulation runtime with {N_EXPERIMENTS:,} experiments"
-    )
+    ax.set_title(f"Simulation runtime with {N_EXPERIMENTS:,} experiments")
     ax.set_xticks(counts)
     ax.tick_params(axis="x", rotation=45)
     ax.grid(True, linestyle="--", alpha=0.4)

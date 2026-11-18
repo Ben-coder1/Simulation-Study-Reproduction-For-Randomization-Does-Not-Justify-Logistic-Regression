@@ -2,6 +2,7 @@
 
 import pickle
 from pathlib import Path
+
 import numpy as np
 
 from configuration import PICKLE_LOCATION, SEED, SIMULATIONS
@@ -41,9 +42,7 @@ class Simulation:
             ValueError: If no parameter estimators are supplied.
         """
         if not param_estimators:
-            raise ValueError(
-                "At least one parameter estimator is required."
-            )
+            raise ValueError("At least one parameter estimator is required.")
 
         self.n_experiments = experiment_dgp.n_exp
         self.n_individuals = individual_dgp.n
@@ -71,33 +70,23 @@ class Simulation:
         base_rng = np.random.default_rng(rng)
         individuals_rng, experiment_rng = base_rng.spawn(2)
 
-        individuals = self.individual_dgp.generate_individuals(
-            rng=individuals_rng
-        )
+        individuals = self.individual_dgp.generate_individuals(rng=individuals_rng)
 
         self.experiment_dgp.set_conditional_outcomes(individuals)
 
-        experiment_results = (
-            self.experiment_dgp.generate_experiments(
-                rng=experiment_rng
-            )
+        experiment_results = self.experiment_dgp.generate_experiments(
+            rng=experiment_rng
         )
 
-        true_parameter = (
-            self.true_parameter_finder.find_true_parameters(
-                individuals
-            )
-        )
+        true_parameter = self.true_parameter_finder.find_true_parameters(individuals)
 
         estimator_results = {}
 
         for estimator in self.param_estimators:
             estimator_name = type(estimator).__name__
 
-            estimates, auxiliary = (
-                estimator.generate_parameter_estimates(
-                    experiment_results
-                )
+            estimates, auxiliary = estimator.generate_parameter_estimates(
+                experiment_results
             )
 
             estimator_results[estimator_name] = {
@@ -143,9 +132,7 @@ class MultipleSimulations:
             self.simulations,
             simulation_rngs,
         ):
-            result = simulation.run_simulation(
-                rng=simulation_rng
-            )
+            result = simulation.run_simulation(rng=simulation_rng)
             simulation_results.append(result)
         pickle_path = Path(PICKLE_LOCATION)
         pickle_path.parent.mkdir(parents=True, exist_ok=True)
@@ -163,16 +150,12 @@ def run_from_config():
     """Build and run the simulations in ``configuration.SIMULATIONS``."""
     simulations = [
         Simulation(
-            individual_dgp=INDIVIDUAL_DGPS[
-                sim_dict["individual_dgp"]
-            ](
+            individual_dgp=INDIVIDUAL_DGPS[sim_dict["individual_dgp"]](
                 sim_dict["n_individuals"],
                 sim_dict["treatment_threshold"],
                 sim_dict["control_threshold"],
             ),
-            experiment_dgp=EXPERIMENT_DGPS[
-                sim_dict["experiment_dgp"]
-            ](
+            experiment_dgp=EXPERIMENT_DGPS[sim_dict["experiment_dgp"]](
                 sim_dict["n_experiments"],
                 sim_dict["p_treatment"],
             ),
@@ -189,9 +172,7 @@ def run_from_config():
 
     simulation_controller = MultipleSimulations(simulations)
 
-    return simulation_controller.run_multiple_simulations(
-        rng=SEED
-    )
+    return simulation_controller.run_multiple_simulations(rng=SEED)
 
 
 if __name__ == "__main__":

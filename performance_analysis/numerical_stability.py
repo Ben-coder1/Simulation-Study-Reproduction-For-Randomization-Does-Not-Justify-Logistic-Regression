@@ -14,10 +14,9 @@ from tqdm.auto import tqdm
 from tqdm.std import tqdm as tqdm_base
 
 import src.simulation as original_module
-import src_optimized.optimized_simulation as optimized_module
 import src_optimized.non_vectorized_simulation as non_vectorized_module
+import src_optimized.optimized_simulation as optimized_module
 from src_optimized import simulate_parallel
-
 
 # Store diagnostic reports separately from timing measurements.
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -79,9 +78,7 @@ def find_nonfinite_outputs(results) -> list[dict]:
     problems = []
 
     for simulation_index, result in enumerate(results):
-        if not np.isfinite(
-            np.asarray(result["true_parameter"])
-        ).all():
+        if not np.isfinite(np.asarray(result["true_parameter"])).all():
             problems.append(
                 {
                     "simulation_index": simulation_index,
@@ -89,9 +86,7 @@ def find_nonfinite_outputs(results) -> list[dict]:
                 }
             )
 
-        for estimator_name, outputs in result[
-            "estimator_results"
-        ].items():
+        for estimator_name, outputs in result["estimator_results"].items():
             for output_name in ("estimates", "auxiliary"):
                 values = np.asarray(outputs[output_name])
                 finite = np.isfinite(values)
@@ -101,9 +96,7 @@ def find_nonfinite_outputs(results) -> list[dict]:
 
                 # The first axis represents experiments.
                 if values.ndim > 1:
-                    finite_rows = finite.all(
-                        axis=tuple(range(1, values.ndim))
-                    )
+                    finite_rows = finite.all(axis=tuple(range(1, values.ndim)))
                 else:
                     finite_rows = finite
 
@@ -112,9 +105,7 @@ def find_nonfinite_outputs(results) -> list[dict]:
                         "simulation_index": simulation_index,
                         "estimator": estimator_name,
                         "output": output_name,
-                        "experiment_indices": np.flatnonzero(
-                            ~finite_rows
-                        ).tolist(),
+                        "experiment_indices": np.flatnonzero(~finite_rows).tolist(),
                     }
                 )
 
@@ -148,13 +139,11 @@ def classify_error(exc: Exception) -> str:
 def format_warnings(warning_records: list[dict]) -> str:
     """Format each distinct warning once."""
     distinct = {
-        (warning["category"], warning["message"])
-        for warning in warning_records
+        (warning["category"], warning["message"]) for warning in warning_records
     }
 
     return " | ".join(
-        f"{category}: {message}"
-        for category, message in sorted(distinct)
+        f"{category}: {message}" for category, message in sorted(distinct)
     )
 
 
@@ -162,19 +151,13 @@ def format_nonfinite_outputs(problems: list[dict]) -> str:
     parts = []
 
     for problem in problems:
-        text = (
-            f"simulation={problem['simulation_index']}, "
-            f"output={problem['output']}"
-        )
+        text = f"simulation={problem['simulation_index']}, output={problem['output']}"
 
         if "estimator" in problem:
             text += f", estimator={problem['estimator']}"
 
         if "experiment_indices" in problem:
-            text += (
-                f", experiment_indices="
-                f"{problem['experiment_indices']}"
-            )
+            text += f", experiment_indices={problem['experiment_indices']}"
 
         parts.append(text)
 
@@ -206,12 +189,8 @@ def check_one_run(
     report = {
         "source": source,
         "configuration_index": configuration_index,
-        "n_individuals": (
-            single_config["n_individuals"] if single_config else None
-        ),
-        "n_experiments": (
-            single_config["n_experiments"] if single_config else None
-        ),
+        "n_individuals": (single_config["n_individuals"] if single_config else None),
+        "n_experiments": (single_config["n_experiments"] if single_config else None),
         "repeat": repeat,
         "seed": seed,
         "method": method,
@@ -252,15 +231,11 @@ def check_one_run(
                     ):
                         results = module.run_from_config()
 
-            report["nonfinite_outputs"] = find_nonfinite_outputs(
-                results
-            )
+            report["nonfinite_outputs"] = find_nonfinite_outputs(results)
             del results
 
             report["status"] = (
-                "nonfinite_output"
-                if report["nonfinite_outputs"]
-                else "passed"
+                "nonfinite_output" if report["nonfinite_outputs"] else "passed"
             )
 
         except Exception as exc:
@@ -325,14 +300,10 @@ def print_report(report: dict) -> None:
             f"experiments={report['n_experiments']:,}"
         )
     else:
-        context += (
-            f", configured_simulations="
-            f"{len(report['configurations'])}"
-        )
+        context += f", configured_simulations={len(report['configurations'])}"
 
     tqdm.write(
-        f"{report['status'].upper()}: {context} "
-        f"({report['runtime_seconds']:.4f}s)"
+        f"{report['status'].upper()}: {context} ({report['runtime_seconds']:.4f}s)"
     )
 
     if report["error"]:
@@ -348,20 +319,14 @@ def print_report(report: dict) -> None:
     if warning_text:
         tqdm.write(f"  Warnings: {warning_text}")
 
-    nonfinite_text = format_nonfinite_outputs(
-        report["nonfinite_outputs"]
-    )
+    nonfinite_text = format_nonfinite_outputs(report["nonfinite_outputs"])
     if nonfinite_text:
         tqdm.write(f"  Nonfinite outputs: {nonfinite_text}")
 
 
 def write_summary(reports: list[dict]) -> None:
     final_grid_seed = (
-        BASE_SEED
-        + len(INDIVIDUAL_COUNTS)
-        * len(EXPERIMENT_COUNTS)
-        * REPEATS
-        - 1
+        BASE_SEED + len(INDIVIDUAL_COUNTS) * len(EXPERIMENT_COUNTS) * REPEATS - 1
     )
 
     lines = [
@@ -413,22 +378,15 @@ def write_summary(reports: list[dict]) -> None:
             subset = [
                 report
                 for report in reports
-                if report["source"] == source
-                and report["method"] == method
+                if report["source"] == source and report["method"] == method
             ]
 
-            counts = Counter(
-                report["status"] for report in subset
-            )
+            counts = Counter(report["status"] for report in subset)
 
-            separation_count = sum(
-                report["possible_separation"]
-                for report in subset
-            )
+            separation_count = sum(report["possible_separation"] for report in subset)
 
             status_text = ", ".join(
-                f"{status}={count}"
-                for status, count in sorted(counts.items())
+                f"{status}={count}" for status, count in sorted(counts.items())
             )
 
             lines.append(
@@ -443,9 +401,7 @@ def write_summary(reports: list[dict]) -> None:
         if report["source"] != "config":
             continue
 
-        lines.append(
-            f"\n{report['method']}, seed={report['seed']}:"
-        )
+        lines.append(f"\n{report['method']}, seed={report['seed']}:")
 
         for idx, config in enumerate(report["configurations"]):
             lines.append(f"  simulation={idx}: {config}")
@@ -466,17 +422,13 @@ def write_summary(reports: list[dict]) -> None:
             lines.append(f"  Error: {report['error']}")
 
         if report["possible_separation"]:
-            lines.append(
-                "  Separation mentioned by estimator; not a proven diagnosis."
-            )
+            lines.append("  Separation mentioned by estimator; not a proven diagnosis.")
 
         warning_text = format_warnings(report["warnings"])
         if warning_text:
             lines.append(f"  Warnings: {warning_text}")
 
-        nonfinite_text = format_nonfinite_outputs(
-            report["nonfinite_outputs"]
-        )
+        nonfinite_text = format_nonfinite_outputs(report["nonfinite_outputs"])
         if nonfinite_text:
             lines.append(f"  Nonfinite outputs: {nonfinite_text}")
 
@@ -491,13 +443,9 @@ def run_convergence_checks() -> list[dict]:
 
     reports = []
 
-    total = (
-        len(METHODS)
-        + len(INDIVIDUAL_COUNTS)
-        * len(EXPERIMENT_COUNTS)
-        * REPEATS
-        * len(METHODS)
-    )
+    total = len(METHODS) + len(INDIVIDUAL_COUNTS) * len(
+        EXPERIMENT_COUNTS
+    ) * REPEATS * len(METHODS)
 
     with (
         TemporaryDirectory(prefix="convergence_comparisons_") as temp_dir,
@@ -516,14 +464,9 @@ def run_convergence_checks() -> list[dict]:
         def record(report: dict) -> None:
             reports.append(report)
 
-            row = {
-                field: report[field]
-                for field in CSV_FIELDS
-            }
+            row = {field: report[field] for field in CSV_FIELDS}
 
-            row["warnings"] = format_warnings(
-                report["warnings"]
-            )
+            row["warnings"] = format_warnings(report["warnings"])
             row["nonfinite_outputs"] = format_nonfinite_outputs(
                 report["nonfinite_outputs"]
             )
@@ -549,9 +492,7 @@ def run_convergence_checks() -> list[dict]:
                     module=module,
                     configs=list(module.SIMULATIONS),
                     seed=module.SEED,
-                    pickle_path=(
-                        Path(temp_dir) / f"{name}_config.pkl"
-                    ),
+                    pickle_path=(Path(temp_dir) / f"{name}_config.pkl"),
                     source="config",
                     configuration_index=None,
                     repeat=1,
@@ -574,17 +515,11 @@ def run_convergence_checks() -> list[dict]:
                 for repeat in range(REPEATS):
                     # Distinct seed for each configuration/repeat.
                     # All methods in this comparison receive this seed.
-                    seed = (
-                        BASE_SEED
-                        + configuration_index * REPEATS
-                        + repeat
-                    )
+                    seed = BASE_SEED + configuration_index * REPEATS + repeat
 
                     # Rotate which implementation runs first.
                     offset = comparison_number % len(METHODS)
-                    run_order = (
-                        METHODS[offset:] + METHODS[:offset]
-                    )
+                    run_order = METHODS[offset:] + METHODS[:offset]
                     comparison_number += 1
 
                     for name, module in run_order:
@@ -602,10 +537,7 @@ def run_convergence_checks() -> list[dict]:
                                 module=module,
                                 configs=[config],
                                 seed=seed,
-                                pickle_path=(
-                                    Path(temp_dir)
-                                    / f"{name}_grid.pkl"
-                                ),
+                                pickle_path=(Path(temp_dir) / f"{name}_grid.pkl"),
                                 source="performance_grid",
                                 configuration_index=configuration_index,
                                 repeat=repeat + 1,
@@ -616,9 +548,7 @@ def run_convergence_checks() -> list[dict]:
 
     write_summary(reports)
 
-    counts = Counter(
-        report["status"] for report in reports
-    )
+    counts = Counter(report["status"] for report in reports)
 
     print("\nConvergence-comparison summary")
     print(f"Total pipeline runs: {len(reports)}")
@@ -643,8 +573,5 @@ if __name__ == "__main__":
     # Exit unsuccessfully if any run has a non-passed status.
     # Other warnings, including separation mentions alone, do not
     # independently trigger a nonzero exit status.
-    if any(
-        report["status"] != "passed"
-        for report in convergence_reports
-    ):
+    if any(report["status"] != "passed" for report in convergence_reports):
         raise SystemExit(1)

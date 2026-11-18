@@ -12,8 +12,11 @@ import matplotlib.pyplot as plt
 
 from performance_analysis.progress import comparison_progress
 from src import simulation as original_module
-from src_optimized import non_vectorized_simulation, optimized_simulation, simulate_parallel
-
+from src_optimized import (
+    non_vectorized_simulation,
+    optimized_simulation,
+    simulate_parallel,
+)
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PROFILES_DIR = PROJECT_ROOT / "performance_results" / "benchmarks"
@@ -80,9 +83,7 @@ def save_results(timings):
     """
     PROFILES_DIR.mkdir(parents=True, exist_ok=True)
 
-    with TIMINGS_PATH.open(
-        "w", newline="", encoding="utf-8"
-    ) as file:
+    with TIMINGS_PATH.open("w", newline="", encoding="utf-8") as file:
         writer = csv.writer(file)
         writer.writerow(["repeat", "first_version", "method", "runtime_seconds"])
 

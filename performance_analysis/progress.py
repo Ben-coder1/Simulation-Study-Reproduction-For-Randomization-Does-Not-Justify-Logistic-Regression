@@ -15,11 +15,13 @@ def comparison_progress(description, total):
         kwargs["disable"] = True
         original_init(self, *args, **kwargs)
 
-    with tqdm(
-        desc=description,
-        total=total,
-        bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}]{postfix}",
-        dynamic_ncols=True,
-    ) as progress:
-        with patch.object(tqdm_base, "__init__", disabled_init):
-            yield progress
+    with (
+        tqdm(
+            desc=description,
+            total=total,
+            bar_format="{l_bar}{bar}| {n_fmt}/{total_fmt} [{elapsed}]{postfix}",
+            dynamic_ncols=True,
+        ) as progress,
+        patch.object(tqdm_base, "__init__", disabled_init),
+    ):
+        yield progress

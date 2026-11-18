@@ -13,8 +13,12 @@ from unittest.mock import patch
 from src_optimized.optimized_methods import fast_LogitModelPlugIn
 from src_optimized.simulate_parallel import run_from_config
 
-
-PROFILE_DIR = Path(__file__).resolve().parents[1] / "performance_results" / "profiles" / "parallel"
+PROFILE_DIR = (
+    Path(__file__).resolve().parents[1]
+    / "performance_results"
+    / "profiles"
+    / "parallel"
+)
 PROFILE_PATH = PROFILE_DIR / "parallel_simulation.prof"
 REPORT_PATH = PROFILE_DIR / "parallel_simulation_profile.txt"
 FLAMEGRAPH_PATH = PROFILE_DIR / "parallel_simulation_flamegraph.svg"
@@ -36,7 +40,9 @@ def main():
 
     with (
         TemporaryDirectory(prefix="parallel_profiler_") as directory,
-        patch.object(fast_LogitModelPlugIn, "generate_parameter_estimates", profile_fit),
+        patch.object(
+            fast_LogitModelPlugIn, "generate_parameter_estimates", profile_fit
+        ),
     ):
         start = perf_counter()
         run_from_config(workers=2, pickle_path=Path(directory) / "simulation.pkl")
@@ -60,7 +66,9 @@ def main():
         check=True,
     )
     FLAMEGRAPH_PATH.write_text(flamegraph.stdout, encoding="utf-8")
-    print(f"Profile: {PROFILE_PATH}\nReport: {REPORT_PATH}\nFlamegraph: {FLAMEGRAPH_PATH}")
+    print(
+        f"Profile: {PROFILE_PATH}\nReport: {REPORT_PATH}\nFlamegraph: {FLAMEGRAPH_PATH}"
+    )
 
 
 if __name__ == "__main__":

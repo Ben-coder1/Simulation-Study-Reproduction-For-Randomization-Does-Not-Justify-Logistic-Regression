@@ -56,9 +56,7 @@ class Simulation:
         base_rng = np.random.default_rng(rng)
         individuals_rng, experiment_rng = base_rng.spawn(2)
 
-        individuals = self.individual_dgp.generate_individuals(
-            rng=individuals_rng
-        )
+        individuals = self.individual_dgp.generate_individuals(rng=individuals_rng)
 
         self.experiment_dgp.set_conditional_outcomes(individuals)
 
@@ -66,17 +64,11 @@ class Simulation:
             rng=experiment_rng
         )
 
-        true_parameter = (
-            self.true_parameter_finder.find_true_parameters(
-                individuals
-            )
-        )
+        true_parameter = self.true_parameter_finder.find_true_parameters(individuals)
 
         # Fit each experiment once and calculate its plug-in estimate.
-        plug_in_estimates, beta_mat = (
-            self.param_estimator.generate_parameter_estimates(
-                experiment_results
-            )
+        plug_in_estimates, beta_mat = self.param_estimator.generate_parameter_estimates(
+            experiment_results
         )
 
         # Columns: intercept, treatment coefficient, covariate coefficients.
@@ -133,9 +125,7 @@ class MultipleSimulations:
             self.simulations,
             simulation_rngs,
         ):
-            result = simulation.run_simulation(
-                rng=simulation_rng
-            )
+            result = simulation.run_simulation(rng=simulation_rng)
             simulation_results.append(result)
 
         pickle_path = Path(PICKLE_LOCATION)
@@ -155,16 +145,12 @@ def run_from_config():
     """Build and run the simulations in ``configuration.SIMULATIONS``."""
     simulations = [
         Simulation(
-            individual_dgp=INDIVIDUAL_DGPS[
-                sim_dict["individual_dgp"]
-            ](
+            individual_dgp=INDIVIDUAL_DGPS[sim_dict["individual_dgp"]](
                 sim_dict["n_individuals"],
                 sim_dict["treatment_threshold"],
                 sim_dict["control_threshold"],
             ),
-            experiment_dgp=EXPERIMENT_DGPS[
-                sim_dict["experiment_dgp"]
-            ](
+            experiment_dgp=EXPERIMENT_DGPS[sim_dict["experiment_dgp"]](
                 sim_dict["n_experiments"],
                 sim_dict["p_treatment"],
             ),
@@ -174,9 +160,7 @@ def run_from_config():
 
     simulation_controller = MultipleSimulations(simulations)
 
-    return simulation_controller.run_multiple_simulations(
-        rng=SEED
-    )
+    return simulation_controller.run_multiple_simulations(rng=SEED)
 
 
 if __name__ == "__main__":

@@ -15,17 +15,18 @@ from unittest.mock import patch
 import matplotlib.pyplot as plt
 import numpy as np
 
-from performance_analysis.progress import comparison_progress
 import src.simulation as original_module
 import src_optimized.non_vectorized_simulation as non_vectorized_module
 import src_optimized.optimized_simulation as optimized_module
-from src_optimized import simulate_parallel
+from performance_analysis.progress import comparison_progress
 from src.simulation import run_from_config as run_original_simulations
+from src_optimized import simulate_parallel
 from src_optimized.non_vectorized_simulation import (
     run_from_config as run_non_vectorized_simulations,
 )
-from src_optimized.optimized_simulation import run_from_config as run_optimized_simulations
-
+from src_optimized.optimized_simulation import (
+    run_from_config as run_optimized_simulations,
+)
 
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
 PROFILES_DIR = PROJECT_ROOT / "performance_results" / "memory"
@@ -74,7 +75,10 @@ def measure_peak_memory(module, run_function, config, seed, pickle_path) -> floa
     try:
         if module is simulate_parallel:
             result = run_function(
-                workers=2, simulation_configs=[config], seed=seed, pickle_path=pickle_path
+                workers=2,
+                simulation_configs=[config],
+                seed=seed,
+                pickle_path=pickle_path,
             )
         else:
             with (
@@ -131,7 +135,9 @@ def collect_memory_data(
                     seed = base_seed + repeat
                     offset = comparison_number % len(methods)
                     comparison_number += 1
-                    for name, module, run_function in methods[offset:] + methods[:offset]:
+                    for name, module, run_function in (
+                        methods[offset:] + methods[:offset]
+                    ):
                         current = (
                             f"{name}, n={n_individuals:,}, experiments={n_experiments:,}, "
                             f"repeat {repeat + 1}/{repeats}"
@@ -149,7 +155,10 @@ def collect_memory_data(
                         }
                         try:
                             peak = measure_peak_memory(
-                                module, run_function, config, seed,
+                                module,
+                                run_function,
+                                config,
+                                seed,
                                 Path(temp_dir) / f"{name}.pkl",
                             )
                             row["peak_python_memory_mib"] = peak
@@ -177,12 +186,16 @@ def graph_memory_data(
     with Path(csv_path).open("r", newline="", encoding="utf-8") as file:
         for row in csv.DictReader(file):
             n_ind, n_exp, method = (
-                int(row["n_individuals"]), int(row["n_experiments"]), row["method"]
+                int(row["n_individuals"]),
+                int(row["n_experiments"]),
+                row["method"],
             )
             populations.add(n_ind)
             configurations.add((n_ind, n_exp))
             if row["status"] != "ok":
-                failures.append(f"{method}, individuals={n_ind}, experiments={n_exp}: {row['error']}")
+                failures.append(
+                    f"{method}, individuals={n_ind}, experiments={n_exp}: {row['error']}"
+                )
                 continue
             measurements.setdefault((n_ind, n_exp, method), []).append(
                 float(row["peak_python_memory_mib"])
@@ -199,10 +212,15 @@ def graph_memory_data(
         "",
     ]
     for n_ind, n_exp in sorted(configurations):
-        values = [medians.get((n_ind, n_exp, method), np.nan) for method, _ in METHOD_LABELS]
+        values = [
+            medians.get((n_ind, n_exp, method), np.nan) for method, _ in METHOD_LABELS
+        ]
         lines.append(
             f"individuals={n_ind:,}, experiments={n_exp:,}: "
-            + ", ".join(f"{label}={value:.3f} MiB" for (_, label), value in zip(METHOD_LABELS, values))
+            + ", ".join(
+                f"{label}={value:.3f} MiB"
+                for (_, label), value in zip(METHOD_LABELS, values)
+            )
         )
     if failures:
         lines.extend(["", "Failed runs:", *failures])
@@ -211,9 +229,13 @@ def graph_memory_data(
     populations = sorted(populations)
     ncols = min(2, len(populations))
     nrows = (len(populations) + ncols - 1) // ncols
-    fig, axes = plt.subplots(nrows, ncols, figsize=(7 * ncols, 4.5 * nrows), squeeze=False)
+    fig, axes = plt.subplots(
+        nrows, ncols, figsize=(7 * ncols, 4.5 * nrows), squeeze=False
+    )
     for ax, n_ind in zip(axes.flat, populations):
-        counts = sorted(n_exp for population, n_exp in configurations if population == n_ind)
+        counts = sorted(
+            n_exp for population, n_exp in configurations if population == n_ind
+        )
         for method, label in METHOD_LABELS:
             values = [medians.get((n_ind, n_exp, method), np.nan) for n_exp in counts]
             ax.plot(counts, values, marker="o", linewidth=2, label=label)
@@ -221,7 +243,7 @@ def graph_memory_data(
         ax.set_xlabel("Number of experiments")
         ax.set_ylabel("Median peak Python memory (MiB)")
         ax.grid(True, alpha=0.3)
-    for ax in list(axes.flat)[len(populations):]:
+    for ax in list(axes.flat)[len(populations) :]:
         ax.set_visible(False)
     # Use one shared key instead of repeating it in every population panel.
     handles, labels = axes.flat[0].get_legend_handles_labels()
@@ -235,7 +257,8 @@ def graph_memory_data(
         )
     fig.suptitle("Memory comparisons — simulation implementations")
     fig.text(
-        0.5, 0.018,
+        0.5,
+        0.018,
         "Only two lines are visible because the two vectorized series overlap "
         "and the two non-vectorized series overlap.",
         ha="center",
@@ -249,6 +272,10 @@ def graph_memory_data(
 
 
 if __name__ == "__main__":
-    path = collect_memory_data(experiment_counts=(10, 50, 100, 250, 500, 1000, 2000), repeats=5)
+    path = collect_memory_data(
+        experiment_counts=(10, 50, 100, 250, 500, 1000, 2000), repeats=5
+    )
     graph_memory_data(path)
-    print(f"Memory grid: {path.resolve()}\nGraph: {PLOT_PATH.resolve()}\nSummary: {SUMMARY_PATH.resolve()}")
+    print(
+        f"Memory grid: {path.resolve()}\nGraph: {PLOT_PATH.resolve()}\nSummary: {SUMMARY_PATH.resolve()}"
+    )

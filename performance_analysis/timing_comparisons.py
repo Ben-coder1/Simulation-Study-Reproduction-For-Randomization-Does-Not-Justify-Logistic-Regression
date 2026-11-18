@@ -9,20 +9,18 @@ from unittest.mock import patch
 import matplotlib.pyplot as plt
 import numpy as np
 
-from performance_analysis.progress import comparison_progress
 import src.simulation as original_module
-import src_optimized.optimized_simulation as optimized_module
 import src_optimized.non_vectorized_simulation as non_vectorized_module
-from src_optimized import simulate_parallel
-
+import src_optimized.optimized_simulation as optimized_module
+from performance_analysis.progress import comparison_progress
 from src.simulation import run_from_config as run_original_simulations
-from src_optimized.optimized_simulation import (
-    run_from_config as run_optimized_simulations,
-)
+from src_optimized import simulate_parallel
 from src_optimized.non_vectorized_simulation import (
     run_from_config as run_non_vectorized_simulations,
 )
-
+from src_optimized.optimized_simulation import (
+    run_from_config as run_optimized_simulations,
+)
 
 # Keep benchmark artifacts outside the simulation results directory.
 PROJECT_ROOT = Path(__file__).resolve().parents[1]
@@ -126,14 +124,10 @@ def collect_runtime_data(
         raise ValueError("repeats must be positive.")
 
     if not individual_counts or not experiment_counts:
-        raise ValueError(
-            "Population and experiment counts must be nonempty."
-        )
+        raise ValueError("Population and experiment counts must be nonempty.")
 
     if any(n <= 0 for n in (*individual_counts, *experiment_counts)):
-        raise ValueError(
-            "Population and experiment counts must be positive."
-        )
+        raise ValueError("Population and experiment counts must be positive.")
 
     csv_path = Path(csv_path)
     csv_path.parent.mkdir(parents=True, exist_ok=True)
@@ -202,9 +196,7 @@ def collect_runtime_data(
                                 run_function=run_function,
                                 simulation_config=config,
                                 seed=seed,
-                                pickle_path=(
-                                    Path(temp_dir) / f"{name}.pkl"
-                                ),
+                                pickle_path=(Path(temp_dir) / f"{name}.pkl"),
                             )
 
                             row["runtime_seconds"] = elapsed
@@ -212,9 +204,7 @@ def collect_runtime_data(
 
                         except Exception as exc:
                             row["status"] = "failed"
-                            row["error"] = (
-                                f"{type(exc).__name__}: {exc}"
-                            )
+                            row["error"] = f"{type(exc).__name__}: {exc}"
                             progress.write(f"FAILED ({current}): {row['error']}")
                             last = ", last=failed"
 
@@ -249,9 +239,7 @@ def graph_runtime_data(
     configurations = set()
     failures = []
 
-    with Path(csv_path).open(
-        "r", newline="", encoding="utf-8"
-    ) as file:
+    with Path(csv_path).open("r", newline="", encoding="utf-8") as file:
         for row in csv.DictReader(file):
             n_ind = int(row["n_individuals"])
             n_exp = int(row["n_experiments"])
@@ -269,27 +257,18 @@ def graph_runtime_data(
                 continue
 
             key = (n_ind, n_exp, method)
-            measurements.setdefault(key, []).append(
-                float(row["runtime_seconds"])
-            )
+            measurements.setdefault(key, []).append(float(row["runtime_seconds"]))
 
     if not individual_counts:
         raise ValueError("The timings CSV contains no measurements.")
 
-    medians = {
-        key: float(np.median(values))
-        for key, values in measurements.items()
-    }
+    medians = {key: float(np.median(values)) for key, values in measurements.items()}
 
     def format_runtime(value):
         return f"{value:.4f}" if value is not None else "N/A"
 
     def format_speedup(original, comparison):
-        if (
-            original is not None
-            and comparison is not None
-            and comparison > 0
-        ):
+        if original is not None and comparison is not None and comparison > 0:
             return f"{original / comparison:.2f}x"
         return "N/A"
 
@@ -314,9 +293,7 @@ def graph_runtime_data(
     for n_ind, n_exp in sorted(configurations):
         original = medians.get((n_ind, n_exp, "original"))
         optimized = medians.get((n_ind, n_exp, "optimized"))
-        non_vectorized = medians.get(
-            (n_ind, n_exp, "non_vectorized")
-        )
+        non_vectorized = medians.get((n_ind, n_exp, "non_vectorized"))
         parallel = medians.get((n_ind, n_exp, "parallel"))
 
         lines.append(
@@ -343,17 +320,12 @@ def graph_runtime_data(
         plotted = False
 
         counts = sorted(
-            n_exp
-            for population, n_exp in configurations
-            if population == n_ind
+            n_exp for population, n_exp in configurations if population == n_ind
         )
 
         for method, label in METHOD_LABELS:
             # Missing or failed runs appear as gaps in the line.
-            runtimes = [
-                medians.get((n_ind, n_exp, method), np.nan)
-                for n_exp in counts
-            ]
+            runtimes = [medians.get((n_ind, n_exp, method), np.nan) for n_exp in counts]
 
             if np.isfinite(runtimes).any():
                 ax.plot(
@@ -396,7 +368,7 @@ def graph_runtime_data(
     for ax, n_ind in zip(axes.flat, populations):
         draw_population(ax, n_ind)
 
-    for ax in list(axes.flat)[len(populations):]:
+    for ax in list(axes.flat)[len(populations) :]:
         ax.set_visible(False)
 
     # A single figure-level legend keeps the four population panels readable.
@@ -409,9 +381,7 @@ def graph_runtime_data(
             ncol=len(handles),
             bbox_to_anchor=(0.5, 0.93),
         )
-    fig.suptitle(
-        "Timing comparisons — simulation implementations"
-    )
+    fig.suptitle("Timing comparisons — simulation implementations")
     fig.tight_layout(rect=(0, 0, 1, 0.88))
     fig.savefig(plot_path, dpi=200)
 
@@ -428,8 +398,8 @@ if __name__ == "__main__":
     csv_path = collect_runtime_data(
         csv_path=TIMINGS_PATH,
         individual_counts=(100, 500, 1000, 5000),
-        experiment_counts=(10, 50, 100, 250, 500, 1000,2000),
-        repeats=5,  
+        experiment_counts=(10, 50, 100, 250, 500, 1000, 2000),
+        repeats=5,
         base_seed=12345,
     )
 

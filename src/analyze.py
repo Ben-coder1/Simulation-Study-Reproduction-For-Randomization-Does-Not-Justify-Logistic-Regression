@@ -20,7 +20,14 @@ import dataframe_image as dfi
 import numpy as np
 import pandas as pd
 
-from configuration import BIAS_CSV_LOCATION, BIAS_IMAGE_LOCATION, PICKLE_LOCATION, RESULTS_CSV_LOCATION, RESULTS_IMAGE_LOCATION, ROW_NAMES
+from configuration import (
+    BIAS_CSV_LOCATION,
+    BIAS_IMAGE_LOCATION,
+    PICKLE_LOCATION,
+    RESULTS_CSV_LOCATION,
+    RESULTS_IMAGE_LOCATION,
+    ROW_NAMES,
+)
 from src.metrics import bias, mean_and_sd
 
 LOGIT_ESTIMATOR_NAME = "LogitModelEstimator"
@@ -28,6 +35,7 @@ PLUGIN_ESTIMATOR_NAME = "LogitModelPlugIn"
 
 CSV_OUTPUT_LOCATION = "simulation_results.csv"
 IMAGE_OUTPUT_LOCATION = "simulation_results.png"
+
 
 def load_simulation_data(
     pickle_location: str | Path = PICKLE_LOCATION,
@@ -37,8 +45,7 @@ def load_simulation_data(
 
     if not pickle_path.exists():
         raise FileNotFoundError(
-            f"Simulation output was not found at "
-            f"{pickle_path.resolve()}."
+            f"Simulation output was not found at {pickle_path.resolve()}."
         )
 
     with pickle_path.open("rb") as file:
@@ -46,8 +53,7 @@ def load_simulation_data(
 
     if not isinstance(simulation_results, list):
         raise ValueError(
-            "Expected the pickle file to contain a list of "
-            "simulation results."
+            "Expected the pickle file to contain a list of simulation results."
         )
 
     if not simulation_results:
@@ -62,31 +68,25 @@ def validate_simulation_result(
 ) -> None:
     """Validate the fields required for this particular table."""
     if not isinstance(simulation_result, dict):
-        raise ValueError(
-            f"Simulation result {row_number} must be a dictionary."
-        )
+        raise ValueError(f"Simulation result {row_number} must be a dictionary.")
 
     required_top_level_keys = {
         "true_parameter",
         "estimator_results",
     }
 
-    missing_keys = (
-        required_top_level_keys - simulation_result.keys()
-    )
+    missing_keys = required_top_level_keys - simulation_result.keys()
 
     if missing_keys:
         raise ValueError(
-            f"Simulation result {row_number} is missing keys: "
-            f"{sorted(missing_keys)}."
+            f"Simulation result {row_number} is missing keys: {sorted(missing_keys)}."
         )
 
     estimator_results = simulation_result["estimator_results"]
 
     if not isinstance(estimator_results, dict):
         raise ValueError(
-            f"'estimator_results' in row {row_number} must be "
-            "a dictionary."
+            f"'estimator_results' in row {row_number} must be a dictionary."
         )
 
     required_estimators = {
@@ -94,9 +94,7 @@ def validate_simulation_result(
         PLUGIN_ESTIMATOR_NAME,
     }
 
-    missing_estimators = (
-        required_estimators - estimator_results.keys()
-    )
+    missing_estimators = required_estimators - estimator_results.keys()
 
     if missing_estimators:
         raise ValueError(
@@ -117,8 +115,7 @@ def validate_simulation_result(
 
     if "estimates" not in plugin_result:
         raise ValueError(
-            f"{PLUGIN_ESTIMATOR_NAME} in row {row_number} does not "
-            "contain 'estimates'."
+            f"{PLUGIN_ESTIMATOR_NAME} in row {row_number} does not contain 'estimates'."
         )
 
 
@@ -143,22 +140,16 @@ def summarize_simulation_result(
     estimator_results = simulation_result["estimator_results"]
 
     logit_coefficients = np.asarray(
-        estimator_results[
-            LOGIT_ESTIMATOR_NAME
-        ]["auxiliary"],
+        estimator_results[LOGIT_ESTIMATOR_NAME]["auxiliary"],
         dtype=float,
     )
 
     plugin_estimates = np.asarray(
-        estimator_results[
-            PLUGIN_ESTIMATOR_NAME
-        ]["estimates"],
+        estimator_results[PLUGIN_ESTIMATOR_NAME]["estimates"],
         dtype=float,
     ).ravel()
 
-    true_parameter = float(
-        simulation_result["true_parameter"]
-    )
+    true_parameter = float(simulation_result["true_parameter"])
 
     if logit_coefficients.ndim != 2:
         raise ValueError(
@@ -181,19 +172,11 @@ def summarize_simulation_result(
             f"{plugin_estimates.size} plug-in estimates."
         )
 
-    beta_1_mean, beta_1_sd = mean_and_sd(
-        logit_coefficients[:, 0]
-    )
-    beta_2_mean, beta_2_sd = mean_and_sd(
-        logit_coefficients[:, 1]
-    )
-    beta_3_mean, beta_3_sd = mean_and_sd(
-        logit_coefficients[:, 2]
-    )
+    beta_1_mean, beta_1_sd = mean_and_sd(logit_coefficients[:, 0])
+    beta_2_mean, beta_2_sd = mean_and_sd(logit_coefficients[:, 1])
+    beta_3_mean, beta_3_sd = mean_and_sd(logit_coefficients[:, 2])
 
-    plugin_mean, plugin_sd = mean_and_sd(
-        plugin_estimates
-    )
+    plugin_mean, plugin_sd = mean_and_sd(plugin_estimates)
 
     logit_failure_rate = float(
         np.mean(
@@ -204,9 +187,7 @@ def summarize_simulation_result(
         )
     )
 
-    plugin_failure_rate = float(
-        np.mean(~np.isfinite(plugin_estimates))
-    )
+    plugin_failure_rate = float(np.mean(~np.isfinite(plugin_estimates)))
 
     if logit_failure_rate > 0:
         warnings.warn(
@@ -248,9 +229,7 @@ def summarize_simulation_results(
     Convert all sample-size scenarios into the reproduction table.
     """
     if not simulation_results:
-        raise ValueError(
-            "simulation_results cannot be empty."
-        )
+        raise ValueError("simulation_results cannot be empty.")
 
     if row_names is None:
         row_names = [
@@ -312,9 +291,7 @@ def summarize_simulation_results(
 
 def analyze_simulation_data() -> pd.DataFrame:
     """Load and summarize the current simulation output."""
-    simulation_results = load_simulation_data(
-        PICKLE_LOCATION
-    )
+    simulation_results = load_simulation_data(PICKLE_LOCATION)
 
     return summarize_simulation_results(
         simulation_results,
@@ -322,9 +299,7 @@ def analyze_simulation_data() -> pd.DataFrame:
     )
 
 
-def export_reproduction_table(
-    dataframe: pd.DataFrame
-) -> None:
+def export_reproduction_table(dataframe: pd.DataFrame) -> None:
     """Export the purpose-built reproduction table."""
     csv_path = Path(RESULTS_CSV_LOCATION)
     image_path = Path(RESULTS_IMAGE_LOCATION)
@@ -344,17 +319,9 @@ def export_reproduction_table(
         float_format="%.4f",
     )
 
-    styled_dataframe = (
-        dataframe.style
-        .hide(axis="index")
-        .format(
-            {
-                column: "{:.4f}"
-                for column in dataframe.columns
-                if column != "n"
-            },
-            na_rep="NaN",
-        )
+    styled_dataframe = dataframe.style.hide(axis="index").format(
+        {column: "{:.4f}" for column in dataframe.columns if column != "n"},
+        na_rep="NaN",
     )
 
     dfi.export(
@@ -362,6 +329,7 @@ def export_reproduction_table(
         image_path,
         table_conversion="matplotlib",
     )
+
 
 def create_bias_dataframe(
     simulation_results,
@@ -378,9 +346,7 @@ def create_bias_dataframe(
     not intended as a general-purpose analysis function.
     """
     if not simulation_results:
-        raise ValueError(
-            "simulation_results cannot be empty."
-        )
+        raise ValueError("simulation_results cannot be empty.")
 
     if row_names is None:
         row_names = [
@@ -413,27 +379,19 @@ def create_bias_dataframe(
             row_number,
         )
 
-        true_parameter = float(
-            simulation_result["true_parameter"]
-        )
+        true_parameter = float(simulation_result["true_parameter"])
 
-        estimator_results = simulation_result[
-            "estimator_results"
-        ]
+        estimator_results = simulation_result["estimator_results"]
 
         # These are the treatment coefficients returned by
         # fitted_result.params[1].
         logit_estimates = np.asarray(
-            estimator_results[
-                LOGIT_ESTIMATOR_NAME
-            ]["estimates"],
+            estimator_results[LOGIT_ESTIMATOR_NAME]["estimates"],
             dtype=float,
         ).ravel()
 
         plugin_estimates = np.asarray(
-            estimator_results[
-                PLUGIN_ESTIMATOR_NAME
-            ]["estimates"],
+            estimator_results[PLUGIN_ESTIMATOR_NAME]["estimates"],
             dtype=float,
         ).ravel()
 
@@ -473,6 +431,7 @@ def create_bias_dataframe(
         ],
     )
 
+
 def export_bias_table(
     dataframe: pd.DataFrame,
 ) -> None:
@@ -497,17 +456,13 @@ def export_bias_table(
         float_format="%.4f",
     )
 
-    styled_dataframe = (
-        dataframe.style
-        .hide(axis="index")
-        .format(
-            {
-                "true_parameter": "{:.4f}",
-                "bias(logit)": "{:.4f}",
-                "bias(logit_plugin)": "{:.4f}",
-            },
-            na_rep="NaN",
-        )
+    styled_dataframe = dataframe.style.hide(axis="index").format(
+        {
+            "true_parameter": "{:.4f}",
+            "bias(logit)": "{:.4f}",
+            "bias(logit_plugin)": "{:.4f}",
+        },
+        na_rep="NaN",
     )
 
     dfi.export(
@@ -515,6 +470,7 @@ def export_bias_table(
         image_path,
         table_conversion="matplotlib",
     )
+
 
 def main() -> None:
     warnings.warn(
@@ -526,9 +482,7 @@ def main() -> None:
         stacklevel=2,
     )
 
-    simulation_results = load_simulation_data(
-        PICKLE_LOCATION
-    )
+    simulation_results = load_simulation_data(PICKLE_LOCATION)
 
     results_dataframe = summarize_simulation_results(
         simulation_results,
@@ -546,18 +500,10 @@ def main() -> None:
     print("\nEstimator bias results:\n")
     print(bias_dataframe.to_string(index=False))
 
-    export_reproduction_table(
-        results_dataframe
-    )
+    export_reproduction_table(results_dataframe)
 
-    export_bias_table(
-        bias_dataframe
-    )
-
-
+    export_bias_table(bias_dataframe)
 
 
 if __name__ == "__main__":
     main()
-
-
