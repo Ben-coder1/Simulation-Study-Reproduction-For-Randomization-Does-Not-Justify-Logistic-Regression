@@ -1,4 +1,8 @@
-"""Run the vectorized simulation with experiments split across threads."""
+"""Run the vectorized simulation with experiment batches split across threads.
+
+Each population uses the standard optimized simulation and result structure.
+The number of fitting threads is configurable from the command line.
+"""
 
 import argparse
 import pickle
@@ -14,7 +18,11 @@ from src_optimized.optimized_simulation import Simulation
 
 
 class _ParallelEstimator:
-    """Fit independent experiment batches and join results in input order."""
+    """Fit independent experiment batches and join results in input order.
+
+    The wrapped estimator is shared by the worker threads. Each call
+    partitions its experiments into at most ``workers`` contiguous batches.
+    """
 
     def __init__(
         self,
@@ -22,6 +30,13 @@ class _ParallelEstimator:
         executor: ThreadPoolExecutor,
         workers: int,
     ):
+        """Store the estimator, executor, and requested worker count.
+
+        Keyword arguments:
+            estimator -- Batched logistic plug-in estimator to run.
+            executor -- Thread pool used to fit experiment batches.
+            workers -- Maximum number of batches for each call.
+        """
         self.estimator = estimator
         self.executor = executor
         self.workers = workers
@@ -30,6 +45,17 @@ class _ParallelEstimator:
         self,
         experiment_results: list[ExperimentResults],
     ) -> tuple[np.ndarray, np.ndarray]:
+        """Fit batches and restore estimates to experiment order.
+
+        A single batch is fitted directly without submitting a thread-pool
+        task. Exceptions from the wrapped estimator propagate to the caller.
+
+        Keyword arguments:
+            experiment_results -- Experiments sharing ordered covariates.
+
+        Returns:
+            Plug-in estimates and coefficient rows in input order.
+        """
         n_chunks = min(self.workers, len(experiment_results))
         estimate = self.estimator.generate_parameter_estimates
         if n_chunks <= 1:
@@ -58,7 +84,24 @@ def run_from_config(
     seed: int = SEED,
     pickle_path: str | Path = PICKLE_LOCATION,
 ):
-    """Run configured populations and save the standard simulation results."""
+    """Run configured populations and save the standard simulation results.
+
+    A separate random stream is spawned for each population. The results
+    use the same keys and ordering as the original simulation pipeline.
+
+    Keyword arguments:
+        workers -- Number of threads available for fitting each population.
+        simulation_configs -- Population settings, or None for the optimized
+            configuration's default simulations.
+        seed -- Seed for the generator that spawns population streams.
+        pickle_path -- Destination for the serialized result list.
+
+    Returns:
+        Simulation result dictionaries in configuration order.
+
+    Raises:
+        ValueError: If workers is not a positive integer.
+    """
     if isinstance(workers, bool) or not isinstance(workers, int) or workers < 1:
         raise ValueError("workers must be a positive integer.")
     if simulation_configs is None:
@@ -92,6 +135,7 @@ def run_from_config(
 
 
 def main():
+    """Parse the worker count and run the configured simulations."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--workers", type=int, default=2, help="fitting threads (default: 2)"
